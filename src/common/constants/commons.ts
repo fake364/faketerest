@@ -1,7 +1,7 @@
 const TITLE = 'Faketerest';
 
 const COMMON_CONSTANTS = {
-    TITLE
-}
+	TITLE
+};
 
 export default COMMON_CONSTANTS;

@@ -1,10 +1,9 @@
-import React from "react";
-import styles from './NavigationContainer.module.scss';
+import React from 'react';
 
 type Props = {};
 
-const NavigationContainer: React.FC<Props> = ({children}) => {
-    return <nav className={styles.mainNavigationContainer}>{children}</nav>
+const NavigationContainer: React.FC<Props> = ({ children }) => {
+	return <nav>{children}</nav>;
 };
 
 export default NavigationContainer;
