@@ -1,0 +1,5 @@
+export enum THEME_TYPE {
+	MAIN = 'MAIN',
+	BUSINESS = 'BUSINESS',
+	NEWSROOM = 'NEWSROOM'
+}
