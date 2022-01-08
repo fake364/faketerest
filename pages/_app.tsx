@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import '../src/styles/global.scss';
 import ThemeContext from '../src/common/context/ThemeContext';
-import { THEMES_VALUES } from '../src/common/constants/colors';
+import { THEME_TYPE } from '../src/common/enums/theme';
 
 function MyApp({ Component, pageProps }) {
-	const [theme, setTheme] = useState(THEMES_VALUES.MAIN);
+	const [theme, setTheme] = useState(THEME_TYPE.BASE);
 
 	return (
 		<ThemeContext.Provider value={{ theme, setTheme }}>

@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import BaseButton, { BaseButtonProps } from '../base/BaseButton';
-import { useContext } from 'react';
 import ThemeContext from '../../../context/ThemeContext';
 
 const PrimaryButton: React.FC<BaseButtonProps> = ({
@@ -8,14 +7,11 @@ const PrimaryButton: React.FC<BaseButtonProps> = ({
 	className,
 	...otherProps
 }) => {
-	const {
-		theme: { PRIMARY, TEXT_PRIMARY }
-	} = useContext(ThemeContext);
-	console.log(PRIMARY);
 	return (
 		<BaseButton
-			style={{ backgroundColor: PRIMARY, color: TEXT_PRIMARY }}
-			className={className}
+			className={`${
+				className ? className : ''
+			} bg-primary hover:bg-primary_hovered text-text_primary rounded-common_radius`}
 			{...otherProps}
 		>
 			{children}

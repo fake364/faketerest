@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import ThemeContext from '../../../context/ThemeContext';
+import { THEME_TYPE } from '../../../enums/theme';
 
 export interface BaseButtonProps
 	extends React.DetailedHTMLProps<
@@ -10,17 +11,14 @@ export interface BaseButtonProps
 const BaseButton: React.FC<BaseButtonProps> = ({
 	children,
 	className,
-	style,
 	...otherProps
 }) => {
-	const {
-		theme: { BUTTON_RADIUS }
-	} = useContext(ThemeContext);
+	const { theme } = useContext(ThemeContext);
 
 	return (
 		<button
 			{...otherProps}
-			style={{ ...style, borderRadius: BUTTON_RADIUS }}
+			data-theme={theme ? theme : THEME_TYPE.BASE}
 			className={`font-bold px-[12px] py-[8px] active:scale-90 active:brightness-15 ${
 				className ? className : ''
 			}`}

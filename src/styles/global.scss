@@ -1,10 +1,11 @@
-@import "fonts.init";
+@import 'fonts.init';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@import 'themes';
 
 body {
-  margin: 0;
-  font-family: Roboto, serif;
+	margin: 0;
+	font-family: Roboto, serif;
 }

@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BaseLink component should render properly with classname 1`] = `
+<BaseLink
+  className="test-class"
+  href="/test"
+>
+  <Link
+    href="/test"
+  >
+    <span
+      className="test-class text-black cursor-pointer hover:underline font-medium"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      Test component
+    </span>
+  </Link>
+</BaseLink>
+`;
+
+exports[`BaseLink component should render properly with default props 1`] = `
+<BaseLink
+  href="/test"
+>
+  <Link
+    href="/test"
+  >
+    <span
+      className=" text-black cursor-pointer hover:underline font-medium"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      Test component
+    </span>
+  </Link>
+</BaseLink>
+`;

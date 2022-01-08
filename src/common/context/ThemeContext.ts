@@ -1,9 +1,11 @@
 import React from 'react';
-import { THEMES_VALUES } from '../constants/colors';
-import StyleModels from '../interfaces/style.models';
+import { THEME_TYPE } from '../enums/theme';
 
-const ThemeContext = React.createContext<{ theme: StyleModels.Theme; setTheme: Function }>({
-	theme: THEMES_VALUES.MAIN,
+const ThemeContext = React.createContext<{
+	theme: THEME_TYPE;
+	setTheme: Function;
+}>({
+	theme: THEME_TYPE.BASE,
 	setTheme: () => null
 });
 
