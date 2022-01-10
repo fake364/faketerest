@@ -1,8 +1,8 @@
-@import 'fonts.init';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@import 'fonts.init';
 @import 'themes';
 
 body {

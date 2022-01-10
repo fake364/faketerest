@@ -6,7 +6,7 @@ type Props = {};
 const BaseNavigationLinks: React.FC<Props> = () => {
 	return (
 		<>
-			<BaseLink className="mr-10" href={'/about'}>
+			<BaseLink className="mr-10 text-blue" href={'/about'}>
 				Описание
 			</BaseLink>
 			<BaseLink className="mr-10" href={'/business'}>
