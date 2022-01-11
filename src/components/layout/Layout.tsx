@@ -4,19 +4,19 @@ import NavigationContainer from '../header/navigation/base-container/NavigationC
 import BaseHead from '../head/BaseHead';
 import CommonNavigation from '../header/navigation/common-navigation/CommonNavigation';
 
-type Props = { isLogged: boolean };
+type Props = { isLogged: boolean; className?: string };
 
-const Layout: React.FC<Props> = ({ children, isLogged }) => {
+const Layout: React.FC<Props> = ({ children, isLogged, className }) => {
 	return (
-		<>
+		<div className={className}>
 			<BaseHead />
 			<Header>
 				<NavigationContainer>
 					<CommonNavigation />
 				</NavigationContainer>
 			</Header>
-			<main>{children}</main>
-		</>
+			<main className="h-full">{children}</main>
+		</div>
 	);
 };
 

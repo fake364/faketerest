@@ -1,0 +1,26 @@
+{
+	"links": {
+		"base": {
+			"description": "Описание",
+			"business": "Бизнес",
+			"blog": "Блог"
+		}
+	},
+	"loginButtons": {
+		"login": "Войти",
+		"register": "Регистрация"
+	},
+	"titles": {
+		"base": {
+			"mainPage": {
+				"slider": {
+					"getYourNext": "Свежая",
+					"dinnerIdea": "идея блюд на ужин",
+					"homeDecor": "идея домашнего декораидея стильного образа",
+					"newOutfit": "идея стильного образа",
+					"thumbIdea": "идея для садоводов"
+				}
+			}
+		}
+	}
+}
