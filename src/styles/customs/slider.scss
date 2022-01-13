@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	.slider-active {
+		@apply rounded-full w-[10px] h-[10px] mr-4 bg-slider_theme;
+	}
+
+	.slider-not-active {
+		@apply rounded-full w-[10px] h-[10px] mr-4 bg-gray-300;
+	}
+}

@@ -3,7 +3,11 @@
 		"browser": true,
 		"es2021": true
 	},
-	"extends": ["eslint:recommended", "plugin:react/recommended", "plugin:@typescript-eslint/recommended"],
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:@typescript-eslint/recommended"
+	],
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
 		"ecmaFeatures": {
@@ -28,5 +32,13 @@
 		"@typescript-eslint/ban-types": "off",
 		"@typescript-eslint/no-namespace": "off",
 		"@typescript-eslint/no-empty-interface": "off"
-	}
+	},
+	"overrides": [
+		{
+			"files": ["*.js", "*.jsx"],
+			"rules": {
+				"@typescript-eslint/...": "off"
+			}
+		}
+	]
 }
