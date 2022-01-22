@@ -19,7 +19,7 @@ const BaseButton: React.FC<BaseButtonProps> = ({
 		<button
 			{...otherProps}
 			data-theme={theme ? theme : THEME_TYPE.BASE}
-			className={`font-bold px-[12px] py-[8px] active:scale-90 active:brightness-15 ${
+			className={`font-bold active:scale-90 active:brightness-15 ${
 				className ? className : ''
 			}`}
 		>

@@ -18,7 +18,7 @@
 	},
 	"plugins": ["react", "@typescript-eslint"],
 	"rules": {
-		"indent": ["error", "tab"],
+		"indent": "off",
 		"linebreak-style": ["error", "windows"],
 		"quotes": ["error", "single"],
 		"semi": ["error", "always"],
@@ -31,7 +31,9 @@
 		"react/prop-types": "off",
 		"@typescript-eslint/ban-types": "off",
 		"@typescript-eslint/no-namespace": "off",
-		"@typescript-eslint/no-empty-interface": "off"
+		"@typescript-eslint/no-empty-interface": "off",
+		"react/jsx-key": "warn",
+		"@typescript-eslint/no-var-requires": "warn"
 	},
 	"overrides": [
 		{

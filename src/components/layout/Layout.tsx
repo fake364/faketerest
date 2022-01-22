@@ -3,6 +3,7 @@ import Header from '../header/Header';
 import NavigationContainer from '../header/navigation/base-container/NavigationContainer';
 import BaseHead from '../head/BaseHead';
 import CommonNavigation from '../header/navigation/common-navigation/CommonNavigation';
+import clsx from 'clsx';
 
 type Props = { isLogged: boolean; className?: string };
 
@@ -15,7 +16,7 @@ const Layout: React.FC<Props> = ({ children, isLogged, className }) => {
 					<CommonNavigation />
 				</NavigationContainer>
 			</Header>
-			<main className="h-full">{children}</main>
+			<main className={clsx('h-full')}>{children}</main>
 		</div>
 	);
 };

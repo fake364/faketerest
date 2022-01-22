@@ -6,7 +6,7 @@ type Props = { pointType: SLIDER_THEMES; shownType: SLIDER_THEMES };
 const SliderPoint: React.FC<Props> = ({ pointType, shownType }) => {
 	const isCurrentPoint = pointType === shownType;
 	const className = isCurrentPoint ? 'slider-active' : 'slider-not-active';
-	return <div slider-theme={pointType} className={className} />;
+	return <div slider-theme={pointType} className={`${className} last:m-0`} />;
 };
 
 export default SliderPoint;

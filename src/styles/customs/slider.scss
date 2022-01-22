@@ -10,4 +10,17 @@
 	.slider-not-active {
 		@apply rounded-full w-[10px] h-[10px] mr-4 bg-gray-300;
 	}
+
+	.bouncing-arrow-button {
+		@apply absolute z-10 animate-bounce bottom-0 left-[48%] mb-6;
+	}
+	.slider-grid {
+		@apply grid grid-cols-7 gap-4 px-10 absolute bottom-[-30%] h-full w-full grid-rows-[repeat(10,_1fr)];
+		-webkit-mask-image: linear-gradient(
+			180deg,
+			black 23%,
+			rgba(0, 0, 0, 0.5) 57%,
+			rgba(0, 0, 0, 0) 69%
+		);
+	}
 }

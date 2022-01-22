@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import BaseButton, { BaseButtonProps } from '../base/BaseButton';
-import ThemeContext from '../../../context/ThemeContext';
 
 const PrimaryButton: React.FC<BaseButtonProps> = ({
 	children,
@@ -11,7 +10,7 @@ const PrimaryButton: React.FC<BaseButtonProps> = ({
 		<BaseButton
 			className={`${
 				className ? className : ''
-			} bg-primary hover:bg-primary_hovered text-text_primary rounded-common_radius`}
+			} bg-primary px-[12px] py-[8px] hover:bg-primary_hovered text-text_primary rounded-common_radius`}
 			{...otherProps}
 		>
 			{children}
