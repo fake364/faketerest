@@ -1,9 +1,19 @@
+$primary: #e60023;
+$primaryHovered: #ad081b;
+$secondary: #efefef;
+$secondaryHovered: #e2e2e2;
+
+$dinnerIdea: #c28b00;
+$homeDecor: #618c7b;
+$newOutfit: #0076d3;
+$thumbIdea: #407a57;
+
 @layer base {
 	[data-theme='base'] {
-		--color-primary: #e60023;
-		--color-primary-hovered: #ad081b;
-		--color-secondary: #efefef;
-		--color-secondary-hovered: #e2e2e2;
+		--color-primary: $primary;
+		--color-primary-hovered: $primaryHovered;
+		--color-secondary: $secondary;
+		--color-secondary-hovered: $secondaryHovered;
 		--color-text-primary: white;
 		--color-text-secondary: black;
 		--radius-common: 24px;
@@ -20,18 +30,18 @@
 	}
 
 	[slider-theme='dinnerIdea'] {
-		--slider-theme: #c28b00;
+		--slider-theme: $dinnerIdea;
 	}
 
 	[slider-theme='homeDecor'] {
-		--slider-theme: #618c7b;
+		--slider-theme: $homeDecor;
 	}
 
 	[slider-theme='newOutfit'] {
-		--slider-theme: #0076d3;
+		--slider-theme: $newOutfit;
 	}
 
 	[slider-theme='thumbIdea'] {
-		--slider-theme: #407a57;
+		--slider-theme: $thumbIdea;
 	}
 }
