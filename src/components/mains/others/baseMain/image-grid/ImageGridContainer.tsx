@@ -23,7 +23,14 @@ const ImageGridContainer: React.FC<CommonTypes.ShownType> = ({ shownType }) => {
 					NumericFunctions.adjustTransform
 				) as TemplateTypes.GridRowSpan;
 				const src = getImageById(shownType, index + 1);
-				return <ImageGridCell key={index} src={src} startFrom={startFrom} />;
+				return (
+					<ImageGridCell
+						key={index}
+						src={src}
+						startFrom={startFrom}
+						shownType={shownType}
+					/>
+				);
 			})}
 		</div>
 	);

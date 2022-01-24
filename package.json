@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
+		"dev": "next dev ",
 		"build": "next build",
 		"start": "next start",
 		"analyze": "cross-env ANALYZE=true next build",
@@ -9,13 +9,15 @@
 	},
 	"dependencies": {
 		"@react-icons/all-files": "^4.1.0",
+		"@types/react-motion": "0.0.32",
 		"lodash": "^4.17.21",
 		"next": "latest",
 		"next-i18next": "^10.1.0",
 		"react": "17.0.2",
 		"react-dom": "17.0.2",
 		"react-icons": "^4.3.1",
-		"react-motion": "^0.5.2"
+		"react-motion": "^0.5.2",
+		"sharp": "^0.29.3"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.16.7",
