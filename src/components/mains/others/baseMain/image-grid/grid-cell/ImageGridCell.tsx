@@ -1,36 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import Image, { ImageProps } from 'next/image';
-import clsx from 'clsx';
-import { rowStartClasses } from './utils/constants';
-import { Motion, spring } from 'react-motion';
+import React from 'react';
+import { ImageProps } from 'next/image';
 import { CommonTypes } from '../../../../../../common/types/common';
+import ImageCell from './ImageCell';
 
-interface Props extends CommonTypes.ShownType {
-	startFrom?: 1 | 2 | 3 | 4;
-	src: ImageProps['src'];
+export interface ImageGridProps extends CommonTypes.ShownType {
+  startFrom?: 1 | 2 | 3 | 4;
+  images: Array<ImageProps['src']>;
+  isAnimated: boolean;
 }
 
-const ImageGridCell: React.FC<Props> = ({ startFrom, src, shownType }) => {
-	return (
-		<Motion key={shownType} defaultStyle={{ y: -20 }} style={{ y: spring(80) }}>
-			{({ y }) => (
-				<div
-					className={clsx('row-span-4', rowStartClasses[startFrom - 1], 'relative')}
-					style={{
-						WebkitTransform: `translate3d(0, -${y}px, 0)`,
-						transform: `translate3d(0, -${y}px, 0)`
-					}}
-				>
-					<Image
-						className="rounded-[16px] h-max"
-						src={src}
-						layout={'fill'}
-						objectFit="cover"
-					/>
-				</div>
-			)}
-		</Motion>
-	);
+const ImageGridCell: React.FC<ImageGridProps> = ({
+  startFrom,
+  images,
+  shownType,
+  isAnimated
+}) => {
+  return (
+    <ImageCell images={images} startFrom={startFrom} shownType={shownType} />
+  );
 };
 
 export default ImageGridCell;

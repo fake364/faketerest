@@ -1,3 +1,6 @@
+import { SLIDER_THEMES } from '../../../enums/slider_themes';
+import { getImageById } from '../../../../components/mains/others/baseMain/image-grid/grid-cell/utils/utils';
+
 const range = <T>(count: number) => Array.from(Array<T>(count).keys());
 
 const numericPalindrome = (palNum: number, startFrom?: number) => {
@@ -25,11 +28,20 @@ const returnInSimpleRange = (
 	return returnOnlyInRange(num, finalRange);
 };
 
+const enumToArray = (): SLIDER_THEMES[] => {
+	return Object.keys(SLIDER_THEMES).map((key) => SLIDER_THEMES[key]);
+};
+
+const arrayOfImagesByType = (theme: SLIDER_THEMES) =>
+	CommonUtils.range(35).map((value) => getImageById(theme, value));
+
 const CommonUtils = {
 	range,
 	numericPalindrome,
 	returnInSimpleRange,
-	returnOnlyInRange
+	returnOnlyInRange,
+	enumToArray,
+	arrayOfImagesByType
 };
 
 export default CommonUtils;
