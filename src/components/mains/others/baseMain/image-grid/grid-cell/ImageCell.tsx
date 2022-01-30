@@ -19,34 +19,49 @@ const sliderIndexMap = [
   SLIDER_THEMES.THUMB_IDEA
 ];
 
+const delays = [
+  'delay-75',
+  'delay-[500ms]',
+  'delay-[700ms]',
+  'delay-[900ms]',
+  'delay-[1200ms]',
+  'delay-[1500ms]',
+  'delay-[1700ms]'
+];
+
+const notFirstRow = {
+  0: 'delay-75',
+  1: 'delay-[1700ms]',
+  2: 'delay-[500ms]',
+  3: 'delay-[1500ms]',
+  4: 'delay-[700ms]',
+  5: 'delay-[1200ms]',
+  6: 'delay-[900ms]'
+};
+
 const ImageCell: React.FC<Props> = ({
   images,
   startFrom,
-  style,
+  index: animateIndex,
   shownType
 }) => {
   return (
     <div
       className={clsx('row-span-4', rowStartClasses[startFrom - 1], 'relative')}
-      style={
-        style
-          ? {
-              WebkitTransform: `translate3d(0, -${style.WebkitTransformY}px, 0)`,
-              transform: `translate3d(0, -${style.transformY}px, 0)`
-            }
-          : undefined
-      }
     >
       {images.map((image, index) => {
         const isNotShown = shownType !== sliderIndexMap[index];
+        const chooseDelayIndex = animateIndex % 7;
+        const delay = startFrom
+          ? delays[chooseDelayIndex]
+          : notFirstRow[chooseDelayIndex];
+        const animatedClasses = clsx(
+          'image-transitions',
+          delay,
+          isNotShown && 'invisible opacity-0'
+        );
         return (
-          <div
-            key={sliderIndexMap[index]}
-            className={clsx(
-              'image-transitions',
-              isNotShown && 'invisible opacity-0 translate-y-1'
-            )}
-          >
+          <div key={sliderIndexMap[index]} className={animatedClasses}>
             <Image
               className={clsx('rounded-[16px]', 'h-max')}
               src={image}

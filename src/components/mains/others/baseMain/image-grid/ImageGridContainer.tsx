@@ -30,7 +30,7 @@ const ImageGridContainer: React.FC<CommonTypes.ShownType> = ({ shownType }) => {
             images={images}
             startFrom={startFrom}
             shownType={shownType}
-            isAnimated={index < 21}
+            index={index}
           />
         );
       })}
