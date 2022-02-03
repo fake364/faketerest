@@ -9,8 +9,9 @@
 	},
 	"dependencies": {
 		"@react-icons/all-files": "^4.1.0",
+		"@types/lodash": "4.14.178",
 		"@types/react-motion": "0.0.32",
-		"lodash": "^4.17.21",
+		"lodash": "4.17.21",
 		"next": "latest",
 		"next-i18next": "^10.1.0",
 		"next-pwa": "5.4.4",

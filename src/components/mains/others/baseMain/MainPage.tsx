@@ -6,7 +6,7 @@ import SliderNode, {
 import PointsContainer from './slider/points-container/PointsContainer';
 import TitleSwitcher from './slider/title-switcher/TitleSwitcher';
 import RoundedArrowButton from '../../../../common/components/buttons/icon-button/prepared-components/RoundedArrowButton';
-import ImageGridContainer from './image-grid/ImageGridContainer';
+import ImageFlexContainer from './image-grid/ImageFlexContainer';
 
 type Props = {};
 
@@ -43,7 +43,7 @@ const MainPage: React.FC<Props> = () => {
 				shownType={type}
 				additionalStyles={'bouncing-arrow-button'}
 			/>
-			<ImageGridContainer shownType={type} />
+			<ImageFlexContainer shownType={type} />
 		</div>
 	);
 };
