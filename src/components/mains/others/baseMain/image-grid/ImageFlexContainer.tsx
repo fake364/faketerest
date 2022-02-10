@@ -1,10 +1,8 @@
 import React, { useRef } from 'react';
 import { CommonTypes } from '../../../../../common/types/common';
 import CommonUtils from '../../../../../common/utils/creation-utils/arrays/common';
-import NumericFunctions from '../../../../../common/utils/functional-utils/numeric/utils.map';
-import Image from 'next/image';
-import { chunkImageIndexes, getImageById } from './grid-cell/utils/utils';
-import ImageCell from './grid-cell/ImageCell';
+import { chunkImageIndexes, getImageById } from './flex-cell/utils/utils';
+import ImageCell from './flex-cell/ImageCell';
 import { SLIDER_ARRAY } from '../../../../../common/classes/customClasses/SliderNode';
 import clsx from 'clsx';
 
@@ -13,7 +11,7 @@ const margins = ['', 'mt-[5rem]', 'mt-[10rem]', 'mt-[15rem]'];
 const ImageFlexContainer: React.FC<CommonTypes.ShownType> = ({ shownType }) => {
   const { current: indexArray } = useRef(chunkImageIndexes(34, 5));
   const { current: marginPalindrome } = useRef(
-    CommonUtils.numericPalindrome(3,0)
+    CommonUtils.numericPalindrome(3, 0)
   );
   return (
     <div className="slider-flex-container">
