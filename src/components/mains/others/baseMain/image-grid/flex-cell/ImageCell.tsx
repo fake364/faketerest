@@ -39,22 +39,22 @@ interface Props extends CommonTypes.ShownType {
 
 const ImageCell: React.FC<Props> = ({ images, shownType }) => {
   return (
-    <div className="mx-2 my-2 h-[25vh] xl:h-[25vh] 2xl:h-[35vh]">
+    <div className="mx-2 my-2 h-[25vh] xl:h-[25vh] 2xl:h-[35vh] relative">
       {images.map((image, index) => {
         const isNotShown = shownType !== SLIDER_ARRAY[index];
         // const delay = startFrom
         //   ? delays[chooseDelayIndex]
         //   : notFirstRow[chooseDelayIndex];
         const animatedClasses = clsx(
-          'h-full',
-          'transition-opacity',
+          // 'h-full',
+          // 'transition-opacity',
           'duration-1000',
           isNotShown && 'invisible opacity-0'
         );
         return (
           <div className={animatedClasses}>
             <Image
-              className={clsx('rounded-[16px]', 'h-max')}
+              className={clsx('rounded-[16px]')}
               src={image}
               layout={'fill'}
               objectFit="cover"
