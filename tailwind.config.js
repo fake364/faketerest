@@ -17,15 +17,15 @@ module.exports = {
 				slider_theme: 'var(--slider-theme)'
 			},
 			keyframes: {
-				move_up: {
-					'0%': { transform: 'translateY(50%)', opacity: '0' },
-					'10%,90%': { opacity: '1', transform: 'translateY(0%)' },
-					'100%': { transform: 'translateY(-50%)', opacity: '0' }
-				}
+				// move_up: {
+				// 	'0%': { transform: 'translateY(50%)', opacity: '0' },
+				// 	'10%,90%': { opacity: '1', transform: 'translateY(0%)' },
+				// 	'100%': { transform: 'translateY(-50%)', opacity: '0' }
+				// }
 			},
 			animation: {
-				move_up: 'move_up 1s ease-in-out infinite',
-				move_and_disappear: 'move_up 5s ease-in-out infinite'
+				// move_up: 'move_up 1s ease-in-out infinite',
+				// move_and_disappear: 'move_up 5s ease-in-out infinite'
 			}
 		}
 	},

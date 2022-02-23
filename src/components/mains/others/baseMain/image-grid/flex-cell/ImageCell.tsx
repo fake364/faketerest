@@ -1,8 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { rowStartClasses } from './utils/constants';
 import Image, { ImageProps } from 'next/image';
-import { SLIDER_THEMES } from '../../../../../../common/enums/slider_themes';
 import { CommonTypes } from '../../../../../../common/types/common';
 import { SLIDER_ARRAY } from '../../../../../../common/classes/customClasses/SliderNode';
 

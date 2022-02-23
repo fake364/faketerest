@@ -1,7 +1,9 @@
 const TITLE = 'Faketerest';
 
 const COMMON_CONSTANTS = {
-	TITLE
+  TITLE
 };
+
+export const sliderTimeout = 5000;
 
 export default COMMON_CONSTANTS;

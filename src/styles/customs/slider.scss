@@ -17,12 +17,11 @@
   .slider-flex-container {
     @apply absolute w-full top-[30%] px-[2rem];
     @apply flex;
-    //-webkit-mask-image: linear-gradient(
-    //  180deg,
-    //  black 23%,
-    //  rgba(0, 0, 0, 0.5) 57%,
-    //  rgba(0, 0, 0, 0) 75%
-    //);
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      black 26%,
+      rgba(0, 0, 0, 0.5) 39%,
+      rgba(0, 0, 0, 0) 44%
+    );
   }
-
 }
