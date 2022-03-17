@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import CircularLinkedNode from '../../../../common/classes/structureClasses/CircularLinkedNode';
 import SliderNode, {
   SLIDER_ARRAY
@@ -14,6 +14,7 @@ type Props = {};
 const sliderNodes = SliderNode.createThemesArray(SLIDER_ARRAY);
 
 const MainPage: React.FC<Props> = () => {
+  const [timer, setTimer] = useState<NodeJS.Timer>();
   const [sliderListNode, setSliderNode] = useState(
     CircularLinkedNode.initializeCircleList<SliderNode>(sliderNodes, 0)
   );
@@ -29,23 +30,34 @@ const MainPage: React.FC<Props> = () => {
       () => setSliderNode(({ nextNode }) => nextNode),
       sliderTimeout
     );
-
+    setTimer(intervalId);
     return () => {
       document.body.style.overflow = oldOverflow;
       clearInterval(intervalId);
     };
   }, []);
 
+  const onClickJumpingButton = () => {
+    if (timer) {
+      clearInterval(timer);
+      setTimer(undefined);
+    }
+  };
+
+  // TODO to add animation of moving container up and down
   return (
-    <div className="w-full flex flex-col items-stretch">
-      <TitleSwitcher shownType={type} />
-      <PointsContainer sliderNodes={sliderNodes} shownType={type} />
+    <>
       <RoundedArrowButton
         shownType={type}
         additionalStyles={'bouncing-arrow-button'}
+        onClick={onClickJumpingButton}
       />
-      <ImageFlexContainer shownType={type} />
-    </div>
+      <div className="w-full flex flex-col items-stretch relative">
+        <TitleSwitcher shownType={type} isAnimation={Boolean(timer)} />
+        <PointsContainer sliderNodes={sliderNodes} shownType={type} />
+        <ImageFlexContainer shownType={type} isAnimation={Boolean(timer)} />
+      </div>
+    </>
   );
 };
 

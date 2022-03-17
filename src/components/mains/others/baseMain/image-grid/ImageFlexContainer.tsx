@@ -18,7 +18,9 @@ const delays = [
   'opacity_move_up-1500'
 ];
 
-const ImageFlexContainer: React.FC<CommonTypes.ShownType> = ({ shownType }) => {
+type Props = { isAnimation: boolean } & CommonTypes.ShownType;
+
+const ImageFlexContainer: React.FC<Props> = ({ shownType, isAnimation }) => {
   const { current: indexArray } = useRef(chunkImageIndexes(34, 5));
   const { current: marginPalindrome } = useRef(
     CommonUtils.numericPalindrome(3, 0)
@@ -30,8 +32,8 @@ const ImageFlexContainer: React.FC<CommonTypes.ShownType> = ({ shownType }) => {
           className={clsx(
             'flex flex-col flex-1 relative',
             margins[marginPalindrome[columnIndex]],
-            'opacity_move_up',
-            delays[columnIndex]
+            isAnimation && 'opacity_move_up',
+            isAnimation && delays[columnIndex]
           )}
         >
           {columnIndexes.map((imageIndex) => {
