@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
-import { CommonTypes } from '../../../../../common/types/common';
 import CommonUtils from '../../../../../common/utils/creation-utils/arrays/common';
 import { chunkImageIndexes, getImageById } from './flex-cell/utils/utils';
 import ImageCell from './flex-cell/ImageCell';
 import { SLIDER_ARRAY } from '../../../../../common/classes/customClasses/SliderNode';
 import clsx from 'clsx';
+import { ShownType } from '../../../../../common/types/common';
 
 const margins = ['', 'mt-[5rem]', 'mt-[10rem]', 'mt-[15rem]'];
 
@@ -18,7 +18,7 @@ const delays = [
   'opacity_move_up-1500'
 ];
 
-type Props = { isAnimation: boolean } & CommonTypes.ShownType;
+type Props = { isAnimation: boolean } & ShownType;
 
 const ImageFlexContainer: React.FC<Props> = ({ shownType, isAnimation }) => {
   const { current: indexArray } = useRef(chunkImageIndexes(34, 5));

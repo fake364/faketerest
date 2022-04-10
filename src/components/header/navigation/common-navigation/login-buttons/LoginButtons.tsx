@@ -6,7 +6,7 @@ import { useTranslation } from 'next-i18next';
 type Props = {};
 
 const LoginButtons: React.FC<Props> = () => {
-	const { t } = useTranslation('common');
+	const { t } = useTranslation('main-page');
 	return (
 		<>
 			<PrimaryButton className="mr-[8px]">

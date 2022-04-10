@@ -1,10 +1,10 @@
 import React from 'react';
 import clsx from 'clsx';
 import Image, { ImageProps } from 'next/image';
-import { CommonTypes } from '../../../../../../common/types/common';
+import { ShownType } from '../../../../../../common/types/common';
 import { SLIDER_ARRAY } from '../../../../../../common/classes/customClasses/SliderNode';
 
-interface Props extends CommonTypes.ShownType {
+interface Props extends ShownType {
   images: Array<ImageProps['src']>;
 }
 

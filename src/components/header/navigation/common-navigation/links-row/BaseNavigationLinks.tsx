@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next';
 type Props = {};
 
 const BaseNavigationLinks: React.FC<Props> = () => {
-	const { t } = useTranslation('common');
+	const { t } = useTranslation('main-page');
 	return (
 		<>
 			<BaseLink className="mr-10 text-blue" href={'/about'}>

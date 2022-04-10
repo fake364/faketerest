@@ -1,12 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
-import { CommonTypes } from '../../../../../../common/types/common';
 import clsx from 'clsx';
+import { ShownType } from '../../../../../../common/types/common';
 
-type Props = { isAnimation: boolean } & CommonTypes.ShownType;
+type Props = { isAnimation: boolean } & ShownType;
 
 const TitleSwitcher: React.FC<Props> = ({ shownType, isAnimation }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('main-page');
 
   return (
     <div className="flex-1 flex flex-col items-center mt-24 relative">

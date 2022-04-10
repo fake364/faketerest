@@ -2,9 +2,9 @@ import React from 'react';
 import { FaChevronDown } from '@react-icons/all-files/fa/FaChevronDown';
 import IconButton from '../IconButton';
 import { FaChevronUp } from '@react-icons/all-files/fa/FaChevronUp';
-import { CommonTypes } from '../../../../types/common';
+import { ShownType } from '../../../../types/common';
 
-interface Props extends Partial<CommonTypes.ShownType> {
+interface Props extends Partial<ShownType> {
   isArrowUp?: boolean;
   additionalStyles?: string;
   onClick: () => void;

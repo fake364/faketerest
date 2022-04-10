@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .main-reg-form {
+    @apply absolute w-screen h-screen bg-black/[0.6] top-0 animate-form_appearance flex items-center justify-between px-[24px];
+  }
+}

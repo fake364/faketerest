@@ -11,6 +11,7 @@
 		"@react-icons/all-files": "^4.1.0",
 		"@types/lodash": "4.14.178",
 		"@types/react-motion": "0.0.32",
+		"formik": "^2.2.9",
 		"lodash": "4.17.21",
 		"next": "latest",
 		"next-i18next": "^10.1.0",
@@ -20,7 +21,8 @@
 		"react-icons": "^4.3.1",
 		"react-motion": "^0.5.2",
 		"react-motion-loop": "^2.0.2",
-		"sharp": "^0.29.3"
+		"sharp": "^0.29.3",
+		"yup": "^0.32.11"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.16.7",

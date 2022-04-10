@@ -1,102 +1,110 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CircularLinkedNode from '../../../../common/classes/structureClasses/CircularLinkedNode';
 import SliderNode, {
   SLIDER_ARRAY
 } from '../../../../common/classes/customClasses/SliderNode';
-import PointsContainer from './slider/points-container/PointsContainer';
-import TitleSwitcher from './slider/title-switcher/TitleSwitcher';
-import ImageFlexContainer from './image-grid/ImageFlexContainer';
 import { sliderTimeout } from '../../../../common/constants/commons';
-import clsx from 'clsx';
 import { findAndSetHeaderVisibility } from './image-grid/flex-cell/utils/utils';
-import { BouncingButtons } from './bouncing-buttons/BouncingButtons';
+import SliderPageWrapper from './slider/page-wrapper/SliderPageWrapper';
+import { Nullable } from '../../../../common/types/common';
+import RegistrationFormWrapper from './regForm/RegistrationFormWrapper';
 
-type Props = {};
+type State = {
+  timer: Nullable<NodeJS.Timer>;
+  sliderListNode: CircularLinkedNode<SliderNode>;
+  isPageSlidingStopped: boolean;
+};
 
 const sliderNodes = SliderNode.createThemesArray(SLIDER_ARRAY);
 
-const MainPage: React.FC<Props> = () => {
-  const [timer, setTimer] = useState<NodeJS.Timer>();
-  const [sliderListNode, setSliderNode] = useState(
-    CircularLinkedNode.initializeCircleList<SliderNode>(sliderNodes, 0)
-  );
-  const [isPageSlidingStopped, setIsStopped] = useState<boolean>(true);
+class MainPage extends React.Component<{}, State> {
+  oldBodyOverflow: string;
 
-  const {
-    value: { type }
-  } = sliderListNode;
+  constructor(props) {
+    super(props);
+    this.state = {
+      timer: null,
+      sliderListNode: CircularLinkedNode.initializeCircleList<SliderNode>(
+        sliderNodes,
+        0
+      ),
+      isPageSlidingStopped: true
+    };
+  }
 
-  const initiateSlider = () => {
+  initiateSlider = () => {
+    const { sliderListNode } = this.state;
     findAndSetHeaderVisibility('visible');
     const intervalId = setInterval(
-      () => setSliderNode(({ nextNode }) => nextNode),
+      () => this.setState({ sliderListNode: sliderListNode.nextNode }),
       sliderTimeout
     );
-    setTimer(intervalId);
-    return intervalId;
+    this.setState({ timer: intervalId });
   };
 
-  useEffect(() => {
-    const oldOverflow = document.body.style.overflow;
+  componentDidMount() {
+    this.oldBodyOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-    const intervalId = initiateSlider();
-    return () => {
-      document.body.style.overflow = oldOverflow;
-      clearInterval(intervalId);
-    };
-  }, []);
+    this.initiateSlider();
+  }
 
-  const takeASlide = (postEffect?: () => void) => {
-    setIsStopped(false);
+  componentWillUnmount() {
+    const { timer } = this.state;
+    document.body.style.overflow = this.oldBodyOverflow;
+    clearInterval(timer);
+  }
+
+  takeASlide = (postEffect?: () => void) => {
+    this.setState({ isPageSlidingStopped: false });
     setTimeout(() => {
-      setIsStopped(true);
+      this.setState({ isPageSlidingStopped: true });
       postEffect && postEffect();
     }, 2000);
   };
 
-  const onClickJumpingButtonDown = () => {
+  onClickJumpingButtonDown = () => {
+    console.log(this);
+    const { timer } = this.state;
     if (timer) {
       clearInterval(timer);
 
       setTimeout(() => {
-        setTimer(undefined);
-        takeASlide();
+        this.setState({ timer: null });
+        this.takeASlide();
         findAndSetHeaderVisibility('hidden');
       }, 1000);
     }
   };
 
-  const onClickJumpingButtonUp = () => {
-    takeASlide(() => {
-      initiateSlider();
+  onClickJumpingButtonUp = () => {
+    this.takeASlide(() => {
+      this.initiateSlider();
       findAndSetHeaderVisibility('visible');
     });
   };
 
-  const isAnimation = Boolean(timer);
+  render() {
+    const { sliderListNode, timer, isPageSlidingStopped } = this.state;
 
-  // TODO to add animation of moving container up and down
-  return (
-    <>
-      <BouncingButtons
-        isAnimated={isAnimation}
-        shownType={type}
-        onClickDown={onClickJumpingButtonDown}
-        onClickUp={onClickJumpingButtonUp}
-      />
-      <div
-        className={clsx(
-          'w-full flex flex-col items-stretch relative z-[-1]',
-          'animate-slide_bottom',
-          isPageSlidingStopped && 'stop-animation'
-        )}
-      >
-        <TitleSwitcher shownType={type} isAnimation={isAnimation} />
-        <PointsContainer sliderNodes={sliderNodes} shownType={type} />
-        <ImageFlexContainer shownType={type} isAnimation={isAnimation} />
-      </div>
-    </>
-  );
-};
+    const {
+      value: { type }
+    } = sliderListNode;
+
+    const isAnimation = Boolean(timer);
+
+    return (
+      <>
+        <SliderPageWrapper
+          animated={isAnimation}
+          shownType={type}
+          onClickDown={this.onClickJumpingButtonDown}
+          onClickUp={this.onClickJumpingButtonUp}
+          pageSlidingStopped={isPageSlidingStopped}
+        />
+        {!isAnimation && isPageSlidingStopped && <RegistrationFormWrapper />}
+      </>
+    );
+  }
+}
 
 export default MainPage;

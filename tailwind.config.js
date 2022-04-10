@@ -5,7 +5,8 @@ module.exports = {
   theme: {
     extend: {
       borderRadius: {
-        common_radius: 'var(--radius-common)'
+        common_radius: 'var(--radius-common)',
+        form_radius: 32
       },
       colors: {
         primary: 'var(--color-primary)',
@@ -16,17 +17,10 @@ module.exports = {
         text_secondary: 'var(--color-text-secondary)',
         slider_theme: 'var(--slider-theme)'
       },
-      keyframes: {
-        // move_up: {
-        // 	'0%': { transform: 'translateY(50%)', opacity: '0' },
-        // 	'10%,90%': { opacity: '1', transform: 'translateY(0%)' },
-        // 	'100%': { transform: 'translateY(-50%)', opacity: '0' }
-        // }
-      },
       animation: {
-        // move_up: 'move_up 1s ease-in-out infinite',
         move_and_disappear: 'move_up 5s ease-in-out infinite',
-        slide_bottom: 'slide-to-second-page 2s ease-in-out infinite alternate'
+        slide_bottom: 'slide-to-second-page 2s ease-in-out infinite alternate',
+        form_appearance: 'appearance 0.3s ease-in-out'
       }
     }
   },

@@ -1,39 +1,43 @@
 @layer base {
-	$dinnerIdea: #c28b00;
+  $dinnerIdea: #c28b00;
 
-	[data-theme='base'] {
-		--color-primary: #e60023;
-		--color-primary-hovered: #ad081b;
-		--color-secondary: #efefef;
-		--color-secondary-hovered: #e2e2e2;
-		--color-text-primary: white;
-		--color-text-secondary: black;
-		--radius-common: 24px;
-	}
+  [data-theme='base'] {
+    --color-primary: #e60023;
+    --color-primary-hovered: #ad081b;
+    --color-secondary: #efefef;
+    --color-secondary-hovered: #e2e2e2;
+    --color-text-primary: white;
+    --color-text-secondary: black;
+    --radius-common: 24px;
+  }
 
-	[data-theme='business'] {
-		--color-primary: #7801e1;
-		--color-primary-hovered: #5600a4;
-		--color-secondary: #cdc3f3;
-		--color-secondary-hovered: #9993b0;
-		--color-text-primary: #7762ff;
-		--color-text-secondary: black;
-		--radius-common: 24px;
-	}
+  [data-theme='business'] {
+    --color-primary: #7801e1;
+    --color-primary-hovered: #5600a4;
+    --color-secondary: #cdc3f3;
+    --color-secondary-hovered: #9993b0;
+    --color-text-primary: #7762ff;
+    --color-text-secondary: black;
+    --radius-common: 24px;
+  }
 
-	[slider-theme='dinnerIdea'] {
-		--slider-theme: #c28b00;
-	}
+  [slider-theme='dinnerIdea'] {
+    --slider-theme: #c28b00;
+  }
 
-	[slider-theme='homeDecor'] {
-		--slider-theme: #618c7b;
-	}
+  [slider-theme='homeDecor'] {
+    --slider-theme: #618c7b;
+  }
 
-	[slider-theme='newOutfit'] {
-		--slider-theme: #0076d3;
-	}
+  [slider-theme='newOutfit'] {
+    --slider-theme: #0076d3;
+  }
 
-	[slider-theme='thumbIdea'] {
-		--slider-theme: #407a57;
-	}
+  [slider-theme='thumbIdea'] {
+    --slider-theme: #407a57;
+  }
+
+  .common-radius {
+    --radius-common: 24px;
+  }
 }

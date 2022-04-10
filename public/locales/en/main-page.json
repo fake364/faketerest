@@ -1,0 +1,55 @@
+{
+  "errorMessages": {},
+  "links": {
+    "base": {
+      "description": "Description",
+      "business": "Business",
+      "blog": "Blog"
+    }
+  },
+  "loginButtons": {
+    "login": "Login",
+    "register": "Register"
+  },
+  "titles": {
+    "base": {
+      "mainPage": {
+        "slider": {
+          "getYourNext": "Get your next",
+          "dinnerIdea": "weeknight dinner idea",
+          "homeDecor": "home decor idea",
+          "newOutfit": "new look outfit",
+          "thumbIdea": "green thumb idea"
+        }
+      }
+    }
+  },
+  "regForm": {
+    "header": "Sign up to get your ideas",
+    "form": {
+      "title": "Welcome to Faketerest",
+      "subtitle": "Find new ideas to try",
+      "fields": {
+        "email": "Email",
+        "password": "Create a password",
+        "age": "Age"
+      },
+      "buttons": {
+        "continue": "Continue",
+        "or": "Or",
+        "continueWithFacebook": "Continue with Facebook",
+        "continue with google": "Continue with Google"
+      },
+      "terms": {
+        "youAgreeWith": "By continuing, you agree to Faketerest's",
+        "youVeRead": "and acknowledge you've read our",
+        "termsOfService": "Terms of Service",
+        "privacyPolicy": "Privacy Policy"
+      },
+      "logInLink": "Already a member? Log in",
+      "areYouABusiness": "Are you a business?",
+      "getStartedHere": "Get started here!",
+      "createBusinessAccount": "Create a free business account"
+    }
+  }
+}
