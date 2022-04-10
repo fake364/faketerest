@@ -45,4 +45,13 @@
       animation-delay: 1500ms;
     }
   }
+
+  @keyframes slide-to-second-page {
+    0% {
+      transform: translateY(0px);
+    }
+    100% {
+      transform: translateY(-150%);
+    }
+  }
 }

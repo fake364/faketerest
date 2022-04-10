@@ -26,7 +26,12 @@ const ImageFlexContainer: React.FC<Props> = ({ shownType, isAnimation }) => {
     CommonUtils.numericPalindrome(3, 0)
   );
   return (
-    <div className="slider-flex-container">
+    <div
+      className={clsx(
+        'slider-flex-container',
+        isAnimation && 'slider-gradient'
+      )}
+    >
       {indexArray.map((columnIndexes, columnIndex) => (
         <div
           className={clsx(

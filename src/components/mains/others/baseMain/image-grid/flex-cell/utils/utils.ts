@@ -19,3 +19,10 @@ export const chunkImageIndexes = (count: number, chunksNumber: number) =>
     CommonUtils.range(count).map(NumericFunctions.adjustToValue()),
     chunksNumber
   );
+
+export const findAndSetHeaderVisibility = (value: string) => {
+  const header = document.querySelector('header');
+  if (header) {
+    header.style.visibility = value;
+  }
+};

@@ -25,7 +25,8 @@ module.exports = {
       },
       animation: {
         // move_up: 'move_up 1s ease-in-out infinite',
-        move_and_disappear: 'move_up 5s ease-in-out infinite'
+        move_and_disappear: 'move_up 5s ease-in-out infinite',
+        slide_bottom: 'slide-to-second-page 2s ease-in-out infinite alternate'
       }
     }
   },

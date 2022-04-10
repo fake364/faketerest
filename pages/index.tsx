@@ -4,7 +4,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import MainPage from '../src/components/mains/others/baseMain/MainPage';
 
 export default function Home(props) {
-	console.log(props);
 	return (
 		<>
 			<AuthLayout className="h-screen overflow-hidden">

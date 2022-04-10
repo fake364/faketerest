@@ -11,17 +11,31 @@
     @apply rounded-full w-[10px] h-[10px] mr-4 bg-gray-300;
   }
 
+  .arrow-button-up {
+    @apply absolute bottom-0 left-[48%];
+  }
+
+  .arrow-button-down {
+    @apply absolute top-0 left-[48%];
+  }
+
   .bouncing-arrow-button {
-    @apply absolute z-10 animate-bounce bottom-0 left-[48%] mb-6;
+    @apply z-10 animate-bounce mb-6;
   }
   .slider-flex-container {
     @apply absolute w-full top-[188px] px-[2rem];
     @apply flex;
+  }
+  .slider-gradient {
     -webkit-mask-image: linear-gradient(
       180deg,
       black 26%,
       rgba(0, 0, 0, 0.5) 39%,
       rgba(0, 0, 0, 0) 44%
     );
+  }
+
+  .stop-animation {
+    animation-play-state: paused !important;
   }
 }
