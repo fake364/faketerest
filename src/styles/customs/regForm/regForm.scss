@@ -4,6 +4,10 @@
 
 @layer base {
   .main-reg-form {
-    @apply absolute w-screen h-screen bg-black/[0.6] top-0 animate-form_appearance flex items-center justify-between px-[24px];
+    @apply absolute w-screen h-screen bg-black/[0.6] top-0 animate-form_appearance flex items-center justify-evenly px-[24px];
+  }
+
+  .reg-form-input {
+    @apply rounded-form_radius border-[#cdcdcd] border-2 focus:outline focus:outline-[#5DA3F6FF] focus:outline-4 py-[10px] px-[16px] text-[16px] font-light;
   }
 }
