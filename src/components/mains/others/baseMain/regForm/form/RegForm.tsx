@@ -4,10 +4,10 @@ import { useTranslation } from 'next-i18next';
 import InputWithError from '../../../../../../common/components/inputs/commonInput/inputWithError/InputWithError';
 import PrimaryButton from '../../../../../../common/components/buttons/primary-button/PrimaryButton';
 import { useFormik } from 'formik';
-import BaseButton from '../../../../../../common/components/buttons/base/BaseButton';
-import IconButton from '../../../../../../common/components/buttons/icon-button/IconButton';
-import { IconType } from '@react-icons/all-files';
 import { FaFacebook } from '@react-icons/all-files/fa/FaFacebook';
+import { FcGoogle } from '@react-icons/all-files/fc/FcGoogle';
+import IconTextButton from './iconTextButton/IconTextButtom';
+import Link, { LinkProps } from 'next/link';
 
 type Props = {};
 
@@ -25,7 +25,11 @@ const RegForm: React.FC<Props> = () => {
   console.log(formik);
 
   return (
-    <div className="p-[8px] bg-white flex w-[483px] min-w-[483px] items-center flex-col ml-[56px] rounded-form_radius">
+    <div
+      className="bg-white flex w-[483px] min-w-[483px]
+     items-center flex-col ml-[56px] rounded-form_radius overflow-hidden
+     shadow-[rgb(0_0_0/45%)_0px_2px_10px]"
+    >
       <div className="my-[16px]">
         <Image src={'/logo.png'} width={40} height={40} />
       </div>
@@ -59,18 +63,49 @@ const RegForm: React.FC<Props> = () => {
           className="mt-[8px] self-stretch"
           onClick={formik.handleSubmit}
         >
-          Continue
+          {t('regForm.form.buttons.continue')}
         </PrimaryButton>
-        <div className="mt-[8px] text-[#333333] font-bold">OR</div>
-        <BaseButton
-          className="mt-[8px] self-stretch bg-[#1877f2] rounded-common_radius py-[8px] text-white"
-          onClick={formik.handleSubmit}
-        >
-          <div className="flex items-center justify-center">
-            <FaFacebook className="mr-[8px] text-[24px]" />
-            <div>Continue with facebook</div>
-          </div>
-        </BaseButton>
+        <div className="mt-[8px] text-[#333333] font-bold text-center">
+          {t('regForm.form.buttons.or')}
+        </div>
+        <IconTextButton
+          Icon={FaFacebook}
+          text={t('regForm.form.buttons.continueWithFacebook')}
+          onClick={() => {}}
+          className="bg-[#1877f2] text-white"
+        />
+        <IconTextButton
+          Icon={FcGoogle}
+          text={t('regForm.form.buttons.continueWithGoogle')}
+          onClick={() => {}}
+          className="text-[#3c4043] border-[1px] border-[#dadce0] text-[15px] font-[500] mt-[12px]"
+        />
+        <div className="mt-[14px] text-center text-[12px] text-gray-600">
+          {t('regForm.form.terms.youAgreeWith')}{' '}
+          <span className="font-bold whitespace-nowrap">
+            <Link href={'/tos'}>{t('regForm.form.terms.termsOfService')}</Link>
+          </span>{' '}
+          {t('regForm.form.terms.youVeRead')}{' '}
+          <span className="font-bold whitespace-nowrap">
+            <Link href={'/privacy'}>
+              {t('regForm.form.terms.privacyPolicy')}
+            </Link>
+          </span>
+        </div>
+        <div className="mt-[12px] text-[13px] text-center text-gray-600 cursor-pointer font-semibold">
+          {t('regForm.form.logInLink')}
+        </div>
+        <div className=" mt-[10px] text-[13px] text-center text-gray-600 font-semibold">
+          {t('regForm.form.areYouABusiness')}{' '}
+          <span>
+            <Link href={'/business/create'}>
+              {t('regForm.form.getStartedHere')}
+            </Link>
+          </span>
+        </div>
+      </div>
+      <div className="bg-[#efefef] w-full h-full text-center text-[16px] font-semibold py-[16px] mt-[16px] cursor-pointer">
+        {t('regForm.form.createBusinessAccount')}
       </div>
     </div>
   );

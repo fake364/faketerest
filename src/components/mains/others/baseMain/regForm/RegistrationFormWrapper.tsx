@@ -9,7 +9,7 @@ const RegistrationFormWrapper: React.FC<Props> = () => {
 
   return (
     <div className="main-reg-form">
-      <h1 className="text-[70px] text-white">{t('regForm.header')}</h1>
+      <h1 className="text-[70px] text-white max-w-[600px]">{t('regForm.header')}</h1>
       <RegForm />
     </div>
   );
