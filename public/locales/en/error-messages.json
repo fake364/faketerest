@@ -1,0 +1,10 @@
+{
+  "emailFormat": "Hmm...that doesn't look like an email address",
+  "requiredEmail": "You missed a spot! Don't forget to add your email.",
+  "shortPassword": "Your password is too short",
+  "longPassword": "Your password is too long",
+  "mandatoryField": "This field is mandatory",
+  "negativeAge": "Age cannot be negative",
+  "tooOld": "You are probably too old for this site or supplied wrong age",
+  "ageNotNumber": "Age must be a number"
+}

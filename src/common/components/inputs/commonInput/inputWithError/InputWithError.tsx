@@ -17,7 +17,7 @@ const InputWithError: React.FC<Props> = ({
         className={clsx(className, labelText && 'border-[#e60023]')}
       />
       {labelText && (
-        <label htmlFor={props.id} className="text-[#e60023]">
+        <label htmlFor={props.id} className="text-[#e60023] px-[10px] block text-[14px] mt-[4px]">
           {labelText}
         </label>
       )}
