@@ -4,9 +4,8 @@ export type RegInstanceType = {
   id?: number;
   username: string;
   email: string;
-  passwordHash: string;
   age?: number;
-  regDate: Date;
+  regDate?: Date;
 };
 
 @Table({ tableName: 'registrations', timestamps: false })
@@ -23,7 +22,7 @@ export default class Registration extends Model<RegInstanceType> {
 
   @Column({
     unique: true,
-    type: DataType.STRING,
+    type: DataType.CITEXT,
     allowNull: false,
     field: 'USERNAME'
   })
@@ -31,16 +30,13 @@ export default class Registration extends Model<RegInstanceType> {
 
   @Column({
     field: 'EMAIL',
-    type: DataType.STRING,
+    type: DataType.CITEXT,
     allowNull: false,
     unique: true
   })
   email: string;
 
-  @Column({ field: 'PASS_HASH', allowNull: false, type: DataType.STRING })
-  passwordHash: string;
-
-  @Column({ field: 'REG_DATE', allowNull: false, type: DataType.DATE })
+  @Column({ field: 'REG_DATE', allowNull: true, type: DataType.DATE })
   regDate: Date;
 
   @Column({ field: 'AGE', allowNull: true, type: DataType.NUMBER })

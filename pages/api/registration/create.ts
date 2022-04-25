@@ -6,23 +6,28 @@ import {
 import { StatusCodes } from 'http-status-codes';
 import RequestMethod from '../../../src/common/constants/requestMethods';
 import RegService from '../../../src/common/backend/services/RegistrationService';
-import Registration, {
-  RegInstanceType
-} from '../../../src/common/backend/models/Registration.model';
-import { EMAIL_REGEX } from '../../../src/common/constants/commons';
-import { Op } from 'sequelize';
+import Registration from '../../../src/common/backend/models/Registration.model';
+import {
+  checkUniqueFields,
+  matchContentType,
+  variableIsEmail
+} from '../../../src/common/backend/models/utils/utils';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   requestInfoLogger(req);
-
-  const isRightContentType =
-    req.headers['content-type'].toLocaleLowerCase() === 'application/json';
   const isPost = RequestMethod.POST === req.method;
-  const isRegInstance = new Registration(req.body).validate();
-  if (
-    typeof req.body.email === 'string' &&
-    !req.body.email.match(EMAIL_REGEX)
-  ) {
+  await RegService.checkConnection();
+  let regInstance: Registration;
+  try {
+    regInstance = new Registration(req.body);
+    await regInstance.validate();
+    await regInstance.save();
+  } catch (e) {
+    console.log(e);
+    setDefaultMessageByCode(res, StatusCodes.BAD_REQUEST);
+    return;
+  }
+  if (variableIsEmail(req.body.email)) {
     setDefaultMessageByCode(
       res,
       StatusCodes.BAD_REQUEST,
@@ -30,31 +35,16 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     );
     return;
   }
-  if (isPost && isRightContentType && isRegInstance) {
-    await RegService.checkConnection();
-    const requestRegJson = req.body as RegInstanceType;
-    const reqEmail = requestRegJson.email.toLocaleLowerCase();
-    const reqUsername = requestRegJson.username.toLocaleLowerCase();
-    const regInstance = await Registration.findOne({
-      where: {
-        [Op.or]: [{ email: reqEmail }, { username: reqUsername }]
-      }
-    });
-    console.log(
-      'kek',
-      regInstance.getDataValue('email'),
-      ' ',
-      regInstance.getDataValue('username')
-    );
-    await Registration.create({
-      username: 'test2',
-      age: 12,
-      email: 'kek@mail.com',
-      passwordHash: '12134',
-      regDate: new Date()
-    });
-    res.status(StatusCodes.OK).json({ status: 'Created' });
-    await RegService.closeConnection();
+  if (isPost && matchContentType(req, 'application/json')) {
+    try {
+      await Registration.create({
+        ...(await checkUniqueFields(req, res)),
+        regDate: new Date()
+      });
+      res.status(StatusCodes.OK).json({ status: 'Created' });
+    } catch (e) {
+      console.warn(e);
+    }
   } else {
     setDefaultMessageByCode(res, StatusCodes.BAD_REQUEST);
   }

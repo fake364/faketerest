@@ -28,10 +28,12 @@ class RegistrationService {
 
   public async checkConnection() {
     await this._connection.authenticate();
+    console.log('---DB CONNECTION OPENED---');
   }
 
   public async closeConnection() {
     await this._connection.close();
+    console.log('---DB CONNECTION CLOSED---');
   }
 }
 
