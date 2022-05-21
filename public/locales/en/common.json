@@ -1,1 +1,8 @@
-{}
+{
+  "placeholders": {
+    "email": "Email",
+    "password": "Password",
+    "createPassword": "Create a password",
+    "age": "Age"
+  }
+}

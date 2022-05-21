@@ -2,9 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 
-type Props = {};
+type Props = { onTriggerFormMode: () => void };
 
-const SecondaryRegForm: React.FC<Props> = () => {
+const SecondaryRegForm: React.FC<Props> = ({ onTriggerFormMode }) => {
   const { t } = useTranslation('main-page');
 
   return (
@@ -19,7 +19,10 @@ const SecondaryRegForm: React.FC<Props> = () => {
           <Link href={'/privacy'}>{t('regForm.form.terms.privacyPolicy')}</Link>
         </span>
       </div>
-      <div className="mt-[12px] text-[13px] text-center text-gray-600 cursor-pointer font-semibold">
+      <div
+        className="mt-[12px] text-[13px] text-center text-gray-600 cursor-pointer font-semibold"
+        onClick={onTriggerFormMode}
+      >
         {t('regForm.form.logInLink')}
       </div>
       <div className=" mt-[10px] text-[13px] text-center text-gray-600 font-semibold">

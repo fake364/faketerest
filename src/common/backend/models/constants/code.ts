@@ -1,4 +1,4 @@
-export enum REGISTRATION_ERROR {
-	EXISTENT_EMAIL,
-	EXISTENT_USERNAME
-}
+export const REGISTRATION_ERROR = {
+  email: 'EXISTENT_EMAIL',
+  username: 'EXISTENT_USERNAME'
+};

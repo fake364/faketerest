@@ -1,84 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'next-i18next';
-import InputWithError from '../../../../../../common/components/inputs/commonInput/inputWithError/InputWithError';
-import PrimaryButton from '../../../../../../common/components/buttons/primary-button/PrimaryButton';
-import { useFormik } from 'formik';
 import { FaFacebook } from '@react-icons/all-files/fa/FaFacebook';
 import { FcGoogle } from '@react-icons/all-files/fc/FcGoogle';
 import IconTextButton from './iconTextButton/IconTextButtom';
 import SecondaryRegForm from './secondaryRegForm/SecondaryRegForm';
 import RegFormHeader from './header/RegFormHeader';
-import getRegFormSchema, { regFormNames } from './schemas/GetRegFormSchema';
+import { RegInputs } from './regInputs/RegInputs';
+import LoginInputs from './loginInputs/LoginInputs';
 
 type Props = {};
 
 const RegForm: React.FC<Props> = () => {
   const { t } = useTranslation('main-page');
-  const { t: errors } = useTranslation('error-messages');
-  const formik = useFormik({
-    initialValues: {
-      [regFormNames.email]: '',
-      [regFormNames.password]: '',
-      [regFormNames.age]: ''
-    },
-    validationSchema: getRegFormSchema({
-      tooOld: errors('tooOld'),
-      tooLittle: errors('negativeAge'),
-      mandatoryField: errors('mandatoryField'),
-      longPassword: errors('longPassword'),
-      shortPassword: errors('shortPassword'),
-      emailFormat: errors('emailFormat'),
-      emailRequired: errors('requiredEmail'),
-      ageNotNumber: errors('ageNotNumber')
-    }),
-    onSubmit: () => {}
-  });
+  const [isRegistrationShown, setRegistration] = useState<boolean>(true);
 
-  console.log(formik);
-
-  const isSubmitted = formik.submitCount !== 0;
-
-  const emailError = (isSubmitted && formik.errors[regFormNames.email]) || '';
-  const passwordError =
-    (isSubmitted && formik.errors[regFormNames.password]) || '';
-
-  const ageError = (isSubmitted && formik.errors[regFormNames.age]) || '';
+  const onTriggerFormMode = () => {
+    setRegistration(!isRegistrationShown);
+  };
 
   return (
     <div
       className="bg-white flex w-[483px] min-w-[483px]
      items-center flex-col ml-[56px] rounded-form_radius overflow-hidden
-     shadow-[rgb(0_0_0/45%)_0px_2px_10px]"
+     shadow-[rgb(0_0_0/45%)_0px_2px_10px] relative"
     >
       <RegFormHeader />
       <div className="flex flex-col w-[60%]">
-        <form className="flex flex-col w-full" onSubmit={formik.handleSubmit}>
-          <InputWithError
-            name={regFormNames.email}
-            onChange={formik.handleChange}
-            className="mt-[28px]"
-            placeholder="Email"
-            labelText={emailError}
-          />
-          <InputWithError
-            name={regFormNames.password}
-            onChange={formik.handleChange}
-            type="password"
-            className="mt-[8px]"
-            placeholder="Create a password"
-            labelText={passwordError}
-          />
-          <InputWithError
-            name={regFormNames.age}
-            onChange={formik.handleChange}
-            className="mt-[8px]"
-            placeholder="Age"
-            labelText={ageError}
-          />
-          <PrimaryButton className="mt-[8px] self-stretch" type="submit">
-            {t('regForm.form.buttons.continue')}
-          </PrimaryButton>
-        </form>
+        {isRegistrationShown ? <RegInputs /> : <LoginInputs />}
+
         <div className="mt-[8px] text-[#333333] font-bold text-center">
           {t('regForm.form.buttons.or')}
         </div>
@@ -94,7 +43,7 @@ const RegForm: React.FC<Props> = () => {
           onClick={() => {}}
           className="text-[#3c4043] border-[1px] border-[#dadce0] text-[15px] font-[500] mt-[12px]"
         />
-        <SecondaryRegForm />
+        <SecondaryRegForm onTriggerFormMode={onTriggerFormMode} />
       </div>
       <div
         className="bg-[#efefef] w-full h-full text-center text-[16px]

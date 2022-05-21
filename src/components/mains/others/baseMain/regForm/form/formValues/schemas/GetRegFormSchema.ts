@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 export const regFormNames = {
   email: 'email',
   password: 'password',
+  username:'password',
   age: 'age'
 };
 

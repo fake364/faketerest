@@ -6,5 +6,6 @@
   "mandatoryField": "This field is mandatory",
   "negativeAge": "Age cannot be negative",
   "tooOld": "You are probably too old for this site or supplied wrong age",
-  "ageNotNumber": "Age must be a number"
+  "ageNotNumber": "Age must be a number",
+  "existentEmail": "This email already exists"
 }
