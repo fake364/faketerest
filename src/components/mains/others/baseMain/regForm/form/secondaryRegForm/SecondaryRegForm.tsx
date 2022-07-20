@@ -2,9 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 
-type Props = { onTriggerFormMode: () => void };
+type Props = { onTriggerFormMode?: () => void; isRegistrationForm: boolean };
 
-const SecondaryRegForm: React.FC<Props> = ({ onTriggerFormMode }) => {
+const SecondaryRegForm: React.FC<Props> = ({
+  onTriggerFormMode,
+  isRegistrationForm
+}) => {
   const { t } = useTranslation('main-page');
 
   return (
@@ -19,13 +22,17 @@ const SecondaryRegForm: React.FC<Props> = ({ onTriggerFormMode }) => {
           <Link href={'/privacy'}>{t('regForm.form.terms.privacyPolicy')}</Link>
         </span>
       </div>
-      <div
-        className="mt-[12px] text-[13px] text-center text-gray-600 cursor-pointer font-semibold"
-        onClick={onTriggerFormMode}
-      >
-        {t('regForm.form.logInLink')}
-      </div>
-      <div className=" mt-[10px] text-[13px] text-center text-gray-600 font-semibold">
+      {onTriggerFormMode && (
+        <div
+          className="mt-[12px] text-[13px] text-center text-gray-600 cursor-pointer font-semibold"
+          onClick={onTriggerFormMode}
+        >
+          {!isRegistrationForm
+            ? t('regForm.form.registerLink')
+            : t('regForm.form.logInLink')}
+        </div>
+      )}
+      <div className=" mt-[10px] text-[13px] text-center text-gray-600 font-semibold pb-[14px]">
         {t('regForm.form.areYouABusiness')}{' '}
         <span>
           <Link href={'/business/create'}>

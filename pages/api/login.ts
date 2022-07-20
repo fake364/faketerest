@@ -11,6 +11,7 @@ import { variableIsEmail } from '../../src/common/backend/models/utils/utils';
 import Registration from '../../src/common/backend/models/Registration.model';
 import { generateJWT } from '../../src/common/backend/utils/jwtUtils';
 import cookie from 'cookie';
+import { AUTH_TOKEN_COOKIE_KEY } from '../../src/common/constants/commons';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   requestInfoLogger(req);
@@ -39,7 +40,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       );
       res.setHeader(
         'Set-Cookie',
-        cookie.serialize('auth-token', jwtString, { httpOnly: true })
+        cookie.serialize(AUTH_TOKEN_COOKIE_KEY, jwtString, {
+          httpOnly: true,
+          path: '/'
+        })
       );
       res.status(StatusCodes.OK).json({ message: 'LOGGED_IN' });
       return;

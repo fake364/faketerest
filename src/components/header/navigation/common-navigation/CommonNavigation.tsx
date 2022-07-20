@@ -8,15 +8,15 @@ import BaseNavigationLinks from './links-row/BaseNavigationLinks';
 type Props = {};
 
 const CommonNavigation: React.FC<Props> = () => {
-	const { theme } = useContext(ThemeContext);
-	return (
-		<>
-			<LogoTitle />
-			<LoginButtonsContainer>
-				{theme === THEME_TYPE.BASE && <BaseNavigationLinks />}
-			</LoginButtonsContainer>
-		</>
-	);
+  const { theme } = useContext(ThemeContext);
+  return (
+    <>
+      <LogoTitle />
+      <LoginButtonsContainer>
+        {theme === THEME_TYPE.BASE && <BaseNavigationLinks />}
+      </LoginButtonsContainer>
+    </>
+  );
 };
 
 export default CommonNavigation;

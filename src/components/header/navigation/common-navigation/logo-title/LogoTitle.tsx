@@ -4,22 +4,28 @@ import logoPic from '../../../../../../public/logo.png';
 import COMMON_CONSTANTS from '../../../../../common/constants/commons';
 import ThemeContext from '../../../../../common/context/ThemeContext';
 
-type Props = {};
+type Props = { titleOff?: boolean; width?: number; height?: number };
 
-const LogoTitle: React.FC<Props> = () => {
-	const { theme } = useContext(ThemeContext);
+const LogoTitle: React.FC<Props> = ({
+  titleOff = false,
+  height = 32,
+  width = 32
+}) => {
+  const { theme } = useContext(ThemeContext);
 
-	return (
-		<div className="flex items-center">
-			<Image src={logoPic} alt={'Logo'} width={32} height={32} />
-			<span
-				data-theme={theme}
-				className="font-bold text-primary text-[20px] ml-[6px]"
-			>
-				{COMMON_CONSTANTS.TITLE}
-			</span>
-		</div>
-	);
+  return (
+    <div className="flex items-center">
+      <Image src={logoPic} alt={'Logo'} width={width} height={height} />
+      {!titleOff && (
+        <span
+          data-theme={theme}
+          className="font-bold text-primary text-[20px] ml-[6px]"
+        >
+          {COMMON_CONSTANTS.TITLE}
+        </span>
+      )}
+    </div>
+  );
 };
 
 export default LogoTitle;

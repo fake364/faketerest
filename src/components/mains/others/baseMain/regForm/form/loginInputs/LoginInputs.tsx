@@ -11,12 +11,16 @@ import {
   initializeLoginSchema
 } from '../formValues/schemas/initializeLoginSchema';
 import { loginFormNames } from '../formValues/schemas/GetLoginFormSchema';
+import { StatusCodes } from 'http-status-codes';
+import { AppDispatch } from '../../../../../../../redux/types';
+import { useDispatch } from 'react-redux';
+import { setIsLoggedIn } from '../../../../../../../redux/actions/metadata/actions';
 
 type Props = {};
 
 const LoginInputs: React.FC<Props> = () => {
   const { t: commonTranslations } = useTranslation('common');
-
+  const dispatch: AppDispatch = useDispatch();
   const { t } = useTranslation('main-page');
   const { t: errors } = useTranslation('error-messages');
 
@@ -36,9 +40,14 @@ const LoginInputs: React.FC<Props> = () => {
             [loginFormNames.email]: values.email
           }
         });
+        if (response.status === StatusCodes.OK) {
+          dispatch(setIsLoggedIn(true));
+          const header = document.querySelector('header');
+          if (header) header.style.visibility = 'visible';
+        }
         console.log(response.data);
       } catch (e) {
-        console.log(e);
+        console.error(e);
       }
     }
   });

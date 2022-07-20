@@ -12,11 +12,17 @@ import axios from 'axios';
 import sha256 from 'crypto-js/sha256';
 import { REGISTRATION_ERROR } from '../../../../../../../common/backend/models/constants/code';
 import RegFormSpinner from '../spinner/RegFormSpinner';
+import { StatusCodes } from 'http-status-codes';
+import { setIsLoggedIn } from '../../../../../../../redux/actions/metadata/actions';
+import { AppDispatch } from '../../../../../../../redux/types';
+import { useDispatch } from 'react-redux';
 
-export const RegInputs: React.FC<{}> = () => {
+export const RegInputs: React.FC = () => {
   const { t: commonTranslations } = useTranslation('common');
   const { t } = useTranslation('main-page');
   const { t: errors } = useTranslation('error-messages');
+  const dispatch: AppDispatch = useDispatch();
+
   const formik = useFormik({
     initialValues: getInitRegFormValues(),
     validationSchema: initializeRegSchema(errors),
@@ -34,6 +40,11 @@ export const RegInputs: React.FC<{}> = () => {
             [regFormNames.email]: values.email
           }
         });
+        if (response.status === StatusCodes.OK) {
+          dispatch(setIsLoggedIn(true));
+          const header = document.querySelector('header');
+          if (header) header.style.visibility = 'visible';
+        }
         console.log(response.data);
       } catch (e) {
         console.log(e);

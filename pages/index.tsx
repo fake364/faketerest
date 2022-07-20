@@ -1,14 +1,27 @@
 import React from 'react';
-import AuthLayout from '../src/components/layout/AuthLayout';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import MainPage from '../src/components/mains/others/baseMain/MainPage';
+import RegFormSpinner from '../src/components/mains/others/baseMain/regForm/form/spinner/RegFormSpinner';
+import { useSelector } from 'react-redux';
+import { RootState } from '../src/redux/types';
+import Layout from '../src/components/layout/Layout';
+import { useCheckAuth } from '../src/common/hooks/useCheckAuth';
 
 export default function Home(props) {
+  const isLoggedIn = useSelector(
+    (state: RootState) => state.metadata.isLoggedIn
+  );
+  const { isCheckingAuth } = useCheckAuth();
+
+  if (isCheckingAuth) {
+    return <RegFormSpinner />;
+  }
+
   return (
     <>
-      <AuthLayout className="h-screen overflow-hidden">
-        <MainPage />
-      </AuthLayout>
+      <Layout className="h-screen overflow-hidden">
+        {isLoggedIn ? <div>Logged page</div> : <MainPage />}
+      </Layout>
     </>
   );
 }

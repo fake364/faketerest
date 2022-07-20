@@ -1,5 +1,4 @@
 import { Sequelize } from 'sequelize-typescript';
-import config from '../../../../config/.env.dev.json';
 import Registration from '../models/Registration.model';
 
 class RegistrationService {
@@ -8,7 +7,7 @@ class RegistrationService {
 
   private constructor() {
     this._connection = new Sequelize(
-      `postgres://${config.username}:${config.password}@${config.host}/${config.username}`,
+      `postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_USERNAME}`,
       { models: [__dirname + '/**/*.model.ts'] }
     );
     RegistrationService.instance = this;

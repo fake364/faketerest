@@ -1,3 +1,4 @@
+// eslint-disable-next-line max-len
 import RoundedArrowButton from '../../../../../common/components/buttons/icon-button/prepared-components/RoundedArrowButton';
 import React, { FC } from 'react';
 import { SLIDER_THEMES } from '../../../../../common/enums/slider_themes';
