@@ -6,15 +6,19 @@ import '../src/styles/customs/regForm/regForm.scss';
 import ThemeContext from '../src/common/context/ThemeContext';
 import { THEME_TYPE } from '../src/common/enums/theme';
 import { appWithTranslation } from 'next-i18next';
+import { Provider } from 'react-redux';
+import { wrapper, store } from '../src/redux/store';
 
 function MyApp({ Component, pageProps }) {
   const [theme, setTheme] = useState(THEME_TYPE.BASE);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      <Component {...pageProps} />
-    </ThemeContext.Provider>
+    <Provider store={store}>
+      <ThemeContext.Provider value={{ theme, setTheme }}>
+        <Component {...pageProps} />
+      </ThemeContext.Provider>
+    </Provider>
   );
 }
 
-export default appWithTranslation(MyApp);
+export default appWithTranslation(wrapper.withRedux(MyApp));

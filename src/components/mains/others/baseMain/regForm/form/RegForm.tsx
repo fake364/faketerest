@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'next-i18next';
 import { FaFacebook } from '@react-icons/all-files/fa/FaFacebook';
 import { FcGoogle } from '@react-icons/all-files/fc/FcGoogle';
@@ -8,14 +8,19 @@ import RegFormHeader from './header/RegFormHeader';
 import { RegInputs } from './regInputs/RegInputs';
 import LoginInputs from './loginInputs/LoginInputs';
 
-type Props = {};
+type Props = {
+  isRegistrationShown: boolean;
+  setRegistrationShown?: Dispatch<SetStateAction<boolean>>;
+};
 
-const RegForm: React.FC<Props> = () => {
+const RegForm: React.FC<Props> = ({
+  setRegistrationShown,
+  isRegistrationShown
+}) => {
   const { t } = useTranslation('main-page');
-  const [isRegistrationShown, setRegistration] = useState<boolean>(true);
 
   const onTriggerFormMode = () => {
-    setRegistration(!isRegistrationShown);
+    setRegistrationShown && setRegistrationShown(!isRegistrationShown);
   };
 
   return (
@@ -43,14 +48,19 @@ const RegForm: React.FC<Props> = () => {
           onClick={() => {}}
           className="text-[#3c4043] border-[1px] border-[#dadce0] text-[15px] font-[500] mt-[12px]"
         />
-        <SecondaryRegForm onTriggerFormMode={onTriggerFormMode} />
+        <SecondaryRegForm
+          isRegistrationForm={isRegistrationShown}
+          onTriggerFormMode={setRegistrationShown ? onTriggerFormMode : null}
+        />
       </div>
-      <div
-        className="bg-[#efefef] w-full h-full text-center text-[16px]
+      {setRegistrationShown && (
+        <div
+          className="bg-[#efefef] w-full h-full text-center text-[16px]
        font-semibold py-[16px] mt-[16px] cursor-pointer"
-      >
-        {t('regForm.form.createBusinessAccount')}
-      </div>
+        >
+          {t('regForm.form.createBusinessAccount')}
+        </div>
+      )}
     </div>
   );
 };

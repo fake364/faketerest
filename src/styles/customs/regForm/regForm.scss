@@ -10,4 +10,8 @@
   .reg-form-input {
     @apply rounded-form_radius border-[#cdcdcd] border-2 focus:outline focus:outline-[#5DA3F6FF] focus:outline-4 py-[10px] px-[16px] text-[16px] font-light;
   }
+
+  .remove-margin > div{
+    margin-left: 0 !important;
+  }
 }

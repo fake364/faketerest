@@ -14,6 +14,7 @@ import {
 import { REGISTRATION_ERROR } from '../../../src/common/backend/models/constants/code';
 import { generateJWT } from '../../../src/common/backend/utils/jwtUtils';
 import cookie from 'cookie';
+import { AUTH_TOKEN_COOKIE_KEY } from '../../../src/common/constants/commons';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   requestInfoLogger(req);
@@ -40,14 +41,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       await regInstance.save();
       const jwtString = generateJWT(
-          regInstance.getDataValue('email'),
-          regInstance.getDataValue('regDate').toString()
+        regInstance.getDataValue('email'),
+        regInstance.getDataValue('regDate').toString()
       );
       res.setHeader(
-          'Set-Cookie',
-          cookie.serialize('auth-token', jwtString, { httpOnly: true })
+        'Set-Cookie',
+        cookie.serialize(AUTH_TOKEN_COOKIE_KEY, jwtString, {
+          httpOnly: true,
+          path: '/'
+        })
       );
       res.status(StatusCodes.OK).json({ status: 'Created' });
+      return;
     } catch (e) {
       const constraintViolated = e?.original?.constraint;
       if (constraintViolated) {
