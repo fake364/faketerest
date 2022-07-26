@@ -33,12 +33,12 @@ class MainPage extends React.Component<{}, State> {
   }
 
   initiateSlider = () => {
-    const { sliderListNode } = this.state;
     findAndSetHeaderVisibility('visible');
-    const intervalId = setInterval(
-      () => this.setState({ sliderListNode: sliderListNode.nextNode }),
-      sliderTimeout
-    );
+    const intervalId = setInterval(() => {
+      this.setState((prev) => ({
+        sliderListNode: prev.sliderListNode.nextNode
+      }));
+    }, sliderTimeout);
     this.setState({ timer: intervalId });
   };
 
@@ -63,7 +63,6 @@ class MainPage extends React.Component<{}, State> {
   };
 
   onClickJumpingButtonDown = () => {
-    console.log(this);
     const { timer } = this.state;
     if (timer) {
       clearInterval(timer);

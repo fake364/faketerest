@@ -3,6 +3,7 @@ import { ImageProps } from 'next/image';
 import NumericFunctions from '../../../../../../../common/utils/functional-utils/numeric/utils.map';
 import CommonUtils from '../../../../../../../common/utils/creation-utils/arrays/common';
 import chunk from 'lodash/chunk';
+import { SLIDER_ARRAY } from '../../../../../../../common/classes/customClasses/SliderNode';
 
 type SrcProps = Array<ImageProps['src']>;
 
@@ -16,7 +17,9 @@ export const getImageById = (
 
 export const chunkImageIndexes = (count: number, chunksNumber: number) =>
   chunk(
-    CommonUtils.range(count).map(NumericFunctions.adjustToValue()),
+    CommonUtils.range(count)
+      .map(NumericFunctions.adjustToValue())
+      .map((index) => SLIDER_ARRAY.map((theme) => getImageById(theme, index))),
     chunksNumber
   );
 

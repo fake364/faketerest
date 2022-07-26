@@ -20,8 +20,9 @@ const delays = [
 
 type Props = { isAnimation: boolean } & ShownType;
 
+const imagesChunks = chunkImageIndexes(34, 5);
+
 const ImageFlexContainer: React.FC<Props> = ({ shownType, isAnimation }) => {
-  const { current: indexArray } = useRef(chunkImageIndexes(34, 5));
   const { current: marginPalindrome } = useRef(
     CommonUtils.numericPalindrome(3, 0)
   );
@@ -32,7 +33,7 @@ const ImageFlexContainer: React.FC<Props> = ({ shownType, isAnimation }) => {
         isAnimation && 'slider-gradient'
       )}
     >
-      {indexArray.map((columnIndexes, columnIndex) => (
+      {imagesChunks.map((columnIndexes, columnIndex) => (
         <div
           className={clsx(
             'flex flex-col flex-1 relative',
@@ -41,10 +42,7 @@ const ImageFlexContainer: React.FC<Props> = ({ shownType, isAnimation }) => {
             isAnimation && delays[columnIndex]
           )}
         >
-          {columnIndexes.map((imageIndex) => {
-            const images = SLIDER_ARRAY.map((theme) =>
-              getImageById(theme, imageIndex)
-            );
+          {columnIndexes.map((images) => {
             return <ImageCell shownType={shownType} images={images} />;
           })}
         </div>
