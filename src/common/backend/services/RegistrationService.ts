@@ -8,7 +8,13 @@ class RegistrationService {
   private constructor() {
     this._connection = new Sequelize(
       `postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}`,
-      { models: [__dirname + '/**/*.model.ts'] }
+      {
+        models: [__dirname + '/**/*.model.ts'],
+        dialect: 'postgres',
+        dialectOptions: {
+          ssl: { require: true, rejectUnauthorized: false }
+        }
+      }
     );
     RegistrationService.instance = this;
     this.connection.addModels([Registration]);
