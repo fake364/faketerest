@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BaseNavigationLinks should render three BaseLinks 1`] = `
+<Fragment>
+  <BaseLink
+    className="mr-10 text-blue"
+    href="/about"
+  >
+    links.base.description
+  </BaseLink>
+  <BaseLink
+    className="mr-10"
+    href="/business"
+  >
+    links.base.business
+  </BaseLink>
+  <BaseLink
+    className="mr-10"
+    href="/blog"
+  >
+    links.base.blog
+  </BaseLink>
+</Fragment>
+`;

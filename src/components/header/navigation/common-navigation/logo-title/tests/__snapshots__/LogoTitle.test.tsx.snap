@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LogoTitle should setup theme for logo 1`] = `
+<LogoTitle>
+  <div
+    className="flex items-center"
+  >
+    <Component
+      alt="Logo"
+      height={32}
+      src={[Function]}
+      width={32}
+    >
+      <div
+        id="image"
+      />
+    </Component>
+    <span
+      className="font-bold text-primary text-[20px] ml-[6px]"
+      data-theme="base"
+    >
+      Faketerest
+    </span>
+  </div>
+</LogoTitle>
+`;

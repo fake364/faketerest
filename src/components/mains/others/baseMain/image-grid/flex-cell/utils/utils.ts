@@ -5,8 +5,6 @@ import CommonUtils from '../../../../../../../common/utils/creation-utils/arrays
 import chunk from 'lodash/chunk';
 import { SLIDER_ARRAY } from '../../../../../../../common/classes/customClasses/SliderNode';
 
-type SrcProps = Array<ImageProps['src']>;
-
 export const getImageById = (
   type: SLIDER_THEMES,
   index: number

@@ -1,8 +1,7 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import CommonUtils from '../../../../../common/utils/creation-utils/arrays/common';
-import { chunkImageIndexes, getImageById } from './flex-cell/utils/utils';
+import { chunkImageIndexes } from './flex-cell/utils/utils';
 import ImageCell from './flex-cell/ImageCell';
-import { SLIDER_ARRAY } from '../../../../../common/classes/customClasses/SliderNode';
 import clsx from 'clsx';
 import { ShownType } from '../../../../../common/types/common';
 
@@ -21,34 +20,28 @@ const delays = [
 type Props = { isAnimation: boolean } & ShownType;
 
 const imagesChunks = chunkImageIndexes(34, 5);
+const marginPalindrome = CommonUtils.numericPalindrome(3, 0);
 
-const ImageFlexContainer: React.FC<Props> = ({ shownType, isAnimation }) => {
-  const { current: marginPalindrome } = useRef(
-    CommonUtils.numericPalindrome(3, 0)
-  );
-  return (
-    <div
-      className={clsx(
-        'slider-flex-container',
-        isAnimation && 'slider-gradient'
-      )}
-    >
-      {imagesChunks.map((columnIndexes, columnIndex) => (
-        <div
-          className={clsx(
-            'flex flex-col flex-1 relative',
-            margins[marginPalindrome[columnIndex]],
-            isAnimation && 'opacity_move_up',
-            isAnimation && delays[columnIndex]
-          )}
-        >
-          {columnIndexes.map((images) => {
-            return <ImageCell shownType={shownType} images={images} />;
-          })}
+const ImageFlexContainer: React.FC<Props> = ({ shownType, isAnimation }) => (
+  <div
+    className={clsx('slider-flex-container', isAnimation && 'slider-gradient')}
+  >
+    {imagesChunks.map((columnIndexes, columnIndex) => {
+      const cellClass = clsx(
+        'flex flex-col flex-1 relative',
+        margins[marginPalindrome[columnIndex]],
+        isAnimation && 'opacity_move_up',
+        isAnimation && delays[columnIndex]
+      );
+      return (
+        <div className={cellClass} key={columnIndex}>
+          {columnIndexes.map((images, index) => (
+            <ImageCell shownType={shownType} images={images} key={index} />
+          ))}
         </div>
-      ))}
-    </div>
-  );
-};
+      );
+    })}
+  </div>
+);
 
 export default ImageFlexContainer;

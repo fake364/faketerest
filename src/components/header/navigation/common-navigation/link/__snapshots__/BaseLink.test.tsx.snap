@@ -5,7 +5,7 @@ exports[`BaseLink component should render properly with classname 1`] = `
   className="test-class"
   href="/test"
 >
-  <Link
+  <ForwardRef(LinkComponent)
     href="/test"
   >
     <span
@@ -15,7 +15,7 @@ exports[`BaseLink component should render properly with classname 1`] = `
     >
       Test component
     </span>
-  </Link>
+  </ForwardRef(LinkComponent)>
 </BaseLink>
 `;
 
@@ -23,7 +23,7 @@ exports[`BaseLink component should render properly with default props 1`] = `
 <BaseLink
   href="/test"
 >
-  <Link
+  <ForwardRef(LinkComponent)
     href="/test"
   >
     <span
@@ -33,6 +33,6 @@ exports[`BaseLink component should render properly with default props 1`] = `
     >
       Test component
     </span>
-  </Link>
+  </ForwardRef(LinkComponent)>
 </BaseLink>
 `;
