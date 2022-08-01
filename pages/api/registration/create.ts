@@ -19,17 +19,14 @@ import { AUTH_TOKEN_COOKIE_KEY } from '../../../src/common/constants/commons';
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   requestInfoLogger(req);
   const isPost = RequestMethod.POST === req.method;
+  await RegService.checkConnection();
   let regInstance: Registration;
   try {
-    await RegService.checkConnection();
     regInstance = new Registration(req.body);
     await regInstance.validate();
   } catch (e) {
     console.error(e);
-    setDefaultMessageByCode(res, StatusCodes.BAD_REQUEST, 'Test', {
-      additional: e,
-      errorCode: { email: 'Test', username: 'test' }
-    });
+    setDefaultMessageByCode(res, StatusCodes.BAD_REQUEST);
     return;
   }
   if (variableIsEmail(req.body.email)) {
@@ -63,8 +60,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           constraintViolated
         )} instead`;
         setDefaultMessageByCode(res, StatusCodes.BAD_REQUEST, errorMessage, {
-          errorCode: REGISTRATION_ERROR[constraintViolated],
-          additional: e
+          errorCode: REGISTRATION_ERROR[constraintViolated]
         });
       }
     }

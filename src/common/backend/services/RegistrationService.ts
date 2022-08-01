@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
+import * as pg from 'pg';
 import Registration from '../models/Registration.model';
 
 class RegistrationService {
@@ -10,7 +11,7 @@ class RegistrationService {
       `postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}`,
       {
         models: [__dirname + '/**/*.model.ts'],
-        dialect: 'postgres',
+        dialect: pg,
         dialectOptions: {
           ssl: { require: true, rejectUnauthorized: false }
         }

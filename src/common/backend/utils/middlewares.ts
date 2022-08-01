@@ -14,7 +14,7 @@ export const setDefaultMessageByCode = (
   res: NextApiResponse,
   code: StatusCodes,
   customMessage?: string,
-  options?: { errorCode: typeof REGISTRATION_ERROR,additional:any }
+  options?: { errorCode: typeof REGISTRATION_ERROR }
 ) => {
   res.status(code).json({
     error: customMessage || getReasonPhrase(code),
