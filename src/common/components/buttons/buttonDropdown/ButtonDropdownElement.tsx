@@ -7,7 +7,7 @@ const ButtonDropdownElement: React.FC<Props> = ({ onClick, children }) => {
     <div
       onClick={onClick}
       className="min-w-[200px] hover:bg-[whitesmoke] rounded-[8px] px-[12px] py-[8px]
-    cursor-pointer font-medium"
+    cursor-pointer font-medium active:bg-[lightgrey]"
     >
       {children}
     </div>

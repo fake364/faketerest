@@ -1,6 +1,6 @@
 import React from 'react';
 import CommonUtils from '../../../../../common/utils/creation-utils/arrays/common';
-import { chunkImageIndexes } from './flex-cell/utils/utils';
+import * as ImageUtils from './flex-cell/utils/utils';
 import ImageCell from './flex-cell/ImageCell';
 import clsx from 'clsx';
 import { ShownType } from '../../../../../common/types/common';
@@ -19,7 +19,7 @@ const delays = [
 
 type Props = { isAnimation: boolean } & ShownType;
 
-const imagesChunks = chunkImageIndexes(34, 5);
+const imagesChunks = ImageUtils.chunkImageIndexes(34, 5);
 const marginPalindrome = CommonUtils.numericPalindrome(3, 0);
 
 const ImageFlexContainer: React.FC<Props> = ({ shownType, isAnimation }) => (

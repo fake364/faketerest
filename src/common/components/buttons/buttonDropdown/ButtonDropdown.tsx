@@ -10,6 +10,7 @@ const ButtonDropdown: React.FC<Props> = ({ children }) => {
     <div
       className="relative flex flex-col self-center"
       onBlur={() => setDisplayed(false)}
+      tabIndex={0}
     >
       <div
         className="self-center font-medium ml-[12px] cursor-pointer"
