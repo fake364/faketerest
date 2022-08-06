@@ -13,7 +13,7 @@ class RegistrationService {
         models: [__dirname + '/**/*.model.ts'],
         dialect: pg,
         dialectOptions: {
-          // ssl: { require: true, rejectUnauthorized: false }
+          ssl: { require: true, rejectUnauthorized: false }
         }
       }
     );
