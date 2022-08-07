@@ -6,15 +6,19 @@ import '../src/styles/customs/regForm/regForm.scss';
 import ThemeContext from '../src/common/context/ThemeContext';
 import { THEME_TYPE } from '../src/common/enums/theme';
 import { appWithTranslation } from 'next-i18next';
-import { Provider, useSelector } from 'react-redux';
-import { wrapper, store } from '../src/redux/store';
+import { Provider, useDispatch, useSelector } from 'react-redux';
+import { store, wrapper } from '../src/redux/store';
 import { RootState } from '../src/redux/types';
-import axios from 'axios';
+import { fetchUserData } from '../src/redux/actions/user-data/actions';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
 
 type WrapperProps = {};
 
 const WrapperUnderRedux: React.FC<WrapperProps> = ({ children }) => {
   const [theme, setTheme] = useState(THEME_TYPE.BASE);
+  const dispatch: ThunkDispatch<RootState, {}, AnyAction> = useDispatch();
+
   const isLoggedIn = useSelector(
     (state: RootState) => state.metadata.isLoggedIn
   );
@@ -24,9 +28,11 @@ const WrapperUnderRedux: React.FC<WrapperProps> = ({ children }) => {
 
   useEffect(() => {
     if (isLoggedIn && userId) {
-      axios.get('api/registration/' + userId);
+      dispatch(fetchUserData(userId));
     }
   }, [isLoggedIn, userId]);
+
+
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       {children}

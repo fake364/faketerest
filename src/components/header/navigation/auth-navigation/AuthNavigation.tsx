@@ -7,10 +7,17 @@ import { FaBell } from '@react-icons/all-files/fa/FaBell';
 import { FaCommentDots } from '@react-icons/all-files/fa/FaCommentDots';
 import ButtonDropdown from '../../../../common/components/buttons/buttonDropdown/ButtonDropdown';
 import ButtonDropdownElement from '../../../../common/components/buttons/buttonDropdown/ButtonDropdownElement';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../redux/types';
+import { UserData } from '../../../../common/types/user-types/UserData';
 
 type Props = {};
 
 const AuthNavigation: React.FC<Props> = () => {
+  const userData: UserData | undefined = useSelector(
+    (state: RootState) => state.userData.userData
+  );
+
   return (
     <nav className="sticky py-[18px] px-[12px] flex flex-stretch gap-[14px]">
       <div
@@ -42,6 +49,15 @@ const AuthNavigation: React.FC<Props> = () => {
         className="px-[12px]"
         onClick={() => null}
       />
+      {userData?.email && (
+        <div
+          className=" transition-all duration-[300ms] hover:bg-[#f0f0f0] p-[12px] rounded-[50%]
+         active:scale-75 items-baseline
+      cursor-pointer"
+        >
+          {userData?.email[0].toUpperCase()}
+        </div>
+      )}
     </nav>
   );
 };

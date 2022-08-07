@@ -14,7 +14,10 @@ import { loginFormNames } from '../formValues/schemas/GetLoginFormSchema';
 import { StatusCodes } from 'http-status-codes';
 import { AppDispatch } from '../../../../../../../redux/types';
 import { useDispatch } from 'react-redux';
-import { setIsLoggedIn } from '../../../../../../../redux/actions/metadata/actions';
+import {
+  setIsLoggedIn,
+  setUserId
+} from '../../../../../../../redux/actions/metadata/actions';
 
 type Props = {};
 
@@ -42,6 +45,7 @@ const LoginInputs: React.FC<Props> = () => {
         });
         if (response.status === StatusCodes.OK) {
           dispatch(setIsLoggedIn(true));
+          dispatch(setUserId(response.data.userId));
           const header = document.querySelector('header');
           if (header) header.style.visibility = 'visible';
         }

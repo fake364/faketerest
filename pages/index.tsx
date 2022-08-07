@@ -6,38 +6,38 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../src/redux/types';
 import Layout from '../src/components/layout/Layout';
 import { useCheckAuth } from '../src/common/hooks/useCheckAuth';
+import MainGallery from '../src/components/mains/authed/mainGallery/MainGallery';
 
 export default function Home(props) {
   const isLoggedIn = useSelector(
     (state: RootState) => state.metadata.isLoggedIn
   );
+  const isUserLoading = useSelector(
+    (state: RootState) => state.userData.isLoading
+  );
   const { isCheckingAuth } = useCheckAuth();
 
-  if (isCheckingAuth) {
+  if (isCheckingAuth || isUserLoading) {
     return <RegFormSpinner />;
   }
 
   return (
     <>
       <Layout className="h-screen overflow-hidden">
-        {isLoggedIn ? <div>Logged page</div> : <MainPage />}
+        {isLoggedIn ? <MainGallery /> : <MainPage />}
       </Layout>
     </>
   );
 }
 
 export async function getStaticProps({ locale }) {
-  const glob = require('glob');
-  const allEntries = glob.sync('public/images/main-slider/dinnerIdea/*.jpeg');
-
   return {
     props: {
       ...(await serverSideTranslations(locale, [
         'main-page',
         'error-messages',
         'common'
-      ])),
-      images: allEntries
+      ]))
     }
   };
 }

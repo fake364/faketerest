@@ -24,7 +24,10 @@ class LoginHandler {
     });
     if (instance && instance.getDataValue('password') === password) {
       setupToken(res, instance.getDataValue('id'));
-      return { message: 'LOGGED_IN' };
+      return {
+        message: 'LOGGED_IN',
+        userId: Number(instance.getDataValue('id'))
+      };
     }
     res
       .status(StatusCodes.UNAUTHORIZED)
