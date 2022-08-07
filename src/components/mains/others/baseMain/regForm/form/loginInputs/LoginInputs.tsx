@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import sha256 from 'crypto-js/sha256';
@@ -23,6 +23,7 @@ const LoginInputs: React.FC<Props> = () => {
   const dispatch: AppDispatch = useDispatch();
   const { t } = useTranslation('main-page');
   const { t: errors } = useTranslation('error-messages');
+  const [error, setError] = useState<string>('');
 
   const formik = useFormik({
     initialValues: getInitLoginFormValues(),
@@ -30,7 +31,6 @@ const LoginInputs: React.FC<Props> = () => {
     validateOnChange: false,
     validateOnBlur: false,
     onSubmit: async (values) => {
-      console.log(values);
       try {
         const response = await axios('/api/login', {
           responseType: 'json',
@@ -45,9 +45,13 @@ const LoginInputs: React.FC<Props> = () => {
           const header = document.querySelector('header');
           if (header) header.style.visibility = 'visible';
         }
-        console.log(response.data);
       } catch (e) {
         console.error(e);
+        if (e.response.status === StatusCodes.UNAUTHORIZED) {
+          setError(errors('invalidAuth'));
+        } else {
+          setError(errors('somethingWentWrong'));
+        }
       }
     }
   });
@@ -55,11 +59,17 @@ const LoginInputs: React.FC<Props> = () => {
   return (
     <>
       {formik.isSubmitting && <RegFormSpinner />}
+
       <form className="flex flex-col w-full" onSubmit={formik.handleSubmit}>
+        {error && (
+          <label className="text-[#e60023] text-center px-[10px] block text-[14px] mt-[14px] mb-[14px]">
+            {error}
+          </label>
+        )}
         <InputWithError
           name={loginFormNames.email}
           onChange={formik.handleChange}
-          className="mt-[28px]"
+          className="mt-[14px]"
           placeholder={commonTranslations('placeholders.email')}
           labelText={formik.errors[loginFormNames.email]}
         />

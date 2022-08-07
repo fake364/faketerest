@@ -29,7 +29,6 @@ export const RegInputs: React.FC = () => {
     validateOnChange: false,
     validateOnBlur: false,
     onSubmit: async (values) => {
-      console.log(values);
       try {
         const response = await axios('/api/registration/create', {
           responseType: 'json',
@@ -45,7 +44,6 @@ export const RegInputs: React.FC = () => {
           const header = document.querySelector('header');
           if (header) header.style.visibility = 'visible';
         }
-        console.log(response.data);
       } catch (e) {
         console.log(e);
         if (e.response.data.errorCode === REGISTRATION_ERROR.email) {

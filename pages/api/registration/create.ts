@@ -1,58 +1,35 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import {
-  requestInfoLogger,
-  setDefaultMessageByCode
-} from '../../../src/common/backend/utils/middlewares';
+import type { NextApiResponse } from 'next';
+import { setDefaultMessageByCode } from '../../../src/common/backend/utils/middlewares';
 import { StatusCodes } from 'http-status-codes';
-import RequestMethod from '../../../src/common/constants/requestMethods';
 import RegService from '../../../src/common/backend/services/RegistrationService';
 import Registration from '../../../src/common/backend/models/Registration.model';
-import {
-  matchContentType,
-  variableIsEmail
-} from '../../../src/common/backend/models/utils/utils';
 import { REGISTRATION_ERROR } from '../../../src/common/backend/models/constants/code';
 import { generateJWT } from '../../../src/common/backend/utils/jwtUtils';
 import cookie from 'cookie';
 import { AUTH_TOKEN_COOKIE_KEY } from '../../../src/common/constants/commons';
+import {
+  Body,
+  createHandler,
+  Post,
+  Res,
+  ValidationPipe
+} from '@storyofams/next-api-decorators';
+import RegistrationCreatePayload from '../../../src/common/backend/models/validation/registration/RegistrationCreatePayload';
+import { setupToken } from '../../../src/common/backend/models/utils/utils';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  requestInfoLogger(req);
-  const isPost = RequestMethod.POST === req.method;
-  await RegService.checkConnection();
-  let regInstance: Registration;
-  try {
-    regInstance = new Registration(req.body);
-    await regInstance.validate();
-  } catch (e) {
-    console.error(e);
-    setDefaultMessageByCode(res, StatusCodes.BAD_REQUEST);
-    return;
-  }
-  if (variableIsEmail(req.body.email)) {
-    setDefaultMessageByCode(
-      res,
-      StatusCodes.BAD_REQUEST,
-      'Invalid email format'
-    );
-    return;
-  }
-  if (isPost && matchContentType(req, 'application/json')) {
+class CreateRegistrationHandler {
+  @Post()
+  async create(
+    @Body(ValidationPipe) body: RegistrationCreatePayload,
+    @Res() res: NextApiResponse
+  ) {
+    let regInstance;
     try {
+      await RegService.checkConnection();
+      regInstance = new Registration(body);
       await regInstance.save();
-      const jwtString = generateJWT(
-        regInstance.getDataValue('email'),
-        regInstance.getDataValue('regDate').toString()
-      );
-      res.setHeader(
-        'Set-Cookie',
-        cookie.serialize(AUTH_TOKEN_COOKIE_KEY, jwtString, {
-          httpOnly: true,
-          path: '/'
-        })
-      );
+      setupToken(res, regInstance.id);
       res.status(StatusCodes.OK).json({ status: 'Created' });
-      return;
     } catch (e) {
       const constraintViolated = e?.original?.constraint;
       if (constraintViolated) {
@@ -62,9 +39,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         setDefaultMessageByCode(res, StatusCodes.BAD_REQUEST, errorMessage, {
           errorCode: REGISTRATION_ERROR[constraintViolated]
         });
-      }
+      } else res.status(StatusCodes.BAD_REQUEST).json({ error: e });
     }
-  } else {
-    setDefaultMessageByCode(res, StatusCodes.BAD_REQUEST);
   }
-};
+}
+
+export default createHandler(CreateRegistrationHandler);

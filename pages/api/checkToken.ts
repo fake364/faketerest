@@ -1,16 +1,18 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import RequestMethod from '../../src/common/constants/requestMethods';
-import { StatusCodes } from 'http-status-codes';
-import { validateToken } from '../../src/common/backend/utils/middlewares';
+import { NextApiRequest } from 'next';
+import { WithJWTAuth } from '../../src/common/backend/utils/middlewares';
+import { createHandler, Get, Req } from '@storyofams/next-api-decorators';
+import { AUTH_TOKEN_COOKIE_KEY } from '../../src/common/constants/commons';
+import jwt from 'jsonwebtoken';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method === RequestMethod.GET) {
-    try {
-      await validateToken(req, res);
-    } catch (e) {
-      return;
-    }
-  } else {
-    res.status(StatusCodes.METHOD_NOT_ALLOWED).json({});
+class CheckTokenHandler {
+  @Get()
+  @WithJWTAuth()
+  checkToken(@Req() req: NextApiRequest) {
+    const payload = jwt.decode(req.cookies[AUTH_TOKEN_COOKIE_KEY]) as {
+      userId: number;
+    };
+    return { userId: payload.userId };
   }
-};
+}
+
+export default createHandler(CheckTokenHandler);

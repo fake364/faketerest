@@ -9,6 +9,7 @@ import { appWithTranslation } from 'next-i18next';
 import { Provider, useSelector } from 'react-redux';
 import { wrapper, store } from '../src/redux/store';
 import { RootState } from '../src/redux/types';
+import axios from 'axios';
 
 type WrapperProps = {};
 
@@ -17,12 +18,15 @@ const WrapperUnderRedux: React.FC<WrapperProps> = ({ children }) => {
   const isLoggedIn = useSelector(
     (state: RootState) => state.metadata.isLoggedIn
   );
+  const userId: number | undefined = useSelector(
+    (state: RootState) => state.metadata.userId
+  );
 
   useEffect(() => {
-    if (isLoggedIn) {
-      //make user request
+    if (isLoggedIn && userId) {
+      axios.get('api/registration/' + userId);
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, userId]);
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       {children}

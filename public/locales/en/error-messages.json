@@ -7,5 +7,7 @@
   "negativeAge": "Age cannot be negative",
   "tooOld": "You are probably too old for this site or supplied wrong age",
   "ageNotNumber": "Age must be a number",
-  "existentEmail": "This email already exists"
+  "existentEmail": "This email already exists",
+  "somethingWentWrong": "Something went wrong, looks like server issue",
+  "invalidAuth": "Login or password is invalid"
 }

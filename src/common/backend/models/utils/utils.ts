@@ -1,8 +1,15 @@
-import { NextApiRequest } from 'next';
-import { EMAIL_REGEX } from '../../../constants/commons';
+import { generateJWT } from '../../utils/jwtUtils';
+import cookie from 'cookie';
+import { AUTH_TOKEN_COOKIE_KEY } from '../../../constants/commons';
+import { NextApiResponse } from 'next';
 
-export const matchContentType = (req: NextApiRequest, contentType: string) =>
-  req.headers['content-type'].toLocaleLowerCase() === contentType;
-
-export const variableIsEmail = (email: unknown) =>
-  typeof email === 'string' && !email.match(EMAIL_REGEX);
+export const setupToken = (res: NextApiResponse, userId: number) => {
+  const jwtString = generateJWT(userId);
+  res.setHeader(
+    'Set-Cookie',
+    cookie.serialize(AUTH_TOKEN_COOKIE_KEY, jwtString, {
+      httpOnly: true,
+      path: '/'
+    })
+  );
+};
