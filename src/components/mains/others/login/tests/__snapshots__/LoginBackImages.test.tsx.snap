@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginBackImages should render container properly 1`] = `
+<div
+  className="flex flex-wrap gap-[16px] px-[52px] py-[18px]"
+>
+  <div
+    className="absolute w-full h-full bg-[rgba(0,0,0,0.6)] top-0 left-0 z-10"
+  />
+  Test
+  <div
+    className="flex-1 relative basis-[200px] h-[400px]"
+  >
+    <Component
+      className="rounded-[16px]"
+      layout="fill"
+      objectFit="cover"
+      src="1"
+    />
+  </div>
+  <div
+    className="flex-1 relative basis-[200px] h-[400px]"
+  >
+    <Component
+      className="rounded-[16px]"
+      layout="fill"
+      objectFit="cover"
+      src="2"
+    />
+  </div>
+  <div
+    className="flex-1 relative basis-[200px] h-[400px]"
+  >
+    <Component
+      className="rounded-[16px]"
+      layout="fill"
+      objectFit="cover"
+      src="3"
+    />
+  </div>
+</div>
+`;

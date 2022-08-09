@@ -10,6 +10,7 @@ import ButtonDropdownElement from '../../../../common/components/buttons/buttonD
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/types';
 import { UserData } from '../../../../common/types/user-types/UserData';
+import Tooltip from '../../../../common/components/tooltip/Tooltip';
 
 type Props = {};
 
@@ -39,25 +40,33 @@ const AuthNavigation: React.FC<Props> = () => {
         </ButtonDropdownElement>
       </ButtonDropdown>
       <SearchInput className="flex-1" />
-      <CircleIconButton
-        Icon={FaBell}
-        className="px-[12px]"
-        onClick={() => null}
-      />
-      <CircleIconButton
-        Icon={FaCommentDots}
-        className="px-[12px]"
-        onClick={() => null}
-      />
-      {userData?.email && (
-        <div
-          className=" transition-all duration-[300ms] hover:bg-[#f0f0f0] p-[12px] rounded-[50%]
-         active:scale-75 items-baseline
+      <Tooltip text="Уведомления">
+        <CircleIconButton
+          Icon={FaBell}
+          className="px-[12px]"
+          onClick={() => null}
+        />
+      </Tooltip>
+      <Tooltip text={'Сообщения'}>
+        <CircleIconButton
+          Icon={FaCommentDots}
+          className="px-[12px]"
+          onClick={() => null}
+        />
+      </Tooltip>
+      <Tooltip text={'Профиль'}>
+        {userData?.email && (
+          <div
+            className=" transition-all duration-[300ms] hover:bg-[#f0f0f0] rounded-[50%]
+         active:scale-75 items-baseline px-[10px] h-full flex !items-center justify-center
       cursor-pointer"
-        >
-          {userData?.email[0].toUpperCase()}
-        </div>
-      )}
+          >
+            <div className="bg-[#f0f0f0] rounded-[50%] px-[10px] py-[3px]">
+              {userData?.email[0].toUpperCase()}
+            </div>
+          </div>
+        )}
+      </Tooltip>
     </nav>
   );
 };

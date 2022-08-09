@@ -18,6 +18,7 @@ import {
   setIsLoggedIn,
   setUserId
 } from '../../../../../../../redux/actions/metadata/actions';
+import Router from 'next/router';
 
 type Props = {};
 
@@ -46,6 +47,7 @@ const LoginInputs: React.FC<Props> = () => {
         if (response.status === StatusCodes.OK) {
           dispatch(setIsLoggedIn(true));
           dispatch(setUserId(response.data.userId));
+          Router.pathname !== '/' && (await Router.push('/'));
           const header = document.querySelector('header');
           if (header) header.style.visibility = 'visible';
         }

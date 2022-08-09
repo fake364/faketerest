@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BaseHead should render head container properly 1`] = `
+<BaseHead>
+  <Head>
+    <SideEffect
+      headManager={
+        Object {
+          "_pendingUpdate": null,
+        }
+      }
+      inAmpMode={false}
+      reduceComponentsToState={[Function]}
+    />
+  </Head>
+</BaseHead>
+`;

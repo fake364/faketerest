@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavigationContainer should render container properly 1`] = `
+<NavigationContainer>
+  <nav
+    className="h-[80px] flex items-center justify-between pl-[20px] pr-[20px]"
+  >
+    Test
+  </nav>
+</NavigationContainer>
+`;

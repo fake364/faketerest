@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginButtons should render two buttons, one secondary and another primary 1`] = `
+<Fragment>
+  <PrimaryButton
+    className="mr-[8px]"
+  >
+    loginButtons.login
+  </PrimaryButton>
+  <SecondaryButton>
+    loginButtons.register
+  </SecondaryButton>
+</Fragment>
+`;
