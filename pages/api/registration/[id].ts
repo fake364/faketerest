@@ -23,7 +23,8 @@ class RegistrationsHandler {
       res.status(StatusCodes.OK).json({
         email: instance.getDataValue('email'),
         firstName: instance.getDataValue('firstName'),
-        lastName: instance.getDataValue('lastName')
+        lastName: instance.getDataValue('lastName'),
+        username: instance.getDataValue('username')
       });
     } catch (e) {}
   }

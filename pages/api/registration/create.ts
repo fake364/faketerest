@@ -26,10 +26,18 @@ class CreateRegistrationHandler {
     let regInstance;
     try {
       await RegService.checkConnection();
-      regInstance = new Registration(body);
+      const firstName = body.email.split('@')[0].toLowerCase();
+      const formattedFirstName =
+        firstName[0].toUpperCase() + firstName.slice(1, firstName.length);
+      regInstance = new Registration({
+        ...body,
+        firstName: formattedFirstName,
+        username: firstName
+      });
       await regInstance.save();
-      setupToken(res, regInstance.id);
-      res.status(StatusCodes.OK).json({ status: 'Created' });
+      const id = regInstance.getDataValue('id');
+      setupToken(res, id);
+      res.status(StatusCodes.OK).json({ status: 'Created', userId: id });
     } catch (e) {
       const constraintViolated = e?.original?.constraint;
       if (constraintViolated) {

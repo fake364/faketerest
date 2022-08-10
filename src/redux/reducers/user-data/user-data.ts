@@ -1,5 +1,9 @@
 import { AnyAction } from 'redux';
-import { SET_IS_LOGGED_IN, SET_USER_ID } from '../../actions/metadata/actions';
+import {
+  SET_IS_LOGGED_IN,
+  SET_USER_ID,
+  WIPE_STATE
+} from '../../actions/metadata/actions';
 import { UserData } from '../../../common/types/user-types/UserData';
 import {
   SET_USER_DATA,
@@ -24,6 +28,8 @@ export default function userDataReducer(
       return { ...state, isLoading: action.payload };
     case SET_USER_DATA:
       return { ...state, userData: action.payload };
+    case WIPE_STATE:
+      return initialState;
     default:
       return state;
   }

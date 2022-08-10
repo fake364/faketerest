@@ -12,26 +12,15 @@ import { RootState } from '../src/redux/types';
 import { fetchUserData } from '../src/redux/actions/user-data/actions';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
+import { useFetchUser } from '../src/common/hooks/useFetchUser/useFetchUser';
 
 type WrapperProps = {};
 
 const WrapperUnderRedux: React.FC<WrapperProps> = ({ children }) => {
   const [theme, setTheme] = useState(THEME_TYPE.BASE);
-  const dispatch: ThunkDispatch<RootState, {}, AnyAction> = useDispatch();
 
-  const isLoggedIn = useSelector(
-    (state: RootState) => state.metadata.isLoggedIn
-  );
-  const userId: number | undefined = useSelector(
-    (state: RootState) => state.metadata.userId
-  );
-
-  useEffect(() => {
-    if (isLoggedIn && userId) {
-      dispatch(fetchUserData(userId));
-    }
-  }, [isLoggedIn, userId]);
-
+  // revisit this hook with react-query
+  useFetchUser();
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
