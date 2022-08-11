@@ -12,6 +12,7 @@ exports[`BaseLink component should render properly with classname 1`] = `
       className="test-class text-black cursor-pointer hover:underline font-medium"
       onClick={[Function]}
       onMouseEnter={[Function]}
+      onTouchStart={[Function]}
     >
       Test component
     </span>
@@ -30,6 +31,7 @@ exports[`BaseLink component should render properly with default props 1`] = `
       className=" text-black cursor-pointer hover:underline font-medium"
       onClick={[Function]}
       onMouseEnter={[Function]}
+      onTouchStart={[Function]}
     >
       Test component
     </span>

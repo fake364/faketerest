@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RegForm should render Reg form if isRegShown true 1`] = `
+<div
+  className="bg-white flex w-[483px] min-w-[483px]
+ items-center flex-col ml-[56px] rounded-form_radius overflow-hidden
+ shadow-[rgb(0_0_0/45%)_0px_2px_10px] relative"
+>
+  <RegFormHeader />
+  <div
+    className="flex flex-col w-[60%]"
+  >
+    <RegInputs />
+    <div
+      className="mt-[8px] text-[#333333] font-bold text-center"
+    >
+      regForm.form.buttons.or
+    </div>
+    <IconTextButton
+      Icon={[Function]}
+      className="bg-[#1877f2] text-white"
+      onClick={null}
+      text="regForm.form.buttons.continueWithFacebook"
+    />
+    <IconTextButton
+      Icon={[Function]}
+      className="text-[#3c4043] border-[1px] border-[#dadce0] text-[15px] font-[500] mt-[12px]"
+      onClick={null}
+      text="regForm.form.buttons.continueWithGoogle"
+    />
+    <SecondaryRegForm
+      isRegistrationForm={true}
+      onTriggerFormMode={null}
+    />
+  </div>
+</div>
+`;
+
+exports[`RegForm should render login form is isRegShown false 1`] = `
+<div
+  className="bg-white flex w-[483px] min-w-[483px]
+ items-center flex-col ml-[56px] rounded-form_radius overflow-hidden
+ shadow-[rgb(0_0_0/45%)_0px_2px_10px] relative"
+>
+  <RegFormHeader />
+  <div
+    className="flex flex-col w-[60%]"
+  >
+    <LoginInputs />
+    <div
+      className="mt-[8px] text-[#333333] font-bold text-center"
+    >
+      regForm.form.buttons.or
+    </div>
+    <IconTextButton
+      Icon={[Function]}
+      className="bg-[#1877f2] text-white"
+      onClick={null}
+      text="regForm.form.buttons.continueWithFacebook"
+    />
+    <IconTextButton
+      Icon={[Function]}
+      className="text-[#3c4043] border-[1px] border-[#dadce0] text-[15px] font-[500] mt-[12px]"
+      onClick={null}
+      text="regForm.form.buttons.continueWithGoogle"
+    />
+    <SecondaryRegForm
+      isRegistrationForm={false}
+      onTriggerFormMode={null}
+    />
+  </div>
+</div>
+`;

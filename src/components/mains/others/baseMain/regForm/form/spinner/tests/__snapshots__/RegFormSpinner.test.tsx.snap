@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RegFormSpinner should render full screen spinner 1`] = `
+<div
+  className="absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.5)] z-10 flex items-center justify-center"
+>
+  <CircleSpinner
+    className="w-[50px] h-[50px]"
+    color={1}
+  />
+</div>
+`;

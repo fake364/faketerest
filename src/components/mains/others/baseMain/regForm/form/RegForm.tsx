@@ -39,13 +39,13 @@ const RegForm: React.FC<Props> = ({
         <IconTextButton
           Icon={FaFacebook}
           text={t('regForm.form.buttons.continueWithFacebook')}
-          onClick={() => null}
+          onClick={null}
           className="bg-[#1877f2] text-white"
         />
         <IconTextButton
           Icon={FcGoogle}
           text={t('regForm.form.buttons.continueWithGoogle')}
-          onClick={() => null}
+          onClick={null}
           className="text-[#3c4043] border-[1px] border-[#dadce0] text-[15px] font-[500] mt-[12px]"
         />
         <SecondaryRegForm
