@@ -8,11 +8,11 @@ interface Props extends ShownType {
 }
 
 const SliderPoint: React.FC<Props> = ({ pointType, shownType }) => {
-	const isCurrentPoint = pointType === shownType;
-	const className = isCurrentPoint ? 'slider-active' : 'slider-not-active';
-	return (
-		<div slider-theme={pointType} className={clsx('last:m-0', className)} />
-	);
+  const isCurrentPoint = pointType === shownType;
+  const className = isCurrentPoint ? 'slider-active' : 'slider-not-active';
+  return (
+    <div slider-theme={pointType} className={clsx('last:m-0', className)} />
+  );
 };
 
 export default SliderPoint;

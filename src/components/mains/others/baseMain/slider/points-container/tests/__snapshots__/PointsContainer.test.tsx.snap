@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PointsContainer should render some slider nodes 1`] = `
+<div
+  className="flex justify-center mt-10"
+>
+  <SliderPoint
+    key="homeDecor"
+    pointType="homeDecor"
+    shownType="homeDecor"
+  />
+  <SliderPoint
+    key="newOutfit"
+    pointType="newOutfit"
+    shownType="homeDecor"
+  />
+</div>
+`;

@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TitleSwitcher should add additional styles when it is animated 1`] = `
+<div
+  className="flex-1 flex flex-col items-center mt-24 relative"
+>
+  <span
+    className="text-[60px] font-normal"
+  >
+    titles.base.mainPage.slider.getYourNext
+  </span>
+  <span
+    className="text-slider_theme text-[50px] animate-move_and_disappear ease-out"
+    slider-theme="newOutfit"
+  >
+    titles.base.mainPage.slider.newOutfit
+  </span>
+</div>
+`;
+
+exports[`TitleSwitcher should match snapshot when is not animated 1`] = `
+<div
+  className="flex-1 flex flex-col items-center mt-24 relative"
+>
+  <span
+    className="text-[60px] font-normal"
+  >
+    titles.base.mainPage.slider.getYourNext
+  </span>
+  <span
+    className="text-slider_theme text-[50px]"
+    slider-theme="newOutfit"
+  >
+    titles.base.mainPage.slider.newOutfit
+  </span>
+</div>
+`;

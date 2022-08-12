@@ -11,5 +11,5 @@ module.exports = {
       '<rootDir>/assetsTransformer.js',
     '\\.(css|less)$': '<rootDir>/assetsTransformer.js'
   },
-  collectCoverageFrom: ['src/**']
+  collectCoverageFrom: ['src/**/*.ts?(x)']
 };

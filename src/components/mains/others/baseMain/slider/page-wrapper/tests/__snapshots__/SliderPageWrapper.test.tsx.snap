@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SliderPageWrapper should render all supplements in slider 1`] = `
+<Fragment>
+  <BouncingButtons
+    isAnimated={true}
+    onClickDown={[MockFunction]}
+    onClickUp={[MockFunction]}
+    shownType="homeDecor"
+  />
+  <div
+    className="w-full flex flex-col items-stretch relative z-[-1] animate-slide_bottom"
+  >
+    <TitleSwitcher
+      isAnimation={true}
+      shownType="homeDecor"
+    />
+    <PointsContainer
+      shownType="homeDecor"
+      sliderNodes={
+        Array [
+          SliderNode {
+            "_type": "dinnerIdea",
+          },
+          SliderNode {
+            "_type": "homeDecor",
+          },
+          SliderNode {
+            "_type": "newOutfit",
+          },
+          SliderNode {
+            "_type": "thumbIdea",
+          },
+        ]
+      }
+    />
+    <ImageFlexContainer
+      isAnimation={true}
+      shownType="homeDecor"
+    />
+  </div>
+</Fragment>
+`;
+
+exports[`SliderPageWrapper should render modified component with stop class 1`] = `
+<Fragment>
+  <BouncingButtons
+    isAnimated={true}
+    onClickDown={[MockFunction]}
+    onClickUp={[MockFunction]}
+    shownType="homeDecor"
+  />
+  <div
+    className="w-full flex flex-col items-stretch relative z-[-1] animate-slide_bottom stop-animation"
+  >
+    <TitleSwitcher
+      isAnimation={true}
+      shownType="homeDecor"
+    />
+    <PointsContainer
+      shownType="homeDecor"
+      sliderNodes={
+        Array [
+          SliderNode {
+            "_type": "dinnerIdea",
+          },
+          SliderNode {
+            "_type": "homeDecor",
+          },
+          SliderNode {
+            "_type": "newOutfit",
+          },
+          SliderNode {
+            "_type": "thumbIdea",
+          },
+        ]
+      }
+    />
+    <ImageFlexContainer
+      isAnimation={true}
+      shownType="homeDecor"
+    />
+  </div>
+</Fragment>
+`;

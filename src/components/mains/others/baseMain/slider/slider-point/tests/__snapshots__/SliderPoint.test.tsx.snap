@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SliderPoint should display active point if it is selected point 1`] = `
+<div
+  className="last:m-0 slider-active"
+  slider-theme="homeDecor"
+/>
+`;
+
+exports[`SliderPoint should display not active point if selected point doesnt match current 1`] = `
+<div
+  className="last:m-0 slider-not-active"
+  slider-theme="newOutfit"
+/>
+`;
