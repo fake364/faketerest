@@ -36,11 +36,6 @@ class RegistrationService {
     await this._connection.authenticate();
     console.log('---DB CONNECTION OPENED---');
   }
-
-  public async closeConnection() {
-    await this._connection.close();
-    console.log('---DB CONNECTION CLOSED---');
-  }
 }
 
 const RegService = RegistrationService.getInstance();

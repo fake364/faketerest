@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconTextButton should render base button with icon and text 1`] = `
+<BaseButton
+  className="mt-[8px] self-stretch rounded-common_radius py-[8px]"
+  onClick={[MockFunction]}
+>
+  <div
+    className="flex items-center justify-evenly"
+  >
+    <FaAddressBook
+      className="mr-[8px] text-[24px]"
+    />
+    <div>
+      Text
+    </div>
+  </div>
+</BaseButton>
+`;

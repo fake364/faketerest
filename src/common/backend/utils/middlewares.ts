@@ -3,17 +3,11 @@ import { getReasonPhrase, StatusCodes } from 'http-status-codes';
 import { REGISTRATION_ERROR } from '../models/constants/code';
 import { AUTH_TOKEN_COOKIE_KEY } from '../../constants/commons';
 import jwt from 'jsonwebtoken';
-import CryptoJS from 'crypto-js';
 import cookie from 'cookie';
 import {
   createMiddlewareDecorator,
-  NextFunction,
-  UnauthorizedException
+  NextFunction
 } from '@storyofams/next-api-decorators';
-
-export const requestInfoLogger = (req: NextApiRequest) => {
-  console.info(req.method, req.url);
-};
 
 export const setDefaultMessageByCode = (
   res: NextApiResponse,

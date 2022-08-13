@@ -53,7 +53,7 @@ const LoginInputs: React.FC<Props> = () => {
         }
       } catch (e) {
         console.error(e);
-        if (e.response.status === StatusCodes.UNAUTHORIZED) {
+        if (e?.response?.status === StatusCodes.UNAUTHORIZED) {
           setError(errors('invalidAuth'));
         } else {
           setError(errors('somethingWentWrong'));
@@ -68,7 +68,10 @@ const LoginInputs: React.FC<Props> = () => {
 
       <form className="flex flex-col w-full" onSubmit={formik.handleSubmit}>
         {error && (
-          <label className="text-[#e60023] text-center px-[10px] block text-[14px] mt-[14px] mb-[14px]">
+          <label
+            id={'error-label'}
+            className="text-[#e60023] text-center px-[10px] block text-[14px] mt-[14px] mb-[14px]"
+          >
             {error}
           </label>
         )}

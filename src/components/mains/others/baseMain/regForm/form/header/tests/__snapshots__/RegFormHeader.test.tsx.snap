@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RegFormHeader should render reg form header with logo 1`] = `
+<Fragment>
+  <div
+    className="my-[16px]"
+  >
+    <Image
+      height={40}
+      src="/logo.png"
+      width={40}
+    />
+  </div>
+  <div
+    className="text-[36px] text-[#333333] font-semibold"
+  >
+    regForm.form.title
+  </div>
+  <div
+    className="text-[16px] text-[#333333] mt-[8px]"
+  >
+    regForm.form.subtitle
+  </div>
+</Fragment>
+`;
