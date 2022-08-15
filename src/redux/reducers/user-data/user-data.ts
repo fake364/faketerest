@@ -1,9 +1,5 @@
 import { AnyAction } from 'redux';
-import {
-  SET_IS_LOGGED_IN,
-  SET_USER_ID,
-  WIPE_STATE
-} from '../../actions/metadata/actions';
+import { WIPE_STATE } from '../../actions/metadata/actions';
 import { UserData } from '../../../common/types/user-types/UserData';
 import {
   SET_USER_DATA,

@@ -21,25 +21,28 @@ export const setDefaultMessageByCode = (
   });
 };
 
-export const WithJWTAuth = createMiddlewareDecorator(
-  (req: NextApiRequest, res: NextApiResponse, next: NextFunction) => {
-    console.log(req.cookies);
-    const token = req.cookies[AUTH_TOKEN_COOKIE_KEY];
-    if (token) {
-      try {
-        jwt.verify(token, process.env.SECRET, {
-          algorithms: ['HS256']
-        });
-        next();
-        return;
-      } catch (e) {
-        console.error(e);
-        res.setHeader(
-          'Set-Cookie',
-          cookie.serialize(AUTH_TOKEN_COOKIE_KEY, '', { httpOnly: true })
-        );
-      }
+export const jwtMiddlewareFn = async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+  next: NextFunction
+) => {
+  const token = req.cookies[AUTH_TOKEN_COOKIE_KEY];
+  if (token) {
+    try {
+      await jwt.verify(token, process.env.SECRET, {
+        algorithms: ['HS256']
+      });
+      next();
+      return;
+    } catch (e) {
+      console.error(e);
+      res.setHeader(
+        'Set-Cookie',
+        cookie.serialize(AUTH_TOKEN_COOKIE_KEY, '', { httpOnly: true })
+      );
     }
-    res.status(StatusCodes.UNAUTHORIZED).json({});
   }
-);
+  res.status(StatusCodes.UNAUTHORIZED).json({});
+};
+
+export const WithJWTAuth = createMiddlewareDecorator(jwtMiddlewareFn);
