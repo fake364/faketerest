@@ -11,17 +11,13 @@ const AuthNavButtons: React.FC<Props> = () => {
   return (
     <>
       <Tooltip text="Уведомления">
-        <CircleIconButton
-          Icon={FaBell}
-          className="px-[12px]"
-          onClick={() => null}
-        />
+        <CircleIconButton Icon={FaBell} className="px-[12px]" onClick={null} />
       </Tooltip>
       <Tooltip text={'Сообщения'}>
         <CircleIconButton
           Icon={FaCommentDots}
           className="px-[12px]"
-          onClick={() => null}
+          onClick={null}
         />
       </Tooltip>
       <UserRoundButton />

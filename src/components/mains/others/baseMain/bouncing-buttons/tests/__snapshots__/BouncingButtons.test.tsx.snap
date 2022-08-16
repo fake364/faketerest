@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BouncingButtons should render animated down button 1`] = `
+<Fragment>
+  <RoundedArrowButton
+    additionalStyles="bouncing-arrow-button arrow-button-up"
+    onClick={[MockFunction]}
+    shownType="homeDecor"
+  />
+</Fragment>
+`;
+
+exports[`BouncingButtons should render not animated up button 1`] = `
+<Fragment>
+  <RoundedArrowButton
+    additionalStyles="bouncing-arrow-button arrow-button-down mt-[24px]"
+    isArrowUp={true}
+    onClick={[MockFunction]}
+    shownType="homeDecor"
+  />
+</Fragment>
+`;

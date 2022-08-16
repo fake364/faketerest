@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout should display Auth navigation if user is logged in 1`] = `
+<div>
+  <BaseHead />
+  <Header>
+    <AuthNavigation />
+  </Header>
+  <main
+    className="h-full"
+  >
+    Text
+  </main>
+</div>
+`;
+
+exports[`Layout should display Common navigation if user is not logged in 1`] = `
+<div>
+  <BaseHead />
+  <Header>
+    <NavigationContainer>
+      <CommonNavigation />
+    </NavigationContainer>
+  </Header>
+  <main
+    className="h-full"
+  >
+    Text
+  </main>
+</div>
+`;

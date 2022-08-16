@@ -5,7 +5,7 @@
     "build": "next build",
     "start": "next start",
     "analyze": "cross-env ANALYZE=true next build",
-    "test": "jest --passWithNoTests --coverage"
+    "test": "jest --passWithNoTests --coverage --forceExit"
   },
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",

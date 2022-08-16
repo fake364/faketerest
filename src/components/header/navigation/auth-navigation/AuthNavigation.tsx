@@ -42,10 +42,10 @@ const AuthNavigation: React.FC<Props> = () => {
         text="Создать"
         dropdownClass="left-[-57px]"
       >
-        <ButtonDropdownElement onClick={() => {}}>
+        <ButtonDropdownElement onClick={null}>
           Создать пин-идею
         </ButtonDropdownElement>
-        <ButtonDropdownElement onClick={() => null}>
+        <ButtonDropdownElement onClick={null}>
           Создать пин
         </ButtonDropdownElement>
       </DropdownRootElement>

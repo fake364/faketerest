@@ -26,6 +26,7 @@ class RegistrationsHandler {
         lastName: instance.getDataValue('lastName'),
         username: instance.getDataValue('username')
       });
+      // eslint-disable-next-line no-empty
     } catch (e) {}
   }
 }

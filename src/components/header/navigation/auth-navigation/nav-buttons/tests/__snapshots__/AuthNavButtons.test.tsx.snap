@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthNavButtons should render some buttons with tooltips 1`] = `
+<Fragment>
+  <Tooltip
+    text="Уведомления"
+  >
+    <CircleIconButton
+      Icon={[Function]}
+      className="px-[12px]"
+      onClick={null}
+    />
+  </Tooltip>
+  <Tooltip
+    text="Сообщения"
+  >
+    <CircleIconButton
+      Icon={[Function]}
+      className="px-[12px]"
+      onClick={null}
+    />
+  </Tooltip>
+  <UserRoundButton />
+</Fragment>
+`;

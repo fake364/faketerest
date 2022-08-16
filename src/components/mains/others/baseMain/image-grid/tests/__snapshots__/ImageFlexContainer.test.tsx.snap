@@ -1,0 +1,723 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImageFlexContainer should render container of images with margins and delays 1`] = `
+<div
+  className="slider-flex-container slider-gradient"
+>
+  <div
+    className="flex flex-col flex-1 relative opacity_move_up opacity_move_up-0"
+    key="0"
+  >
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="0"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="1"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="2"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="3"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="4"
+      shownType="homeDecor"
+    />
+  </div>
+  <div
+    className="flex flex-col flex-1 relative mt-[5rem] opacity_move_up opacity_move_up-250"
+    key="1"
+  >
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="0"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="1"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="2"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="3"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="4"
+      shownType="homeDecor"
+    />
+  </div>
+  <div
+    className="flex flex-col flex-1 relative mt-[10rem] opacity_move_up opacity_move_up-500"
+    key="2"
+  >
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="0"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="1"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="2"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="3"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="4"
+      shownType="homeDecor"
+    />
+  </div>
+  <div
+    className="flex flex-col flex-1 relative mt-[15rem] opacity_move_up opacity_move_up-725"
+    key="3"
+  >
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="0"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="1"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="2"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="3"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="4"
+      shownType="homeDecor"
+    />
+  </div>
+  <div
+    className="flex flex-col flex-1 relative mt-[10rem] opacity_move_up opacity_move_up-1000"
+    key="4"
+  >
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="0"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="1"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="2"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="3"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="4"
+      shownType="homeDecor"
+    />
+  </div>
+  <div
+    className="flex flex-col flex-1 relative mt-[5rem] opacity_move_up opacity_move_up-1250"
+    key="5"
+  >
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="0"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="1"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="2"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="3"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="4"
+      shownType="homeDecor"
+    />
+  </div>
+  <div
+    className="flex flex-col flex-1 relative opacity_move_up opacity_move_up-1500"
+    key="6"
+  >
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="0"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="1"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="2"
+      shownType="homeDecor"
+    />
+    <ImageCell
+      images={
+        Array [
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+          Object {
+            "process": [Function],
+          },
+        ]
+      }
+      key="3"
+      shownType="homeDecor"
+    />
+  </div>
+</div>
+`;

@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserCard should display a bit of user info in as a card 1`] = `
+<ButtonDropdownElement
+  onClick={null}
+>
+  <div
+    className="flex gap-[8px]"
+  >
+    <div
+      className="w-[60px] h-[60px]"
+    >
+      <div
+        className="w-full h-full rounded-full bg-[whitesmoke] flex justify-center items-center text-[24px]"
+      >
+        F
+      </div>
+    </div>
+    <div
+      className="flex flex-col gap-[4px]"
+    >
+      <div>
+        First Last
+      </div>
+      <div
+        className="font-normal text-[14px]"
+      >
+        mail@mail.com
+      </div>
+    </div>
+  </div>
+</ButtonDropdownElement>
+`;

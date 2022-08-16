@@ -11,5 +11,9 @@ module.exports = {
       '<rootDir>/assetsTransformer.js',
     '\\.(css|less)$': '<rootDir>/assetsTransformer.js'
   },
-  collectCoverageFrom: ['src/**/*.ts?(x)']
+  collectCoverageFrom: [
+    'src/**/*.ts?(x)',
+    '!src/redux/store.ts',
+    '!src/redux/reducers/index.ts'
+  ]
 };

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header should render header with content 1`] = `
+<header
+  className="bg-white"
+>
+  Text
+</header>
+`;

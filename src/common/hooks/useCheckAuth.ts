@@ -9,7 +9,8 @@ export const useCheckAuth = () => {
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
-    axios('/api/checkToken', { method: 'GET' })
+    axios
+      .get('/api/checkToken')
       .then((res) => {
         if (res.status === 200) {
           dispatch(setIsLoggedIn(true));

@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImageCell should render three invisible images in one container and one visible depending on shown type 1`] = `
+<div
+  className="mx-2 my-2 h-[25vh] xl:h-[25vh] 2xl:h-[35vh] relative"
+>
+  <div
+    className="duration-1000 invisible opacity-0"
+  >
+    <Image
+      className="rounded-[16px]"
+      height={500}
+      layout="fill"
+      objectFit="cover"
+      quality={70}
+      sizes="12vw"
+      src="1"
+      width={200}
+    />
+  </div>
+  <div
+    className="duration-1000"
+  >
+    <Image
+      className="rounded-[16px]"
+      height={500}
+      layout="fill"
+      objectFit="cover"
+      quality={70}
+      sizes="12vw"
+      src="2"
+      width={200}
+    />
+  </div>
+  <div
+    className="duration-1000 invisible opacity-0"
+  >
+    <Image
+      className="rounded-[16px]"
+      height={500}
+      layout="fill"
+      objectFit="cover"
+      quality={70}
+      sizes="12vw"
+      src="3"
+      width={200}
+    />
+  </div>
+  <div
+    className="duration-1000 invisible opacity-0"
+  >
+    <Image
+      className="rounded-[16px]"
+      height={500}
+      layout="fill"
+      objectFit="cover"
+      quality={70}
+      sizes="12vw"
+      src="4"
+      width={200}
+    />
+  </div>
+</div>
+`;

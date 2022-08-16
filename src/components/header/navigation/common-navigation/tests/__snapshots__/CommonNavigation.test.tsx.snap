@@ -1,0 +1,331 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CommonNavigation should display logo, and links for BASE theme 1`] = `
+<CommonNavigation>
+  <LogoTitle>
+    <div
+      className="flex items-center"
+    >
+      <Image
+        alt="Logo"
+        height={32}
+        src={
+          Object {
+            "process": [Function],
+          }
+        }
+        width={32}
+      >
+        <span
+          style={
+            Object {
+              "background": "none",
+              "border": 0,
+              "boxSizing": "border-box",
+              "display": "inline-block",
+              "height": "initial",
+              "margin": 0,
+              "maxWidth": "100%",
+              "opacity": 1,
+              "overflow": "hidden",
+              "padding": 0,
+              "position": "relative",
+              "width": "initial",
+            }
+          }
+        >
+          <span
+            style={
+              Object {
+                "background": "none",
+                "border": 0,
+                "boxSizing": "border-box",
+                "display": "block",
+                "height": "initial",
+                "margin": 0,
+                "maxWidth": "100%",
+                "opacity": 1,
+                "padding": 0,
+                "width": "initial",
+              }
+            }
+          >
+            <img
+              alt=""
+              aria-hidden={true}
+              src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2732%27%20height=%2732%27/%3e"
+              style={
+                Object {
+                  "background": "none",
+                  "border": 0,
+                  "display": "block",
+                  "height": "initial",
+                  "margin": 0,
+                  "maxWidth": "100%",
+                  "opacity": 1,
+                  "padding": 0,
+                  "width": "initial",
+                }
+              }
+            />
+          </span>
+          <ImageElement
+            alt="Logo"
+            blurStyle={Object {}}
+            config={
+              Object {
+                "allSizes": Array [
+                  16,
+                  32,
+                  48,
+                  64,
+                  96,
+                  128,
+                  256,
+                  384,
+                  640,
+                  750,
+                  828,
+                  1080,
+                  1200,
+                  1920,
+                  2048,
+                  3840,
+                ],
+                "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;",
+                "dangerouslyAllowSVG": false,
+                "deviceSizes": Array [
+                  640,
+                  750,
+                  828,
+                  1080,
+                  1200,
+                  1920,
+                  2048,
+                  3840,
+                ],
+                "disableStaticImages": false,
+                "domains": Array [],
+                "formats": Array [
+                  "image/webp",
+                ],
+                "imageSizes": Array [
+                  16,
+                  32,
+                  48,
+                  64,
+                  96,
+                  128,
+                  256,
+                  384,
+                ],
+                "loader": "default",
+                "minimumCacheTTL": 60,
+                "path": "/_next/image",
+              }
+            }
+            heightInt={32}
+            imgAttributes={
+              Object {
+                "sizes": undefined,
+                "src": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+                "srcSet": undefined,
+              }
+            }
+            imgStyle={
+              Object {
+                "border": "none",
+                "bottom": 0,
+                "boxSizing": "border-box",
+                "display": "block",
+                "height": 0,
+                "left": 0,
+                "margin": "auto",
+                "maxHeight": "100%",
+                "maxWidth": "100%",
+                "minHeight": "100%",
+                "minWidth": "100%",
+                "objectFit": undefined,
+                "objectPosition": undefined,
+                "padding": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "width": 0,
+              }
+            }
+            isLazy={true}
+            isVisible={false}
+            layout="intrinsic"
+            loader={[Function]}
+            onLoadingCompleteRef={
+              Object {
+                "current": undefined,
+              }
+            }
+            placeholder="empty"
+            setBlurComplete={[Function]}
+            setIntersection={[Function]}
+            srcString=""
+            unoptimized={true}
+            widthInt={32}
+          >
+            <img
+              alt="Logo"
+              data-nimg="intrinsic"
+              decoding="async"
+              onError={[Function]}
+              onLoad={[Function]}
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+              style={
+                Object {
+                  "border": "none",
+                  "bottom": 0,
+                  "boxSizing": "border-box",
+                  "display": "block",
+                  "height": 0,
+                  "left": 0,
+                  "margin": "auto",
+                  "maxHeight": "100%",
+                  "maxWidth": "100%",
+                  "minHeight": "100%",
+                  "minWidth": "100%",
+                  "objectFit": undefined,
+                  "objectPosition": undefined,
+                  "padding": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                  "width": 0,
+                }
+              }
+            />
+            <noscript>
+              <img
+                alt="Logo"
+                data-nimg="intrinsic"
+                decoding="async"
+                loading="lazy"
+                src=""
+                style={
+                  Object {
+                    "border": "none",
+                    "bottom": 0,
+                    "boxSizing": "border-box",
+                    "display": "block",
+                    "height": 0,
+                    "left": 0,
+                    "margin": "auto",
+                    "maxHeight": "100%",
+                    "maxWidth": "100%",
+                    "minHeight": "100%",
+                    "minWidth": "100%",
+                    "objectFit": undefined,
+                    "objectPosition": undefined,
+                    "padding": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                    "width": 0,
+                  }
+                }
+              />
+            </noscript>
+          </ImageElement>
+        </span>
+      </Image>
+      <span
+        className="font-bold text-primary text-[20px] ml-[6px]"
+        data-theme="base"
+      >
+        Faketerest
+      </span>
+    </div>
+  </LogoTitle>
+  <LoginButtonsContainer>
+    <div>
+      <BaseNavigationLinks>
+        <BaseLink
+          className="mr-10 text-blue"
+          href="/about"
+        >
+          <ForwardRef(LinkComponent)
+            href="/about"
+          >
+            <span
+              className="mr-10 text-blue text-black cursor-pointer hover:underline font-medium"
+              onClick={[Function]}
+              onMouseEnter={[Function]}
+              onTouchStart={[Function]}
+            >
+              links.base.description
+            </span>
+          </ForwardRef(LinkComponent)>
+        </BaseLink>
+        <BaseLink
+          className="mr-10"
+          href="/business"
+        >
+          <ForwardRef(LinkComponent)
+            href="/business"
+          >
+            <span
+              className="mr-10 text-black cursor-pointer hover:underline font-medium"
+              onClick={[Function]}
+              onMouseEnter={[Function]}
+              onTouchStart={[Function]}
+            >
+              links.base.business
+            </span>
+          </ForwardRef(LinkComponent)>
+        </BaseLink>
+        <BaseLink
+          className="mr-10"
+          href="/blog"
+        >
+          <ForwardRef(LinkComponent)
+            href="/blog"
+          >
+            <span
+              className="mr-10 text-black cursor-pointer hover:underline font-medium"
+              onClick={[Function]}
+              onMouseEnter={[Function]}
+              onTouchStart={[Function]}
+            >
+              links.base.blog
+            </span>
+          </ForwardRef(LinkComponent)>
+        </BaseLink>
+      </BaseNavigationLinks>
+      <LoginButtons>
+        <PrimaryButton
+          className="mr-[8px]"
+        >
+          <BaseButton
+            className="mr-[8px] bg-primary px-[12px] py-[8px] hover:bg-primary_hovered text-text_primary rounded-common_radius"
+          >
+            <button
+              className="font-bold active:scale-90 active:brightness-15 mr-[8px] bg-primary px-[12px] py-[8px] hover:bg-primary_hovered text-text_primary rounded-common_radius"
+              data-theme="base"
+            >
+              loginButtons.login
+            </button>
+          </BaseButton>
+        </PrimaryButton>
+        <SecondaryButton>
+          <BaseButton
+            className=" px-[12px] py-[8px] bg-secondary hover:bg-secondary_hovered text-text_secondary rounded-common_radius"
+          >
+            <button
+              className="font-bold active:scale-90 active:brightness-15  px-[12px] py-[8px] bg-secondary hover:bg-secondary_hovered text-text_secondary rounded-common_radius"
+              data-theme="base"
+            >
+              loginButtons.register
+            </button>
+          </BaseButton>
+        </SecondaryButton>
+      </LoginButtons>
+    </div>
+  </LoginButtonsContainer>
+</CommonNavigation>
+`;
