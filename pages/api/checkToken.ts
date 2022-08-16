@@ -1,12 +1,20 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { WithJWTAuth } from '../../src/common/backend/utils/middlewares';
-import { createHandler, Get, Req, Res } from '@storyofams/next-api-decorators';
+import type { NextApiResponse, NextApiRequest } from 'next';
+import {
+  createHandler,
+  createMiddlewareDecorator,
+  Get,
+  Req,
+  Res
+} from 'next-api-decorators';
 import { AUTH_TOKEN_COOKIE_KEY } from '../../src/common/constants/commons';
 import jwt from 'jsonwebtoken';
 import RegistrationService from '../../src/common/backend/services/RegistrationService';
 import Registration from '../../src/common/backend/models/Registration.model';
 import { StatusCodes } from 'http-status-codes';
 import { setupToken } from '../../src/common/backend/models/utils/utils';
+import { jwtMiddlewareFn } from '../../src/common/backend/utils/middlewares';
+
+export const WithJWTAuth = createMiddlewareDecorator(jwtMiddlewareFn);
 
 class CheckTokenHandler {
   @Get()

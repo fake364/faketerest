@@ -1,4 +1,3 @@
-import { NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
 import RegService from '../../src/common/backend/services/RegistrationService';
 import Registration from '../../src/common/backend/models/Registration.model';
@@ -8,9 +7,10 @@ import {
   Post,
   Res,
   ValidationPipe
-} from '@storyofams/next-api-decorators';
-import LoginRequestPayload from '../../src/common/backend/models/validation/login/LoginPayload';
+} from 'next-api-decorators';
+import type LoginRequestPayload from '../../src/common/backend/models/validation/login/LoginPayload';
 import { setupToken } from '../../src/common/backend/models/utils/utils';
+import type { NextApiResponse } from 'next';
 
 class LoginHandler {
   @Post()

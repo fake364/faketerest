@@ -7,13 +7,17 @@ class RegistrationService {
   private _connection: Sequelize;
 
   private constructor() {
+    const sslConfig =
+      process.env.ENVIRONMENT !== 'local'
+        ? { ssl: { require: true, rejectUnauthorized: false } }
+        : {};
     this._connection = new Sequelize(
       `postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}`,
       {
         models: [__dirname + '/**/*.model.ts'],
         dialect: pg,
         dialectOptions: {
-          // ssl: { require: true, rejectUnauthorized: false }
+          ...sslConfig
         }
       }
     );

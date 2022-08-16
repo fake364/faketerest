@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import LoginBackImages from '../../src/components/mains/others/login/LoginBackImages';
 import RegForm from '../../src/components/mains/others/baseMain/regForm/form/RegForm';

@@ -1,14 +1,9 @@
-import {
-  createHandler,
-  Get,
-  Query,
-  Res
-} from '@storyofams/next-api-decorators';
-import { WithJWTAuth } from '../../../src/common/backend/utils/middlewares';
+import { createHandler, Get, Query, Res } from 'next-api-decorators';
 import RegistrationService from '../../../src/common/backend/services/RegistrationService';
 import Registration from '../../../src/common/backend/models/Registration.model';
 import { StatusCodes } from 'http-status-codes';
-import { NextApiResponse } from 'next';
+import { WithJWTAuth } from '../checkToken';
+import type { NextApiResponse } from 'next';
 
 class RegistrationsHandler {
   @Get()

@@ -4,10 +4,7 @@ import { REGISTRATION_ERROR } from '../models/constants/code';
 import { AUTH_TOKEN_COOKIE_KEY } from '../../constants/commons';
 import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
-import {
-  createMiddlewareDecorator,
-  NextFunction
-} from '@storyofams/next-api-decorators';
+import { NextFunction } from 'next-api-decorators';
 
 export const setDefaultMessageByCode = (
   res: NextApiResponse,
@@ -44,5 +41,3 @@ export const jwtMiddlewareFn = async (
   }
   res.status(StatusCodes.UNAUTHORIZED).json({});
 };
-
-export const WithJWTAuth = createMiddlewareDecorator(jwtMiddlewareFn);

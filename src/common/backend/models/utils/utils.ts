@@ -1,7 +1,7 @@
 import { generateJWT } from '../../utils/jwtUtils';
 import cookie from 'cookie';
 import { AUTH_TOKEN_COOKIE_KEY } from '../../../constants/commons';
-import { NextApiResponse } from 'next';
+import type { NextApiResponse } from 'next';
 
 export const setupToken = (res: NextApiResponse, userId?: number) => {
   const jwtString = userId ? generateJWT(userId) : '';
