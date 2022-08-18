@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RegistrationFormWrapper should render RegForm with mode switcher 1`] = `
+<div
+  className="main-reg-form"
+>
+  <h1
+    className="text-[70px] text-white max-w-[600px]"
+  >
+    regForm.header
+  </h1>
+  <RegForm
+    isRegistrationShown={true}
+    setRegistrationShown={[Function]}
+  />
+</div>
+`;

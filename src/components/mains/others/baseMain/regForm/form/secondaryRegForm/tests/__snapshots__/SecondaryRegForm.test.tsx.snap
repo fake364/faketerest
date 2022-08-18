@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SecondaryRegForm should not render switcher if registration trigger is not present 1`] = `
+<Fragment>
+  <div
+    className="mt-[14px] text-center text-[12px] text-gray-600"
+  >
+    regForm.form.terms.youAgreeWith
+     
+    <span
+      className="font-bold whitespace-nowrap"
+    >
+      <ForwardRef(LinkComponent)
+        href="/tos"
+      >
+        regForm.form.terms.termsOfService
+      </ForwardRef(LinkComponent)>
+    </span>
+     
+    regForm.form.terms.youVeRead
+     
+    <span
+      className="font-bold whitespace-nowrap"
+    >
+      <ForwardRef(LinkComponent)
+        href="/privacy"
+      >
+        regForm.form.terms.privacyPolicy
+      </ForwardRef(LinkComponent)>
+    </span>
+  </div>
+  <div
+    className=" mt-[10px] text-[13px] text-center text-gray-600 font-semibold pb-[14px]"
+  >
+    regForm.form.areYouABusiness
+     
+    <span>
+      <ForwardRef(LinkComponent)
+        href="/business/create"
+      >
+        regForm.form.getStartedHere
+      </ForwardRef(LinkComponent)>
+    </span>
+  </div>
+</Fragment>
+`;
+
+exports[`SecondaryRegForm should render registration button 1`] = `
+<Fragment>
+  <div
+    className="mt-[14px] text-center text-[12px] text-gray-600"
+  >
+    regForm.form.terms.youAgreeWith
+     
+    <span
+      className="font-bold whitespace-nowrap"
+    >
+      <ForwardRef(LinkComponent)
+        href="/tos"
+      >
+        regForm.form.terms.termsOfService
+      </ForwardRef(LinkComponent)>
+    </span>
+     
+    regForm.form.terms.youVeRead
+     
+    <span
+      className="font-bold whitespace-nowrap"
+    >
+      <ForwardRef(LinkComponent)
+        href="/privacy"
+      >
+        regForm.form.terms.privacyPolicy
+      </ForwardRef(LinkComponent)>
+    </span>
+  </div>
+  <div
+    className="mt-[12px] text-[13px] text-center text-gray-600 cursor-pointer font-semibold"
+    onClick={[Function]}
+  >
+    regForm.form.logInLink
+  </div>
+  <div
+    className=" mt-[10px] text-[13px] text-center text-gray-600 font-semibold pb-[14px]"
+  >
+    regForm.form.areYouABusiness
+     
+    <span>
+      <ForwardRef(LinkComponent)
+        href="/business/create"
+      >
+        regForm.form.getStartedHere
+      </ForwardRef(LinkComponent)>
+    </span>
+  </div>
+</Fragment>
+`;
+
+exports[`SecondaryRegForm should render switcher if there is a trigger callback 1`] = `
+<Fragment>
+  <div
+    className="mt-[14px] text-center text-[12px] text-gray-600"
+  >
+    regForm.form.terms.youAgreeWith
+     
+    <span
+      className="font-bold whitespace-nowrap"
+    >
+      <ForwardRef(LinkComponent)
+        href="/tos"
+      >
+        regForm.form.terms.termsOfService
+      </ForwardRef(LinkComponent)>
+    </span>
+     
+    regForm.form.terms.youVeRead
+     
+    <span
+      className="font-bold whitespace-nowrap"
+    >
+      <ForwardRef(LinkComponent)
+        href="/privacy"
+      >
+        regForm.form.terms.privacyPolicy
+      </ForwardRef(LinkComponent)>
+    </span>
+  </div>
+  <div
+    className="mt-[12px] text-[13px] text-center text-gray-600 cursor-pointer font-semibold"
+    onClick={[MockFunction]}
+  >
+    regForm.form.registerLink
+  </div>
+  <div
+    className=" mt-[10px] text-[13px] text-center text-gray-600 font-semibold pb-[14px]"
+  >
+    regForm.form.areYouABusiness
+     
+    <span>
+      <ForwardRef(LinkComponent)
+        href="/business/create"
+      >
+        regForm.form.getStartedHere
+      </ForwardRef(LinkComponent)>
+    </span>
+  </div>
+</Fragment>
+`;
