@@ -1,0 +1,5 @@
+.roundButton {
+  @apply transition-all duration-[300ms] hover:bg-[#f0f0f0] rounded-[50%]
+    active:scale-75 items-baseline px-[10px] h-full flex !items-center justify-center
+    cursor-pointer;
+}

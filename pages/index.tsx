@@ -15,9 +15,8 @@ export default function Home(props) {
   const isUserLoading = useSelector(
     (state: RootState) => state.userData.isLoading
   );
-  const { isCheckingAuth } = useCheckAuth();
 
-  if (isCheckingAuth || isUserLoading) {
+  if (isUserLoading) {
     return <RegFormSpinner />;
   }
 

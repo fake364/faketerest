@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/types';
 import RegFormSpinner from '../../../mains/others/baseMain/regForm/form/spinner/RegFormSpinner';
 import { UserData } from '../../../../common/types/user-types/UserData';
+import Link from 'next/link';
 
 type Props = {};
 
@@ -27,13 +28,15 @@ const AuthNavigation: React.FC<Props> = () => {
 
   return (
     <nav className="sticky py-[18px] px-[12px] flex flex-stretch gap-[14px]">
-      <div
-        className=" transition-all duration-[300ms] hover:bg-[#f0f0f0] p-[12px] rounded-[50%]
+      <Link href={'/'}>
+        <div
+          className=" transition-all duration-[300ms] hover:bg-[#f0f0f0] p-[12px] rounded-[50%]
          active:scale-75 items-baseline
       cursor-pointer"
-      >
-        <LogoTitle titleOff width={24} height={24} />
-      </div>
+        >
+          <LogoTitle titleOff width={24} height={24} />
+        </div>
+      </Link>
       <BaseButton className="bg-[#000000] text-white rounded-[24px] px-[18px] mr-[8px]">
         Главная
       </BaseButton>

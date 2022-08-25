@@ -15,8 +15,10 @@ export const useFetchUser = () => {
     (state: RootState) => state.metadata.userId
   );
 
+  const userData = useSelector((state: RootState) => state.userData.userData);
+
   useEffect(() => {
-    if (isLoggedIn && userId) {
+    if (isLoggedIn && userId && !userData) {
       dispatch(fetchUserData(userId));
     }
   }, [isLoggedIn, userId]);

@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { setIsLoggedIn, setUserId } from '../../redux/actions/metadata/actions';
+import {
+  setIsLoggedIn,
+  setUserId,
+  setWipeState
+} from '../../redux/actions/metadata/actions';
 import { AppDispatch } from '../../redux/types';
 import { useDispatch } from 'react-redux';
+import { StatusCodes } from 'http-status-codes';
 
 export const useCheckAuth = () => {
   const [isCheckingAuth, setCheckAuth] = useState<boolean>(true);
@@ -19,8 +24,11 @@ export const useCheckAuth = () => {
           setCheckAuth(false);
         }
       })
-      .catch(() => {
+      .catch((e) => {
         setCheckAuth(false);
+        if (e?.response?.status === StatusCodes.UNAUTHORIZED) {
+          dispatch(setWipeState());
+        }
       });
   }, []);
 

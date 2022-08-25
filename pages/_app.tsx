@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import '../src/styles/global.scss';
 import '../src/styles/customs/slider.scss';
 import '../src/styles/customs/animations.scss';
@@ -6,15 +6,14 @@ import '../src/styles/customs/regForm/regForm.scss';
 import ThemeContext from '../src/common/context/ThemeContext';
 import { THEME_TYPE } from '../src/common/enums/theme';
 import { appWithTranslation } from 'next-i18next';
-import { Provider, useDispatch, useSelector } from 'react-redux';
-import { store, wrapper } from '../src/redux/store';
-import { RootState } from '../src/redux/types';
-import { fetchUserData } from '../src/redux/actions/user-data/actions';
-import { ThunkDispatch } from 'redux-thunk';
-import { AnyAction } from 'redux';
+import { Provider } from 'react-redux';
+import { persistor, store, wrapper } from '../src/redux/store';
 import { useFetchUser } from '../src/common/hooks/useFetchUser/useFetchUser';
+import { useCheckAuth } from '../src/common/hooks/useCheckAuth';
+import RegFormSpinner from '../src/components/mains/others/baseMain/regForm/form/spinner/RegFormSpinner';
+import { PersistGate } from 'redux-persist/integration/react';
 
-type WrapperProps = {};
+type WrapperProps = { children?: React.ReactNode };
 
 const WrapperUnderRedux: React.FC<WrapperProps> = ({ children }) => {
   const [theme, setTheme] = useState(THEME_TYPE.BASE);
@@ -22,9 +21,11 @@ const WrapperUnderRedux: React.FC<WrapperProps> = ({ children }) => {
   // revisit this hook with react-query
   useFetchUser();
 
+  const { isCheckingAuth } = useCheckAuth();
+
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      {children}
+      {isCheckingAuth ? <RegFormSpinner /> : children}
     </ThemeContext.Provider>
   );
 };
@@ -32,9 +33,11 @@ const WrapperUnderRedux: React.FC<WrapperProps> = ({ children }) => {
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      <WrapperUnderRedux>
-        <Component {...pageProps} />
-      </WrapperUnderRedux>
+      <PersistGate loading={null} persistor={persistor}>
+        <WrapperUnderRedux>
+          <Component {...pageProps} />
+        </WrapperUnderRedux>
+      </PersistGate>
     </Provider>
   );
 }

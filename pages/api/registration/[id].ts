@@ -8,12 +8,16 @@ import type { NextApiResponse } from 'next';
 class RegistrationsHandler {
   @Get()
   @WithJWTAuth()
-  async registration(@Query('id') id: number, @Res() res: NextApiResponse) {
-    console.log('ID', id);
+  async registration(
+    @Query('id') id: number | string,
+    @Res() res: NextApiResponse
+  ) {
+    console.log('KEK ID', id);
     try {
       await RegistrationService.checkConnection();
+      const condition = isNaN(Number(id)) ? { username: id } : { id };
       const instance = await Registration.findOne({
-        where: { id }
+        where: { ...condition }
       });
       res.status(StatusCodes.OK).json({
         email: instance.getDataValue('email'),

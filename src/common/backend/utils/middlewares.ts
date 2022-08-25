@@ -4,7 +4,7 @@ import { REGISTRATION_ERROR } from '../models/constants/code';
 import { AUTH_TOKEN_COOKIE_KEY } from '../../constants/commons';
 import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
-import { NextFunction } from 'next-api-decorators';
+import { NextFunction, UnauthorizedException } from 'next-api-decorators';
 
 export const setDefaultMessageByCode = (
   res: NextApiResponse,
@@ -40,4 +40,5 @@ export const jwtMiddlewareFn = async (
     }
   }
   res.status(StatusCodes.UNAUTHORIZED).json({});
+  throw new UnauthorizedException();
 };
