@@ -8,10 +8,12 @@ import {
 import { AppDispatch } from '../../redux/types';
 import { useDispatch } from 'react-redux';
 import { StatusCodes } from 'http-status-codes';
+import { useRouter } from 'next/router';
 
 export const useCheckAuth = () => {
   const [isCheckingAuth, setCheckAuth] = useState<boolean>(true);
   const dispatch: AppDispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     axios
@@ -27,7 +29,7 @@ export const useCheckAuth = () => {
       .catch((e) => {
         setCheckAuth(false);
         if (e?.response?.status === StatusCodes.UNAUTHORIZED) {
-          dispatch(setWipeState());
+          router.push('/').then(() => dispatch(setWipeState()));
         }
       });
   }, []);

@@ -1,9 +1,10 @@
 import React from 'react';
-import axios from 'axios';
-import { UserData } from '../src/common/types/user-types/UserData';
-import { StatusCodes } from 'http-status-codes';
 import Layout from '../src/components/layout/Layout';
 import Profile from '../src/components/mains/authed/profile/Profile';
+import RegistrationService from '../src/common/backend/services/RegistrationService';
+import { jwtCheck } from '../src/common/backend/utils/middlewares';
+import { AUTH_TOKEN_COOKIE_KEY } from '../src/common/constants/commons';
+import cookie from 'cookie';
 
 export default function UsernamePage(props) {
   console.log('Got props', props);
@@ -14,33 +15,20 @@ export default function UsernamePage(props) {
   );
 }
 
-export async function getServerSideProps({
+export const getServerSideProps = async ({
   params: { username },
-  req: { headers },
-  ...rest
-}) {
+  req: { headers }
+}) => {
   try {
-    const result = await axios.get<UserData>(
-      'http://localhost:3000/api/registration/' + username,
-      {
-        withCredentials: true,
-        headers: {
-          Cookie: headers.cookie || ''
-        }
-      }
-    );
-    console.log(result);
-    return { props: { ...result.data } };
+    await jwtCheck(cookie.parse(headers.cookie)[AUTH_TOKEN_COOKIE_KEY]);
+    const result = await RegistrationService.getUserDataBy(username);
+    return { props: { ...result } };
   } catch (e) {
-    if (e?.response?.status === StatusCodes.UNAUTHORIZED) {
-      return {
-        redirect: {
-          permanent: true,
-          destination: '/'
-        }
-      };
-    }
-    console.error(e);
-    return { notFound: true };
+    return {
+      redirect: {
+        permanent: true,
+        destination: '/'
+      }
+    };
   }
-}
+};

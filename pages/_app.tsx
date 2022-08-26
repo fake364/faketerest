@@ -18,7 +18,7 @@ type WrapperProps = { children?: React.ReactNode };
 const WrapperUnderRedux: React.FC<WrapperProps> = ({ children }) => {
   const [theme, setTheme] = useState(THEME_TYPE.BASE);
 
-  // revisit this hook with react-query
+  // TODO revisit this hook with react-query
   useFetchUser();
 
   const { isCheckingAuth } = useCheckAuth();

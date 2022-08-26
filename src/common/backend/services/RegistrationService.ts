@@ -40,6 +40,22 @@ class RegistrationService {
     await this._connection.authenticate();
     console.log('---DB CONNECTION OPENED---');
   }
+
+  public async getUserDataBy(usernameOrId: string | number) {
+    await this.checkConnection();
+    const condition = isNaN(Number(usernameOrId))
+      ? { username: usernameOrId }
+      : { id: usernameOrId };
+    const instance = await Registration.findOne({
+      where: { ...condition }
+    });
+    return {
+      email: instance.getDataValue('email'),
+      firstName: instance.getDataValue('firstName'),
+      lastName: instance.getDataValue('lastName'),
+      username: instance.getDataValue('username')
+    };
+  }
 }
 
 const RegService = RegistrationService.getInstance();

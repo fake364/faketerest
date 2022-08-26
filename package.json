@@ -21,7 +21,7 @@
     "formik": "^2.2.9",
     "jwt-decode": "^3.1.2",
     "lodash": "4.17.21",
-    "next": "12.1.4",
+    "next": "12.2.0",
     "next-api-decorators": "2.0.0",
     "next-i18next": "^10.1.0",
     "next-pwa": "5.4.4",

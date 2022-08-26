@@ -6,16 +6,19 @@ import UserCard from './userCard/UserCard';
 import { useDispatch } from 'react-redux';
 import { setWipeState } from '../../../../../../redux/actions/metadata/actions';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 type Props = {};
 
 const ParamsArrowDropdown: React.FC<Props> = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const onLogoutClick = async () => {
     try {
       await axios.get('/api/logout');
     } finally {
+      await router.push('/');
       dispatch(setWipeState());
     }
   };
