@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { FaFacebook } from '@react-icons/all-files/fa/FaFacebook';
 import { FcGoogle } from '@react-icons/all-files/fc/FcGoogle';
 import IconTextButton from './iconTextButton/IconTextButtom';

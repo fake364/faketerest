@@ -1,13 +1,17 @@
 import * as yup from 'yup';
 
-const NAME_REGEX =
+export const NAME_REGEX =
   /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
 
-const USERNAME_REGEX = /^([a-z0-9]+[.-]?[a-z0-9]+)+$/;
+export const USERNAME_REGEX = /^([a-z0-9]+[.-]?[a-z0-9]+)+$/;
 
-const isNameValid = (value: string) => !!value.match(NAME_REGEX);
+export const SPACES_REGEX = /^(\S+$)/g;
 
-const isUserNameValid = (value: string) => !!value.match(USERNAME_REGEX);
+const isNameValid = (value?: string) =>
+  !!(value === undefined || value === null || value.trim().match(NAME_REGEX));
+
+export const isUserNameValid = (value: string) =>
+  !!value?.trim().match(USERNAME_REGEX);
 
 export const editProfileSchema = yup.object({
   firstName: yup
@@ -18,7 +22,9 @@ export const editProfileSchema = yup.object({
       'Looks like first name does not match format(Letters and space,",",".","' +
         '.","-" allowed)',
       isNameValid
-    ),
+    )
+    .matches(SPACES_REGEX, '* This field cannot contain only blankspaces')
+    .required(),
   lastName: yup
     .string()
     .max(126)
@@ -28,6 +34,7 @@ export const editProfileSchema = yup.object({
         '.","-" allowed)',
       isNameValid
     )
+    .matches(SPACES_REGEX, '* This field cannot contain only blankspaces')
     .nullable(),
   username: yup
     .string()
@@ -38,4 +45,6 @@ export const editProfileSchema = yup.object({
       'Username should contain only letters, numbers and some symbols(-.)',
       isUserNameValid
     )
+    .matches(SPACES_REGEX, '* This field cannot contain only blankspaces')
+    .required()
 });

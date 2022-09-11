@@ -1,7 +1,7 @@
 import React from 'react';
 import PrimaryButton from '../../../../../common/components/buttons/primary-button/PrimaryButton';
 import SecondaryButton from '../../../../../common/components/buttons/secondary-button/SecondaryButton';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = {};
 

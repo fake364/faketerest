@@ -1,6 +1,6 @@
 import React from 'react';
 import BaseLink from '../link/BaseLink';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = {};
 

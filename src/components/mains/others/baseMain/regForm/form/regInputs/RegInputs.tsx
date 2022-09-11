@@ -2,7 +2,7 @@ import React from 'react';
 import InputWithError from '../../../../../../../common/components/inputs/commonInput/inputWithError/InputWithError';
 import { regFormNames } from '../formValues/schemas/GetRegFormSchema';
 import PrimaryButton from '../../../../../../../common/components/buttons/primary-button/PrimaryButton';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { useFormik } from 'formik';
 import {
   getInitRegFormValues,

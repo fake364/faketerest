@@ -1,0 +1,17 @@
+{
+  "inputNames": {
+    "firstName": "Name",
+    "lastName": "Last Name",
+    "username": "User Name"
+  },
+  "tabs": {
+    "public-profile": "Public profile"
+  },
+  "public-profile": {
+    "subtitle": "In your profile you will be able to see the specified information"
+  },
+  "submitFooter": {
+    "reset": "Reset",
+    "submit": "Save"
+  }
+}

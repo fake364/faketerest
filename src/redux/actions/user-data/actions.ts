@@ -14,8 +14,10 @@ export const fetchUserData = (userId: number) => async (dispatch: Dispatch) => {
   const res: AxiosResponse<UserData> = await axios.get(
     'api/registration/' + userId
   );
-  dispatch({
-    type: SET_USER_DATA,
-    payload: res.data
-  });
+  dispatch(setUserData(res.data));
 };
+
+export const setUserData = (payload: UserData) => ({
+  type: SET_USER_DATA,
+  payload
+});

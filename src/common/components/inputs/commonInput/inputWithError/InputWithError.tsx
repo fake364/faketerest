@@ -5,6 +5,7 @@ import clsx from 'clsx';
 type Props = CommonInputProps & {
   labelText?: string;
   variant?: 'topLabel' | 'errorLabelBottom';
+  error?: string;
 };
 
 type LabelType = { labelText?: string; className?: string };
@@ -26,6 +27,7 @@ const InputLabel: React.FC<LabelType> = ({ labelText, className }) => {
 const InputWithError: React.FC<Props> = ({
   labelText,
   className,
+  error,
   variant = 'errorLabelBottom',
   ...props
 }) => {
@@ -42,8 +44,11 @@ const InputWithError: React.FC<Props> = ({
           labelText && variant === 'errorLabelBottom' && 'border-[#e60023]'
         )}
       />
-      {variant === 'errorLabelBottom' && (
-        <InputLabel labelText={labelText} className={'text-[#e60023]'} />
+      {(variant === 'errorLabelBottom' || error) && (
+        <InputLabel
+          labelText={error || labelText}
+          className={'text-[#e60023] mt-[12px] max-w-[400px]'}
+        />
       )}
     </div>
   );

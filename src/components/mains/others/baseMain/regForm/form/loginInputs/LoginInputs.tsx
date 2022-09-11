@@ -5,7 +5,7 @@ import sha256 from 'crypto-js/sha256';
 import RegFormSpinner from '../spinner/RegFormSpinner';
 import InputWithError from '../../../../../../../common/components/inputs/commonInput/inputWithError/InputWithError';
 import PrimaryButton from '../../../../../../../common/components/buttons/primary-button/PrimaryButton';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import {
   getInitLoginFormValues,
   initializeLoginSchema
