@@ -11,10 +11,21 @@ import { RootState } from '../../../../redux/types';
 import RegFormSpinner from '../../../mains/others/baseMain/regForm/form/spinner/RegFormSpinner';
 import { UserData } from '../../../../common/types/user-types/UserData';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = {};
 
 const AuthNavigation: React.FC<Props> = () => {
+  const router = useRouter();
+  const { t } = useTranslation('common');
+
+  const onClickMain = () => {
+    if (router.pathname !== '/') {
+      router.push('/');
+    }
+  };
+
   const isUserLoading: boolean = useSelector(
     (state: RootState) => state.userData?.isLoading
   );
@@ -37,19 +48,22 @@ const AuthNavigation: React.FC<Props> = () => {
           <LogoTitle titleOff width={24} height={24} />
         </div>
       </Link>
-      <BaseButton className="bg-[#000000] text-white rounded-[24px] px-[18px] mr-[8px]">
-        Главная
+      <BaseButton
+        className="bg-[#000000] text-white rounded-[24px] px-[18px] mr-[8px]"
+        onClick={onClickMain}
+      >
+        {t('header.main-page')}
       </BaseButton>
       <DropdownRootElement
         variant={'text'}
-        text="Создать"
+        text={t('header.create')}
         dropdownClass="left-[-57px]"
       >
         <ButtonDropdownElement onClick={null}>
-          Создать пин-идею
+          {t('header.create-fake-idea')}
         </ButtonDropdownElement>
         <ButtonDropdownElement onClick={null}>
-          Создать пин
+          {t('header.create-fake')}
         </ButtonDropdownElement>
       </DropdownRootElement>
       <SearchInput className="flex-1" />

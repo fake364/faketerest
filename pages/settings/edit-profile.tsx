@@ -4,7 +4,6 @@ import SettingsContainer from '../../src/components/mains/authed/settings/Settin
 import { SETTINGS_TAB } from '../../src/components/mains/authed/settings/sideMenu/SettingsSideMenu';
 import PublicProfileSettings from '../../src/components/mains/authed/settings/publicProfileSettings/PublicProfileSettings';
 import { mapUserDataWithJWTCheck } from '../../src/common/backend/utils/withServerSideProps/utils';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function EditProfile(props) {
   return (

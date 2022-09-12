@@ -6,6 +6,7 @@ import { RootState } from '../../../../../../redux/types';
 import Link from 'next/link';
 import styles from './UserRoundButton.module.css';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = {};
 
@@ -14,10 +15,11 @@ const UserRoundButton: React.FC<Props> = () => {
     (state: RootState) => state.userData.userData
   );
   const router = useRouter();
+  const { t } = useTranslation('common');
 
   return (
     <Tooltip
-      text={'Профиль'}
+      text={t('header.tooltips.profile')}
       className={
         router.query?.username === userData?.username && 'pointer-events-none'
       }

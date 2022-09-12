@@ -4,5 +4,29 @@
     "password": "Password",
     "createPassword": "Create a password",
     "age": "Age"
+  },
+  "header": {
+    "main-page": "Main page",
+    "create": "Create",
+    "create-fake-idea": "Create fake-idea",
+    "create-fake": "Create fake",
+    "search": "Search",
+    "tooltips": {
+      "notifications": "Notifications",
+      "messages": "Messages",
+      "profile": "Profile"
+    }
+  },
+  "user-dropdown": {
+    "now": "Now",
+    "your-accounts": "Your accounts",
+    "add-account": "Add account",
+    "switch-to-business": "Switch to business account",
+    "settings": "Settings",
+    "additional": "Additional",
+    "setup-feed": "Setup feed",
+    "setup-app": "Setup Windows application",
+    "get-reference": "Get reference",
+    "logout": "Logout"
   }
 }
