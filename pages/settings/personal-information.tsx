@@ -6,11 +6,11 @@ import React from 'react';
 import PersonalInformationSettings from '../../src/components/mains/authed/settings/personalnformationSettings/PersonalInformationSettings';
 import { mapUserDataWithJWTCheck } from '../../src/common/backend/utils/withServerSideProps/utils';
 
-export default function PersonalInformation() {
+export default function PersonalInformation(props) {
   return (
     <Layout>
       <SettingsContainer selectedTab={SETTINGS_TAB.PERSONAL_DATA}>
-        <PersonalInformationSettings />
+        <PersonalInformationSettings userData={props} />
       </SettingsContainer>
     </Layout>
   );

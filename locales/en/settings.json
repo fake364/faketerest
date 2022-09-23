@@ -1,4 +1,7 @@
 {
+  "errors": {
+    "maximumImage": "Looks like your file is too big. There is just maximum 3mb images allowed"
+  },
   "inputNames": {
     "firstName": "Name",
     "lastName": "Last Name",
@@ -11,6 +14,9 @@
   },
   "public-profile": {
     "subtitle": "In your profile you will be able to see the specified information"
+  },
+  "personal-data": {
+    "subtitle": "Edit basic personal information to improve recommendations. This information is confidential and will not appear on your public profile."
   },
   "submitFooter": {
     "reset": "Reset",

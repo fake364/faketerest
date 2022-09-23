@@ -13,3 +13,5 @@ export const EMAIL_REGEX =
 export default COMMON_CONSTANTS;
 
 export const AUTH_TOKEN_COOKIE_KEY = 'auth-token';
+
+export const MB_3_IN_BYTES=3145728;

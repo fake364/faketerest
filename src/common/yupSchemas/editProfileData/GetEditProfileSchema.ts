@@ -46,5 +46,6 @@ export const editProfileSchema = yup.object({
       isUserNameValid
     )
     .matches(SPACES_REGEX, '* This field cannot contain only blankspaces')
-    .required()
+    .required(),
+  image: yup.object().nullable()
 });

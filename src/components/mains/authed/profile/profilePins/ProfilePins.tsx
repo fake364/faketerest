@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TabButton from './TabButton';
 import CreatedPins from './createdPins/CreatedPins';
 import SavedPins from './savedPins/SavedPins';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = {};
 
@@ -13,6 +14,7 @@ enum PROFILE_TAB {
 const PROFILE_TABS = [PROFILE_TAB.CREATED, PROFILE_TAB.SAVED];
 
 const ProfilePins: React.FC<Props> = () => {
+  const { t } = useTranslation('profile');
   const [currentTab, setTab] = useState<PROFILE_TAB>(PROFILE_TAB.SAVED);
 
   const onClickCreated = () => setTab(PROFILE_TAB.CREATED);
@@ -26,13 +28,13 @@ const ProfilePins: React.FC<Props> = () => {
           isActive={currentTab === PROFILE_TAB.CREATED}
           onClick={onClickCreated}
         >
-          Созданные
+          {t('created')}
         </TabButton>
         <TabButton
           isActive={currentTab === PROFILE_TAB.SAVED}
           onClick={onClickSaved}
         >
-          Сохраненные
+          {t('saved')}
         </TabButton>
       </div>
       {currentTab === PROFILE_TAB.CREATED && <CreatedPins />}

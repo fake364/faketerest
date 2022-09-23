@@ -1,0 +1,9 @@
+{
+  "share": "Share",
+  "editProfile": "Edit profile",
+  "subscriber_0": "{{count}} Subscribers",
+  "subscriber_1": "{{count}} Subscriber",
+  "subscriber_other": "{{count}} Subscribers",
+  "created": "Created",
+  "saved": "Saved"
+}

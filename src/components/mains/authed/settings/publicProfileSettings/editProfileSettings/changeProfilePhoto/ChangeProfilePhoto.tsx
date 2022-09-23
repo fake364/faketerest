@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { ChangeEventHandler } from 'react';
 import clsx from 'clsx';
 import styles from '../../../../profile/Profile.module.css';
 import SecondaryButton from '../../../../../../../common/components/buttons/secondary-button/SecondaryButton';
 import useTranslation from 'next-translate/useTranslation';
 
-type Props = { firstName: string };
+type Props = {
+  firstName: string;
+  onChangeFile: ChangeEventHandler<HTMLInputElement>;
+};
 
-const ChangeProfilePhoto: React.FC<Props> = ({ firstName }) => {
-    const {t}=useTranslation('settings');
+const ChangeProfilePhoto: React.FC<Props> = ({ firstName, onChangeFile }) => {
+  const { t } = useTranslation('settings');
+
+  const triggerFileInput = () => {
+    document.getElementById('upload_image').click();
+  };
 
   return (
     <div className="flex flex-col gap-[4px]">
@@ -23,7 +30,16 @@ const ChangeProfilePhoto: React.FC<Props> = ({ firstName }) => {
           {firstName[0].toUpperCase()}
         </div>
         <div className="flex items-center">
-          <SecondaryButton>{t('change')}</SecondaryButton>
+          <input
+            type="file"
+            hidden
+            id="upload_image"
+            onChange={onChangeFile}
+            accept="image/jpeg, image/png"
+          />
+          <SecondaryButton onClick={triggerFileInput}>
+            {t('change')}
+          </SecondaryButton>
         </div>
       </div>
     </div>

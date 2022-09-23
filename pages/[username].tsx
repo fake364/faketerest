@@ -7,7 +7,6 @@ import { AUTH_TOKEN_COOKIE_KEY } from '../src/common/constants/commons';
 import cookie from 'cookie';
 
 export default function UsernamePage(props) {
-  console.log('Got props', props);
   return (
     <Layout>
       <Profile userData={props} />

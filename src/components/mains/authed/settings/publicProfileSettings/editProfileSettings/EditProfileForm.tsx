@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEventHandler } from 'react';
 import InputWithError from '../../../../../../common/components/inputs/commonInput/inputWithError/InputWithError';
 import { UserData } from '../../../../../../common/types/user-types/UserData';
 import ChangeProfilePhoto from './changeProfilePhoto/ChangeProfilePhoto';
@@ -11,10 +11,13 @@ import { AppDispatch, RootState } from '../../../../../../redux/types';
 import { useRouter } from 'next/router';
 import { setUserData } from '../../../../../../redux/actions/user-data/actions';
 import useTranslation from 'next-translate/useTranslation';
+import { MB_3_IN_BYTES } from '../../../../../../common/constants/commons';
 
 type Props = { userData: UserData };
 
-type FormData = Pick<UserData, 'firstName' | 'lastName' | 'username'>;
+type FormData = Pick<UserData, 'firstName' | 'lastName' | 'username'> & {
+  image?: File;
+};
 
 const EditProfileForm: React.FC<Props> = ({
   userData: { firstName, username, lastName }
@@ -25,10 +28,17 @@ const EditProfileForm: React.FC<Props> = ({
   const { t } = useTranslation('settings');
 
   const onSubmit = async (values: FormData) => {
+    const formData = new FormData();
+    Object.entries(values).forEach(([key, value]) =>
+      formData.append(key, value)
+    );
     try {
       await axios.put(
         '/api/registration/personal-data/' + state.metadata.userId,
-        values
+        formData,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        }
       );
       dispatch(setUserData({ ...state.userData?.userData, ...values }));
       router.reload();
@@ -36,9 +46,7 @@ const EditProfileForm: React.FC<Props> = ({
     } catch (e) {}
   };
 
-  const formik = useFormik<
-    Pick<UserData, 'firstName' | 'lastName' | 'username'>
-  >({
+  const formik = useFormik<FormData>({
     initialValues: {
       firstName,
       lastName: lastName || '',
@@ -54,9 +62,19 @@ const EditProfileForm: React.FC<Props> = ({
     formik.resetForm();
   };
 
+  const onChangeFiles: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const file = e.target.files[0];
+    if (file.size < MB_3_IN_BYTES) {
+      formik.setFieldValue('image', file);
+      formik.setFieldError('image', undefined);
+    } else {
+      formik.setFieldError('image', t('errors.maximumImage'));
+    }
+  };
+
   return (
     <>
-      <ChangeProfilePhoto firstName={firstName} />
+      <ChangeProfilePhoto firstName={firstName} onChangeFile={onChangeFiles} />
       <form name="edit-profile-form" onSubmit={formik.handleSubmit}>
         <div className="flex gap-[12px] w-full">
           <InputWithError

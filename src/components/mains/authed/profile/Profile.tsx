@@ -4,10 +4,12 @@ import styles from './Profile.module.css';
 import ProfileButtons from './ProfileButtons/ProfileButtons';
 import ProfilePins from './profilePins/ProfilePins';
 import clsx from 'clsx';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = { userData: UserData };
 
 const Profile: React.FC<Props> = ({ userData }) => {
+  const { t } = useTranslation('profile');
   return (
     <div className="flex flex-col items-center">
       <div
@@ -26,7 +28,9 @@ const Profile: React.FC<Props> = ({ userData }) => {
       <div className="text-[14px] text-[#767676] mt-[4px]">
         @{userData.username}
       </div>
-      <div className="text-[16px] mt-[10px]">0 подписок</div>
+      <div className="text-[16px] mt-[10px]">
+        {t('subscriber', { count: 1212 })}
+      </div>
       <ProfileButtons userData={userData} />
       <ProfilePins />
     </div>

@@ -2,8 +2,9 @@ import { IsNotEmpty, IsOptional, Max, Min, ValidateIf } from 'class-validator';
 import {
   isUserNameValid,
   NAME_REGEX,
-  SPACES_REGEX,
+  SPACES_REGEX
 } from '../../../../yupSchemas/editProfileData/GetEditProfileSchema';
+import { MB_3_IN_BYTES } from '../../../../constants/commons';
 
 export default class PutUserPayload {
   @ValidateIf(
@@ -21,7 +22,15 @@ export default class PutUserPayload {
   lastName?: string;
 
   @Max(64)
-  @ValidateIf((value)=>isUserNameValid(value?.toLowerCase()) && !value.toLowerCase().match(SPACES_REGEX))
+  @ValidateIf(
+    (value) =>
+      isUserNameValid(value?.toLowerCase()) &&
+      !value.toLowerCase().match(SPACES_REGEX)
+  )
   @IsNotEmpty()
-  username:string;
+  username: string;
+
+  @IsOptional()
+  @ValidateIf((value: File) => value.size < MB_3_IN_BYTES)
+  image?: File;
 }

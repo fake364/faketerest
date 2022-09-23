@@ -1,5 +1,4 @@
 import React from 'react';
-import SecondaryButton from '../../../../../common/components/buttons/secondary-button/SecondaryButton';
 import { UserData } from '../../../../../common/types/user-types/UserData';
 import { useRouter } from 'next/router';
 import MyProfileButtons from './myProfileButtons/MyProfileButtons';
