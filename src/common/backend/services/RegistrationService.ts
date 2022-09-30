@@ -2,11 +2,14 @@ import { Sequelize } from 'sequelize-typescript';
 import * as pg from 'pg';
 import Registration from '../models/Registration.model';
 
-class RegistrationService {
+export class RegistrationService {
   public static instance: RegistrationService;
   private _connection: Sequelize;
 
-  private constructor() {
+  constructor() {
+    if (RegistrationService.instance) {
+      return RegistrationService.instance;
+    }
     const sslConfig =
       process.env.ENVIRONMENT !== 'local'
         ? { ssl: { require: true, rejectUnauthorized: false } }
@@ -23,13 +26,6 @@ class RegistrationService {
     );
     RegistrationService.instance = this;
     this.connection.addModels([Registration]);
-  }
-
-  public static getInstance() {
-    if (this.instance) {
-      return this.instance;
-    }
-    return new RegistrationService();
   }
 
   get connection(): Sequelize {
@@ -58,6 +54,6 @@ class RegistrationService {
   }
 }
 
-const RegService = RegistrationService.getInstance();
+const RegService = new RegistrationService();
 
 export default RegService;

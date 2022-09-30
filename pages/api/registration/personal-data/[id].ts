@@ -1,5 +1,3 @@
-import multer from 'multer';
-
 import {
   Body,
   createHandler,
@@ -16,12 +14,7 @@ import RegistrationService from '../../../../src/common/backend/services/Registr
 import Registration from '../../../../src/common/backend/models/Registration.model';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
-
-import formidable from 'formidable';
-import * as util from 'util';
-import { MB_3_IN_BYTES } from '../../../../src/common/constants/commons';
-import path from 'path';
-import * as fs from 'fs';
+import PublicProfileServiceInstance from '../../../../src/common/backend/services/publicProfile/PublicProfileService';
 
 class PersonalDataHandler {
   @Put()
@@ -34,39 +27,21 @@ class PersonalDataHandler {
     @Res() res: NextApiResponse
   ) {
     await RegistrationService.checkConnection();
-    // TODO PARSE multipart form data
-    const form = new formidable.IncomingForm();
 
-    form.maxFileSize = MB_3_IN_BYTES;
-    form.uploadDir = path.join('public', 'user', String(id));
-    console.log(form);
-    if (!fs.existsSync(form.uploadDir)) {
-      fs.mkdirSync(form.uploadDir, { recursive: true });
-    }
-    const result = await new Promise((resolve, reject) => {
-      form.parse(req, (err, fields, files1) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        resolve({ values: [fields, files1] });
-      });
-    });
+    const result = await PublicProfileServiceInstance.handleFormData(req, id);
 
-    console.log(result);
-
-    const [num] = await Registration.update(
-      { ...result[0] },
+    const [updatedCount] = await Registration.update(
+      { ...result },
       { where: { id } }
     );
-    if (num === 1) {
+
+    if (updatedCount === 1) {
       res.status(StatusCodes.OK).json({ msg: 'Success updating user' });
     } else {
       res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
         .json({ msg: 'Error updating user' });
     }
-    return result;
   }
 }
 

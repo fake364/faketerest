@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import styles from '../../../../profile/Profile.module.css';
 import SecondaryButton from '../../../../../../../common/components/buttons/secondary-button/SecondaryButton';
 import useTranslation from 'next-translate/useTranslation';
+import UserAvatarImage from '../../../../../../header/navigation/auth-navigation/nav-buttons/user-button/user-image/UserAvatarImage';
 
 type Props = {
   firstName: string;
@@ -20,15 +21,14 @@ const ChangeProfilePhoto: React.FC<Props> = ({ firstName, onChangeFile }) => {
     <div className="flex flex-col gap-[4px]">
       <div className="text-[14px] text-[gray]">{t('photo')}</div>
       <div className="flex gap-[18px]">
-        <div
+        <UserAvatarImage
           className={clsx(
             styles.roundedButton,
             'w-[75px] h-[75px]',
-            'text-[32px]'
+            'text-[32px] relative'
           )}
-        >
-          {firstName[0].toUpperCase()}
-        </div>
+          firstName={firstName}
+        />
         <div className="flex items-center">
           <input
             type="file"

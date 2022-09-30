@@ -3,6 +3,7 @@ import ButtonDropdownElement from '../../../../../../../common/components/button
 import { UserData } from '../../../../../../../common/types/user-types/UserData';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../redux/types';
+import UserAvatarImage from '../../user-button/user-image/UserAvatarImage';
 
 type Props = { onClick: (username: string) => void };
 
@@ -18,7 +19,7 @@ const UserCard: React.FC<Props> = ({ onClick }) => {
       <div className="flex gap-[8px]">
         <div className="w-[60px] h-[60px]">
           <div className="w-full h-full rounded-full bg-[whitesmoke] flex justify-center items-center text-[24px]">
-            {userData.firstName?.[0].toUpperCase()}
+            <UserAvatarImage firstName={userData.firstName} className={'w-full h-full'} />
           </div>
         </div>
         <div className="flex flex-col gap-[4px]">

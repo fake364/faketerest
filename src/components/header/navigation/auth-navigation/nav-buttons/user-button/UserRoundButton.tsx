@@ -7,6 +7,8 @@ import Link from 'next/link';
 import styles from './UserRoundButton.module.css';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import UserAvatarImage from './user-image/UserAvatarImage';
+import clsx from 'clsx';
 
 type Props = {};
 
@@ -24,15 +26,14 @@ const UserRoundButton: React.FC<Props> = () => {
         router.query?.username === userData?.username && 'pointer-events-none'
       }
     >
-      {userData?.email && (
-        <Link href={'/' + userData?.username}>
-          <div className={styles.roundButton}>
-            <div className="bg-[#f0f0f0] rounded-[50%] px-[10px] py-[3px]">
-              {userData?.firstName[0].toUpperCase()}
-            </div>
-          </div>
-        </Link>
-      )}
+      <Link href={'/' + userData?.username}>
+        <div className={clsx(styles.roundButton, '!w-[48px]')}>
+          <UserAvatarImage
+            firstName={userData.firstName}
+            className={clsx('w-[28px]', 'h-[28px]')}
+          />
+        </div>
+      </Link>
     </Tooltip>
   );
 };

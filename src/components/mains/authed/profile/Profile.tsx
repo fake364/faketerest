@@ -5,6 +5,7 @@ import ProfileButtons from './ProfileButtons/ProfileButtons';
 import ProfilePins from './profilePins/ProfilePins';
 import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
+import UserAvatarImage from '../../../header/navigation/auth-navigation/nav-buttons/user-button/user-image/UserAvatarImage';
 
 type Props = { userData: UserData };
 
@@ -12,16 +13,15 @@ const Profile: React.FC<Props> = ({ userData }) => {
   const { t } = useTranslation('profile');
   return (
     <div className="flex flex-col items-center">
-      <div
+      <UserAvatarImage
+        firstName={userData.firstName}
         className={clsx(
           styles.roundedButton,
           styles.roundedButtonSizes,
           'mt-[24px]',
           'cursor-pointer'
         )}
-      >
-        {userData.firstName[0].toUpperCase()}
-      </div>
+      />
       <div className="text-[36px] mt-[16px]">
         {[userData.firstName, userData.lastName].join(' ')}
       </div>
