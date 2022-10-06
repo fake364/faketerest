@@ -6,8 +6,9 @@ import ProfilePins from './profilePins/ProfilePins';
 import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
 import UserAvatarImage from '../../../header/navigation/auth-navigation/nav-buttons/user-button/user-image/UserAvatarImage';
+import UserDataEntity from '../../../../common/backend/validation-services/registration/UserDataEntity';
 
-type Props = { userData: UserData };
+type Props = { userData: UserDataEntity };
 
 const Profile: React.FC<Props> = ({ userData }) => {
   const { t } = useTranslation('profile');

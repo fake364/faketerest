@@ -13,6 +13,7 @@ import { UserData } from '../../../../common/types/user-types/UserData';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import UserDataEntity from '../../../../common/backend/validation-services/registration/UserDataEntity';
 
 type Props = {};
 
@@ -29,7 +30,7 @@ const AuthNavigation: React.FC<Props> = () => {
   const isUserLoading: boolean = useSelector(
     (state: RootState) => state.userData?.isLoading
   );
-  const userData: UserData = useSelector(
+  const userData: UserDataEntity = useSelector(
     (state: RootState) => state.userData?.userData
   );
 

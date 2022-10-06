@@ -1,22 +1,17 @@
 import * as yup from 'yup';
-
-export const NAME_REGEX =
-  /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
-
-export const USERNAME_REGEX = /^([a-z0-9]+[.-]?[a-z0-9]+)+$/;
-
-export const SPACES_REGEX = /^(\S+$)/g;
-
-const isNameValid = (value?: string) =>
-  !!(value === undefined || value === null || value.trim().match(NAME_REGEX));
-
-export const isUserNameValid = (value: string) =>
-  !!value?.trim().match(USERNAME_REGEX);
+import {
+  isNameValid,
+  isUserNameValid
+} from '../../backend/validation-services/registration/functions';
+import {
+  MAX_LENGTH_FIELDS,
+  SPACES_REGEX
+} from '../../backend/validation-services/registration/constants';
 
 export const editProfileSchema = yup.object({
   firstName: yup
     .string()
-    .max(126)
+    .max(MAX_LENGTH_FIELDS.firstName)
     .test(
       'firstname-test',
       'Looks like first name does not match format(Letters and space,",",".","' +
@@ -27,7 +22,7 @@ export const editProfileSchema = yup.object({
     .required(),
   lastName: yup
     .string()
-    .max(126)
+    .max(MAX_LENGTH_FIELDS.lastName)
     .test(
       'lastname-test',
       'Looks like last name does not match format(Letters and space and:",","' +
@@ -38,7 +33,7 @@ export const editProfileSchema = yup.object({
     .nullable(),
   username: yup
     .string()
-    .max(64)
+    .max(MAX_LENGTH_FIELDS.username)
     .transform((value) => value.toLowerCase())
     .test(
       'username-test',

@@ -52,6 +52,9 @@ export class RegistrationService {
       username: instance.getDataValue('username')
     };
   }
+
+
+
 }
 
 const RegService = new RegistrationService();

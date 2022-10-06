@@ -9,11 +9,12 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import UserAvatarImage from './user-image/UserAvatarImage';
 import clsx from 'clsx';
+import UserDataEntity from '../../../../../../common/backend/validation-services/registration/UserDataEntity';
 
 type Props = {};
 
 const UserRoundButton: React.FC<Props> = () => {
-  const userData: UserData | undefined = useSelector(
+  const userData: UserDataEntity | undefined = useSelector(
     (state: RootState) => state.userData.userData
   );
   const router = useRouter();

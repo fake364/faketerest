@@ -4,11 +4,12 @@ import { UserData } from '../../../../../../../common/types/user-types/UserData'
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../redux/types';
 import UserAvatarImage from '../../user-button/user-image/UserAvatarImage';
+import UserDataEntity from '../../../../../../../common/backend/validation-services/registration/UserDataEntity';
 
 type Props = { onClick: (username: string) => void };
 
 const UserCard: React.FC<Props> = ({ onClick }) => {
-  const userData: UserData = useSelector(
+  const userData: UserDataEntity = useSelector(
     (state: RootState) => state.userData.userData
   );
 

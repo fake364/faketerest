@@ -5,10 +5,11 @@ import {
   SET_USER_DATA,
   SET_USER_DATA_LOADING
 } from '../../actions/user-data/actions';
+import UserDataEntity from '../../../common/backend/validation-services/registration/UserDataEntity';
 
 type UserDataState = {
   isLoading: boolean;
-  userData?: UserData;
+  userData?: UserDataEntity;
 };
 
 const initialState: UserDataState = {

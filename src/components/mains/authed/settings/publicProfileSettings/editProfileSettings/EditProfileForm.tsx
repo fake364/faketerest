@@ -12,10 +12,11 @@ import { useRouter } from 'next/router';
 import { setUserData } from '../../../../../../redux/actions/user-data/actions';
 import useTranslation from 'next-translate/useTranslation';
 import { MB_3_IN_BYTES } from '../../../../../../common/constants/commons';
+import UserDataEntity from '../../../../../../common/backend/validation-services/registration/UserDataEntity';
 
-type Props = { userData: UserData };
+type Props = { userData: UserDataEntity };
 
-type FormData = Pick<UserData, 'firstName' | 'lastName' | 'username'> & {
+type FormData = Pick<UserDataEntity, 'firstName' | 'lastName' | 'username'> & {
   image?: File;
 };
 
@@ -33,8 +34,8 @@ const EditProfileForm: React.FC<Props> = ({
       formData.append(key, value)
     );
     try {
-      await axios.put(
-        '/api/registration/personal-data/' + state.metadata.userId,
+      await axios.patch(
+        '/api/registration/' + state.metadata.userId,
         formData,
         {
           headers: { 'Content-Type': 'multipart/form-data' }

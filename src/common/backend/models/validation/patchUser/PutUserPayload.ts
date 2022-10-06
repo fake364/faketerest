@@ -1,10 +1,7 @@
 import { IsNotEmpty, IsOptional, Max, Min, ValidateIf } from 'class-validator';
-import {
-  isUserNameValid,
-  NAME_REGEX,
-  SPACES_REGEX
-} from '../../../../yupSchemas/editProfileData/GetEditProfileSchema';
 import { MB_3_IN_BYTES } from '../../../../constants/commons';
+import { isUserNameValid} from '../../../validation-services/registration/functions';
+import { NAME_REGEX, SPACES_REGEX } from '../../../validation-services/registration/constants';
 
 export default class PutUserPayload {
   @ValidateIf(
