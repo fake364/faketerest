@@ -12,6 +12,7 @@ import { MAX_LENGTH_FIELDS } from './constants';
 import { EMAIL_REGEX } from '../../../constants/commons';
 import IsNameValid from './validationClasses/IsNameValid';
 import IsUsernameValid from './validationClasses/IsUsernameValid';
+import IsGenderNumber from './validationClasses/isGenderNumber';
 
 export default class UserDataEntity {
   @IsOptional()
@@ -25,7 +26,7 @@ export default class UserDataEntity {
   @IsString()
   @MaxLength(MAX_LENGTH_FIELDS.lastName)
   @Validate(IsNameValid)
-  lastName: string;
+  lastName?: string;
 
   @IsOptional()
   @IsString()
@@ -36,10 +37,23 @@ export default class UserDataEntity {
   @IsOptional()
   @IsNumber()
   @IsPositive()
-  age: number;
+  age?: number;
 
   @IsOptional()
   @IsString()
   @Matches(EMAIL_REGEX, { message: 'email does not look like email' })
   email: string;
+
+  @IsOptional()
+  @IsNumber()
+  @Validate(IsGenderNumber)
+  gender: number;
+
+  @IsOptional()
+  @IsString()
+  countryCode3?: string;
+
+  @IsOptional()
+  @IsString()
+  country?: string;
 }

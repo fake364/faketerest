@@ -2,13 +2,13 @@ import { Sequelize } from 'sequelize-typescript';
 import * as pg from 'pg';
 import Registration from '../models/Registration.model';
 
-export class RegistrationService {
-  public static instance: RegistrationService;
-  private _connection: Sequelize;
+export class ConnectionService {
+  public static instance: ConnectionService;
+  protected _connection: Sequelize;
 
   constructor() {
-    if (RegistrationService.instance) {
-      return RegistrationService.instance;
+    if (ConnectionService.instance) {
+      return ConnectionService.instance;
     }
     const sslConfig =
       process.env.ENVIRONMENT !== 'local'
@@ -24,7 +24,7 @@ export class RegistrationService {
         }
       }
     );
-    RegistrationService.instance = this;
+    ConnectionService.instance = this;
     this.connection.addModels([Registration]);
   }
 
@@ -36,27 +36,8 @@ export class RegistrationService {
     await this._connection.authenticate();
     console.log('---DB CONNECTION OPENED---');
   }
-
-  public async getUserDataBy(usernameOrId: string | number) {
-    await this.checkConnection();
-    const condition = isNaN(Number(usernameOrId))
-      ? { username: usernameOrId }
-      : { id: usernameOrId };
-    const instance = await Registration.findOne({
-      where: { ...condition }
-    });
-    return {
-      email: instance.getDataValue('email'),
-      firstName: instance.getDataValue('firstName'),
-      lastName: instance.getDataValue('lastName'),
-      username: instance.getDataValue('username')
-    };
-  }
-
-
-
 }
 
-const RegService = new RegistrationService();
+const Connection = new ConnectionService();
 
-export default RegService;
+export default Connection;

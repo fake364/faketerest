@@ -1,0 +1,7 @@
+.selectOutline:focus {
+  outline: 4px solid rgba(0, 132, 255, 0.5);
+}
+
+.selectOutline {
+  @apply w-full h-full text-[18px] py-[12px] px-[14px] rounded-[18px] border-[#CDCDCD] border-[2px] border-solid;
+}

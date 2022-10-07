@@ -8,7 +8,7 @@ import {
 } from 'next-api-decorators';
 import { AUTH_TOKEN_COOKIE_KEY } from '../../src/common/constants/commons';
 import jwt from 'jsonwebtoken';
-import RegistrationService from '../../src/common/backend/services/RegistrationService';
+import RegistrationService from '../../src/common/backend/services/Connection';
 import Registration from '../../src/common/backend/models/Registration.model';
 import { StatusCodes } from 'http-status-codes';
 import { setupToken } from '../../src/common/backend/models/utils/utils';

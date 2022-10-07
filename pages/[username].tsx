@@ -1,10 +1,10 @@
 import React from 'react';
 import Layout from '../src/components/layout/Layout';
 import Profile from '../src/components/mains/authed/profile/Profile';
-import RegistrationService from '../src/common/backend/services/RegistrationService';
 import { jwtCheck } from '../src/common/backend/utils/middlewares';
 import { AUTH_TOKEN_COOKIE_KEY } from '../src/common/constants/commons';
 import cookie from 'cookie';
+import RegistrationService from '../src/common/backend/services/registrationService/RegistrationService';
 
 export default function UsernamePage(props) {
   return (
@@ -21,6 +21,9 @@ export const getServerSideProps = async ({
   try {
     await jwtCheck(cookie.parse(headers.cookie)[AUTH_TOKEN_COOKIE_KEY]);
     const result = await RegistrationService.getUserDataBy(username);
+    if (!result) {
+      throw new Error('No user found');
+    }
     return { props: { ...result } };
   } catch (e) {
     return {

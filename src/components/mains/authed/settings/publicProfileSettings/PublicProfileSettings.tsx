@@ -2,8 +2,9 @@ import React from 'react';
 import { UserData } from '../../../../../common/types/user-types/UserData';
 import EditProfileForm from './editProfileSettings/EditProfileForm';
 import useTranslation from 'next-translate/useTranslation';
+import UserDataEntity from '../../../../../common/backend/validation-services/registration/UserDataEntity';
 
-type Props = { userData: UserData };
+type Props = { userData: UserDataEntity };
 
 const PublicProfileSettings: React.FC<Props> = ({ userData }) => {
   const { t } = useTranslation('settings');

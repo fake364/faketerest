@@ -7,7 +7,6 @@ import {
   Req,
   Res
 } from 'next-api-decorators';
-import RegistrationService from '../../../src/common/backend/services/RegistrationService';
 import { StatusCodes } from 'http-status-codes';
 import { WithJWTAuth } from '../checkToken';
 import type { NextApiRequest, NextApiResponse } from 'next';
@@ -17,6 +16,7 @@ import {
   updateUser
 } from '../../../src/common/backend/utils/registrationUtils/utils';
 import UserDataEntity from '../../../src/common/backend/validation-services/registration/UserDataEntity';
+import RegistrationService from '../../../src/common/backend/services/registrationService/RegistrationService';
 
 export const config = {
   api: {
@@ -33,9 +33,12 @@ class RegistrationsHandler {
   ) {
     try {
       const userData = await RegistrationService.getUserDataBy(id);
+      if (!userData) {
+        throw new Error('No user found');
+      }
       res.status(StatusCodes.OK).json(userData);
     } catch (e) {
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({});
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: e });
     }
   }
 

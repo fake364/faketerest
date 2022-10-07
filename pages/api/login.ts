@@ -1,5 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
-import RegService from '../../src/common/backend/services/RegistrationService';
+import Connection from '../../src/common/backend/services/Connection';
 import Registration from '../../src/common/backend/models/Registration.model';
 import {
   Body,
@@ -18,7 +18,7 @@ class LoginHandler {
     @Body(ValidationPipe) { password, email }: LoginRequestPayload,
     @Res() res: NextApiResponse
   ) {
-    await RegService.checkConnection();
+    await Connection.checkConnection();
     const instance = await Registration.findOne({
       where: { email: email.toLowerCase() }
     });

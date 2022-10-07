@@ -1,4 +1,3 @@
-import { UserData } from '../../../common/types/user-types/UserData';
 import { Dispatch } from 'redux';
 import axios, { AxiosResponse } from 'axios';
 import UserDataEntity from '../../../common/backend/validation-services/registration/UserDataEntity';

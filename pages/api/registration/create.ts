@@ -1,6 +1,6 @@
 import { setDefaultMessageByCode } from '../../../src/common/backend/utils/middlewares';
 import { StatusCodes } from 'http-status-codes';
-import RegService from '../../../src/common/backend/services/RegistrationService';
+import Connection from '../../../src/common/backend/services/Connection';
 import Registration from '../../../src/common/backend/models/Registration.model';
 import { REGISTRATION_ERROR } from '../../../src/common/backend/models/constants/code';
 import {
@@ -22,7 +22,7 @@ class CreateRegistrationHandler {
   ) {
     let regInstance;
     try {
-      await RegService.checkConnection();
+      await Connection.checkConnection();
       const firstName = body.email.split('@')[0].toLowerCase();
       const formattedFirstName =
         firstName[0].toUpperCase() + firstName.slice(1, firstName.length);
