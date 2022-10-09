@@ -9,6 +9,8 @@ export type RegInstanceType = {
   firstName?: string;
   lastName?: string;
   password?: string;
+  fkCountryCode?: number;
+  gender?: number;
 };
 
 @Table({ tableName: 'registrations', timestamps: false })
@@ -53,4 +55,10 @@ export default class Registration extends Model<RegInstanceType> {
 
   @Column({ field: 'PASS_HASH', allowNull: false, type: DataType.STRING })
   password: string;
+
+  @Column({ field: 'GENDER', allowNull: true, type: DataType.NUMBER })
+  gender: number;
+
+  @Column({ field: 'FK_COUNTRY_CODE', allowNull: true, type: DataType.BIGINT })
+  fkCountryCode?: number;
 }

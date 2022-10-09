@@ -1,4 +1,4 @@
-import Connection, { ConnectionService } from '../Connection';
+import { ConnectionService } from '../Connection';
 import { Nullable } from '../../../types/common';
 import UserDataEntity from '../../validation-services/registration/UserDataEntity';
 import userQueryWithCountry from '../../sql/userQueryWithCountry';
@@ -8,9 +8,13 @@ export class RegService extends ConnectionService {
 
   constructor() {
     super();
-    if (RegService.instance) {
-      return RegService.instance;
+  }
+
+  static getInstance() {
+    if (!this.instance) {
+      this.instance = new RegService();
     }
+    return this.instance;
   }
 
   public async getUserDataBy(
@@ -19,7 +23,7 @@ export class RegService extends ConnectionService {
     const userId = Number(usernameOrId);
     await this.checkConnection();
 
-    const result = await Connection.connection.query(
+    const result = await this.connection.query(
       userQueryWithCountry(isNaN(userId) ? usernameOrId : userId)
     );
     if (result[0].length !== 1) {
@@ -41,6 +45,6 @@ export class RegService extends ConnectionService {
   }
 }
 
-const RegistrationService = new RegService();
+const RegistrationService = RegService.getInstance();
 
 export default RegistrationService;

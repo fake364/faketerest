@@ -21,7 +21,6 @@ export const useCheckAuth = () => {
       .then((res) => {
         if (res.status === 200) {
           dispatch(setIsLoggedIn(true));
-          console.log(res.data);
           dispatch(setUserId(res.data.userId));
           setCheckAuth(false);
         }

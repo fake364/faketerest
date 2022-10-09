@@ -1,11 +1,9 @@
 import React, { ChangeEventHandler } from 'react';
 import InputWithError from '../../../../../../common/components/inputs/commonInput/inputWithError/InputWithError';
-import { UserData } from '../../../../../../common/types/user-types/UserData';
 import ChangeProfilePhoto from './changeProfilePhoto/ChangeProfilePhoto';
 import { useFormik } from 'formik';
 import { editProfileSchema } from '../../../../../../common/yupSchemas/editProfileData/GetEditProfileSchema';
 import SubmitFooter from '../../submitFooter/SubmitFooter';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../../../../redux/types';
 import { useRouter } from 'next/router';
@@ -13,10 +11,15 @@ import { setUserData } from '../../../../../../redux/actions/user-data/actions';
 import useTranslation from 'next-translate/useTranslation';
 import { MB_3_IN_BYTES } from '../../../../../../common/constants/commons';
 import UserDataEntity from '../../../../../../common/backend/validation-services/registration/UserDataEntity';
+import { submitProfileSettings } from './utils/utils';
+import { handleFieldError } from '../../../../../../common/backend/utils/registrationUtils/errorHandlers';
 
 type Props = { userData: UserDataEntity };
 
-type FormData = Pick<UserDataEntity, 'firstName' | 'lastName' | 'username'> & {
+export type PublicSettingsFormData = Pick<
+  UserDataEntity,
+  'firstName' | 'lastName' | 'username'
+> & {
   image?: File;
 };
 
@@ -28,26 +31,20 @@ const EditProfileForm: React.FC<Props> = ({
   const dispatch: AppDispatch = useDispatch();
   const { t } = useTranslation('settings');
 
-  const onSubmit = async (values: FormData) => {
-    const formData = new FormData();
-    Object.entries(values).forEach(([key, value]) =>
-      formData.append(key, value)
-    );
+  const onSubmit = async (values: PublicSettingsFormData) => {
     try {
-      await axios.patch(
-        '/api/registration/' + state.metadata.userId,
-        formData,
-        {
-          headers: { 'Content-Type': 'multipart/form-data' }
-        }
-      );
+      await submitProfileSettings(state.metadata.userId, values);
       dispatch(setUserData({ ...state.userData?.userData, ...values }));
       router.reload();
-      // eslint-disable-next-line no-empty
-    } catch (e) {}
+    } catch (e) {
+      handleFieldError(e, (fieldName) => {
+        fieldName === 'username' &&
+          formik.setFieldError(fieldName, 'This username already exists');
+      });
+    }
   };
 
-  const formik = useFormik<FormData>({
+  const formik = useFormik<PublicSettingsFormData>({
     initialValues: {
       firstName,
       lastName: lastName || '',

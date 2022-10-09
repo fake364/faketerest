@@ -10,7 +10,7 @@ export const mapUserDataWithJWTCheck = async (cookies: string) => {
     if (!result) {
       throw new Error('No user found');
     }
-    return { props: { ...result } };
+    return { props: { userData: { ...result } } };
   } catch (e) {
     return {
       redirect: {

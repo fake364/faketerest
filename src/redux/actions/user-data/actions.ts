@@ -11,10 +11,14 @@ export const setUserLoading = (isLoading: boolean) => ({
 });
 
 export const fetchUserData = (userId: number) => async (dispatch: Dispatch) => {
-  const res: AxiosResponse<UserDataEntity> = await axios.get(
-    'api/registration/' + userId
-  );
-  dispatch(setUserData(res.data));
+  try {
+    const res: AxiosResponse<UserDataEntity> = await axios.get(
+      'api/registration/' + userId
+    );
+    dispatch(setUserData(res.data));
+  } catch (e) {
+    console.error('User setup failed', e);
+  }
 };
 
 export const setUserData = (payload: UserDataEntity) => ({

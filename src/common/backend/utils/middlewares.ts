@@ -50,6 +50,8 @@ export const jwtMiddlewareFn = async (
       );
     }
   }
-  res.status(StatusCodes.UNAUTHORIZED).json({});
+  res
+    .status(StatusCodes.UNAUTHORIZED)
+    .json({ message: 'Error in jwt middleware' });
   throw new UnauthorizedException();
 };

@@ -2,12 +2,21 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './Dropdown.module.css';
 
-type Props = { className?: string };
+export type DropdownProps = { className?: string } & React.DetailedHTMLProps<
+  React.SelectHTMLAttributes<HTMLSelectElement>,
+  HTMLSelectElement
+>;
 
-const Dropdown: React.FC<Props> = ({ className, children }) => {
+const Dropdown: React.FC<DropdownProps> = ({
+  className,
+  children,
+  ...rest
+}) => {
   return (
     <div className={clsx('border-common_radius relative', className)}>
-      <select className={clsx(styles.selectOutline)}>{children}</select>
+      <select className={clsx(styles.selectOutline)} {...rest}>
+        {children}
+      </select>
     </div>
   );
 };

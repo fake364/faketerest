@@ -6,11 +6,10 @@ import AccountSettings from '../../src/components/mains/authed/settings/accountS
 import { mapUserDataWithJWTCheck } from '../../src/common/backend/utils/withServerSideProps/utils';
 
 export default function AccountSettingsPage(props) {
-  console.log(props);
   return (
     <Layout>
       <SettingsContainer selectedTab={SETTINGS_TAB.ACCOUNT_SETTINGS}>
-        <AccountSettings />
+        <AccountSettings userData={props.userData} />
       </SettingsContainer>
     </Layout>
   );

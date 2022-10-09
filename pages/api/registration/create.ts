@@ -13,6 +13,9 @@ import {
 import RegistrationCreatePayload from '../../../src/common/backend/models/validation/registration/RegistrationCreatePayload';
 import { setupToken } from '../../../src/common/backend/models/utils/utils';
 import type { NextApiResponse } from 'next';
+import CryptoJS from 'crypto-js';
+import { createPasswordHmac } from '../../../src/common/backend/utils/password/utils';
+import { hashStringWithLength } from '../../../src/common/backend/utils/registrationUtils/utils';
 
 class CreateRegistrationHandler {
   @Post()
@@ -29,13 +32,15 @@ class CreateRegistrationHandler {
       regInstance = new Registration({
         ...body,
         firstName: formattedFirstName,
-        username: firstName
+        username: hashStringWithLength(String(Date.now()), 16),
+        password: createPasswordHmac(body.password)
       });
       await regInstance.save();
       const id = regInstance.getDataValue('id');
       setupToken(res, id);
       res.status(StatusCodes.OK).json({ status: 'Created', userId: id });
     } catch (e) {
+      console.log(e);
       const constraintViolated = e?.original?.constraint;
       if (constraintViolated) {
         const errorMessage = `${constraintViolated} field should be unique. Given ${regInstance.getDataValue(

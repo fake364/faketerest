@@ -6,10 +6,14 @@ export class ConnectionService {
   public static instance: ConnectionService;
   protected _connection: Sequelize;
 
-  constructor() {
-    if (ConnectionService.instance) {
-      return ConnectionService.instance;
+  static getInstance() {
+    if (!this.instance) {
+      this.instance = new ConnectionService();
     }
+    return this.instance;
+  }
+
+  constructor() {
     const sslConfig =
       process.env.ENVIRONMENT !== 'local'
         ? { ssl: { require: true, rejectUnauthorized: false } }
@@ -24,7 +28,6 @@ export class ConnectionService {
         }
       }
     );
-    ConnectionService.instance = this;
     this.connection.addModels([Registration]);
   }
 
@@ -38,6 +41,6 @@ export class ConnectionService {
   }
 }
 
-const Connection = new ConnectionService();
+const Connection = ConnectionService.getInstance();
 
 export default Connection;

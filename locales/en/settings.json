@@ -15,8 +15,17 @@
   "public-profile": {
     "subtitle": "In your profile you will be able to see the specified information"
   },
+  "manage-account": {
+    "subtitle": "Makes changes to the email address, password, and account type. This information is confidential and will not be in a future public profile."
+  },
   "personal-data": {
-    "subtitle": "Edit basic personal information to improve recommendations. This information is confidential and will not appear on your public profile."
+    "subtitle": "Edit basic personal information to improve recommendations. This information is confidential and will not appear on your public profile.",
+    "country": "Country",
+    "radio": {
+      "male": "Male",
+      "female": "Female",
+      "notSpecified": "Not specified"
+    }
   },
   "submitFooter": {
     "reset": "Reset",

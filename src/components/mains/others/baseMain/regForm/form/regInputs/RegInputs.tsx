@@ -9,7 +9,6 @@ import {
   initializeRegSchema
 } from '../formValues/schemas/initializeRegSchema';
 import axios from 'axios';
-import sha256 from 'crypto-js/sha256';
 import { REGISTRATION_ERROR } from '../../../../../../../common/backend/models/constants/code';
 import RegFormSpinner from '../spinner/RegFormSpinner';
 import { StatusCodes } from 'http-status-codes';
@@ -37,7 +36,7 @@ export const RegInputs: React.FC = () => {
           responseType: 'json',
           method: 'POST',
           data: {
-            [regFormNames.password]: sha256(values.password).toString(),
+            [regFormNames.password]: values.password,
             [regFormNames.age]: values.age,
             [regFormNames.email]: values.email
           }

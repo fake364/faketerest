@@ -10,12 +10,12 @@ import {
 import { StatusCodes } from 'http-status-codes';
 import { WithJWTAuth } from '../checkToken';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { validate } from 'class-validator';
 import {
   handlePatchUserByType,
+  handleRegistrationError,
+  prepareEntityAndValidate,
   updateUser
 } from '../../../src/common/backend/utils/registrationUtils/utils';
-import UserDataEntity from '../../../src/common/backend/validation-services/registration/UserDataEntity';
 import RegistrationService from '../../../src/common/backend/services/registrationService/RegistrationService';
 
 export const config = {
@@ -55,27 +55,12 @@ class RegistrationsHandler {
       return;
     }
 
-    const dto = new UserDataEntity();
-    const formValues = Object.entries(result);
-    if (formValues.length > 0) {
-      formValues.forEach(([key, value]) => (dto[key] = value));
-      const errors = await validate(dto, {
-        whitelist: true,
-        forbidNonWhitelisted: true
-      });
-
-      if (errors.length === 0) {
-        await updateUser(dto, id, res);
-        return;
-      } else {
-        res
-          .status(StatusCodes.BAD_REQUEST)
-          .json({ errors: errors.map((err) => err.constraints) });
-      }
-    } else {
-      res
-        .status(StatusCodes.NO_CONTENT)
-        .json({ message: 'No fields were updated' });
+    try {
+      const dto = await prepareEntityAndValidate(result);
+      await updateUser(dto, id, res);
+      return;
+    } catch (errors) {
+      handleRegistrationError(errors, res);
     }
   }
 }

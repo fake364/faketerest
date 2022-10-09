@@ -1,0 +1,3 @@
+export enum SQL_ERRORS {
+  USER_ALREADY_EXISTS = '23505'
+}

@@ -13,3 +13,10 @@ export const isUserNameValid = (value: string) => {
   }
   return !!value?.trim().match(USERNAME_REGEX);
 };
+
+export const isPasswordComplexOrEmpty = (value: string) => {
+  if (!value) {
+    return true;
+  }
+  return value.length > 4;
+};

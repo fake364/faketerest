@@ -27,13 +27,18 @@ const SubmitFooter: React.FC<Props> = ({
           'py-[16px] px-[24px] font-[400]'
         )}
         onClick={onReset}
+        type={'reset'}
       >
         {t('submitFooter.reset')}
       </SecondaryButton>
       {isFormValid && wasFormChanged && !isSubmitting ? (
-        <PrimaryButton className={'!px-[18px]'} type="submit">{t('submitFooter.submit')}</PrimaryButton>
+        <PrimaryButton className={'!px-[18px]'} type="submit">
+          {t('submitFooter.submit')}
+        </PrimaryButton>
       ) : (
-        <SecondaryButton className={'!text-[gray] pointer-events-none !px-[18px]'}>
+        <SecondaryButton
+          className={'!text-[gray] pointer-events-none !px-[18px]'}
+        >
           {t('submitFooter.submit')}
         </SecondaryButton>
       )}

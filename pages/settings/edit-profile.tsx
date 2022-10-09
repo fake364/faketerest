@@ -9,7 +9,7 @@ export default function EditProfile(props) {
   return (
     <Layout>
       <SettingsContainer selectedTab={SETTINGS_TAB.PUBLIC_PROFILE}>
-        <PublicProfileSettings userData={props} />
+        <PublicProfileSettings userData={props.userData} />
       </SettingsContainer>
     </Layout>
   );

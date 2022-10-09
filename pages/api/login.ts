@@ -11,6 +11,7 @@ import {
 import type LoginRequestPayload from '../../src/common/backend/models/validation/login/LoginPayload';
 import { setupToken } from '../../src/common/backend/models/utils/utils';
 import type { NextApiResponse } from 'next';
+import { createPasswordHmac } from '../../src/common/backend/utils/password/utils';
 
 class LoginHandler {
   @Post()
@@ -22,7 +23,8 @@ class LoginHandler {
     const instance = await Registration.findOne({
       where: { email: email.toLowerCase() }
     });
-    if (instance && instance.getDataValue('password') === password) {
+    const sentPass = createPasswordHmac(instance.getDataValue('password'));
+    if (instance && sentPass === password) {
       setupToken(res, instance.getDataValue('id'));
       return {
         message: 'LOGGED_IN',
