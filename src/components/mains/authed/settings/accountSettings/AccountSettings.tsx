@@ -11,7 +11,8 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../../../redux/types';
 import { setUserData } from '../../../../../redux/actions/user-data/actions';
-import { handleFieldError } from '../publicProfileSettings/editProfileSettings/utils/utils';
+import { getErrorsKeysArray } from '../publicProfileSettings/editProfileSettings/utils/utils';
+import { FORM_ERRORS_KEYS } from '../../../../../common/enums/common';
 
 type Props = { userData: UserDataEntity };
 
@@ -24,6 +25,8 @@ type FormType = {
 
 const AccountSettings: React.FC<Props> = ({ userData: { email } }) => {
   const { t } = useTranslation('settings');
+  const { t: errors } = useTranslation('error-messages');
+
   const state = useSelector((state: RootState) => state);
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
@@ -34,28 +37,11 @@ const AccountSettings: React.FC<Props> = ({ userData: { email } }) => {
     await formik.setFieldValue('confirmPassword', '');
   };
 
-  const checkCurrentPassword = async (currentPassword: string) => {
-    try {
-      await axios.post('/login', {
-        email: state.userData.userData.email,
-        password: currentPassword
-      });
-    } catch (e) {
-      formik.setFieldError(
-        'currentPassword',
-        'You have entered incorrect password'
-      );
-      throw new Error('Current password is not valid');
-    }
-  };
-
-  const checkOrResetPasswords = async (
+  const resetPasswordIfNeeded = async (
     password: string,
     currentPassword: string
   ) => {
-    if (password && currentPassword) {
-      await checkCurrentPassword(currentPassword);
-    } else {
+    if (!password || !currentPassword) {
       await resetPasswordFields();
     }
   };
@@ -73,7 +59,7 @@ const AccountSettings: React.FC<Props> = ({ userData: { email } }) => {
       submitData.currentPassword = values.currentPassword;
     }
     try {
-      await checkOrResetPasswords(values.password, values.currentPassword);
+      await resetPasswordIfNeeded(values.password, values.currentPassword);
       await axios.patch(
         '/api/registration/' + state.metadata.userId,
         submitData,
@@ -88,12 +74,19 @@ const AccountSettings: React.FC<Props> = ({ userData: { email } }) => {
     } catch (e) {
       // TODO refactor this shit
       console.log(e);
-      e?.response?.data?.errors?.find((obj) => obj['currentPasswordError']) &&
-        formik.setFieldError('currentPassword', 'Incorrect current password');
-
-      handleFieldError(e, (fieldName) => {
-        fieldName === 'email' &&
-          formik.setFieldError(fieldName, 'This email is already registered');
+      const errorsKeys = getErrorsKeysArray(e);
+      errorsKeys.forEach((key) => {
+        switch (key) {
+          case FORM_ERRORS_KEYS.INVALID_CURRENT_PASSWORD:
+            formik.setFieldError(
+              'currentPassword',
+              errors('currentPasswordIncorrect')
+            );
+            break;
+          case FORM_ERRORS_KEYS.EXISTING_FIELD:
+            formik.setFieldError('email', errors('registeredEmail'));
+            break;
+        }
       });
     }
   };
@@ -122,7 +115,7 @@ const AccountSettings: React.FC<Props> = ({ userData: { email } }) => {
         <InputWithError
           name={'email'}
           variant={'topLabel'}
-          labelText={'Email'}
+          labelText={t('inputNames.email')}
           onChange={formik.handleChange}
           value={formik.values.email}
           error={formik.errors.email}
@@ -130,7 +123,7 @@ const AccountSettings: React.FC<Props> = ({ userData: { email } }) => {
         <InputWithError
           name={'currentPassword'}
           variant={'topLabel'}
-          labelText={'Current password'}
+          labelText={t('inputNames.currentPassword')}
           onChange={formik.handleChange}
           value={formik.values.currentPassword}
           error={formik.errors.currentPassword}
@@ -139,7 +132,7 @@ const AccountSettings: React.FC<Props> = ({ userData: { email } }) => {
         <InputWithError
           name={'password'}
           variant={'topLabel'}
-          labelText={'Password'}
+          labelText={t('inputNames.password')}
           onChange={formik.handleChange}
           value={formik.values.password}
           error={formik.errors.password}
@@ -148,7 +141,7 @@ const AccountSettings: React.FC<Props> = ({ userData: { email } }) => {
         <InputWithError
           name={'confirmPassword'}
           variant={'topLabel'}
-          labelText={'Confirm password'}
+          labelText={t('inputNames.confirmPassword')}
           onChange={formik.handleChange}
           value={formik.values.confirmPassword}
           error={formik.errors.confirmPassword}

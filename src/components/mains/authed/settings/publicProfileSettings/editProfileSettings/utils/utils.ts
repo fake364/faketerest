@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { PublicSettingsFormData } from '../EditProfileForm';
 import { SQL_ERRORS } from '../../../../../../../common/backend/sql/constants/constants';
+import { FORM_ERRORS_KEYS } from '../../../../../../../common/enums/common';
 
 export const submitProfileSettings = async (
   id,
@@ -20,9 +21,15 @@ export const submitProfileSettings = async (
   });
 };
 
-export const handleFieldError = (e, onExists: (fieldName: string) => void) => {
-  const err = e?.response?.data?.errors?.[0];
-  if (err?.field) {
-    err?.status === SQL_ERRORS.USER_ALREADY_EXISTS && onExists(err.field);
-  }
+export const getErrorsKeysArray = (e) => {
+  const errorsResult: string[] = [];
+  const backendErrors = e?.response?.data?.errors;
+  backendErrors?.forEach((errObj) => {
+    if (errObj?.field && errObj?.status === SQL_ERRORS.USER_ALREADY_EXISTS) {
+      errorsResult.push(FORM_ERRORS_KEYS.EXISTING_FIELD);
+    } else {
+      errorsResult.push(...Object.keys(errObj));
+    }
+  });
+  return errorsResult;
 };

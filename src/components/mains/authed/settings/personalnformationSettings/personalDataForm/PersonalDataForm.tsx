@@ -66,7 +66,7 @@ const PersonalDataForm: React.FC<Props> = ({ userData, countries }) => {
             { value: GENDER_ENUM.NOT_SPECIFIED, label: 'notSpecified' }
           ].map(({ value, label }) => ({
             value,
-            label: t(`personal-data.radio.${label}`)
+            label: t(`inputNames.${label}`)
           }))}
           selected={gender}
           onChange={(checkedValue) =>
@@ -83,7 +83,7 @@ const PersonalDataForm: React.FC<Props> = ({ userData, countries }) => {
               formik.setFieldValue(e.target.name, e.target.value)
             }
           >
-            <option value={''}>Not specified</option>
+            <option value={''}>{t('inputNames.notSpecified')}</option>
             {countries.map(({ label, code }) => (
               <option key={code} value={code}>
                 {label}

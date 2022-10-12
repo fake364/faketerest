@@ -9,5 +9,7 @@
   "ageNotNumber": "Age must be a number",
   "existentEmail": "This email already exists",
   "somethingWentWrong": "Something went wrong, looks like server issue",
-  "invalidAuth": "Login or password is invalid"
+  "invalidAuth": "Login or password is invalid",
+  "currentPasswordIncorrect": "You have entered incorrect password",
+  "registeredEmail": "This email is already registered"
 }

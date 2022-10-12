@@ -31,8 +31,5 @@ export const sessionMiddlewareFn = async (
   } catch (e) {
     console.error(e);
   }
-  res
-    .status(StatusCodes.UNAUTHORIZED)
-    .json({ message: 'Error in jwt middleware' });
   throw new UnauthorizedException();
 };

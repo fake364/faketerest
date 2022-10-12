@@ -20,9 +20,9 @@ export const getServerSideProps = async ({
 }) => {
   try {
     if (
-      await UserSessionsService.isSessionActive(
+      !(await UserSessionsService.isSessionActive(
         cookie.parse(headers.cookie)[AUTH_SESSION_KEY]
-      )
+      ))
     ) {
       throw new Error('Unauthorized');
     }
@@ -32,6 +32,7 @@ export const getServerSideProps = async ({
     }
     return { props: { ...result } };
   } catch (e) {
+    console.log('kek', e);
     return {
       redirect: {
         permanent: true,

@@ -11,7 +11,8 @@ import { setUserData } from '../../../../../../redux/actions/user-data/actions';
 import useTranslation from 'next-translate/useTranslation';
 import { MB_3_IN_BYTES } from '../../../../../../common/constants/commons';
 import UserDataEntity from '../../../../../../common/backend/validation-services/registration/UserDataEntity';
-import { handleFieldError, submitProfileSettings } from './utils/utils';
+import { getErrorsKeysArray, submitProfileSettings } from './utils/utils';
+import { FORM_ERRORS_KEYS } from '../../../../../../common/enums/common';
 
 type Props = { userData: UserDataEntity };
 
@@ -36,9 +37,16 @@ const EditProfileForm: React.FC<Props> = ({
       dispatch(setUserData({ ...state.userData?.userData, ...values }));
       router.reload();
     } catch (e) {
-      handleFieldError(e, (fieldName) => {
-        fieldName === 'username' &&
-          formik.setFieldError(fieldName, 'This username already exists');
+      const errorsKeys = getErrorsKeysArray(e);
+      errorsKeys.forEach((key) => {
+        switch (key) {
+          case FORM_ERRORS_KEYS.EXISTING_FIELD:
+            formik.setFieldError(
+              'username',
+              'This username is already registered'
+            );
+            break;
+        }
       });
     }
   };

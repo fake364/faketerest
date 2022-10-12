@@ -27,7 +27,7 @@ class LoginHandler {
       const dbPass = createPasswordHmac(password);
       console.log(dbPass, instance.getDataValue('password'));
       if (dbPass === instance.getDataValue('password')) {
-        createAndAssignSession(res, instance.getDataValue('id'));
+        await createAndAssignSession(res, instance.getDataValue('id'));
         return {
           message: 'LOGGED_IN',
           userId: Number(instance.getDataValue('id'))

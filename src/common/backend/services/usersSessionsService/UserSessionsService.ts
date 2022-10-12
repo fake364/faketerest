@@ -3,6 +3,7 @@ import createSessionQuery from '../countriesService/queries/createSession';
 import countValidSessionsById, {
   getValidSessionByUUid
 } from '../countriesService/queries/countValidSessionsById';
+import deleteSessionById from '../countriesService/queries/deleteSessionById';
 
 export class UserSessionsServiceClass extends ConnectionService {
   public static instance: UserSessionsServiceClass;
@@ -17,6 +18,10 @@ export class UserSessionsServiceClass extends ConnectionService {
   constructor() {
     super();
   }
+
+  deleteSession = async (sessionId: string) => {
+    await this.connection.query(deleteSessionById(sessionId));
+  };
 
   createSession = async (userId: number) => {
     const res = await this.connection.query(createSessionQuery(userId));

@@ -63,9 +63,11 @@ const AuthNavigation: React.FC<Props> = () => {
         <ButtonDropdownElement onClick={null}>
           {t('header.create-fake-idea')}
         </ButtonDropdownElement>
-        <ButtonDropdownElement onClick={null}>
-          {t('header.create-fake')}
-        </ButtonDropdownElement>
+        <Link href={'/fake-builder'}>
+          <ButtonDropdownElement>
+            {t('header.create-fake')}
+          </ButtonDropdownElement>
+        </Link>
       </DropdownRootElement>
       <SearchInput className="flex-1" />
       <AuthNavButtons />

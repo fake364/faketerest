@@ -5,7 +5,15 @@
   "inputNames": {
     "firstName": "Name",
     "lastName": "Last Name",
-    "username": "User Name"
+    "username": "User Name",
+    "email": "Email",
+    "currentPassword": "Current password",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "male": "Male",
+    "female": "Female",
+    "notSpecified": "Not specified",
+    "country": "Country"
   },
   "tabs": {
     "public-profile": "Public profile",

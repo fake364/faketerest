@@ -1,6 +1,6 @@
 import React from 'react';
 
-type Props = { onClick: () => void };
+type Props = { onClick?: () => void };
 
 const ButtonDropdownElement: React.FC<Props> = ({ onClick, children }) => {
   return (

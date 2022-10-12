@@ -4,7 +4,8 @@ import {
   createMiddlewareDecorator,
   Get,
   Req,
-  Res
+  Res,
+  UnauthorizedException
 } from 'next-api-decorators';
 import { AUTH_SESSION_KEY } from '../../src/common/constants/commons';
 import RegistrationService from '../../src/common/backend/services/Connection';
@@ -18,12 +19,13 @@ class CheckSessionHandler {
   @Get()
   async checkSession(@Req() req: NextApiRequest, @Res() res: NextApiResponse) {
     await RegistrationService.checkConnection();
-
+    const sessionId = req.cookies[AUTH_SESSION_KEY];
+    if (!sessionId) {
+      throw new UnauthorizedException();
+    }
     try {
       return {
-        userId: await UserSessionsService.getUserIdBySessionUUid(
-          req.cookies[AUTH_SESSION_KEY]
-        )
+        userId: await UserSessionsService.getUserIdBySessionUUid(sessionId)
       };
     } catch (e) {
       console.error(
