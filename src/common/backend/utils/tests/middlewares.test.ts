@@ -1,6 +1,6 @@
 import { StatusCodes } from 'http-status-codes';
-import { jwtMiddlewareFn, setDefaultMessageByCode } from '../middlewares';
-import { AUTH_TOKEN_COOKIE_KEY } from '../../../constants/commons';
+import { sessionMiddlewareFn, setDefaultMessageByCode } from '../middlewares';
+import { AUTH_SESSION_KEY } from '../../../constants/commons';
 import jwt from 'jsonwebtoken';
 
 describe('middlewares', () => {
@@ -27,13 +27,13 @@ describe('middlewares', () => {
       process.env.SECRET = 'secret';
       const req = {
         cookies: {
-          [AUTH_TOKEN_COOKIE_KEY]: jwt.sign({ userId: 1 }, 'secret', {
+          [AUTH_SESSION_KEY]: jwt.sign({ userId: 1 }, 'secret', {
             algorithm: 'HS256'
           })
         }
       };
       const spy = jest.fn();
-      await jwtMiddlewareFn(req, {}, spy);
+      await sessionMiddlewareFn(req, {}, spy);
       expect(spy).toBeCalled();
     });
 
@@ -44,8 +44,8 @@ describe('middlewares', () => {
       const jsonSpy = jest.fn();
       const statusSpy = jest.fn(() => ({ json: jsonSpy }));
       const res = { setHeader: jest.fn(), status: statusSpy };
-      await jwtMiddlewareFn(
-        { cookies: { [AUTH_TOKEN_COOKIE_KEY]: '1214' } },
+      await sessionMiddlewareFn(
+        { cookies: { [AUTH_SESSION_KEY]: '1214' } },
         res,
         jest.fn()
       );

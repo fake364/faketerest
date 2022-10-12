@@ -40,7 +40,7 @@ const LoginInputs: React.FC<Props> = () => {
           responseType: 'json',
           method: 'POST',
           data: {
-            [loginFormNames.password]: sha256(values.password).toString(),
+            [loginFormNames.password]: values.password,
             [loginFormNames.email]: values.email
           }
         });

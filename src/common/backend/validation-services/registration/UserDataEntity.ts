@@ -7,6 +7,7 @@ import {
   IsString,
   Matches,
   MaxLength,
+  MinLength,
   Validate
 } from 'class-validator';
 import { MAX_LENGTH_FIELDS } from './constants';
@@ -14,6 +15,7 @@ import { EMAIL_REGEX } from '../../../constants/commons';
 import IsNameValid from './validationClasses/IsNameValid';
 import IsUsernameValid from './validationClasses/IsUsernameValid';
 import IsGenderNumber from './validationClasses/isGenderNumber';
+import IsChangePasswordPair from './validationClasses/isChangePasswordPair';
 
 export default class UserDataEntity {
   @IsOptional()
@@ -57,4 +59,16 @@ export default class UserDataEntity {
   @IsOptional()
   @IsString()
   country?: string;
+
+  @IsOptional()
+  @IsString()
+  @MinLength(4)
+  @Validate(IsChangePasswordPair)
+  password?: string;
+
+  @IsOptional()
+  @IsString()
+  @MinLength(4)
+  @Validate(IsChangePasswordPair)
+  currentPassword?: string;
 }

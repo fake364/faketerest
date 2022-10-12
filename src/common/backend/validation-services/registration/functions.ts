@@ -18,5 +18,5 @@ export const isPasswordComplexOrEmpty = (value: string) => {
   if (!value) {
     return true;
   }
-  return value.length > 4;
+  return value.length >= 4;
 };

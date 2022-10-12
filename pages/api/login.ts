@@ -9,7 +9,7 @@ import {
   ValidationPipe
 } from 'next-api-decorators';
 import type LoginRequestPayload from '../../src/common/backend/models/validation/login/LoginPayload';
-import { setupToken } from '../../src/common/backend/models/utils/utils';
+import { createAndAssignSession } from '../../src/common/backend/models/utils/utils';
 import type { NextApiResponse } from 'next';
 import { createPasswordHmac } from '../../src/common/backend/utils/password/utils';
 
@@ -23,13 +23,16 @@ class LoginHandler {
     const instance = await Registration.findOne({
       where: { email: email.toLowerCase() }
     });
-    const sentPass = createPasswordHmac(instance.getDataValue('password'));
-    if (instance && sentPass === password) {
-      setupToken(res, instance.getDataValue('id'));
-      return {
-        message: 'LOGGED_IN',
-        userId: Number(instance.getDataValue('id'))
-      };
+    if (instance) {
+      const dbPass = createPasswordHmac(password);
+      console.log(dbPass, instance.getDataValue('password'));
+      if (dbPass === instance.getDataValue('password')) {
+        createAndAssignSession(res, instance.getDataValue('id'));
+        return {
+          message: 'LOGGED_IN',
+          userId: Number(instance.getDataValue('id'))
+        };
+      }
     }
     res
       .status(StatusCodes.UNAUTHORIZED)

@@ -1,13 +1,13 @@
-import { generateJWT } from '../../utils/jwtUtils';
-import cookie from 'cookie';
-import { AUTH_TOKEN_COOKIE_KEY } from '../../../constants/commons';
 import type { NextApiResponse } from 'next';
+import UserSessionsService from '../../services/usersSessionsService/UserSessionsService';
+import cookie from 'cookie';
+import { AUTH_SESSION_KEY } from '../../../constants/commons';
 
-export const setupToken = (res: NextApiResponse, userId?: number) => {
-  const jwtString = userId ? generateJWT(userId) : '';
+export const createAndAssignSession = async (res: NextApiResponse, userId: number) => {
+  const sessionUUid = await UserSessionsService.createSession(userId);
   res.setHeader(
     'Set-Cookie',
-    cookie.serialize(AUTH_TOKEN_COOKIE_KEY, jwtString, {
+    cookie.serialize(AUTH_SESSION_KEY, sessionUUid, {
       httpOnly: true,
       path: '/'
     })

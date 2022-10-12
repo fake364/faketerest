@@ -115,23 +115,44 @@ const modifyFieldFn =
     return;
   };
 
+const receivedValidCurrentPassword = async (
+  currentPassword: string,
+  userId: number
+) => {
+  const instance = await Registration.findOne({ where: { id: userId } });
+  return new Promise((resolve) =>
+    resolve(
+      createPasswordHmac(currentPassword) === instance?.getDataValue('password')
+    )
+  );
+};
+
+const CURRENT_PASSWORD_INVALID = {
+  constraints: { currentPasswordError: 'Current password is not valid' }
+};
+
 export const prepareEntityAndValidate = async (
-  result: UserDataEntity
+  payload: UserDataEntity,
+  id: number
 ): Promise<UserDataEntity> => {
   const dto = new UserDataEntity();
-  const formValues = Object.entries(result);
+  const formValues = Object.entries(payload);
   if (formValues.length > 0) {
     formValues.forEach(modifyFieldFn((key, value) => (dto[key] = value)));
     const errors = await validate(dto, {
       whitelist: true,
       forbidNonWhitelisted: true
     });
+    const hasCurrentPasswordNoError =
+      errors.length === 0 && dto.currentPassword;
+    if (
+      hasCurrentPasswordNoError &&
+      !(await receivedValidCurrentPassword(dto.currentPassword, id))
+    ) {
+      errors.push(CURRENT_PASSWORD_INVALID as any);
+    }
     return new Promise((resolve, reject) => {
-      if (errors.length === 0) {
-        resolve(dto);
-      } else {
-        reject(errors);
-      }
+      errors.length === 0 ? resolve(dto) : reject(errors);
     });
   }
 };

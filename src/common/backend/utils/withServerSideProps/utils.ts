@@ -1,11 +1,13 @@
-import { jwtCheck } from '../middlewares';
 import cookie from 'cookie';
-import { AUTH_TOKEN_COOKIE_KEY } from '../../../constants/commons';
+import { AUTH_SESSION_KEY } from '../../../constants/commons';
 import RegistrationService from '../../services/registrationService/RegistrationService';
+import UserSessionsService from '../../services/usersSessionsService/UserSessionsService';
 
 export const mapUserDataWithJWTCheck = async (cookies: string) => {
   try {
-    const userId = await jwtCheck(cookie.parse(cookies)[AUTH_TOKEN_COOKIE_KEY]);
+    const userId = await UserSessionsService.getUserIdBySessionUUid(
+      cookie.parse(cookies)[AUTH_SESSION_KEY]
+    );
     const result = await RegistrationService.getUserDataBy(userId);
     if (!result) {
       throw new Error('No user found');

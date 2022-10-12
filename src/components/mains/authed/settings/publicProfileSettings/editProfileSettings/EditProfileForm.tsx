@@ -11,8 +11,7 @@ import { setUserData } from '../../../../../../redux/actions/user-data/actions';
 import useTranslation from 'next-translate/useTranslation';
 import { MB_3_IN_BYTES } from '../../../../../../common/constants/commons';
 import UserDataEntity from '../../../../../../common/backend/validation-services/registration/UserDataEntity';
-import { submitProfileSettings } from './utils/utils';
-import { handleFieldError } from '../../../../../../common/backend/utils/registrationUtils/errorHandlers';
+import { handleFieldError, submitProfileSettings } from './utils/utils';
 
 type Props = { userData: UserDataEntity };
 

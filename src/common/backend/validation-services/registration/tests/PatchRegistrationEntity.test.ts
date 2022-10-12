@@ -1,7 +1,6 @@
 import UserDataEntity from '../UserDataEntity';
-import { validate } from 'class-validator';
-
-import jsonObjects from './countries-codes.json';
+import { Validate, validate } from 'class-validator';
+import IsChangePasswordPair from '../validationClasses/isChangePasswordPair';
 
 const getNameFieldCheck = (field: string) => [
   [
@@ -18,10 +17,6 @@ const getNameFieldCheck = (field: string) => [
 ];
 
 describe('PatchRegistrationClass', () => {
-  it('should ', function () {
-    expect(jsonObjects.map(obj=>({iso3_code:obj.fields}))).toStrictEqual([]);
-  });
-
   it('should not get any error on empty object', async () => {
     const entity = new UserDataEntity();
     const err = await validate(entity);
@@ -61,7 +56,17 @@ describe('PatchRegistrationClass', () => {
     ['email', 'email@', 'email does not look like email'],
     ['email', 'email@mail', 'email does not look like email'],
     ['email', 'email@email.', 'email does not look like email'],
-    ['email', 'email@mail.ru', undefined]
+    ['email', 'email@mail.ru', undefined],
+    [
+      'password',
+      'password',
+      'It should be defined both new password and current'
+    ],
+    [
+      'currentPassword',
+      'password',
+      'It should be defined both new password and current'
+    ]
   ])(
     'should validate %s field with %s value and give %s as result',
     async (fieldName, value, error) => {

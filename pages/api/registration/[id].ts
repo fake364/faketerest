@@ -8,7 +8,7 @@ import {
   Res
 } from 'next-api-decorators';
 import { StatusCodes } from 'http-status-codes';
-import { WithJWTAuth } from '../checkToken';
+import { WithSessionAuth } from '../checkSession';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import {
   handlePatchUserByType,
@@ -26,7 +26,7 @@ export const config = {
 
 class RegistrationsHandler {
   @Get()
-  @WithJWTAuth()
+  @WithSessionAuth()
   async registration(
     @Query('id') id: number | string,
     @Res() res: NextApiResponse
@@ -43,7 +43,7 @@ class RegistrationsHandler {
   }
 
   @Patch()
-  @WithJWTAuth()
+  @WithSessionAuth()
   async changeRegistration(
     @Req() req: NextApiRequest,
     @Query('id') id: number,
@@ -56,7 +56,7 @@ class RegistrationsHandler {
     }
 
     try {
-      const dto = await prepareEntityAndValidate(result);
+      const dto = await prepareEntityAndValidate(result,id);
       await updateUser(dto, id, res);
       return;
     } catch (errors) {

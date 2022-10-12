@@ -11,7 +11,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../../../redux/types';
 import { setUserData } from '../../../../../redux/actions/user-data/actions';
-import { handleFieldError } from '../../../../../common/backend/utils/registrationUtils/errorHandlers';
+import { handleFieldError } from '../publicProfileSettings/editProfileSettings/utils/utils';
 
 type Props = { userData: UserDataEntity };
 
@@ -61,11 +61,16 @@ const AccountSettings: React.FC<Props> = ({ userData: { email } }) => {
   };
 
   const onSubmit = async (values: FormType) => {
-    const submitData: { email: string; password?: string } = {
+    const submitData: {
+      email: string;
+      password?: string;
+      currentPassword?: string;
+    } = {
       email: values.email
     };
-    if (values.password) {
+    if (values.password && values.currentPassword) {
       submitData.password = values.password;
+      submitData.currentPassword = values.currentPassword;
     }
     try {
       await checkOrResetPasswords(values.password, values.currentPassword);
@@ -81,6 +86,11 @@ const AccountSettings: React.FC<Props> = ({ userData: { email } }) => {
       );
       router.reload();
     } catch (e) {
+      // TODO refactor this shit
+      console.log(e);
+      e?.response?.data?.errors?.find((obj) => obj['currentPasswordError']) &&
+        formik.setFieldError('currentPassword', 'Incorrect current password');
+
       handleFieldError(e, (fieldName) => {
         fieldName === 'email' &&
           formik.setFieldError(fieldName, 'This email is already registered');

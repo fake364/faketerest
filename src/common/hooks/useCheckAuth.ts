@@ -7,7 +7,6 @@ import {
 } from '../../redux/actions/metadata/actions';
 import { AppDispatch } from '../../redux/types';
 import { useDispatch } from 'react-redux';
-import { StatusCodes } from 'http-status-codes';
 import { useRouter } from 'next/router';
 
 export const useCheckAuth = () => {
@@ -17,7 +16,7 @@ export const useCheckAuth = () => {
 
   useEffect(() => {
     axios
-      .get('/api/checkToken')
+      .get('/api/checkSession')
       .then((res) => {
         if (res.status === 200) {
           dispatch(setIsLoggedIn(true));
@@ -27,9 +26,7 @@ export const useCheckAuth = () => {
       })
       .catch((e) => {
         setCheckAuth(false);
-        if (e?.response?.status === StatusCodes.UNAUTHORIZED) {
-          router.push('/').then(() => dispatch(setWipeState()));
-        }
+        router.push('/').then(() => dispatch(setWipeState()));
       });
   }, []);
 
