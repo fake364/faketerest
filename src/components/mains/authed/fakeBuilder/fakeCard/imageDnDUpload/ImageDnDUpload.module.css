@@ -1,0 +1,8 @@
+.imageDnDUploadContainer {
+  @apply rounded-[16px] bg-[#EFEFEF] p-[16px] flex flex-col cursor-pointer;
+}
+
+.dashedUpload {
+  @apply flex-1 border-2 border-dashed border-[rgb(218,218,218)] text-center text-[14px] font-[500] px-[48px]
+  flex flex-col items-center gap-[18px] py-[72px];
+}
