@@ -1,0 +1,15 @@
+.titleInput {
+  @apply border-b-[1px] border-[#C6C6C6] focus:border-b-[2px] focus:border-[#118CFF] w-full focus:outline-[0px]
+      leading-[1.3];
+}
+
+.titleInput + div {
+  display: none;
+}
+
+.titleInput:focus + div {
+  display: block;
+  font-size: 11px;
+  padding-top: 4px;
+  color: gray;
+}

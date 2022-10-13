@@ -28,5 +28,9 @@
     "setup-app": "Setup Windows application",
     "get-reference": "Get reference",
     "logout": "Logout"
+  },
+  "fake-builder": {
+    "drag-image": "Drag and drop image or click button to upload",
+    "recommend-using-jpg": "We recommend using high quality .jpg files (less than 20MB in size)"
   }
 }

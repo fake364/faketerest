@@ -5,8 +5,8 @@ type Props = {};
 
 const FakeBuilderContainer: React.FC<Props> = () => {
   return (
-    <div className="fixed h-screen w-screen overflow-y-scroll flex flex-col items-center">
-      <FakeCard  />
+    <div className="fixed h-screen w-screen overflow-y-scroll flex flex-col items-center z-[-1]">
+      <FakeCard onImageDrop={() => {}} />
     </div>
   );
 };

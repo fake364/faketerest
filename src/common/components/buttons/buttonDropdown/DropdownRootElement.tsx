@@ -4,7 +4,7 @@ import { IconType } from '@react-icons/all-files';
 import CircleIconButton from '../CircleIconButton';
 import clsx from 'clsx';
 
-type DropdownClassName = { dropdownClass?: string };
+type DropdownClassName = { dropdownClass?: string; buttonClass?: string };
 
 type Props<T> = T extends { variant: 'text' }
   ? T & { text: string; children: ReactNode | ReactNode[] } & DropdownClassName
@@ -36,7 +36,7 @@ const DropdownRootElement = <T,>(props: Props<T>) => {
         {props.variant === 'icon' && (
           <CircleIconButton
             Icon={props.Icon}
-            className="px-[12px] text-[14px]"
+            className={clsx('px-[12px] text-[14px]', props.buttonClass)}
             onClick={() => null}
           />
         )}
