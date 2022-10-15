@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import ImageDnDUpload, { ImageDnDProps } from './imageDnDUpload/ImageDnDUpload';
 import FakeAddForm from './fakeAddForm/FakeAddForm';
@@ -6,10 +6,34 @@ import DropdownRootElement from '../../../../../common/components/buttons/button
 import ButtonDropdownElement from '../../../../../common/components/buttons/buttonDropdown/ButtonDropdownElement';
 import { BsThreeDots } from '@react-icons/all-files/bs/BsThreeDots';
 import PrimaryButton from '../../../../../common/components/buttons/primary-button/PrimaryButton';
+import FakePostEntity from '../../../../../common/classes/fakePostEntity/FakePostEntity';
+import { PostChangeFunction } from '../FakeBuilderContainer';
 
-type Props = { className?: string } & Pick<ImageDnDProps, 'onImageDrop'>;
+type Props = {
+  className?: string;
+  postEntry: FakePostEntity;
+  handleChange: PostChangeFunction;
+  onRemoveCard: (id: number) => void;
+};
 
-const FakeCard: React.FC<Props> = ({ className, onImageDrop }) => {
+const FakeCard: React.FC<Props> = ({
+  className,
+  handleChange,
+  postEntry,
+  onRemoveCard
+}) => {
+  const [imageUrl, setImageUrl] = useState<string>();
+
+  useEffect(() => {
+    if (postEntry.image) {
+      const fr = new FileReader();
+      fr.onload = function () {
+        setImageUrl(fr.result as string);
+      };
+      fr.readAsDataURL(postEntry.image);
+    }
+  }, [postEntry.image]);
+
   return (
     <div
       className={clsx(
@@ -24,15 +48,25 @@ const FakeCard: React.FC<Props> = ({ className, onImageDrop }) => {
           dropdownClass={'z-[100] left-0 top-[12px]'}
           buttonClass={'!text-[22px] !p-[8px]'}
         >
-          <ButtonDropdownElement onClick={null}>Удалить</ButtonDropdownElement>
+          <ButtonDropdownElement onClick={() => onRemoveCard(postEntry.id)}>
+            Удалить
+          </ButtonDropdownElement>
         </DropdownRootElement>
         <div>
           <PrimaryButton>Сохранить</PrimaryButton>
         </div>
       </div>
       <div className="flex gap-[42px]">
-        <ImageDnDUpload className={'flex-1'} onImageDrop={onImageDrop} />
-        <FakeAddForm className={'flex-[2]'} />
+        <ImageDnDUpload
+          className={'flex-1'}
+          src={imageUrl}
+          onImageDrop={(file) => handleChange(postEntry.id, 'image', file)}
+        />
+        <FakeAddForm
+          className={'flex-[2]'}
+          fakePost={postEntry}
+          handleChange={handleChange}
+        />
       </div>
     </div>
   );

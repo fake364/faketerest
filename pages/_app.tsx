@@ -12,6 +12,7 @@ import { useCheckAuth } from '../src/common/hooks/useCheckAuth';
 import RegFormSpinner from '../src/components/mains/others/baseMain/regForm/form/spinner/RegFormSpinner';
 import { PersistGate } from 'redux-persist/integration/react';
 import setLanguage from 'next-translate/setLanguage';
+import 'reflect-metadata';
 
 type WrapperProps = { children?: React.ReactNode };
 
