@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import ImageDnDUpload, { ImageDnDProps } from './imageDnDUpload/ImageDnDUpload';
+import ImageDnDUpload from './imageDnDUpload/ImageDnDUpload';
 import FakeAddForm from './fakeAddForm/FakeAddForm';
 import DropdownRootElement from '../../../../../common/components/buttons/buttonDropdown/DropdownRootElement';
 import ButtonDropdownElement from '../../../../../common/components/buttons/buttonDropdown/ButtonDropdownElement';
@@ -14,13 +14,15 @@ type Props = {
   postEntry: FakePostEntity;
   handleChange: PostChangeFunction;
   onRemoveCard: (id: number) => void;
+  onSubmit: () => void;
 };
 
 const FakeCard: React.FC<Props> = ({
   className,
   handleChange,
   postEntry,
-  onRemoveCard
+  onRemoveCard,
+  onSubmit
 }) => {
   const [imageUrl, setImageUrl] = useState<string>();
 
@@ -33,6 +35,9 @@ const FakeCard: React.FC<Props> = ({
       fr.readAsDataURL(postEntry.image);
     }
   }, [postEntry.image]);
+
+  const error = postEntry?.errors?.find((err) => err.property === 'image');
+  const dNdError = error?.constraints?.['isNotEmpty'];
 
   return (
     <div
@@ -53,7 +58,7 @@ const FakeCard: React.FC<Props> = ({
           </ButtonDropdownElement>
         </DropdownRootElement>
         <div>
-          <PrimaryButton>Сохранить</PrimaryButton>
+          <PrimaryButton onClick={onSubmit}>Сохранить</PrimaryButton>
         </div>
       </div>
       <div className="flex gap-[42px]">
@@ -61,6 +66,7 @@ const FakeCard: React.FC<Props> = ({
           className={'flex-1'}
           src={imageUrl}
           onImageDrop={(file) => handleChange(postEntry.id, 'image', file)}
+          error={dNdError}
         />
         <FakeAddForm
           className={'flex-[2]'}

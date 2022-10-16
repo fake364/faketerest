@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import styles from './ImageDnDUpload.module.css';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
-import { RiArrowUpCircleFill } from '@react-icons/all-files/ri/RiArrowUpCircleFill';
+import DashedIconBlock from './dashedIconBlock/DashedIconBlock';
 
 const fileTypes = ['image/apng', 'image/jpeg', 'image/png', 'image/webp'];
 
@@ -11,11 +11,13 @@ export type ImageDnDProps = {
   className?: string;
   onImageDrop: (file: File) => void;
   src?: string;
+  error?: string;
 };
 const ImageDnDUpload: React.FC<ImageDnDProps> = ({
   className,
   onImageDrop,
-  src
+  src,
+  error
 }) => {
   const { t } = useTranslation('common');
   const [isDraggingOn, setDragging] = useState<boolean>(false);
@@ -62,10 +64,9 @@ const ImageDnDUpload: React.FC<ImageDnDProps> = ({
         />
       ) : (
         <>
-          <div className={clsx(styles.dashedUpload)}>
-            <RiArrowUpCircleFill className={'text-[32px] text-[#767676]'} />
-            <div className="text-[#111]">{t('fake-builder.drag-image')}</div>
-          </div>
+          <DashedIconBlock error={error}>
+            {error || t('fake-builder.drag-image')}
+          </DashedIconBlock>
           <div className="m-[32px] text-center text-[12px] font-[400] text-[#111]">
             {t('fake-builder.recommend-using-jpg')}
           </div>
@@ -83,11 +84,12 @@ const ImageDnDUpload: React.FC<ImageDnDProps> = ({
         )}
         onChange={onChangeHandler}
       />
-      {isDraggingOn && (
+      {(isDraggingOn || error) && (
         <div
           className={clsx(
             styles.fullSizeAbsoluteBlock,
             styles.draggedOnBlock,
+            error ? styles.errorColors : styles.dragColors,
             'z-[1]'
           )}
         />

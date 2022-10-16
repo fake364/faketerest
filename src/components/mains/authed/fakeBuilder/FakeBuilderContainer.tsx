@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import FakeCard from './fakeCard/FakeCard';
 import FakePostEntity from '../../../../common/classes/fakePostEntity/FakePostEntity';
-import { FaPlus } from '@react-icons/all-files/fa/FaPlus';
-import SideButton from './fakeCard/sideIconButton/SideButton';
-import { FaImage } from '@react-icons/all-files/fa/FaImage';
 import ImagesSideColumn from './fakeCard/imagesSideColumn/ImagesSideColumn';
+import { changePostByName, mapIdToPostEntries } from './fakeCard/utils/utils';
+import { validate } from 'class-validator';
 
 type Props = {};
-type Keys = keyof FakePostEntity;
-type FieldChangeValues = FakePostEntity[Keys];
+export type PostFieldKeys = keyof FakePostEntity;
+export type FieldChangeValues = FakePostEntity[PostFieldKeys];
 export type PostChangeFunction = (
   id: FakePostEntity['id'],
-  name: Keys,
+  name: PostFieldKeys,
   value: FieldChangeValues
 ) => void;
 
@@ -20,53 +19,48 @@ const FakeBuilderContainer: React.FC<Props> = () => {
 
   const handleChangeCard: PostChangeFunction = (
     id: FakePostEntity['id'],
-    name: Keys,
+    name: PostFieldKeys,
     value: FieldChangeValues
   ) => {
     const index = posts.findIndex(({ id: postId }) => postId === id);
-    console.log('found index', index);
     if (index !== -1) {
-      const postToChange = posts[index];
-      const changedPost = new FakePostEntity(
-        postToChange.id,
-        postToChange.title,
-        postToChange.description,
-        postToChange.image
-      );
-      switch (name) {
-        case 'title':
-        case 'description':
-          if (typeof value === 'string') {
-            changedPost[name] = value as string;
-          }
-          break;
-        case 'id':
-          if (typeof value === 'number') {
-            changedPost[name] = value as number;
-          }
-          break;
-        case 'image':
-          changedPost[name] = value as File;
-          break;
-      }
-
       setPosts((prev) => {
         const newPrev = [...prev];
-        newPrev[index] = changedPost;
+        newPrev[index] = changePostByName(prev[index], name, value);
         return newPrev;
       });
     }
   };
 
+  const submitForms = async (ids: number[]) => {
+    const postsToCreate = mapIdToPostEntries(ids, posts);
+    let wasFail = false;
+    for (const post of posts) {
+      const result = await validate(post);
+      if (result.length > 0) {
+        wasFail = true;
+      }
+      handleChangeCard(post.id, 'errors', result);
+    }
+
+    if (!wasFail) {
+      // SUBMIT SUCCESS
+      return;
+    }
+    // SUBMIT fail
+  };
+
   const onAddNewPost = () => {
     setPosts((prev) => {
-      const id = prev[prev.length - 1].id + 1;
+      const id = (prev[prev.length - 1]?.id || 0) + 1;
       return [...prev, new FakePostEntity(id)];
     });
   };
 
   const onRemoveCard = (id: number) => {
-    setPosts((prev) => prev.filter(({ id: postId }) => postId === id));
+    if (posts.length > 1) {
+      setPosts((prev) => prev.filter(({ id: postId }) => postId !== id));
+    }
   };
 
   console.log('posts', posts);
@@ -79,9 +73,11 @@ const FakeBuilderContainer: React.FC<Props> = () => {
       />
       {posts.map((post) => (
         <FakeCard
+          key={post.id}
           postEntry={post}
           handleChange={handleChangeCard}
           onRemoveCard={onRemoveCard}
+          onSubmit={() => submitForms([post.id])}
         />
       ))}
     </div>

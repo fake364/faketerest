@@ -19,11 +19,13 @@ const FakeAddForm: React.FC<Props> = ({
   return (
     <div className={clsx('flex flex-col items-stretch gap-[32px]', className)}>
       <BottomLineInput
-        className={'py-[4px] px-[8px] text-[36px] font-bold'}
+        className={'py-[4px] text-[36px] font-bold'}
         placeholder={'Добавьте название'}
         subtitle={'В ленте видны только первые 40 символов'}
         onChange={(val) => handleChange(id, 'title', val)}
         value={title}
+        maxLength={100}
+        placeholderClassName={'font-bold text-[36px]'}
       />
       <UserImageName />
       <BottomLineInput
@@ -31,9 +33,10 @@ const FakeAddForm: React.FC<Props> = ({
         subtitle={
           'Когда люди нажимают на ваш фэйк, они обычно видят первые 40 символов'
         }
-        className={'py-[14px] px-[4px]'}
+        className={'py-[14px]'}
         onChange={(val) => handleChange(id, 'description', val)}
         value={description}
+        maxLength={500}
       />
     </div>
   );

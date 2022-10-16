@@ -1,6 +1,7 @@
-import React from 'react';
-import styles from './BottomLineInput.module.css';
+import React, { useState } from 'react';
+import ExtendableInput from './extendableInput/ExtendableInput';
 import clsx from 'clsx';
+import styles from './BottomLineInput.module.css';
 
 type Props = {
   className?: string;
@@ -8,6 +9,8 @@ type Props = {
   subtitle: string;
   onChange: (val: string) => void;
   value: string;
+  maxLength?: number;
+  placeholderClassName?: string;
 };
 
 const BottomLineInput: React.FC<Props> = ({
@@ -15,21 +18,39 @@ const BottomLineInput: React.FC<Props> = ({
   placeholder,
   subtitle,
   onChange,
-  value
+  value,
+  maxLength,
+  placeholderClassName
 }) => {
+  const [isFocused, setFocus] = useState(false);
+
+  const setFocusFlag = (flag: boolean) => () => setFocus(flag);
+  const charactersLeft = maxLength - (value?.length || 0);
+  const areTooManyChars = charactersLeft < 0;
+  const isSubtitleShown = isFocused || areTooManyChars;
+
   return (
     <div>
-      <input
-        type={'text'}
-        className={clsx(styles.titleInput, className)}
-        placeholder={placeholder}
-        onChange={({ target: { value } }) => onChange(value)}
+      <ExtendableInput
         value={value}
+        onChange={(value) => onChange(value)}
+        placeholder={placeholder}
+        className={clsx(areTooManyChars && styles.errorBottomBorder, className)}
+        placeholderClassName={placeholderClassName}
+        onBlur={setFocusFlag(false)}
+        onFocus={setFocusFlag(true)}
       />
-      <div>
-        <span>{subtitle}</span>
-        <span className="float-right">100</span>
-      </div>
+      {isSubtitleShown && (
+        <div
+          className={clsx(
+            'text-[11px]  pt-[4px]',
+            areTooManyChars ? 'text-[#CC0000]' : 'text-[gray]'
+          )}
+        >
+          <span>{subtitle}</span>
+          {maxLength && <span className="float-right">{charactersLeft}</span>}
+        </div>
+      )}
     </div>
   );
 };
