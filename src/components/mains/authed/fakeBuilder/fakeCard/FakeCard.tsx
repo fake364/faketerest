@@ -8,6 +8,7 @@ import { BsThreeDots } from '@react-icons/all-files/bs/BsThreeDots';
 import PrimaryButton from '../../../../../common/components/buttons/primary-button/PrimaryButton';
 import FakePostEntity from '../../../../../common/classes/fakePostEntity/FakePostEntity';
 import { PostChangeFunction } from '../FakeBuilderContainer';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = {
   className?: string;
@@ -25,6 +26,7 @@ const FakeCard: React.FC<Props> = ({
   onSubmit
 }) => {
   const [imageUrl, setImageUrl] = useState<string>();
+  const { t } = useTranslation('common');
 
   useEffect(() => {
     if (postEntry.image) {
@@ -33,6 +35,8 @@ const FakeCard: React.FC<Props> = ({
         setImageUrl(fr.result as string);
       };
       fr.readAsDataURL(postEntry.image);
+    } else {
+      setImageUrl(null);
     }
   }, [postEntry.image]);
 
@@ -54,11 +58,13 @@ const FakeCard: React.FC<Props> = ({
           buttonClass={'!text-[22px] !p-[8px]'}
         >
           <ButtonDropdownElement onClick={() => onRemoveCard(postEntry.id)}>
-            Удалить
+            {t('fake-builder.remove')}
           </ButtonDropdownElement>
         </DropdownRootElement>
         <div>
-          <PrimaryButton onClick={onSubmit}>Сохранить</PrimaryButton>
+          <PrimaryButton onClick={onSubmit}>
+            {t('fake-builder.save')}
+          </PrimaryButton>
         </div>
       </div>
       <div className="flex gap-[42px]">

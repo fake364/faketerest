@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ExtendableInput from './extendableInput/ExtendableInput';
 import clsx from 'clsx';
 import styles from './BottomLineInput.module.css';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = {
   className?: string;
@@ -22,6 +23,8 @@ const BottomLineInput: React.FC<Props> = ({
   maxLength,
   placeholderClassName
 }) => {
+  const { t } = useTranslation('error-messages');
+
   const [isFocused, setFocus] = useState(false);
 
   const setFocusFlag = (flag: boolean) => () => setFocus(flag);
@@ -47,7 +50,7 @@ const BottomLineInput: React.FC<Props> = ({
             areTooManyChars ? 'text-[#CC0000]' : 'text-[gray]'
           )}
         >
-          <span>{subtitle}</span>
+          <span>{areTooManyChars ? t('tooManyCharacters') : subtitle}</span>
           {maxLength && <span className="float-right">{charactersLeft}</span>}
         </div>
       )}

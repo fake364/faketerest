@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import FakeCard from './fakeCard/FakeCard';
 import FakePostEntity from '../../../../common/classes/fakePostEntity/FakePostEntity';
 import ImagesSideColumn from './fakeCard/imagesSideColumn/ImagesSideColumn';
-import { changePostByName, mapIdToPostEntries } from './fakeCard/utils/utils';
+import {
+  changePostByName,
+  convertPostToFormData,
+  mapIdToPostEntries
+} from './fakeCard/utils/utils';
 import { validate } from 'class-validator';
+import axios from 'axios';
 
 type Props = {};
 export type PostFieldKeys = keyof FakePostEntity;
@@ -34,21 +39,30 @@ const FakeBuilderContainer: React.FC<Props> = () => {
 
   const submitForms = async (ids: number[]) => {
     const postsToCreate = mapIdToPostEntries(ids, posts);
-    let wasFail = false;
-    for (const post of posts) {
+    const validPosts: FakePostEntity[] = [];
+    for (const post of postsToCreate) {
       const result = await validate(post);
-      if (result.length > 0) {
-        wasFail = true;
+      if (result.length === 0) {
+        validPosts.push(post);
       }
       handleChangeCard(post.id, 'errors', result);
     }
-
-    if (!wasFail) {
-      // SUBMIT SUCCESS
-      return;
+    if (validPosts.length > 0) {
+      await submitValidForms(validPosts);
     }
-    // SUBMIT fail
   };
+
+  const submitValidForms = async (posts: FakePostEntity[]) =>
+    await Promise.allSettled(
+      posts.map(convertPostToFormData).map(([id, formData]) => {
+        handleChangeCard(id, 'isLoading', true);
+        return axios('/api/post', {
+          method: 'POST',
+          headers: { 'Content-Type': 'multipart/form-data' },
+          data: formData
+        });
+      })
+    );
 
   const onAddNewPost = () => {
     setPosts((prev) => {

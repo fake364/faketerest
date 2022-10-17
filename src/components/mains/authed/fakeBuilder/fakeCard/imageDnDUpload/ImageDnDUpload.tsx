@@ -4,6 +4,8 @@ import styles from './ImageDnDUpload.module.css';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 import DashedIconBlock from './dashedIconBlock/DashedIconBlock';
+import { ImBin2 } from '@react-icons/all-files/im/ImBin2';
+import CircleIconButton from '../../../../../../common/components/buttons/CircleIconButton';
 
 const fileTypes = ['image/apng', 'image/jpeg', 'image/png', 'image/webp'];
 
@@ -55,13 +57,24 @@ const ImageDnDUpload: React.FC<ImageDnDProps> = ({
       className={clsx(styles.imageDnDUploadContainer, 'relative', className)}
     >
       {src ? (
-        <Image
-          src={src}
-          layout={'fill'}
-          objectFit={'cover'}
-          objectPosition={'center'}
-          className={'rounded-[8px]'}
-        />
+        <div className={'flex flex-col justify-center h-full'}>
+          <Image
+            src={src}
+            layout={'fill'}
+            objectFit={'contain'}
+            objectPosition={'center'}
+            className={'rounded-[8px]'}
+          />
+          <div>
+            <CircleIconButton
+              className={
+                'relative z-[4] bg-[white] w-[40px] h-[40px] text-[black]'
+              }
+              Icon={ImBin2}
+              onClick={() => onImageDrop(null)}
+            />
+          </div>
+        </div>
       ) : (
         <>
           <DashedIconBlock error={error}>

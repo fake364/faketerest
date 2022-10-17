@@ -11,7 +11,6 @@ import CountriesService from '../../services/countriesService/CountriesService';
 import { selectCountryCodeId } from '../../sql/selectCountryCodeId';
 import { isArray, validate, ValidationError } from 'class-validator';
 import { createPasswordHmac } from '../password/utils';
-import { SQL_ERRORS } from '../../sql/constants/constants';
 
 export const handleRegistrationFormData = async (
   req: NextApiRequest,

@@ -1,6 +1,7 @@
 import FakePostEntity from '../../../../../../common/classes/fakePostEntity/FakePostEntity';
 import { FieldChangeValues, PostFieldKeys } from '../../FakeBuilderContainer';
 import { isArray, ValidationError } from 'class-validator';
+import UserDataEntity from '../../../../../../common/backend/validation-services/registration/UserDataEntity';
 
 export const changePostByName = (
   fakePost: FakePostEntity,
@@ -31,6 +32,9 @@ export const changePostByName = (
         changedPost[name] = value as ValidationError[];
       }
       break;
+    case 'isLoading':
+      changedPost[name] = value as boolean;
+      break;
   }
 
   return changedPost;
@@ -40,3 +44,16 @@ export const mapIdToPostEntries = (ids: number[], posts: FakePostEntity[]) =>
   ids
     .map((id) => posts.find(({ id: postId }) => id === postId))
     .filter(Boolean);
+
+export const convertPostToFormData = ({
+  id,
+  title,
+  image,
+  description
+}: FakePostEntity): [number, FormData] => {
+  const formData = new FormData();
+  formData.set('title', title);
+  formData.set('description', description);
+  formData.set('image', image);
+  return [id, formData];
+};

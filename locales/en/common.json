@@ -31,6 +31,18 @@
   },
   "fake-builder": {
     "drag-image": "Drag and drop image or click button to upload",
-    "recommend-using-jpg": "We recommend using high quality .jpg files (less than 20MB in size)"
+    "recommend-using-jpg": "We recommend using high quality .jpg files (less than 20MB in size)",
+    "inputs": {
+      "title": {
+        "placeholder": "Add title",
+        "description": "Only the first 40 characters are visible in the feed"
+      },
+      "description": {
+        "placeholder": "Add fake description",
+        "description": "When people click on your Pin, they only see the first 50 characters"
+      }
+    },
+    "save": "Save",
+    "remove": "Remove"
   }
 }

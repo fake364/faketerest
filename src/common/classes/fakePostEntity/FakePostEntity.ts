@@ -24,6 +24,10 @@ export default class FakePostEntity {
 
   errors: ValidationError[] = [];
 
+  isLoading: boolean;
+
+  uploadId?: string;
+
   constructor(id: number, title?: string, description?: string, image?: File) {
     this.id = id;
     this.title = title;

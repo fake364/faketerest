@@ -11,5 +11,6 @@
   "somethingWentWrong": "Something went wrong, looks like server issue",
   "invalidAuth": "Login or password is invalid",
   "currentPasswordIncorrect": "You have entered incorrect password",
-  "registeredEmail": "This email is already registered"
+  "registeredEmail": "This email is already registered",
+  "tooManyCharacters": "Oops... too many characters were entered. Please make your text shorter"
 }
