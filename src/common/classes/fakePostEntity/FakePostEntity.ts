@@ -3,7 +3,6 @@ import {
   IsOptional,
   IsString,
   MaxLength,
-  validate,
   ValidationError
 } from 'class-validator';
 
@@ -13,11 +12,11 @@ export default class FakePostEntity {
   @IsOptional()
   @IsString()
   @MaxLength(100)
-  title?: string;
+  title?: string = '';
 
   @IsOptional()
   @MaxLength(500)
-  description?: string;
+  description?: string = '';
 
   @IsNotEmpty()
   image?: File;
@@ -28,7 +27,7 @@ export default class FakePostEntity {
 
   uploadId?: string;
 
-  constructor(id: number, title?: string, description?: string, image?: File) {
+  constructor(id: number, title = '', description = '', image?: File) {
     this.id = id;
     this.title = title;
     this.description = description;

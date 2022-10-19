@@ -3,7 +3,8 @@ module.exports = {
   defaultLocale: 'en',
   pages: {
     '*': ['common'],
-    '/': ['main-page'],
+    '/': ['main-page', 'error-messages'],
+    '/fake-builder': ['error-messages'],
     'rgx:/.*': ['profile'],
     'rgx:/settings/.*': ['settings']
   }

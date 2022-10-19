@@ -12,39 +12,50 @@ import { selectCountryCodeId } from '../../sql/selectCountryCodeId';
 import { isArray, validate, ValidationError } from 'class-validator';
 import { createPasswordHmac } from '../password/utils';
 
-export const handleRegistrationFormData = async (
+type FormDataFileOptions = {
+  uploadDir?: string;
+  maxFileSize?: number;
+  filename?: string;
+};
+
+export const syncHandleFormAndSaveFile = (
   req: NextApiRequest,
-  userId
+  { uploadDir, maxFileSize, filename }: FormDataFileOptions
 ) => {
   const form = new formidable.IncomingForm();
 
-  form.maxFileSize = MB_3_IN_BYTES;
-  form.uploadDir = path.join('public', 'user', String(userId));
+  maxFileSize && (form.maxFileSize = maxFileSize);
+  uploadDir && (form.uploadDir = uploadDir);
 
   if (!fs.existsSync(form.uploadDir)) {
     fs.mkdirSync(form.uploadDir, { recursive: true });
   }
-  const result: UserDataEntity | undefined = await new Promise(
-    (resolve, reject) => {
-      form.parse(req, (err, fields, file) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        if (file?.image) {
-          fs.rename(
-            file.image.filepath,
-            form.uploadDir + '/avatar.png',
-            () => {}
-          );
-        }
 
-        resolve(fields);
-      });
-    }
-  );
-  return result;
+  return new Promise((resolve, reject) => {
+    form.parse(req, (err, fields, file) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      if (file?.image && filename) {
+        fs.rename(
+          file.image.filepath,
+          form.uploadDir + '/' + filename,
+          () => {}
+        );
+      }
+
+      resolve(fields);
+    });
+  });
 };
+
+export const handleRegistrationFormData = async (req: NextApiRequest, userId) =>
+  (await syncHandleFormAndSaveFile(req, {
+    filename: 'avatar.png',
+    maxFileSize: MB_3_IN_BYTES,
+    uploadDir: path.join('public', 'user', String(userId))
+  })) as UserDataEntity | undefined;
 
 export const updateUser = async (
   { countryCode3, country, ...rest }: Partial<UserDataEntity>,

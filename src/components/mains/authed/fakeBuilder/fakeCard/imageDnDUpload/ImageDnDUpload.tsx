@@ -68,7 +68,7 @@ const ImageDnDUpload: React.FC<ImageDnDProps> = ({
           <div>
             <CircleIconButton
               className={
-                'relative z-[4] bg-[white] w-[40px] h-[40px] text-[black]'
+                'relative !z-[4] bg-[white] w-[40px] h-[40px] text-[black]'
               }
               Icon={ImBin2}
               onClick={() => onImageDrop(null)}

@@ -35,6 +35,9 @@ export const changePostByName = (
     case 'isLoading':
       changedPost[name] = value as boolean;
       break;
+    case 'uploadId':
+      changedPost[name] = value as string;
+      break;
   }
 
   return changedPost;
@@ -52,8 +55,8 @@ export const convertPostToFormData = ({
   description
 }: FakePostEntity): [number, FormData] => {
   const formData = new FormData();
-  formData.set('title', title);
-  formData.set('description', description);
+  formData.set('title', title.trim());
+  formData.set('description', description.trim());
   formData.set('image', image);
   return [id, formData];
 };

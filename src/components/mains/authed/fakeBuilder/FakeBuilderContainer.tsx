@@ -9,6 +9,7 @@ import {
 } from './fakeCard/utils/utils';
 import { validate } from 'class-validator';
 import axios from 'axios';
+import clsx from 'clsx';
 
 type Props = {};
 export type PostFieldKeys = keyof FakePostEntity;
@@ -19,8 +20,10 @@ export type PostChangeFunction = (
   value: FieldChangeValues
 ) => void;
 
+// TODO MAKE SCALE DOWN ANIMATION AS LIKE IN PINTEREST, AND GROUP SUBMIT WITH SELECT. However all prerequisites are done except of selection
 const FakeBuilderContainer: React.FC<Props> = () => {
   const [posts, setPosts] = useState<FakePostEntity[]>([new FakePostEntity(0)]);
+  const [isSelectionEnabled, setSelectionEnabled] = useState(false);
 
   const handleChangeCard: PostChangeFunction = (
     id: FakePostEntity['id'],
@@ -52,17 +55,18 @@ const FakeBuilderContainer: React.FC<Props> = () => {
     }
   };
 
-  const submitValidForms = async (posts: FakePostEntity[]) =>
-    await Promise.allSettled(
-      posts.map(convertPostToFormData).map(([id, formData]) => {
-        handleChangeCard(id, 'isLoading', true);
-        return axios('/api/post', {
-          method: 'POST',
-          headers: { 'Content-Type': 'multipart/form-data' },
-          data: formData
-        });
-      })
-    );
+  const submitValidForms = async (posts: FakePostEntity[]) => {
+    for (const [id, formData] of posts.map(convertPostToFormData)) {
+      handleChangeCard(id, 'isLoading', true);
+      const res = await axios('/api/post', {
+        method: 'POST',
+        headers: { 'Content-Type': 'multipart/form-data' },
+        data: formData
+      });
+      handleChangeCard(id, 'isLoading', false);
+      handleChangeCard(id, 'uploadId', res?.data?.postId);
+    }
+  };
 
   const onAddNewPost = () => {
     setPosts((prev) => {
@@ -79,21 +83,34 @@ const FakeBuilderContainer: React.FC<Props> = () => {
 
   console.log('posts', posts);
   return (
-    <div className="fixed h-[-webkit-fill-available] w-full overflow-y-scroll flex flex-col items-center z-[-1]">
+    <div
+      className={'overflow-y-scroll fixed h-[-webkit-fill-available] w-full'}
+    >
       <ImagesSideColumn
         posts={posts}
         className={'fixed left-0'}
         onClickPlus={onAddNewPost}
       />
-      {posts.map((post) => (
-        <FakeCard
-          key={post.id}
-          postEntry={post}
-          handleChange={handleChangeCard}
-          onRemoveCard={onRemoveCard}
-          onSubmit={() => submitForms([post.id])}
-        />
-      ))}
+      <div
+        className={clsx(
+          isSelectionEnabled && 'scale-50 -translate-y-[100px]',
+          'transition-all',
+          'flex flex-col items-center z-[-1]'
+        )}
+        onClick={() => {
+          setSelectionEnabled(true);
+        }}
+      >
+        {posts.map((post) => (
+          <FakeCard
+            key={post.id}
+            postEntry={post}
+            handleChange={handleChangeCard}
+            onRemoveCard={onRemoveCard}
+            onSubmit={() => submitForms([post.id])}
+          />
+        ))}
+      </div>
     </div>
   );
 };
