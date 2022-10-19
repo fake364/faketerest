@@ -1,0 +1,29 @@
+.selectButton {
+  @apply w-[46px] h-[46px]  absolute right-[-64px] top-[24px]
+    rounded-[50%] flex items-center justify-center  cursor-pointer transition-all
+    active:scale-[0.9];
+}
+
+.inactiveStyle {
+  @apply border-[#A4A4A4] border-dashed border-[2px] hover:bg-[#e3e3e3] text-[#A4A4A4];
+}
+
+.selectionModeStyle {
+  @apply scale-[1.8] right-[-100px];
+}
+
+.activeStyle {
+  @apply bg-[#E60023] text-[white];
+}
+
+.activeStyle * {
+  visibility: visible !important;
+}
+
+.selectButton * {
+  visibility: hidden;
+}
+
+.selectButton:hover * {
+  visibility: visible;
+}

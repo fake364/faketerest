@@ -4,6 +4,7 @@ import FakePostEntity from '../../../../../common/classes/fakePostEntity/FakePos
 import { PostChangeFunction } from '../FakeBuilderContainer';
 import PostImageForm from './postImageForm/PostImageForm';
 import UploadSuccess from './uploadSuccess/UploadSuccess';
+import SelectButton from './selectButton/SelectButton';
 
 type Props = {
   className?: string;
@@ -11,6 +12,8 @@ type Props = {
   handleChange: PostChangeFunction;
   onRemoveCard: (id: number) => void;
   onSubmit: () => void;
+  isSelectionEnabled: boolean;
+  shouldDisplaySelect?: boolean;
 };
 
 const FakeCard: React.FC<Props> = ({
@@ -18,7 +21,9 @@ const FakeCard: React.FC<Props> = ({
   handleChange,
   postEntry,
   onRemoveCard,
-  onSubmit
+  onSubmit,
+  isSelectionEnabled,
+  shouldDisplaySelect = false
 }) => {
   const [imageUrl, setImageUrl] = useState<string>();
 
@@ -36,6 +41,10 @@ const FakeCard: React.FC<Props> = ({
 
   const onRemove = () => onRemoveCard(postEntry.id);
 
+  const onSelect = () => {
+    handleChange(postEntry.id, 'isSelected', !postEntry.isSelected);
+  };
+
   return (
     <div
       className={clsx(
@@ -44,6 +53,24 @@ const FakeCard: React.FC<Props> = ({
         className
       )}
     >
+      {isSelectionEnabled && (
+        <div
+          className={clsx(
+            'border-[2px] left-0 top-0 absolute z-[5]',
+            'rounded-[16px] w-full h-full bg-[rgba(255,255,255,0.5)]',
+            'cursor-pointer',
+            postEntry.isSelected && 'border-[#E60023]'
+          )}
+          onClick={onSelect}
+        />
+      )}
+      {shouldDisplaySelect && (
+        <SelectButton
+          isSelected={postEntry.isSelected}
+          isSelectionEnabled={isSelectionEnabled}
+          onSelect={onSelect}
+        />
+      )}
       {postEntry.uploadId ? (
         <UploadSuccess
           imageUrl={imageUrl}

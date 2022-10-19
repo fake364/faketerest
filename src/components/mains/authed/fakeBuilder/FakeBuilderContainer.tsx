@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FakeCard from './fakeCard/FakeCard';
 import FakePostEntity from '../../../../common/classes/fakePostEntity/FakePostEntity';
 import ImagesSideColumn from './fakeCard/imagesSideColumn/ImagesSideColumn';
@@ -20,10 +20,10 @@ export type PostChangeFunction = (
   value: FieldChangeValues
 ) => void;
 
-// TODO MAKE SCALE DOWN ANIMATION AS LIKE IN PINTEREST, AND GROUP SUBMIT WITH SELECT. However all prerequisites are done except of selection
 const FakeBuilderContainer: React.FC<Props> = () => {
   const [posts, setPosts] = useState<FakePostEntity[]>([new FakePostEntity(0)]);
-  const [isSelectionEnabled, setSelectionEnabled] = useState(false);
+
+  const isSelectionEnabled = posts.some(({ isSelected }) => isSelected);
 
   const handleChangeCard: PostChangeFunction = (
     id: FakePostEntity['id'],
@@ -81,7 +81,7 @@ const FakeBuilderContainer: React.FC<Props> = () => {
     }
   };
 
-  console.log('posts', posts);
+  const shouldDisplaySelect = posts.length !== 1;
   return (
     <div
       className={'overflow-y-scroll fixed h-[-webkit-fill-available] w-full'}
@@ -90,16 +90,14 @@ const FakeBuilderContainer: React.FC<Props> = () => {
         posts={posts}
         className={'fixed left-0'}
         onClickPlus={onAddNewPost}
+        handleChange={handleChangeCard}
       />
       <div
         className={clsx(
-          isSelectionEnabled && 'scale-50 -translate-y-[100px]',
-          'transition-all',
+          isSelectionEnabled && 'scale-50 origin-top h-[50%]',
+          'transition-all duration-500',
           'flex flex-col items-center z-[-1]'
         )}
-        onClick={() => {
-          setSelectionEnabled(true);
-        }}
       >
         {posts.map((post) => (
           <FakeCard
@@ -108,6 +106,8 @@ const FakeBuilderContainer: React.FC<Props> = () => {
             handleChange={handleChangeCard}
             onRemoveCard={onRemoveCard}
             onSubmit={() => submitForms([post.id])}
+            isSelectionEnabled={isSelectionEnabled}
+            shouldDisplaySelect={shouldDisplaySelect}
           />
         ))}
       </div>

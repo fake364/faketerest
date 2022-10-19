@@ -1,7 +1,6 @@
 import FakePostEntity from '../../../../../../common/classes/fakePostEntity/FakePostEntity';
 import { FieldChangeValues, PostFieldKeys } from '../../FakeBuilderContainer';
 import { isArray, ValidationError } from 'class-validator';
-import UserDataEntity from '../../../../../../common/backend/validation-services/registration/UserDataEntity';
 
 export const changePostByName = (
   fakePost: FakePostEntity,
@@ -33,6 +32,7 @@ export const changePostByName = (
       }
       break;
     case 'isLoading':
+    case 'isSelected':
       changedPost[name] = value as boolean;
       break;
     case 'uploadId':
