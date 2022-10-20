@@ -10,6 +10,10 @@ import {
 import { validate } from 'class-validator';
 import axios from 'axios';
 import clsx from 'clsx';
+import { AppDispatch } from '../../../../redux/types';
+import { useDispatch } from 'react-redux';
+import { setHeaderMode } from '../../../../redux/actions/metadata/actions';
+import { HEADER_MODE } from '../../../layout/Layout';
 
 type Props = {};
 export type PostFieldKeys = keyof FakePostEntity;
@@ -22,8 +26,17 @@ export type PostChangeFunction = (
 
 const FakeBuilderContainer: React.FC<Props> = () => {
   const [posts, setPosts] = useState<FakePostEntity[]>([new FakePostEntity(0)]);
+  const dispatch: AppDispatch = useDispatch();
 
   const isSelectionEnabled = posts.some(({ isSelected }) => isSelected);
+
+  useEffect(() => {
+    if (isSelectionEnabled) {
+      dispatch(setHeaderMode(HEADER_MODE.FAKE_BUILDER));
+    } else {
+      dispatch(setHeaderMode(HEADER_MODE.DEFAULT));
+    }
+  }, [isSelectionEnabled]);
 
   const handleChangeCard: PostChangeFunction = (
     id: FakePostEntity['id'],

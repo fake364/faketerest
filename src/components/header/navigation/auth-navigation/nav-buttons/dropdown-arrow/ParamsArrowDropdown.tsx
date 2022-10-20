@@ -37,7 +37,7 @@ const ParamsArrowDropdown: React.FC<Props> = () => {
     <DropdownRootElement
       variant={'icon'}
       Icon={FaChevronDown}
-      dropdownClass={'right-[0] px-[10px] py-[16px] min-w-[360px]'}
+      dropdownClass={'right-[0] px-[10px] py-[16px] min-w-[360px] z-[10]'}
     >
       <div className="text-[12px] ml-[12px]">{t('user-dropdown.now')}:</div>
       <UserCard onClick={onUserClick} />
