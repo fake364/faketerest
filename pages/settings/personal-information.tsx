@@ -22,6 +22,7 @@ export default function PersonalInformation(props) {
 }
 
 export const getServerSideProps = async ({ req: { headers } }) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const res: {
     props: {

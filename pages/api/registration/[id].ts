@@ -10,13 +10,12 @@ import {
 import { StatusCodes } from 'http-status-codes';
 import { WithSessionAuth } from '../checkSession';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import {
-  handlePatchUserByType,
-  handleRegistrationError,
-  prepareEntityAndValidate,
-  updateUser
-} from '../../../src/common/backend/utils/registrationUtils/utils';
 import RegistrationService from '../../../src/common/backend/services/registrationService/RegistrationService';
+import {
+  handlePatchUserByType, handleRegistrationError,
+  prepareEntityAndValidate,
+  updateUser,
+} from '../../../src/common/backend/utils/registrationUtils/utils';
 
 export const config = {
   api: {
