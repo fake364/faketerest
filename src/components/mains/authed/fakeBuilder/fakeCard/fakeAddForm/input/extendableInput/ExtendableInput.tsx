@@ -24,6 +24,8 @@ const ExtendableInput: React.FC<Props> = ({
 }) => {
   return (
     <div className="relative flex items-center">
+      {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+      {  /* @ts-ignore*/}
       <ContentEditable
         className={clsx(styles.expandableInput, styles.titleInput, className)}
         onChange={(event) => onChange(event.target.value)}
