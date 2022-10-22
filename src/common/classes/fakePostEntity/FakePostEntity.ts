@@ -5,6 +5,7 @@ import {
   MaxLength,
   ValidationError
 } from 'class-validator';
+import 'reflect-metadata';
 
 export default class FakePostEntity {
   id?: number;

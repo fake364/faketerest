@@ -4,17 +4,28 @@ import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../redux/types';
 
-type Props = { className?: string; firstName: string };
+type Props = { className?: string; firstName?: string; userId?: number };
 
-const UserAvatarImage: React.FC<Props> = ({ firstName, className }) => {
-  const id = useSelector((state: RootState) => state.metadata.userId);
+const UserAvatarImage: React.FC<Props> = ({
+  firstName = useSelector(
+    (state: RootState) => state.userData?.userData?.firstName
+  ),
+  className,
+  userId = useSelector((state: RootState) => state.metadata.userId)
+}) => {
   const [isImageShown, setImageShown] = useState<boolean>(true);
 
   return (
-    <div className={clsx('relative','flex justify-center items-center', className)}>
+    <div
+      className={clsx(
+        'relative',
+        'flex justify-center items-center',
+        className
+      )}
+    >
       {isImageShown ? (
         <Image
-          src={'/user/' + id + '/avatar.png'}
+          src={'/user/' + userId + '/avatar.png'}
           className={'rounded-[50%]'}
           onError={() => {
             setImageShown(false);

@@ -5,11 +5,13 @@ import { PostChangeFunction } from '../FakeBuilderContainer';
 import PostImageForm from './postImageForm/PostImageForm';
 import UploadSuccess from './uploadSuccess/UploadSuccess';
 import SelectButton from './selectButton/SelectButton';
+import { AppDispatch } from '../../../../../redux/types';
+import { useDispatch } from 'react-redux';
+import { changePostFieldById } from '../../../../../redux/actions/fake-builder/actions';
 
 type Props = {
   className?: string;
   postEntry: FakePostEntity;
-  handleChange: PostChangeFunction;
   onRemoveCard: (id: number) => void;
   onSubmit: () => void;
   isSelectionEnabled: boolean;
@@ -18,7 +20,6 @@ type Props = {
 
 const FakeCard: React.FC<Props> = ({
   className,
-  handleChange,
   postEntry,
   onRemoveCard,
   onSubmit,
@@ -26,6 +27,7 @@ const FakeCard: React.FC<Props> = ({
   shouldDisplaySelect = false
 }) => {
   const [imageUrl, setImageUrl] = useState<string>();
+  const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
     if (postEntry.image) {
@@ -42,7 +44,9 @@ const FakeCard: React.FC<Props> = ({
   const onRemove = () => onRemoveCard(postEntry.id);
 
   const onSelect = () => {
-    handleChange(postEntry.id, 'isSelected', !postEntry.isSelected);
+    dispatch(
+      changePostFieldById(postEntry.id, 'isSelected', !postEntry.isSelected)
+    );
   };
 
   return (
@@ -80,7 +84,6 @@ const FakeCard: React.FC<Props> = ({
       ) : (
         <PostImageForm
           postEntry={postEntry}
-          handleChange={handleChange}
           onSubmit={onSubmit}
           onRemove={onRemove}
           imageUrl={imageUrl}

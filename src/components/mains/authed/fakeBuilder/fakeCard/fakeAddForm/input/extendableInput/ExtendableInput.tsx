@@ -11,6 +11,7 @@ type Props = {
   placeholderClassName?: string;
   onFocus?: () => void;
   onBlur?: () => void;
+  containerClass?: string;
 };
 
 const ExtendableInput: React.FC<Props> = ({
@@ -20,14 +21,15 @@ const ExtendableInput: React.FC<Props> = ({
   onChange,
   placeholderClassName,
   onFocus,
-  onBlur
+  onBlur,
+  containerClass
 }) => {
   return (
-    <div className="relative flex items-center">
+    <div className={clsx('relative flex items-center', containerClass)}>
       {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-      {  /* @ts-ignore*/}
+      {/* @ts-ignore*/}
       <ContentEditable
-        className={clsx(styles.expandableInput, styles.titleInput, className)}
+        className={clsx(styles.expandableInput, className)}
         onChange={(event) => onChange(event.target.value)}
         tagName={'div'}
         html={value || ''}

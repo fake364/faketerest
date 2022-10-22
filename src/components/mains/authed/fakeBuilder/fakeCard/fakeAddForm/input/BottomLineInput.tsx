@@ -38,7 +38,11 @@ const BottomLineInput: React.FC<Props> = ({
         value={value}
         onChange={(value) => onChange(value)}
         placeholder={placeholder}
-        className={clsx(areTooManyChars && styles.errorBottomBorder, className)}
+        className={clsx(
+          areTooManyChars && styles.errorBottomBorder,
+          styles.titleInput,
+          className
+        )}
         placeholderClassName={placeholderClassName}
         onBlur={setFocusFlag(false)}
         onFocus={setFocusFlag(true)}

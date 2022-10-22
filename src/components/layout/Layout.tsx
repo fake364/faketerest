@@ -7,10 +7,12 @@ import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/types';
 import AuthNavigation from '../header/navigation/auth-navigation/AuthNavigation';
+import FakeBuilderHeader from '../header/navigation/fake-builder-header/FakeBuilderHeader';
 
 export enum HEADER_MODE {
   DEFAULT,
-  FAKE_BUILDER
+  FAKE_BUILDER,
+  NON_AUTHED_WITH_SEARCH
 }
 
 type Props = { className?: string };
@@ -28,9 +30,8 @@ const Layout: React.FC<Props> = ({ children, className }) => {
         {isLoggedIn ? (
           <>
             {mode === HEADER_MODE.DEFAULT && <AuthNavigation />}
-            {mode === HEADER_MODE.FAKE_BUILDER && (
-              <nav className="sticky py-[18px] px-[12px] flex flex-stretch gap-[14px] z-[10]"></nav>
-            )}
+            {mode === HEADER_MODE.FAKE_BUILDER && <FakeBuilderHeader />}
+            {mode === HEADER_MODE.NON_AUTHED_WITH_SEARCH && <div></div>}
           </>
         ) : (
           <NavigationContainer>

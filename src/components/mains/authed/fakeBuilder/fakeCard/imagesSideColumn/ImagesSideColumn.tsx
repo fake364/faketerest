@@ -2,24 +2,20 @@ import React from 'react';
 import SideButton from '../sideIconButton/SideButton';
 import { FaPlus } from '@react-icons/all-files/fa/FaPlus';
 import { FaImage } from '@react-icons/all-files/fa/FaImage';
-import FakePostEntity from '../../../../../../common/classes/fakePostEntity/FakePostEntity';
-import Image from 'next/image';
-import { PostChangeFunction } from '../../FakeBuilderContainer';
 import clsx from 'clsx';
+import { changePostFieldById } from '../../../../../../redux/actions/fake-builder/actions';
+import { AppDispatch, RootState } from '../../../../../../redux/types';
+import { useDispatch, useSelector } from 'react-redux';
 
 type Props = {
   className?: string;
-  posts: FakePostEntity[];
   onClickPlus: () => void;
-  handleChange: PostChangeFunction;
 };
 
-const ImagesSideColumn: React.FC<Props> = ({
-  posts,
-  className,
-  onClickPlus,
-  handleChange
-}) => {
+const ImagesSideColumn: React.FC<Props> = ({ className, onClickPlus }) => {
+  const posts = useSelector((state: RootState) => state.fakePosts.posts);
+  const dispatch: AppDispatch = useDispatch();
+
   return (
     <div className={className}>
       <SideButton onClick={onClickPlus} className={'flex justify-center'}>
@@ -27,10 +23,11 @@ const ImagesSideColumn: React.FC<Props> = ({
       </SideButton>
       {posts.map(({ image, isSelected, id }) => (
         <SideButton
-          onClick={() => handleChange(id, 'isSelected', !isSelected)}
+          onClick={() =>
+            dispatch(changePostFieldById(id, 'isSelected', !isSelected))
+          }
           className={clsx(
-            isSelected &&
-              'border-[#E60023] border-[2px] relative border-solid',
+            isSelected && 'border-[#E60023] border-[2px] relative border-solid',
             'bg-[#E2E2E2] text-[gray] flex justify-center'
           )}
         >

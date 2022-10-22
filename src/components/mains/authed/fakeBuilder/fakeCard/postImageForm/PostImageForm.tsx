@@ -11,11 +11,13 @@ import FakeAddForm from '../fakeAddForm/FakeAddForm';
 import useTranslation from 'next-translate/useTranslation';
 import FakePostEntity from '../../../../../../common/classes/fakePostEntity/FakePostEntity';
 import { PostChangeFunction } from '../../FakeBuilderContainer';
+import { AppDispatch } from '../../../../../../redux/types';
+import { useDispatch } from 'react-redux';
+import { changePostFieldById } from '../../../../../../redux/actions/fake-builder/actions';
 
 type Props = {
   postEntry: FakePostEntity;
   imageUrl?: string;
-  handleChange: PostChangeFunction;
   onSubmit: () => void;
   onRemove: () => void;
 };
@@ -23,13 +25,13 @@ type Props = {
 const PostImageForm: React.FC<Props> = ({
   postEntry,
   imageUrl,
-  handleChange,
   onSubmit,
   onRemove
 }) => {
   const { t } = useTranslation('common');
   const error = postEntry?.errors?.find((err) => err.property === 'image');
   const dNdError = error?.constraints?.['isNotEmpty'];
+  const dispatch: AppDispatch = useDispatch();
 
   return (
     <>
@@ -62,13 +64,14 @@ const PostImageForm: React.FC<Props> = ({
         <ImageDnDUpload
           className={'flex-1'}
           src={imageUrl}
-          onImageDrop={(file) => handleChange(postEntry.id, 'image', file)}
+          onImageDrop={(file) =>
+            dispatch(changePostFieldById(postEntry.id, 'image', file))
+          }
           error={dNdError}
         />
         <FakeAddForm
           className={'flex-[2]'}
           fakePost={postEntry}
-          handleChange={handleChange}
         />
       </div>
     </>
