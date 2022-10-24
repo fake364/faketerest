@@ -32,13 +32,15 @@ const UploadSuccess: React.FC<Props> = ({
         </div>
         <div className={'text-[#767676] text-[20px] flex flex-col'}>
           <div>{title?.trim() || 'Нет названия'}</div>
-          <div className={'text-[12px] text-[black]'}>Пост был успешно добавлен!</div>
+          <div className={'text-[12px] text-[black]'}>
+            Пост был успешно добавлен!
+          </div>
         </div>
       </div>
       <div className="flex items-center gap-[12px]">
-        <Link href={'/fake/' + postId}>
+        <a href={'/fake/' + postId} target="_blank" rel="noopener noreferrer">
           <SecondaryButton>Просмотреть</SecondaryButton>
-        </Link>
+        </a>
         <div
           className={
             'text-[22px] [&:hover>#check]:hidden [&:hover>#times]:block p-[8px]'

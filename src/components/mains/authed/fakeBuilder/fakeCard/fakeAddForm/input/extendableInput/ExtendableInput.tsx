@@ -12,6 +12,7 @@ type Props = {
   onFocus?: () => void;
   onBlur?: () => void;
   containerClass?: string;
+  onClick?: () => void;
 };
 
 const ExtendableInput: React.FC<Props> = ({
@@ -22,7 +23,8 @@ const ExtendableInput: React.FC<Props> = ({
   placeholderClassName,
   onFocus,
   onBlur,
-  containerClass
+  containerClass,
+  onClick
 }) => {
   return (
     <div className={clsx('relative flex items-center', containerClass)}>
@@ -35,6 +37,7 @@ const ExtendableInput: React.FC<Props> = ({
         html={value || ''}
         onFocus={onFocus}
         onBlur={onBlur}
+        onClick={onClick}
       />
       {placeholder && !value && (
         <div

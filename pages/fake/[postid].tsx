@@ -1,25 +1,43 @@
 import React from 'react';
 import Layout from '../../src/components/layout/Layout';
 import FakePost from '../../src/components/mains/authed/fakePost/FakePost';
-import * as fs from 'fs';
-import * as path from 'path';
+import { getImageBase64UrlById } from '../../src/common/backend/utils/fakePosts/utils';
+import FakePostsService from '../../src/common/backend/services/fakePostsService/FakePostsService';
 
-export default function Post({ imageUrl: imageBase64Url }) {
+export type FakePostPageProps = {
+  imageBase64Url: string;
+  author: {
+    id: number;
+    firstName: string;
+    lastName?: string;
+    username: string;
+  };
+  title?: string;
+  description?: string;
+};
+
+export default function Post(props: FakePostPageProps) {
   return (
     <Layout>
-      <FakePost imageBase64Url={imageBase64Url} />
+      <FakePost {...props} />
     </Layout>
   );
 }
 
 export async function getServerSideProps({ params: { postid } }) {
-  console.log(postid);
-  const uintArr = fs.readFileSync(
-    path.join('public', 'posts', `${postid}.jpg`)
-  );
-  const base64EncodedImage = uintArr.toString('base64');
-  const mimeType = 'image/jpg';
+  const imageDataUrl = getImageBase64UrlById(postid);
+  let postData;
+  try {
+    postData = await FakePostsService.getPost(postid);
+    console.log(postData);
+  } catch (e) {
+    console.error('Could not find post', e);
+    postData = null;
+  }
+  if (!imageDataUrl || !postData) {
+    return { notFound: true };
+  }
   return {
-    props: { imageBase64Url: `data:${mimeType};base64,${base64EncodedImage}` } // will be passed to the page component as props
+    props: { imageBase64Url: imageDataUrl, ...postData } // will be passed to the page component as props
   };
 }

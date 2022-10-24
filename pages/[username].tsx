@@ -32,7 +32,6 @@ export const getServerSideProps = async ({
     }
     return { props: { ...result } };
   } catch (e) {
-    console.log('kek', e);
     return {
       redirect: {
         permanent: true,

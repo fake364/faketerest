@@ -13,6 +13,7 @@ type Props = { className?: string };
 const CommentBlock: React.FC<Props> = ({ className }) => {
   const [isExpanded, setExpanded] = useState(true);
   const [commentValue, setComment] = useState('');
+  const [isInputFocused, setInputFocused] = useState(false);
 
   const toggleComments = () => {
     setExpanded((prevState) => !prevState);
@@ -20,6 +21,15 @@ const CommentBlock: React.FC<Props> = ({ className }) => {
 
   const handleChangeComment = (value) => {
     setComment(value);
+  };
+
+  const onClickInput = () => {
+    setInputFocused(true);
+  };
+
+  const onCancelCommenting = () => {
+    setComment('');
+    setInputFocused(false);
   };
 
   return (
@@ -51,12 +61,17 @@ const CommentBlock: React.FC<Props> = ({ className }) => {
               placeholderClassName={'ml-[12px]'}
               value={commentValue}
               onChange={handleChangeComment}
+              onClick={onClickInput}
             />
           </div>
-          <div className={'flex justify-end mt-[12px] gap-[12px] pb-[12px]'}>
-            <SecondaryButton>Отмена</SecondaryButton>
-            <SecondaryButton>Готово</SecondaryButton>
-          </div>
+          {isInputFocused && (
+            <div className={'flex justify-end mt-[12px] gap-[12px] pb-[12px]'}>
+              <SecondaryButton onClick={onCancelCommenting}>
+                Отмена
+              </SecondaryButton>
+              <SecondaryButton>Готово</SecondaryButton>
+            </div>
+          )}
         </>
       )}
     </div>

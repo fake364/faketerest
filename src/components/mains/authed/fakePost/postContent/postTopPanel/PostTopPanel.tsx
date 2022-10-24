@@ -8,8 +8,12 @@ import PrimaryButton from '../../../../../../common/components/buttons/primary-b
 type Props = {};
 
 const PostTopPanel: React.FC<Props> = () => {
+  const copyCurrentUrl = async () => {
+    await navigator.clipboard.writeText(window.location.href);
+  };
+
   return (
-    <div className={'flex justify-between mt-[24px] sticky'}>
+    <div className={'flex justify-between sticky'}>
       <div className="flex gap-[4px]">
         <CircleIconButton
           className="text-[black]"
@@ -24,7 +28,7 @@ const PostTopPanel: React.FC<Props> = () => {
         <CircleIconButton
           Icon={GrLink}
           className="text-[black]"
-          onClick={null}
+          onClick={copyCurrentUrl}
         />
       </div>
       <div>

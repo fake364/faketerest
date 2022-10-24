@@ -19,7 +19,7 @@ const UserAvatarImage: React.FC<Props> = ({
     <div
       className={clsx(
         'relative',
-        'flex justify-center items-center',
+        'flex justify-center items-center rounded-[50%]',
         className
       )}
     >
@@ -38,7 +38,13 @@ const UserAvatarImage: React.FC<Props> = ({
           objectPosition={'center'}
         />
       ) : (
-        firstName[0].toUpperCase()
+        <div
+          className={
+            'bg-[whitesmoke] w-[80%] h-[80%] rounded-[50%] flex justify-center items-center '
+          }
+        >
+          {firstName[0].toUpperCase()}
+        </div>
       )}
     </div>
   );
