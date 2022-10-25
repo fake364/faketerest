@@ -7,10 +7,12 @@ import UserAvatarImage from '../../../../../header/navigation/auth-navigation/na
 import ExtendableInput from '../../../fakeBuilder/fakeCard/fakeAddForm/input/extendableInput/ExtendableInput';
 import outlineStyles from '../../../../../../common/utilityCss/Outline.module.css';
 import SecondaryButton from '../../../../../../common/components/buttons/secondary-button/SecondaryButton';
+import { CommentInstance } from '../../../../../../../pages/fake/[postid]';
+import Comment from './comment/Comment';
 
-type Props = { className?: string };
+type Props = { className?: string; comments: CommentInstance[] };
 
-const CommentBlock: React.FC<Props> = ({ className }) => {
+const CommentBlock: React.FC<Props> = ({ className, comments }) => {
   const [isExpanded, setExpanded] = useState(true);
   const [commentValue, setComment] = useState('');
   const [isInputFocused, setInputFocused] = useState(false);
@@ -39,7 +41,11 @@ const CommentBlock: React.FC<Props> = ({ className }) => {
           'mt-[24px] text-[20px] font-[400] flex gap-[12px] items-center'
         }
       >
-        <span>{12} комментариев</span>
+        <span>
+          {comments.length > 0
+            ? `${comments.length} комментариев`
+            : 'Комментарии'}
+        </span>
         <CircleIconButton
           className={'text-[black]'}
           Icon={isExpanded ? FaChevronDown : FaChevronRight}
@@ -48,7 +54,19 @@ const CommentBlock: React.FC<Props> = ({ className }) => {
       </div>
       {isExpanded && (
         <>
-          <div>Comments</div>
+          <div className={'flex flex-col gap-[8px]'}>
+            {comments.map(
+              ({ text, username, userId, firstName, createDate }) => (
+                <Comment
+                  userId={userId}
+                  firstName={firstName}
+                  username={username}
+                  createDate={createDate}
+                  text={text}
+                />
+              )
+            )}
+          </div>
           <div className="flex gap-[12px] mt-[18px]">
             <UserAvatarImage className={'w-[50px] h-[50px]'} />
             <ExtendableInput

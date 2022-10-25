@@ -1,5 +1,5 @@
 .imageDnDUploadContainer {
-  @apply rounded-[16px] bg-[#EFEFEF] p-[16px] flex flex-col cursor-pointer max-h-[454px];
+  @apply rounded-[16px] bg-[#EFEFEF] p-[16px] flex flex-col cursor-pointer;
 }
 
 .fullSizeAbsoluteBlock {

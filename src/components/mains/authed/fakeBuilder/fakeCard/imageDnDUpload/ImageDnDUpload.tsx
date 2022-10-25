@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import styles from './ImageDnDUpload.module.css';
 import useTranslation from 'next-translate/useTranslation';
-import Image from 'next/image';
+import ImageNext from 'next/image';
 import DashedIconBlock from './dashedIconBlock/DashedIconBlock';
 import { ImBin2 } from '@react-icons/all-files/im/ImBin2';
 import CircleIconButton from '../../../../../../common/components/buttons/CircleIconButton';
@@ -51,14 +51,18 @@ const ImageDnDUpload: React.FC<ImageDnDProps> = ({
       console.warn('It is not allowed image type');
     }
   };
-
   return (
     <div
-      className={clsx(styles.imageDnDUploadContainer, 'relative', className)}
+      className={clsx(
+        styles.imageDnDUploadContainer,
+        'relative',
+        src ? 'max-h-[230px]' : 'max-h-[454px]',
+        className
+      )}
     >
       {src ? (
         <div className={'flex flex-col justify-center h-full'}>
-          <Image
+          <ImageNext
             src={src}
             layout={'fill'}
             objectFit={'contain'}

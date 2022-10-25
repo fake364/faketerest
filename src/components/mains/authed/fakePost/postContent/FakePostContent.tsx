@@ -11,7 +11,7 @@ import Link from 'next/link';
 
 type Props = { className?: string } & Pick<
   FakePostPageProps,
-  'title' | 'author' | 'description'
+  'title' | 'author' | 'description' | 'comments'
 >;
 
 const FakePostContent: React.FC<Props> = ({
@@ -23,14 +23,15 @@ const FakePostContent: React.FC<Props> = ({
     lastName: authorLastName,
     firstName: authorFirstName,
     username
-  }
+  },
+  comments
 }) => {
   const authUserId = useSelector((state: RootState) => state.metadata.userId);
 
   return (
     <div className={className}>
       <PostTopPanel />
-      <div>website</div>
+      {/*<div>website</div>*/}
       {title && (
         <a
           target="_blank"
@@ -63,7 +64,7 @@ const FakePostContent: React.FC<Props> = ({
           </SecondaryButton>
         )}
       </div>
-      <CommentBlock />
+      <CommentBlock comments={comments} />
     </div>
   );
 };

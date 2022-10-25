@@ -53,7 +53,11 @@ const FakeBuilderContainer: React.FC<Props> = () => {
     <div
       className={'overflow-y-scroll fixed h-[-webkit-fill-available] w-full'}
     >
-      <ImagesSideColumn className={'fixed left-0'} onClickPlus={onAddNewPost} />
+      <ImagesSideColumn
+        className={'fixed left-0'}
+        onClickPlus={onAddNewPost}
+        isSelectionEnabled={isSelectionEnabled}
+      />
       <div
         className={clsx(
           isSelectionEnabled && 'scale-50 origin-top h-[50%]',

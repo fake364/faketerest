@@ -10,9 +10,14 @@ import { useDispatch, useSelector } from 'react-redux';
 type Props = {
   className?: string;
   onClickPlus: () => void;
+  isSelectionEnabled: boolean;
 };
 
-const ImagesSideColumn: React.FC<Props> = ({ className, onClickPlus }) => {
+const ImagesSideColumn: React.FC<Props> = ({
+  className,
+  onClickPlus,
+  isSelectionEnabled
+}) => {
   const posts = useSelector((state: RootState) => state.fakePosts.posts);
   const dispatch: AppDispatch = useDispatch();
 
@@ -23,9 +28,10 @@ const ImagesSideColumn: React.FC<Props> = ({ className, onClickPlus }) => {
       </SideButton>
       {posts.map(({ image, isSelected, id }) => (
         <SideButton
-          onClick={() =>
-            dispatch(changePostFieldById(id, 'isSelected', !isSelected))
-          }
+          onClick={() => {
+            isSelectionEnabled &&
+              dispatch(changePostFieldById(id, 'isSelected', !isSelected));
+          }}
           className={clsx(
             isSelected && 'border-[#E60023] border-[2px] relative border-solid',
             'bg-[#E2E2E2] text-[gray] flex justify-center'
