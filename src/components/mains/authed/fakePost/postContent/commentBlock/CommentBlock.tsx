@@ -3,19 +3,28 @@ import clsx from 'clsx';
 import CircleIconButton from '../../../../../../common/components/buttons/CircleIconButton';
 import { FaChevronDown } from '@react-icons/all-files/fa/FaChevronDown';
 import { FaChevronRight } from '@react-icons/all-files/fa/FaChevronRight';
-import UserAvatarImage from '../../../../../header/navigation/auth-navigation/nav-buttons/user-button/user-image/UserAvatarImage';
-import ExtendableInput from '../../../fakeBuilder/fakeCard/fakeAddForm/input/extendableInput/ExtendableInput';
-import outlineStyles from '../../../../../../common/utilityCss/Outline.module.css';
-import SecondaryButton from '../../../../../../common/components/buttons/secondary-button/SecondaryButton';
 import { CommentInstance } from '../../../../../../../pages/fake/[postid]';
-import Comment from './comment/Comment';
+import { useRouter } from 'next/router';
+import axios from 'axios';
+import CommentEntity from '../../../../../../common/classes/commentEntity/CommentEntity';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../../../redux/types';
+import CommentsBody from './comment/commentsBody/CommentsBody';
+import useFakeSnackbar from '../../../../../../snackbar/hooks/useFakeSnackbar/useFakeSnackbar';
 
-type Props = { className?: string; comments: CommentInstance[] };
+type Props = {
+  className?: string;
+  comments: CommentInstance[];
+  postId: string;
+};
 
-const CommentBlock: React.FC<Props> = ({ className, comments }) => {
+const CommentBlock: React.FC<Props> = ({ className, comments, postId }) => {
   const [isExpanded, setExpanded] = useState(true);
   const [commentValue, setComment] = useState('');
-  const [isInputFocused, setInputFocused] = useState(false);
+  const myUserId = useSelector((state: RootState) => state.metadata.userId);
+  const router = useRouter();
+  const [isSubmitting, setSubmitting] = useState(false);
+  const { addFakeSnack } = useFakeSnackbar();
 
   const toggleComments = () => {
     setExpanded((prevState) => !prevState);
@@ -25,13 +34,21 @@ const CommentBlock: React.FC<Props> = ({ className, comments }) => {
     setComment(value);
   };
 
-  const onClickInput = () => {
-    setInputFocused(true);
-  };
-
-  const onCancelCommenting = () => {
-    setComment('');
-    setInputFocused(false);
+  const onSubmitComment = async () => {
+    setSubmitting(true);
+    try {
+      await axios.post('/api/post/comment', {
+        postId,
+        text: commentValue,
+        userId: myUserId
+      } as CommentEntity);
+      await router.replace(router.asPath);
+      setComment('');
+      addFakeSnack({ text: 'Комментарий был добавлен' });
+    } catch (e) {
+      console.error('Error creating comment', e);
+    }
+    setSubmitting(false);
   };
 
   return (
@@ -53,44 +70,13 @@ const CommentBlock: React.FC<Props> = ({ className, comments }) => {
         />
       </div>
       {isExpanded && (
-        <>
-          <div className={'flex flex-col gap-[8px]'}>
-            {comments.map(
-              ({ text, username, userId, firstName, createDate }) => (
-                <Comment
-                  userId={userId}
-                  firstName={firstName}
-                  username={username}
-                  createDate={createDate}
-                  text={text}
-                />
-              )
-            )}
-          </div>
-          <div className="flex gap-[12px] mt-[18px]">
-            <UserAvatarImage className={'w-[50px] h-[50px]'} />
-            <ExtendableInput
-              containerClass={'flex-1'}
-              className={clsx(
-                'w-full py-[12px] px-[12px] rounded-[16px] border-[1px] border-[#d4d5d6] border-solid',
-                outlineStyles.defaultFocusOutline
-              )}
-              placeholder={'Добавить комментарий'}
-              placeholderClassName={'ml-[12px]'}
-              value={commentValue}
-              onChange={handleChangeComment}
-              onClick={onClickInput}
-            />
-          </div>
-          {isInputFocused && (
-            <div className={'flex justify-end mt-[12px] gap-[12px] pb-[12px]'}>
-              <SecondaryButton onClick={onCancelCommenting}>
-                Отмена
-              </SecondaryButton>
-              <SecondaryButton>Готово</SecondaryButton>
-            </div>
-          )}
-        </>
+        <CommentsBody
+          comments={comments}
+          onSubmitComment={onSubmitComment}
+          isSubmitting={isSubmitting}
+          handleChangeComment={handleChangeComment}
+          commentValue={commentValue}
+        />
       )}
     </div>
   );

@@ -25,3 +25,9 @@ export const getDifferenceWithCode = (createDate: string) => {
     dates[0]
   );
 };
+
+export function decodeHtml(html) {
+  const txt = document.createElement('textarea');
+  txt.innerHTML = html;
+  return txt.value;
+}

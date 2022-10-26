@@ -5,4 +5,4 @@ export const insertPostCommentQuery = (
 ) => `
 INSERT INTO public.posts_comments(
 	text, fk_post_id, fk_author_user_id)
-		VALUES ('${text}', ${fkPostId}, ${fkAuthorUserId});`;
+		VALUES ('${text}','${fkPostId}', ${fkAuthorUserId});`;

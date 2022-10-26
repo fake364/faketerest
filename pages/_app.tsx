@@ -13,6 +13,7 @@ import RegFormSpinner from '../src/components/mains/others/baseMain/regForm/form
 import { PersistGate } from 'redux-persist/integration/react';
 import setLanguage from 'next-translate/setLanguage';
 import 'reflect-metadata';
+import SnackbarProvider from '../src/snackbar/SnackbarProvider';
 
 type WrapperProps = { children?: React.ReactNode };
 
@@ -46,7 +47,9 @@ function MyApp({ Component, pageProps }) {
       {/* @ts-ignore*/}
       <PersistGate loading={null} persistor={persistor}>
         <WrapperUnderRedux>
-          <Component {...pageProps} />
+          <SnackbarProvider>
+            <Component {...pageProps} />
+          </SnackbarProvider>
         </WrapperUnderRedux>
       </PersistGate>
     </Provider>

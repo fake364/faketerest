@@ -27,6 +27,7 @@ const FakePost: React.FC<Props> = ({ imageBase64Url, ...rest }) => {
         <FakePostContent
           className={'flex flex-col w-[508px] px-[26px] py-[18px]'}
           {...rest}
+          postId={postid as string}
         />
       </div>
     </div>

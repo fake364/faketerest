@@ -1,7 +1,7 @@
 import React from 'react';
 import UserAvatarImage from '../../../../../../header/navigation/auth-navigation/nav-buttons/user-button/user-image/UserAvatarImage';
 import Link from 'next/link';
-import { getDifferenceWithCode, msToTime } from './utils/utils';
+import { getDifferenceWithCode } from './utils/utils';
 
 type Props = {
   userId: number;
@@ -20,7 +20,6 @@ const Comment: React.FC<Props> = ({
 }) => {
   const dateDifference = getDifferenceWithCode(createDate);
 
-  console.log('parsed', dateDifference);
   return (
     <div className={'flex gap-[8px]'}>
       <Link href={'/' + username}>
@@ -42,7 +41,11 @@ const Comment: React.FC<Props> = ({
           {text}
         </div>
         <div>
-          <div className={'text-[gray] text-[14px]'}>{`${dateDifference[1]} ${dateDifference[0]}`}</div>
+          <div className={'text-[gray] text-[14px]'}>{`${
+            dateDifference
+              ? dateDifference[1] + ' ' + dateDifference[0]
+              : 'Just now'
+          }`}</div>
         </div>
       </div>
     </div>

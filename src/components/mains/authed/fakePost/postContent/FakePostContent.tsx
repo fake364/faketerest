@@ -9,7 +9,7 @@ import CommentBlock from './commentBlock/CommentBlock';
 import { FakePostPageProps } from '../../../../../../pages/fake/[postid]';
 import Link from 'next/link';
 
-type Props = { className?: string } & Pick<
+type Props = { className?: string; postId: string } & Pick<
   FakePostPageProps,
   'title' | 'author' | 'description' | 'comments'
 >;
@@ -24,7 +24,8 @@ const FakePostContent: React.FC<Props> = ({
     firstName: authorFirstName,
     username
   },
-  comments
+  comments,
+  postId
 }) => {
   const authUserId = useSelector((state: RootState) => state.metadata.userId);
 
@@ -64,7 +65,7 @@ const FakePostContent: React.FC<Props> = ({
           </SecondaryButton>
         )}
       </div>
-      <CommentBlock comments={comments} />
+      <CommentBlock comments={comments} postId={postId} />
     </div>
   );
 };
