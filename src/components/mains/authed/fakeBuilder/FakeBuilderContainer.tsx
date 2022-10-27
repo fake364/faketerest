@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setHeaderMode } from '../../../../redux/actions/metadata/actions';
 import { HEADER_MODE } from '../../../layout/Layout';
 import {
+  resetPosts,
   setFakePosts,
   submitPostsById
 } from '../../../../redux/actions/fake-builder/actions';
@@ -36,6 +37,12 @@ const FakeBuilderContainer: React.FC<Props> = () => {
       dispatch(setHeaderMode(HEADER_MODE.DEFAULT));
     }
   }, [isSelectionEnabled]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetPosts());
+    };
+  }, []);
 
   const onAddNewPost = () => {
     const id = (posts[posts.length - 1]?.id || 0) + 1;

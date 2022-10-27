@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
+    "@tailwindcss/line-clamp": "^0.4.2",
     "@types/crypto-js": "^4.1.1",
     "@types/lodash": "4.14.178",
     "@types/react-motion": "0.0.32",
@@ -20,6 +21,7 @@
     "crypto-js": "^4.1.1",
     "formidable": "^2.0.1",
     "formik": "^2.2.9",
+    "image-size": "^1.0.2",
     "jwt-decode": "^3.1.2",
     "lodash": "4.17.21",
     "next": "12.2.0",
@@ -31,6 +33,7 @@
     "react-contenteditable": "^3.3.6",
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
+    "react-infinite-scroll-component": "6.1.0",
     "react-lines-ellipsis": "^0.15.3",
     "react-redux": "^8.0.2",
     "redux": "^4.2.0",

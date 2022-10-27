@@ -39,7 +39,7 @@ const Layout: React.FC<Props> = ({ children, className }) => {
           </NavigationContainer>
         )}
       </Header>
-      <main className={clsx('h-full')}>{children}</main>
+      <main className={clsx('')}>{children}</main>
     </div>
   );
 };

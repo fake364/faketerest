@@ -2,6 +2,14 @@ import { ConnectionService } from '../Connection';
 import { createPostQuery } from './queries/createPostQuery';
 import { selectPostById } from './queries/selectPostById/selectPostById';
 import { isPostInstance } from './utils/utils';
+import selectAllPostsQuery, {
+  SelectPostsSettings
+} from './queries/selectAllPosts/selectAllPostsQuery';
+import path from 'path';
+import totalPostsQuery from './queries/totalPostsQuery/totalPostsQuery';
+const sizeOf = require('image-size');
+
+type TablePostEntity = { title?: string; description?: string; pk_id: string };
 
 export class FakePostsServiceClass extends ConnectionService {
   public static instance: FakePostsServiceClass;
@@ -49,6 +57,26 @@ export class FakePostsServiceClass extends ConnectionService {
         username: res.USERNAME
       }
     };
+  };
+
+  getPosts = async (settings: SelectPostsSettings) => {
+    const [res] = await this.connection.query(selectAllPostsQuery(settings));
+    const posts = res as TablePostEntity[];
+    return posts.map(({ pk_id, title, description }) => {
+      const dimensions = sizeOf(path.join('public', 'posts', `${pk_id}.jpg`));
+      return {
+        postId: pk_id,
+        title,
+        description,
+        sizes: [dimensions.width, dimensions.height]
+      };
+    });
+  };
+
+  getTotalPosts = async () => {
+    const [[res]] = await this.connection.query(totalPostsQuery());
+    const countObj = res as { count: string };
+    return Number(countObj.count);
   };
 }
 

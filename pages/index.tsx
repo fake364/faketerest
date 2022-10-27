@@ -20,7 +20,7 @@ export default function Home(props) {
 
   return (
     <>
-      <Layout className="h-screen overflow-hidden">
+      <Layout className="">
         {isLoggedIn ? <MainGallery /> : <MainPage />}
       </Layout>
     </>

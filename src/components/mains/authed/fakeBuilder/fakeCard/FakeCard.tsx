@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import FakePostEntity from '../../../../../common/classes/fakePostEntity/FakePostEntity';
-import { PostChangeFunction } from '../FakeBuilderContainer';
 import PostImageForm from './postImageForm/PostImageForm';
 import UploadSuccess from './uploadSuccess/UploadSuccess';
 import SelectButton from './selectButton/SelectButton';

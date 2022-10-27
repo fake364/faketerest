@@ -21,9 +21,20 @@ module.exports = {
         move_and_disappear: 'move_up 5s ease-in-out infinite',
         slide_bottom: 'slide-to-second-page 2s ease-in-out infinite alternate',
         form_appearance: 'appearance 0.3s ease-in-out'
+      },
+      gridRow: {
+        'span-7': 'span 7 / span 7',
+        'span-8': 'span 8 / span 8',
+        'span-9': 'span 9 / span 9',
+        'span-10': 'span 10 / span 10',
+        'span-11': 'span 11 / span 11',
+        'span-12': 'span 12 / span 12'
       }
     }
   },
 
-  plugins: [require('tailwindcss-animation-delay')]
+  plugins: [
+    require('tailwindcss-animation-delay'),
+    require('@tailwindcss/line-clamp')
+  ]
 };
