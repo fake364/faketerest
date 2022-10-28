@@ -1,0 +1,3 @@
+.fakePostItemTitle{
+    @apply line-clamp-[2] text-ellipsis mt-[8px] font-bold text-[14px] text-[#4d4d4d] pointer-events-none;
+}

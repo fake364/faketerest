@@ -59,6 +59,6 @@ export async function getServerSideProps({ params: { postid } }) {
     return { notFound: true };
   }
   return {
-    props: { imageBase64Url: imageDataUrl, ...postData, comments } // will be passed to the page component as props
+    props: { imageBase64Url: imageDataUrl, ...postData, comments }
   };
 }

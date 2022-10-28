@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import LinesEllipsis from 'react-lines-ellipsis';
 import responsiveHOC from 'react-lines-ellipsis/lib/responsiveHOC';
+import useTranslation from 'next-translate/useTranslation';
 const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis);
 
 type Props = { text: string; maxLines: number };
@@ -8,6 +9,7 @@ type Props = { text: string; maxLines: number };
 const LimitedRowsText: React.FC<Props> = ({ text, maxLines }) => {
   const [isClamped, setClamped] = useState(true);
   const [isExpanded, setExpanded] = useState(false);
+  const {t}=useTranslation('common');
 
   const onReflow = (state) => {
     setClamped(state.clamped);
@@ -32,8 +34,7 @@ const LimitedRowsText: React.FC<Props> = ({ text, maxLines }) => {
           />
           {isClamped && (
             <span className={'font-[500] cursor-pointer'} onClick={expandBlock}>
-              {' '}
-              Еще
+              {t('fakePost.more')}
             </span>
           )}
         </>

@@ -2,6 +2,7 @@ import React from 'react';
 import UserAvatarImage from '../../../../../../header/navigation/auth-navigation/nav-buttons/user-button/user-image/UserAvatarImage';
 import Link from 'next/link';
 import { getDifferenceWithCode } from './utils/utils';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = {
   userId: number;
@@ -19,6 +20,7 @@ const Comment: React.FC<Props> = ({
   createDate
 }) => {
   const dateDifference = getDifferenceWithCode(createDate);
+  const { t } = useTranslation('common');
 
   return (
     <div className={'flex gap-[8px]'}>
@@ -44,7 +46,7 @@ const Comment: React.FC<Props> = ({
           <div className={'text-[gray] text-[14px]'}>{`${
             dateDifference
               ? dateDifference[1] + ' ' + dateDifference[0]
-              : 'Just now'
+              : t('fakePost.justNow')
           }`}</div>
         </div>
       </div>

@@ -7,6 +7,7 @@ import outlineStyles from '../../../../../../../../common/utilityCss/Outline.mod
 import { decodeHtml } from '../utils/utils';
 import SecondaryButton from '../../../../../../../../common/components/buttons/secondary-button/SecondaryButton';
 import { CommentInstance } from '../../../../../../../../../pages/fake/[postid]';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = {
   comments: CommentInstance[];
@@ -25,6 +26,7 @@ const CommentsBody: React.FC<Props> = ({
 }) => {
   const [isInputFocused, setInputFocused] = useState(false);
   const [showCommentsNum, setCommentsNum] = useState(3);
+  const { t } = useTranslation('common');
 
   const onClickInput = () => {
     setInputFocused(true);
@@ -55,7 +57,7 @@ const CommentsBody: React.FC<Props> = ({
           ))}
         {showCommentsNum < comments.length && (
           <SecondaryButton onClick={onClickShowMore}>
-            Показать больше
+            {t('fakePost.showMore')}
           </SecondaryButton>
         )}
       </div>
@@ -68,7 +70,7 @@ const CommentsBody: React.FC<Props> = ({
             outlineStyles.defaultFocusOutline,
             isSubmitting && '!bg-[whitesmoke] pointer-events-none'
           )}
-          placeholder={'Добавить комментарий'}
+          placeholder={t('fakePost.addComment')}
           placeholderClassName={'ml-[12px]'}
           value={commentValue}
           onChange={(value) => handleChangeComment(decodeHtml(value))}
@@ -77,7 +79,9 @@ const CommentsBody: React.FC<Props> = ({
       </div>
       {isInputFocused && (
         <div className={'flex justify-end mt-[12px] gap-[12px] pb-[12px]'}>
-          <SecondaryButton onClick={onCancelCommenting}>Отмена</SecondaryButton>
+          <SecondaryButton onClick={onCancelCommenting}>
+            {t('fakePost.cancel')}
+          </SecondaryButton>
           <SecondaryButton
             className={clsx(
               (!commentValue.trim() || isSubmitting) &&
@@ -85,7 +89,7 @@ const CommentsBody: React.FC<Props> = ({
             )}
             onClick={onSubmitComment}
           >
-            Готово
+            {t('fakePost.postCommentButton')}
           </SecondaryButton>
         </div>
       )}

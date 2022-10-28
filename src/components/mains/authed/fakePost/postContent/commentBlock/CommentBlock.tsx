@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../../redux/types';
 import CommentsBody from './comment/commentsBody/CommentsBody';
 import useFakeSnackbar from '../../../../../../snackbar/hooks/useFakeSnackbar/useFakeSnackbar';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = {
   className?: string;
@@ -24,6 +25,7 @@ const CommentBlock: React.FC<Props> = ({ className, comments, postId }) => {
   const myUserId = useSelector((state: RootState) => state.metadata.userId);
   const router = useRouter();
   const [isSubmitting, setSubmitting] = useState(false);
+  const { t } = useTranslation('common');
   const { addFakeSnack } = useFakeSnackbar();
 
   const toggleComments = () => {
@@ -44,8 +46,9 @@ const CommentBlock: React.FC<Props> = ({ className, comments, postId }) => {
       } as CommentEntity);
       await router.replace(router.asPath);
       setComment('');
-      addFakeSnack({ text: 'Комментарий был добавлен' });
+      addFakeSnack({ text: t('fakePost.commentHasBeenAdded') });
     } catch (e) {
+      addFakeSnack({ text: t('fakePost.errorAddingComment') });
       console.error('Error creating comment', e);
     }
     setSubmitting(false);
@@ -58,11 +61,7 @@ const CommentBlock: React.FC<Props> = ({ className, comments, postId }) => {
           'mt-[24px] text-[20px] font-[400] flex gap-[12px] items-center'
         }
       >
-        <span>
-          {comments.length > 0
-            ? `${comments.length} комментариев`
-            : 'Комментарии'}
-        </span>
+        <span>{t('fakePost.comment', { count: comments.length })}</span>
         <CircleIconButton
           className={'text-[black]'}
           Icon={isExpanded ? FaChevronDown : FaChevronRight}

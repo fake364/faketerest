@@ -52,5 +52,10 @@
       "getStartedHere": "Get started here!",
       "createBusinessAccount": "Create a free business account"
     }
+  },
+  "gallery": {
+    "errors": {
+      "couldNotGetImages": "There was some error fetching images"
+    }
   }
 }

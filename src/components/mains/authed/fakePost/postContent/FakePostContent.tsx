@@ -8,6 +8,7 @@ import PostTopPanel from './postTopPanel/PostTopPanel';
 import CommentBlock from './commentBlock/CommentBlock';
 import { FakePostPageProps } from '../../../../../../pages/fake/[postid]';
 import Link from 'next/link';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = { className?: string; postId: string } & Pick<
   FakePostPageProps,
@@ -28,6 +29,7 @@ const FakePostContent: React.FC<Props> = ({
   postId
 }) => {
   const authUserId = useSelector((state: RootState) => state.metadata.userId);
+  const { t } = useTranslation('common');
 
   return (
     <div className={className}>
@@ -61,7 +63,7 @@ const FakePostContent: React.FC<Props> = ({
         </Link>
         {authUserId !== authorId && (
           <SecondaryButton className={'justify-self-end ml-[auto]'}>
-            Подписаться
+            {t('fakePost.subscribe')}
           </SecondaryButton>
         )}
       </div>

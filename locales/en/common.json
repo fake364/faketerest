@@ -44,5 +44,21 @@
     },
     "save": "Save",
     "remove": "Remove"
+  },
+  "fakePost": {
+    "save": "Save",
+    "linkCopied": "Link has been copied",
+    "more": "More",
+    "subscribe": "Subscribe",
+    "commentHasBeenAdded": "Comment has been added",
+    "errorAddingComment": "Error adding new comment",
+    "comment_0": "Comments",
+    "comment_1": "{{count}} Comment",
+    "comment_other": "{{count}} Comments",
+    "showMore": "Show more",
+    "addComment": "Add comment",
+    "cancel": "Cancel",
+    "postCommentButton": "Send",
+    "justNow": "Just now"
   }
 }

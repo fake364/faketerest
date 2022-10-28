@@ -5,14 +5,16 @@ import { FiUpload } from '@react-icons/all-files/fi/FiUpload';
 import { GrLink } from '@react-icons/all-files/gr/GrLink';
 import PrimaryButton from '../../../../../../common/components/buttons/primary-button/PrimaryButton';
 import useFakeSnackbar from '../../../../../../snackbar/hooks/useFakeSnackbar/useFakeSnackbar';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = {};
 
 const PostTopPanel: React.FC<Props> = () => {
   const { addFakeSnack } = useFakeSnackbar();
+  const { t } = useTranslation('common');
   const copyCurrentUrl = async () => {
     await navigator.clipboard.writeText(window.location.href);
-    addFakeSnack({ text: 'Ссылка скопирована' });
+    addFakeSnack({ text: t('fakePost.linkCopied') });
   };
 
   return (
@@ -35,7 +37,7 @@ const PostTopPanel: React.FC<Props> = () => {
         />
       </div>
       <div>
-        <PrimaryButton>Сохранить</PrimaryButton>
+        <PrimaryButton>{t('fakePost.save')}</PrimaryButton>
       </div>
     </div>
   );
