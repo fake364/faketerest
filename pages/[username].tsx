@@ -5,8 +5,10 @@ import { AUTH_SESSION_KEY } from '../src/common/constants/commons';
 import cookie from 'cookie';
 import RegistrationService from '../src/common/backend/services/registrationService/RegistrationService';
 import UserSessionsService from '../src/common/backend/services/usersSessionsService/UserSessionsService';
+import UserSubscriptionsService from '../src/common/backend/services/userSubscriptionsService/UserSubscriptionsService';
 
 export default function UsernamePage(props) {
+  console.log(props);
   return (
     <Layout>
       <Profile userData={props} />
@@ -27,10 +29,13 @@ export const getServerSideProps = async ({
       throw new Error('Unauthorized');
     }
     const result = await RegistrationService.getUserDataBy(username);
+    const subscriptions = await UserSubscriptionsService.getUserSubscriptions(
+      result.id
+    );
     if (!result) {
       throw new Error('No user found');
     }
-    return { props: { ...result } };
+    return { props: { ...result, subscriptions } };
   } catch (e) {
     return {
       redirect: {

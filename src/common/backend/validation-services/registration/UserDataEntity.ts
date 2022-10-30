@@ -18,6 +18,8 @@ import IsGenderNumber from './validationClasses/isGenderNumber';
 import IsChangePasswordPair from './validationClasses/isChangePasswordPair';
 
 export default class UserDataEntity {
+  id: number;
+
   @IsOptional()
   @IsString()
   @MaxLength(MAX_LENGTH_FIELDS.firstName)

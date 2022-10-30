@@ -1,14 +1,19 @@
 import React from 'react';
+import styles from './ButtonDropdownElement.module.css';
+import clsx from 'clsx';
 
-type Props = { onClick?: () => void };
+type Props = {
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  className?: string;
+};
 
-const ButtonDropdownElement: React.FC<Props> = ({ onClick, children }) => {
+const ButtonDropdownElement: React.FC<Props> = ({
+  onClick,
+  className,
+  children
+}) => {
   return (
-    <div
-      onClick={onClick}
-      className="min-w-[200px] hover:bg-[whitesmoke] rounded-[8px] px-[12px] py-[8px]
-    cursor-pointer font-medium active:bg-[lightgrey]"
-    >
+    <div onClick={onClick} className={clsx(styles.dropdownElement, className)}>
       {children}
     </div>
   );

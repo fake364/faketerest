@@ -26,7 +26,10 @@ const DropdownRootElement = <T,>(props: Props<T>) => {
     >
       <div
         className="self-center font-medium cursor-pointer"
-        onClick={() => setDisplayed(!isDisplayed)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setDisplayed(!isDisplayed);
+        }}
       >
         {props.variant === 'text' && (
           <>

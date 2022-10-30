@@ -1,0 +1,4 @@
+.dropdownElement {
+  @apply min-w-[200px] hover:bg-[whitesmoke] rounded-[8px] px-[12px] py-[8px]
+cursor-pointer font-medium active:bg-[lightgrey];
+}

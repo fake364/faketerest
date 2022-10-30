@@ -12,10 +12,12 @@ type Props = { userData: UserDataEntity };
 
 const Profile: React.FC<Props> = ({ userData }) => {
   const { t } = useTranslation('profile');
+  console.log(userData);
   return (
     <div className="flex flex-col items-center">
       <UserAvatarImage
         firstName={userData.firstName}
+        userId={userData.id}
         className={clsx(
           styles.roundedButton,
           styles.roundedButtonSizes,

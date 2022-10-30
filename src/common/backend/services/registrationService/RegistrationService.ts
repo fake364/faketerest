@@ -40,7 +40,8 @@ export class RegService extends ConnectionService {
       gender: instance.GENDER,
       age: instance.AGE,
       country: instance.label,
-      countryCode3: instance.ISO3
+      countryCode3: instance.ISO3,
+      id: Number(instance.ID)
     };
   }
 }

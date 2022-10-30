@@ -1,3 +1,23 @@
-.fakePostItemTitle{
-    @apply line-clamp-[2] text-ellipsis mt-[8px] font-bold text-[14px] text-[#4d4d4d] pointer-events-none;
+.fakePostItemTitle {
+  @apply line-clamp-[2] text-ellipsis font-bold text-[14px] text-[#4d4d4d] pointer-events-none;
+}
+
+.imageMenuBlock {
+  @apply relative leading-[0];
+}
+
+.imageMenuBlock > .hover-opening-menu {
+  display: none;
+}
+
+.imageMenuBlock:hover > .hover-opening-menu {
+  display: block;
+}
+
+.blackTransparentBlock {
+  @apply absolute w-full h-full left-0 top-0 bg-[rgba(0,0,0,0.3)] rounded-[24px]  flex-col justify-between;
+}
+
+.dotsButtonIcon {
+  @apply p-[4px] w-[30px] h-[30px] mr-[14px] mb-[14px] bg-[rgba(255,255,255,0.8)] !text-[34px] !text-[black];
 }
