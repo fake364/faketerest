@@ -1,0 +1,7 @@
+.blackBackScreen {
+  @apply bg-[rgba(0,0,0,0.4)] fixed w-full h-full z-[20] flex justify-center items-center top-0 left-0;
+}
+
+.form {
+  @apply rounded-[16px] bg-[white] p-[12px] absolute min-w-[200px] min-h-[100px];
+}

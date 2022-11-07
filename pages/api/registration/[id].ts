@@ -17,6 +17,7 @@ import {
   updateUser
 } from '../../../src/common/backend/utils/registrationUtils/utils';
 import RegistrationService from '../../../src/common/backend/services/registrationService/RegistrationService';
+import UserSubscriptionsService from '../../../src/common/backend/services/userSubscriptionsService/UserSubscriptionsService';
 
 export const config = {
   api: {
@@ -56,7 +57,7 @@ class RegistrationsHandler {
     }
 
     try {
-      const dto = await prepareEntityAndValidate(result,id);
+      const dto = await prepareEntityAndValidate(result, id);
       await updateUser(dto, id, res);
       return;
     } catch (errors) {

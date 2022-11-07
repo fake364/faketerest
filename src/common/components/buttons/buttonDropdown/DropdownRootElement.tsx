@@ -4,7 +4,11 @@ import { IconType } from '@react-icons/all-files';
 import CircleIconButton from '../CircleIconButton';
 import clsx from 'clsx';
 
-type DropdownClassName = { dropdownClass?: string; buttonClass?: string };
+type DropdownClassName = {
+  dropdownClass?: string;
+  buttonClass?: string;
+  onOpenDropdown?: () => void;
+};
 
 type Props<T> = T extends { variant: 'text' }
   ? T & { text: string; children: ReactNode | ReactNode[] } & DropdownClassName
@@ -28,6 +32,9 @@ const DropdownRootElement = <T,>(props: Props<T>) => {
         className="self-center font-medium cursor-pointer"
         onClick={(e) => {
           e.stopPropagation();
+          if (!isDisplayed) {
+            props.onOpenDropdown?.();
+          }
           setDisplayed(!isDisplayed);
         }}
       >

@@ -14,14 +14,13 @@ import { PersistGate } from 'redux-persist/integration/react';
 import setLanguage from 'next-translate/setLanguage';
 import 'reflect-metadata';
 import SnackbarProvider from '../src/snackbar/SnackbarProvider';
+import GlobalNotificationWrapper from '../src/components/globalNotificationWrapper/GlobalNotificationWrapper';
 
 type WrapperProps = { children?: React.ReactNode };
 
 const WrapperUnderRedux: React.FC<WrapperProps> = ({ children }) => {
   const [theme, setTheme] = useState(THEME_TYPE.BASE);
   const [isTranslationLoading, setTranslationsLoading] = useState(true);
-
-  // TODO revisit this hook with react-query
   useFetchUser();
 
   const { isCheckingAuth } = useCheckAuth();
@@ -48,7 +47,9 @@ function MyApp({ Component, pageProps }) {
       <PersistGate loading={null} persistor={persistor}>
         <WrapperUnderRedux>
           <SnackbarProvider>
-            <Component {...pageProps} />
+            <GlobalNotificationWrapper>
+              <Component {...pageProps} />
+            </GlobalNotificationWrapper>
           </SnackbarProvider>
         </WrapperUnderRedux>
       </PersistGate>

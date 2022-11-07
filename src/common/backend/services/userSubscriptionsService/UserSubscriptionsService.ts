@@ -1,7 +1,18 @@
 import { ConnectionService } from '../Connection';
 import insertSubscription from './queries/insertSubscription';
 import removeSubscription from './queries/removeSubscription';
+import selectUserSubscribersQuery from './queries/selectUserSubscribersQuery';
+import { Nullable } from '../../../types/common';
 import selectUserSubscriptionsQuery from './queries/selectUserSubscriptionsQuery';
+import { mapDbSubscriptionToEntity } from './utils/utils';
+
+export type SubscriberDbType = {
+  fk_to_user: number;
+  FIRST_NAME: string;
+  LAST_NAME: Nullable<string>;
+  USERNAME: string;
+  fk_from_user: number;
+};
 
 export class UserSubscriptionsServiceClass extends ConnectionService {
   public static instance: UserSubscriptionsServiceClass;
@@ -25,18 +36,22 @@ export class UserSubscriptionsServiceClass extends ConnectionService {
     await this.connection.query(removeSubscription(fromUserId, toUserId));
   }
 
+  async getUserSubscribers(userId: number) {
+    const [res] = await this.connection.query(
+      selectUserSubscribersQuery(userId)
+    );
+    const checkedEntries = res as SubscriberDbType[];
+
+    return checkedEntries.map(mapDbSubscriptionToEntity);
+  }
+
   async getUserSubscriptions(userId: number) {
     const [res] = await this.connection.query(
       selectUserSubscriptionsQuery(userId)
     );
-    const checkedEntries = res as any[]; // TODO Check type
+    const checkedEntries = res as SubscriberDbType[];
 
-    return checkedEntries.map((entity) => ({
-      id: Number(entity.fk_to_user),
-      firstName: entity.FIRST_NAME,
-      lastName: entity.LAST_NAME,
-      username: entity.USERNAME
-    }));
+    return checkedEntries.map(mapDbSubscriptionToEntity);
   }
 }
 

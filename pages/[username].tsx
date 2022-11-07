@@ -1,47 +1,55 @@
 import React from 'react';
 import Layout from '../src/components/layout/Layout';
 import Profile from '../src/components/mains/authed/profile/Profile';
-import { AUTH_SESSION_KEY } from '../src/common/constants/commons';
-import cookie from 'cookie';
 import RegistrationService from '../src/common/backend/services/registrationService/RegistrationService';
-import UserSessionsService from '../src/common/backend/services/usersSessionsService/UserSessionsService';
 import UserSubscriptionsService from '../src/common/backend/services/userSubscriptionsService/UserSubscriptionsService';
+import withSessionAuth from '../src/common/backend/utils/withSessionAuth/withSessionAuth';
+import UserDataEntity from '../src/common/backend/validation-services/registration/UserDataEntity';
+import { Nullable } from '../src/common/types/common';
 
-export default function UsernamePage(props) {
-  console.log(props);
+export type SubscriptionEntry = {
+  id: number;
+  firstName: string;
+  lastName: Nullable<string>;
+  username: string;
+  actionMakerId: number;
+};
+
+export type ProfilePageProps = {
+  userData: UserDataEntity;
+  subscribers: SubscriptionEntry[];
+  subscriptions: SubscriptionEntry[];
+};
+
+export default function UsernamePage({
+  userData,
+  subscribers,
+  subscriptions
+}: ProfilePageProps) {
+  console.log(subscriptions, subscribers);
   return (
     <Layout>
-      <Profile userData={props} />
+      <Profile
+        userData={userData}
+        subscribers={subscribers}
+        subscriptions={subscriptions}
+      />
     </Layout>
   );
 }
 
-export const getServerSideProps = async ({
-  params: { username },
-  req: { headers }
-}) => {
-  try {
-    if (
-      !(await UserSessionsService.isSessionActive(
-        cookie.parse(headers.cookie)[AUTH_SESSION_KEY]
-      ))
-    ) {
-      throw new Error('Unauthorized');
-    }
-    const result = await RegistrationService.getUserDataBy(username);
+export const getServerSideProps = withSessionAuth(
+  async ({ params: { username }, req: { headers } }) => {
+    const result = await RegistrationService.getUserDataBy(username as string);
+    const subscribers = await UserSubscriptionsService.getUserSubscribers(
+      result.id
+    );
     const subscriptions = await UserSubscriptionsService.getUserSubscriptions(
       result.id
     );
     if (!result) {
       throw new Error('No user found');
     }
-    return { props: { ...result, subscriptions } };
-  } catch (e) {
-    return {
-      redirect: {
-        permanent: true,
-        destination: '/'
-      }
-    };
+    return { props: { userData: result, subscriptions, subscribers } };
   }
-};
+);

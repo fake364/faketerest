@@ -1,0 +1,4 @@
+.notificationBubble {
+  @apply w-[18px] h-[18px] absolute bg-[red] rounded-[50%] text-[white] text-[12px] flex justify-center items-center
+    z-[10] right-[4px] top-[4px];
+}

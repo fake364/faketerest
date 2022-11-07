@@ -1,9 +1,14 @@
 {
   "share": "Share",
   "editProfile": "Edit profile",
+  "subscription_0": "{{count}} Subscriptions",
+  "subscription_1": "{{count}} Subscription",
+  "subscription_other": "{{count}} Subscriptions",
   "subscriber_0": "{{count}} Subscribers",
   "subscriber_1": "{{count}} Subscriber",
   "subscriber_other": "{{count}} Subscribers",
   "created": "Created",
-  "saved": "Saved"
+  "saved": "Saved",
+  "subscriptions": "Subscriptions",
+  "subscribers": "Subscribers"
 }
