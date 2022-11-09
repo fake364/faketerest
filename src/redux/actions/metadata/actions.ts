@@ -1,5 +1,5 @@
 import { HEADER_MODE } from '../../../components/layout/Layout';
-import { NotificationType } from '../../../common/types/events/EventTypes';
+import { NotificationType } from 'faketerest-utilities';
 
 export const SET_IS_LOGGED_IN = 'SET_IS_LOGGED_IN';
 export const SET_USER_ID = 'SET_USER_ID';

@@ -25,11 +25,11 @@ const SubscriptionItem: React.FC<Props> = ({
   firstName,
   type
 }) => {
-  const { onFollow, isSubscribed, onUnfollow } =
-    useFollowUnfollow(subscribedToid);
-  const myId = useSelector((state: RootState) => state.metadata.userId);
   const selectId =
     type === SUBSCRIPTION_TYPE.SUBSCRIBER ? actionAuthorId : subscribedToid;
+  const { onFollow, isSubscribed, onUnfollow } = useFollowUnfollow(selectId);
+  const myId = useSelector((state: RootState) => state.metadata.userId);
+
   console.log(myId, type, subscribedToid, actionAuthorId, selectId === myId);
 
   return (

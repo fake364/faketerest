@@ -1,4 +1,4 @@
-import { NotificationType } from '../../../../../../../common/types/events/EventTypes';
+import { NotificationType } from 'faketerest-utilities';
 
 export const getUnreadNotificationsKeys = (notifications: NotificationType[]) =>
   notifications
