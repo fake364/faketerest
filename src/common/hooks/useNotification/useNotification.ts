@@ -11,6 +11,9 @@ import {
   filterDuplicateNotifications,
   NotificationType
 } from 'faketerest-utilities';
+import EVENT_TYPE from 'faketerest-utilities/dist/events/types';
+import PostCreatePayload from 'faketerest-utilities/dist/events/postCreate/types';
+import getFirstLastName from '../../utils/firstLastNameCreate/getFirstLastName';
 
 export const useNotification = () => {
   const myId = useSelector((state: RootState) => state.metadata.userId);
@@ -39,11 +42,33 @@ export const useNotification = () => {
     PagerNotificationsService.socket.on(
       CLIENT_EVENTS.COMMON_NOTIFICATION,
       (notification: NotificationType) => {
-        const obj: SubscriptionPayload = notification.payload;
+        console.log('KEK!!11111', notification);
+
+        let snackText;
+        switch (notification.payload.eventType) {
+          case EVENT_TYPE.POST_CREATE:
+            const { authorFirstname, authorLastName } =
+              notification.payload as PostCreatePayload;
+            snackText = `${getFirstLastName(
+              authorFirstname,
+              authorLastName
+            )} has just posted image, look`;
+            break;
+          case EVENT_TYPE.SUBSCRIPTION:
+            const { fromFirstname, fromLastname } =
+              notification.payload as SubscriptionPayload;
+            snackText = `${getFirstLastName(
+              fromFirstname,
+              fromLastname
+            )} has just subscribed to you`;
+            break;
+        }
         console.log('KEK', notification);
-        addFakeSnack({
-          text: `${obj.fromFirstname} ${obj.fromLastname} has just subscribed to you`
-        });
+        if (snackText) {
+          addFakeSnack({
+            text: snackText
+          });
+        }
         addNotification(notification);
       }
     );

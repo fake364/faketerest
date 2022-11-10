@@ -20,7 +20,7 @@
     "clsx": "^1.1.1",
     "cookie": "^0.5.0",
     "crypto-js": "^4.1.1",
-    "faketerest-utilities": "^1.0.2",
+    "faketerest-utilities": "1.0.3",
     "formidable": "^2.0.1",
     "formik": "^2.2.9",
     "image-size": "^1.0.2",

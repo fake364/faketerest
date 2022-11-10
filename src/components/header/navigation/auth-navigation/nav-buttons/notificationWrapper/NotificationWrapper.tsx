@@ -8,6 +8,9 @@ import { Dispatch } from 'redux';
 import { setNotifications } from '../../../../../../redux/actions/metadata/actions';
 import { CLIENT_EVENTS, NotificationType } from 'faketerest-utilities';
 import EVENT_TYPE from 'faketerest-utilities/dist/events/types';
+import { SubscriptionPayload } from 'faketerest-utilities/dist/events/subscription/types';
+import PostCreatedNotification from './postCreatedNotification/PostCreatedNotification';
+import PostCreatePayload from 'faketerest-utilities/dist/events/postCreate/types';
 
 type Props = {
   notificationData: NotificationType;
@@ -40,7 +43,16 @@ const NotificationWrapper: React.FC<Props> = ({
   }, []);
 
   if (payload.eventType === EVENT_TYPE.SUBSCRIPTION) {
-    return <SubscriptionNotification notificationId={key} data={payload} />;
+    return (
+      <SubscriptionNotification
+        notificationId={key}
+        data={payload as SubscriptionPayload}
+      />
+    );
+  }
+
+  if (payload.eventType === EVENT_TYPE.POST_CREATE) {
+    return <PostCreatedNotification data={payload as PostCreatePayload} />;
   }
 
   return <></>;
