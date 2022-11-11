@@ -12,7 +12,7 @@ const PostCreatedNotification: React.FC<Props> = ({
   data: { createdAt, postId, authorFirstname, authorLastName, authorId }
 }) => {
   return (
-    <Link href={`/fake/` + postId}>
+    <Link href={'/fake/' + postId}>
       <ButtonDropdownElement onClick={(e) => e.stopPropagation()}>
         <div className={'flex gap-[12px]'}>
           <div className={'relative w-[120px] h-[95px]'}>

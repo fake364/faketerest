@@ -4,6 +4,7 @@ import Link from 'next/link';
 import UserAvatarImage from '../../user-button/user-image/UserAvatarImage';
 import CreatedAtLabel from '../../../../../../../common/components/createdAtLabel/CreatedAtLabel';
 import { SubscriptionPayload } from 'faketerest-utilities/dist/events/subscription/types';
+import getFirstLastName from '../../../../../../../common/utils/firstLastNameCreate/getFirstLastName';
 
 type Props = { notificationId: string; data: SubscriptionPayload };
 
@@ -23,7 +24,7 @@ const SubscriptionNotification: React.FC<Props> = ({
             />
           </div>
           <div>
-            {[fromFirstname, fromLastname].join(' ')}{' '}
+            { getFirstLastName(fromFirstname, fromLastname)}{' '}
             <span className={'font-normal'}>
               has just started following you
             </span>{' '}

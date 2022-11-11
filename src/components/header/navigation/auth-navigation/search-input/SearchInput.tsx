@@ -9,10 +9,10 @@ type Props = { className?: string };
 const SearchInput: React.FC<Props> = ({ className }) => {
   const { t } = useTranslation('common');
   return (
-    <div className={clsx('relative', className)}>
+    <div className={clsx('relative ', className)}>
       <input
         className={clsx(
-          'bg-[#efefef] rounded-[28px] px-[48px] w-full h-full',
+          'bg-[#efefef] rounded-[28px] px-[48px] w-full h-full  cursor-not-allowed',
           outlineStyles.defaultFocusOutline
         )}
         placeholder={t('header.search')}

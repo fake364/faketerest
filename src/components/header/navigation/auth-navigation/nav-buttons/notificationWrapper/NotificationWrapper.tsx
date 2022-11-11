@@ -11,6 +11,9 @@ import EVENT_TYPE from 'faketerest-utilities/dist/events/types';
 import { SubscriptionPayload } from 'faketerest-utilities/dist/events/subscription/types';
 import PostCreatedNotification from './postCreatedNotification/PostCreatedNotification';
 import PostCreatePayload from 'faketerest-utilities/dist/events/postCreate/types';
+import { readNotificationMapFn } from '../notificationDropdown/utils/utils';
+import PostCommentedNotification from './postCommentedNotification/PostCommentedNotification';
+import { PostCommentedPayload } from 'faketerest-utilities/dist/events/comment/types';
 
 type Props = {
   notificationData: NotificationType;
@@ -29,15 +32,7 @@ const NotificationWrapper: React.FC<Props> = ({
       PagerNotificationsService.socket.emit(CLIENT_EVENTS.READ_NOTIFICATIONS, [
         key
       ]);
-      const readNotifications = notifications.map(
-        (notification): NotificationType =>
-          notification.key === key
-            ? notification
-            : {
-                key: notification.key,
-                payload: { ...notification.payload, hasBeenRead: true }
-              }
-      );
+      const readNotifications = notifications.map(readNotificationMapFn(key));
       dispatch(setNotifications(readNotifications));
     }
   }, []);
@@ -53,6 +48,10 @@ const NotificationWrapper: React.FC<Props> = ({
 
   if (payload.eventType === EVENT_TYPE.POST_CREATE) {
     return <PostCreatedNotification data={payload as PostCreatePayload} />;
+  }
+
+  if (payload.eventType === EVENT_TYPE.COMMENT) {
+    return <PostCommentedNotification data={payload as PostCommentedPayload} />;
   }
 
   return <></>;

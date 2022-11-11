@@ -9,6 +9,7 @@ import { RootState } from '../../../../../redux/types';
 import style from './AuthNavButtons.module.css';
 import NotificationDropdown from './notificationDropdown/NotificationDropdown';
 import { NotificationType } from 'faketerest-utilities';
+import MessageDropdown from './messageDropdown/MessageDropdown';
 
 type Props = {};
 
@@ -30,13 +31,7 @@ const AuthNavButtons: React.FC<Props> = () => {
         )}
         <NotificationDropdown />
       </div>
-      <Tooltip text={t('header.tooltips.messages')}>
-        <CircleIconButton
-          Icon={FaCommentDots}
-          className="px-[12px]"
-          onClick={null}
-        />
-      </Tooltip>
+      <MessageDropdown />
       <UserRoundButton />
     </>
   );

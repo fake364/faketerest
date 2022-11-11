@@ -39,7 +39,7 @@ const AuthNavigation: React.FC<Props> = () => {
   }
 
   return (
-    <nav className="sticky py-[18px] px-[12px] flex flex-stretch gap-[14px] z-[10]">
+    <nav className=" py-[18px] px-[12px] flex flex-stretch gap-[14px] z-[10]">
       <Link href={'/'}>
         <div
           className=" transition-all duration-[300ms] hover:bg-[#f0f0f0] p-[12px] rounded-[50%]

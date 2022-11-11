@@ -26,7 +26,13 @@ const Layout: React.FC<Props> = ({ children, className }) => {
   return (
     <div className={className}>
       <BaseHead />
-      <Header>
+      <Header
+        className={clsx(
+          isLoggedIn &&
+            mode === HEADER_MODE.DEFAULT &&
+            'sticky top-0 z-[100] bg-[white]'
+        )}
+      >
         {isLoggedIn ? (
           <>
             {mode === HEADER_MODE.DEFAULT && <AuthNavigation />}

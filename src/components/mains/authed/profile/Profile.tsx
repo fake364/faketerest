@@ -7,6 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 import UserAvatarImage from '../../../header/navigation/auth-navigation/nav-buttons/user-button/user-image/UserAvatarImage';
 import { ProfilePageProps } from '../../../../../pages/[username]';
 import SubscriptionsBlock from './subscriptionsBlock/SubscriptionsBlock';
+import getFirstLastName from '../../../../common/utils/firstLastNameCreate/getFirstLastName';
 
 const Profile: React.FC<ProfilePageProps> = ({
   userData,
@@ -27,7 +28,7 @@ const Profile: React.FC<ProfilePageProps> = ({
         )}
       />
       <div className="text-[36px] mt-[16px]">
-        {[userData.firstName, userData.lastName].join(' ')}
+        {getFirstLastName(userData.firstName, userData.lastName)}
       </div>
       <div className="text-[14px] text-[#767676] mt-[4px]">
         @{userData.username}

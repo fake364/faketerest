@@ -13,6 +13,7 @@ import { setNotifications } from '../../../../../../redux/actions/metadata/actio
 import PagerNotificationsService from '../../../../../../common/singletons/PagerNotificationsService';
 import { FiBellOff } from '@react-icons/all-files/fi/FiBellOff';
 import { CLIENT_EVENTS, NotificationType } from 'faketerest-utilities';
+import styles from './NotificationDropdown.module.css';
 
 type Props = {};
 
@@ -27,7 +28,10 @@ const NotificationDropdown: React.FC<Props> = () => {
       const unreadKeys = getUnreadNotificationsKeys(notifications);
       if (unreadKeys.length > 0) {
         dispatch(setNotifications(getReadNotifications(notifications)));
-        PagerNotificationsService.socket.emit(CLIENT_EVENTS.READ_NOTIFICATIONS, unreadKeys);
+        PagerNotificationsService.socket.emit(
+          CLIENT_EVENTS.READ_NOTIFICATIONS,
+          unreadKeys
+        );
       }
     } catch (e) {
       console.error(e);
@@ -39,16 +43,13 @@ const NotificationDropdown: React.FC<Props> = () => {
       variant={'icon'}
       buttonClass={'!text-[24px]'}
       Icon={FaBell}
-      dropdownClass={'right-[-130px] top-[24px] drop-shadow-md overflow-y-auto'}
+      dropdownClass={styles.dropdownClass}
       onOpenDropdown={onOpenDropdown}
+      tooltipText={'Notifications'}
     >
-      <div className={'w-[340px] max-h-[80vh] min-h-[300px] relative'}>
+      <div className={styles.dropdownBody}>
         {notifications.length === 0 ? (
-          <div
-            className={
-              'w-full h-full absolute m-auto l-0 r-0 flex items-center justify-center flex-col gap-[12px]'
-            }
-          >
+          <div className={styles.emptyListContainer}>
             <FiBellOff className={'text-[48px] text-[gray]'} />
             <div className={'text-center text-[24px] text-[gray] font-[300]'}>
               No notifications yet

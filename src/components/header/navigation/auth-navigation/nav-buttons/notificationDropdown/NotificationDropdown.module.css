@@ -1,0 +1,11 @@
+.dropdownClass {
+  @apply right-[-130px] top-[24px] drop-shadow-md overflow-y-auto p-[24px];
+}
+
+.dropdownBody {
+  @apply w-[340px] max-h-[80vh] min-h-[300px] relative flex flex-col gap-[12px];
+}
+
+.emptyListContainer {
+  @apply w-full h-full absolute m-auto left-0 right-0 flex items-center justify-center flex-col gap-[12px];
+}

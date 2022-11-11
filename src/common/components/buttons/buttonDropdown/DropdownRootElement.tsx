@@ -3,11 +3,13 @@ import { FaChevronDown } from '@react-icons/all-files/fa/FaChevronDown';
 import { IconType } from '@react-icons/all-files';
 import CircleIconButton from '../CircleIconButton';
 import clsx from 'clsx';
+import Tooltip from '../../tooltip/Tooltip';
 
 type DropdownClassName = {
   dropdownClass?: string;
   buttonClass?: string;
   onOpenDropdown?: () => void;
+  tooltipText?: string;
 };
 
 type Props<T> = T extends { variant: 'text' }
@@ -21,6 +23,24 @@ type Props<T> = T extends { variant: 'text' }
 
 const DropdownRootElement = <T,>(props: Props<T>) => {
   const [isDisplayed, setDisplayed] = useState<boolean>(false);
+
+  const TooltipedIcon = () => {
+    if (props.variant === 'icon') {
+      const button = (
+        <CircleIconButton
+          Icon={props.Icon}
+          className={clsx('px-[12px] text-[14px]', props.buttonClass)}
+          onClick={() => null}
+        />
+      );
+      return props.tooltipText ? (
+        <Tooltip text={props.tooltipText}>{button}</Tooltip>
+      ) : (
+        button
+      );
+    }
+    return null;
+  };
 
   return (
     <div
@@ -43,13 +63,7 @@ const DropdownRootElement = <T,>(props: Props<T>) => {
             <span>{props.text}</span> <FaChevronDown className="inline-block" />
           </>
         )}
-        {props.variant === 'icon' && (
-          <CircleIconButton
-            Icon={props.Icon}
-            className={clsx('px-[12px] text-[14px]', props.buttonClass)}
-            onClick={() => null}
-          />
-        )}
+        <TooltipedIcon />
       </div>
       {isDisplayed && (
         <div>

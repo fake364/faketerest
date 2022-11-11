@@ -1,0 +1,7 @@
+.dropdownContainer {
+  @apply right-[-100px] top-[24px] drop-shadow-md overflow-y-auto p-[24px];
+}
+
+.dropdownBody {
+  @apply h-[80vh] w-[370px];
+}

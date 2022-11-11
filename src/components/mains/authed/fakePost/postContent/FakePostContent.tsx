@@ -9,6 +9,7 @@ import CommentBlock from './commentBlock/CommentBlock';
 import { FakePostPageProps } from '../../../../../../pages/fake/[postid]';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
+import getFirstLastName from '../../../../../common/utils/firstLastNameCreate/getFirstLastName';
 
 type Props = { className?: string; postId: string } & Pick<
   FakePostPageProps,
@@ -58,7 +59,7 @@ const FakePostContent: React.FC<Props> = ({
               userId={authorId}
               className={'w-[50px] h-[50px]'}
             />
-            <span>{[authorFirstName, authorLastName].join(' ')}</span>
+            <span>{getFirstLastName(authorFirstName, authorLastName)}</span>
           </div>
         </Link>
         {authUserId !== authorId && (

@@ -4,16 +4,13 @@ import { RootState } from '../../../redux/types';
 import useFakeSnackbar from '../../../snackbar/hooks/useFakeSnackbar/useFakeSnackbar';
 import { setNotifications } from '../../../redux/actions/metadata/actions';
 import PagerNotificationsService from '../../singletons/PagerNotificationsService';
-import { SubscriptionPayload } from 'faketerest-utilities/dist/events/subscription/types';
 import {
   CLIENT_EVENTS,
   filterAndSortNotifications,
   filterDuplicateNotifications,
   NotificationType
 } from 'faketerest-utilities';
-import EVENT_TYPE from 'faketerest-utilities/dist/events/types';
-import PostCreatePayload from 'faketerest-utilities/dist/events/postCreate/types';
-import getFirstLastName from '../../utils/firstLastNameCreate/getFirstLastName';
+import { getSnackText } from './utils/utils';
 
 export const useNotification = () => {
   const myId = useSelector((state: RootState) => state.metadata.userId);
@@ -44,26 +41,7 @@ export const useNotification = () => {
       (notification: NotificationType) => {
         console.log('KEK!!11111', notification);
 
-        let snackText;
-        switch (notification.payload.eventType) {
-          case EVENT_TYPE.POST_CREATE:
-            const { authorFirstname, authorLastName } =
-              notification.payload as PostCreatePayload;
-            snackText = `${getFirstLastName(
-              authorFirstname,
-              authorLastName
-            )} has just posted image, look`;
-            break;
-          case EVENT_TYPE.SUBSCRIPTION:
-            const { fromFirstname, fromLastname } =
-              notification.payload as SubscriptionPayload;
-            snackText = `${getFirstLastName(
-              fromFirstname,
-              fromLastname
-            )} has just subscribed to you`;
-            break;
-        }
-        console.log('KEK', notification);
+        const snackText = getSnackText(notification.payload);
         if (snackText) {
           addFakeSnack({
             text: snackText

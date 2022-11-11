@@ -15,3 +15,13 @@ export const getReadNotifications = (
     };
   });
 };
+
+export const readNotificationMapFn =
+  (key: string) =>
+  (notification): NotificationType =>
+    notification.key === key
+      ? notification
+      : {
+          key: notification.key,
+          payload: { ...notification.payload, hasBeenRead: true }
+        };
