@@ -11,7 +11,6 @@ type Props = FakePostPageProps;
 const FakePost: React.FC<Props> = ({ imageBase64Url, ...rest }) => {
   const router = useRouter();
   const { postid } = router.query;
-  console.log('postid', postid);
 
   return (
     <div className="w-full flex justify-center">

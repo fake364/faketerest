@@ -26,7 +26,6 @@ export default function UsernamePage({
   subscribers,
   subscriptions
 }: ProfilePageProps) {
-  console.log(subscriptions, subscribers);
   return (
     <Layout>
       <Profile

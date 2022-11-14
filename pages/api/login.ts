@@ -25,7 +25,6 @@ class LoginHandler {
     });
     if (instance) {
       const dbPass = createPasswordHmac(password);
-      console.log(dbPass, instance.getDataValue('password'));
       if (dbPass === instance.getDataValue('password')) {
         await createAndAssignSession(res, instance.getDataValue('id'));
         return {

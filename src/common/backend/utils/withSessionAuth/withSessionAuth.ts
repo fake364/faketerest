@@ -8,7 +8,6 @@ const withSessionAuth: (context: GetServerSideProps) => GetServerSideProps =
     const {
       req: { headers }
     } = props;
-      console.log(headers.cookie);
     if (headers.cookie && cookie.parse(headers.cookie)[AUTH_SESSION_KEY]) {
       const isActive = await UserSessionsService.isSessionActive(
         cookie.parse(headers.cookie)[AUTH_SESSION_KEY]

@@ -39,7 +39,6 @@ export const useNotification = () => {
     PagerNotificationsService.socket.on(
       CLIENT_EVENTS.COMMON_NOTIFICATION,
       (notification: NotificationType) => {
-        console.log('KEK!!11111', notification);
 
         const snackText = getSnackText(notification.payload);
         if (snackText) {

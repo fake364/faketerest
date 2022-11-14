@@ -17,7 +17,6 @@ export class NotificationsServiceClass {
     return this.instance;
   }
 
-  async getKek() {}
 
   async withConnection<T>(callback: () => T) {
     await this.client.connect();
