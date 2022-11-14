@@ -26,7 +26,7 @@ export const useCheckAuth = () => {
       })
       .catch((e) => {
         setCheckAuth(false);
-        router.push('/').then(() => dispatch(setWipeState()));
+        // router.push('/').then(() => dispatch(setWipeState()));
       });
   }, []);
 

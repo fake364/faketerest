@@ -26,7 +26,11 @@ const WrapperUnderRedux: React.FC<WrapperProps> = ({ children }) => {
   const { isCheckingAuth } = useCheckAuth();
 
   useEffect(() => {
-    // TODO setup translations
+    // TODO FIX TRANSLATIONS
+    // setLanguage(navigator.language)
+    //   .then((res) => {
+    //     !res && setLanguage('en');
+    //   })
     setLanguage('en').then(() => {
       setTranslationsLoading(false);
     });

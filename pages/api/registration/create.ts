@@ -11,9 +11,9 @@ import {
 import RegistrationCreatePayload from '../../../src/common/backend/models/validation/registration/RegistrationCreatePayload';
 import { createAndAssignSession } from '../../../src/common/backend/models/utils/utils';
 import type { NextApiResponse } from 'next';
-import { createPasswordHmac } from '../../../src/common/backend/utils/password/utils';
 import { hashStringWithLength } from '../../../src/common/backend/utils/registrationUtils/utils';
 import { createRegistrationErrorHandler } from '../../../src/common/backend/utils/registrationUtils/errorHandlers';
+import { createPasswordHmac } from '../../../src/common/backend/utils/password/utils';
 
 class CreateRegistrationHandler {
   @Post()
