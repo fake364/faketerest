@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { FaChevronDown } from '@react-icons/all-files/fa/FaChevronDown';
 import { IconType } from '@react-icons/all-files';
 import CircleIconButton from '../CircleIconButton';
@@ -10,6 +10,7 @@ type DropdownClassName = {
   buttonClass?: string;
   onOpenDropdown?: () => void;
   tooltipText?: string;
+  onClose?: () => void;
 };
 
 type Props<T> = T extends { variant: 'text' }
@@ -42,10 +43,23 @@ const DropdownRootElement = <T,>(props: Props<T>) => {
     return null;
   };
 
+  useEffect(() => {
+    if (!isDisplayed) {
+      props.onClose?.();
+    }
+  }, [isDisplayed]);
+
+  const onBlur = (e) => {
+    console.log(e.relatedTarget);
+    // if (!e.currentTarget.contains(e.relatedTarget)) {
+    //   setDisplayed(false);
+    // }
+  };
+
   return (
     <div
       className="relative flex flex-col self-center"
-      onBlur={() => setDisplayed(false)}
+      onBlur={onBlur}
       tabIndex={0}
     >
       <div

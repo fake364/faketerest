@@ -57,6 +57,8 @@ export const useNotification = () => {
       connectAndAssignListeners();
     }
 
-    return () => {};
+    return () => {
+      PagerNotificationsService.socket?.disconnect();
+    };
   }, [myId]);
 };

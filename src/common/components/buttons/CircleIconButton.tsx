@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { IconType } from '@react-icons/all-files';
 import clsx from 'clsx';
+import { THEME_TYPE } from '../../enums/theme';
+import ThemeContext from '../../context/ThemeContext';
 
 type Props = { Icon: IconType; className?: string; onClick: () => void };
 
 const CircleIconButton: React.FC<Props> = ({ Icon, className, onClick }) => {
+  const { theme } = useContext(ThemeContext);
+
   return (
     <div
       className={clsx(
@@ -12,6 +16,7 @@ const CircleIconButton: React.FC<Props> = ({ Icon, className, onClick }) => {
           ' text-[24px] cursor-pointer',
         className
       )}
+      data-theme={theme ? theme : THEME_TYPE.BASE}
       onClick={onClick}
     >
       <Icon />

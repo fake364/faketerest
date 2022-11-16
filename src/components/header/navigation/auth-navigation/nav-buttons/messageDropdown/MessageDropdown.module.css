@@ -3,5 +3,5 @@
 }
 
 .dropdownBody {
-  @apply h-[80vh] w-[370px];
+  @apply h-[80vh] w-[370px] flex flex-col gap-[8px] relative;
 }

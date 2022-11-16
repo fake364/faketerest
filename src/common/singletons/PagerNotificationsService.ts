@@ -1,5 +1,6 @@
 import { io, Socket } from 'socket.io-client';
 import { DefaultEventsMap } from 'socket.io/dist/typed-events';
+import { CUSTOM_HEADERS } from 'faketerest-utilities/dist/common/enums';
 
 export class PagerNotificationsServiceClass {
   public static instance: PagerNotificationsServiceClass;
@@ -19,7 +20,7 @@ export class PagerNotificationsServiceClass {
       await this._socket.disconnect();
     }
     this._socket = io('http://localhost:3003', {
-      extraHeaders: { 'x-user-id': String(userId) }
+      extraHeaders: { [CUSTOM_HEADERS.X_CLIENT_ID]: String(userId) }
     }) as unknown as Socket<DefaultEventsMap, DefaultEventsMap>;
     await this._socket.connect();
   };
