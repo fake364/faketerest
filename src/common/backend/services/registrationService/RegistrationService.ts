@@ -2,6 +2,9 @@ import { ConnectionService } from '../Connection';
 import { Nullable } from '../../../types/common';
 import UserDataEntity from '../../validation-services/registration/UserDataEntity';
 import userQueryWithCountry from '../../sql/userQueryWithCountry';
+import selectUsersByString from './queries/selectUsersByString';
+import { areSearchUsersEntries } from './utils/utils';
+import { SearchUserPayload } from './types/types';
 
 export class RegService extends ConnectionService {
   public static instance: RegService;
@@ -44,6 +47,17 @@ export class RegService extends ConnectionService {
       id: Number(instance.ID)
     };
   }
+
+  getUsersByStringEntry = async (entry: string) => {
+    const [res] = await this.connection.query(selectUsersByString(entry));
+    if (!areSearchUsersEntries(res)) {
+      throw new Error('some entry was wrong');
+    }
+    return res.map((entry) => ({
+      id: Number(entry.ID),
+      fullText: entry.full_text
+    })) as SearchUserPayload[];
+  };
 }
 
 const RegistrationService = RegService.getInstance();

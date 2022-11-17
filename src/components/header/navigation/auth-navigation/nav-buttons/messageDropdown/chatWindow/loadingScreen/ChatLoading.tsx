@@ -7,7 +7,7 @@ type Props = {};
 
 const ChatLoading: React.FC<Props> = () => {
   return (
-    <div className={'absolute w-full h-full flex justify-center items-center'}>
+    <div className={'absolute left-[45%] top-[45%]'}>
       <CircleSpinner
         className={'w-[50px] h-[50px]'}
         color={SPINNER_COLORS.DEFAULT}

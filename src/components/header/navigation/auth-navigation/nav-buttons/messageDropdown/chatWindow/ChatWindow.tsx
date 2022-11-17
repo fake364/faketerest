@@ -21,15 +21,13 @@ type Props = {
   className?: string;
   onBack: () => void;
   participantId: number;
-  participantUsername: string;
 };
 
 const ChatWindow: React.FC<Props> = ({
   firstName,
   className,
   onBack,
-  participantId,
-  participantUsername
+  participantId
 }) => {
   const [text, setText] = useState<string>('');
   const [messages, setMessages] = useState<MessagePayload[]>();
@@ -146,7 +144,6 @@ const ChatWindow: React.FC<Props> = ({
           messages={messages}
           participantId={participantId}
           participantName={firstName}
-          participantUserName={participantUsername}
           containerRef={chatScrollBody}
         />
         <ChatBottomPanel

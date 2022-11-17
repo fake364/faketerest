@@ -1,14 +1,10 @@
-import React, { useContext } from 'react';
-import clsx from 'clsx';
-import { THEME_TYPE } from '../../../../../../../../common/enums/theme';
+import React from 'react';
 import ChatLoading from '../loadingScreen/ChatLoading';
 import MessagePayload from 'faketerest-utilities/dist/events/message/type';
 import { groupMessagesArray } from '../utils/utils';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../../redux/types';
 import UserDataEntity from '../../../../../../../../common/backend/validation-services/registration/UserDataEntity';
-import ThemeContext from '../../../../../../../../common/context/ThemeContext';
-import MessageBubble from './messageBubble/MessageBubble';
 import MessageGroup from './messageGroup/MessageGroup';
 
 type Props = {
@@ -16,15 +12,13 @@ type Props = {
   messages: MessagePayload[];
   participantId: number;
   participantName: string;
-  participantUserName: string;
 };
 
 const ChatBody: React.FC<Props> = ({
   containerRef,
   messages,
   participantId,
-  participantName,
-  participantUserName
+  participantName
 }) => {
   const myId: number = useSelector((state: RootState) => state.metadata.userId);
   const myUser: UserDataEntity = useSelector(
@@ -33,12 +27,10 @@ const ChatBody: React.FC<Props> = ({
   const groupedMessages = messages ? groupMessagesArray(messages) : [];
   const nameMap = {
     [myId]: {
-      firstName: myUser.firstName,
-      userName: myUser.username
+      firstName: myUser.firstName
     },
     [participantId]: {
-      firstName: participantName,
-      userName: participantUserName
+      firstName: participantName
     }
   };
 
@@ -59,7 +51,7 @@ const ChatBody: React.FC<Props> = ({
           })}
         </div>
       ) : (
-        <ChatLoading />
+        <ChatLoading  />
       )}
     </div>
   );

@@ -43,8 +43,23 @@ export class NotificationsServiceClass {
   async withConnection<T>(callback: () => T) {
     !this.client.isOpen && (await this.client.connect());
     const result = await callback();
-    this.client.isOpen && (await this.client.disconnect());
     return result;
+  }
+
+  getUsersDialogs(userId: number) {
+    return this.withConnection(async () => {
+      const usersDialogs = await this.client.keys(
+        `${EVENT_TYPE.MESSAGE}:*${userId}*`
+      );
+      console.log('AKLAKFOEWKFOWEKFOWE', usersDialogs);
+      const splittedDialogKeys = usersDialogs.map((dialogKey) =>
+        dialogKey.split(':')
+      );
+      const filteredDialogs = splittedDialogKeys.filter((splitedKey) =>
+        splitedKey.slice(1).some((id) => id === String(userId))
+      );
+      return filteredDialogs.map((dialogsParts) => dialogsParts.join(':'));
+    });
   }
 }
 
