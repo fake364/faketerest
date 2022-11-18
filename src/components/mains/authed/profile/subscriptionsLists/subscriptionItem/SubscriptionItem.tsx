@@ -30,7 +30,6 @@ const SubscriptionItem: React.FC<Props> = ({
   const { onFollow, isSubscribed, onUnfollow } = useFollowUnfollow(selectId);
   const myId = useSelector((state: RootState) => state.metadata.userId);
 
-  console.log(myId, type, subscribedToid, actionAuthorId, selectId === myId);
 
   return (
     <div className={'flex items-center gap-[12px] w-full justify-between'}>

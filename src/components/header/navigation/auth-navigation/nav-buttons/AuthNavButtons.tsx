@@ -21,6 +21,11 @@ const AuthNavButtons: React.FC<Props> = () => {
   const unreadNotifications = notifications.filter(
     ({ payload: { hasBeenRead } }) => !hasBeenRead
   );
+  const unreadMessagesCount = useSelector((state: RootState) => {
+    const map = state.messages.messagesMap;
+    return Object.values(map).flat().length;
+  });
+
   return (
     <>
       <div className="relative">
@@ -31,7 +36,12 @@ const AuthNavButtons: React.FC<Props> = () => {
         )}
         <NotificationDropdown />
       </div>
-      <MessageDropdown />
+      <div className="relative">
+        {unreadMessagesCount > 0 && (
+          <div className={style.notificationBubble}>{unreadMessagesCount}</div>
+        )}
+        <MessageDropdown />
+      </div>
       <UserRoundButton />
     </>
   );

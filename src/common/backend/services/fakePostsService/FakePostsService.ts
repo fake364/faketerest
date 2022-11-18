@@ -43,7 +43,6 @@ export class FakePostsServiceClass extends ConnectionService {
 
   getPost = async (postId: string) => {
     const [[res]] = await this.connection.query(selectPostById(postId));
-    console.log(res);
     if (!isPostInstance(res)) {
       throw new Error('Wrong payload', res);
     }

@@ -11,6 +11,13 @@ import {
   NotificationType
 } from 'faketerest-utilities';
 import { getSnackText } from './utils/utils';
+import axios from 'axios';
+import { MessagesMap } from '../../../redux/reducers/messages/messageReducer';
+import UserDataEntity from '../../backend/validation-services/registration/UserDataEntity';
+import {
+  assignUserToMap,
+  setMessagesMap
+} from '../../../redux/actions/messages/actions';
 
 export const useNotification = () => {
   const myId = useSelector((state: RootState) => state.metadata.userId);
@@ -39,7 +46,6 @@ export const useNotification = () => {
     PagerNotificationsService.socket.on(
       CLIENT_EVENTS.COMMON_NOTIFICATION,
       (notification: NotificationType) => {
-        console.log('KEK!!11111', notification);
 
         const snackText = getSnackText(notification.payload);
         if (snackText) {
@@ -52,9 +58,20 @@ export const useNotification = () => {
     );
   };
 
+  const initializeMessagesBox = async () => {
+    const { data } = await axios.get<MessagesMap>('/api/messages/dialogs');
+    const ids = Object.keys(data);
+    const usersResponses = await Promise.all(
+      ids.map((id) => axios.get<UserDataEntity>('/api/registration/' + id))
+    );
+    dispatch(setMessagesMap(data));
+    usersResponses.forEach(({ data }) => dispatch(assignUserToMap(data)));
+  };
+
   useEffect(() => {
     if (myId) {
       connectAndAssignListeners();
+      initializeMessagesBox();
     }
 
     return () => {

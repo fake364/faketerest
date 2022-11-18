@@ -51,7 +51,6 @@ export class NotificationsServiceClass {
       const usersDialogs = await this.client.keys(
         `${EVENT_TYPE.MESSAGE}:*${userId}*`
       );
-      console.log('AKLAKFOEWKFOWEKFOWE', usersDialogs);
       const splittedDialogKeys = usersDialogs.map((dialogKey) =>
         dialogKey.split(':')
       );
@@ -61,8 +60,18 @@ export class NotificationsServiceClass {
       return filteredDialogs.map((dialogsParts) => dialogsParts.join(':'));
     });
   }
-}
 
+  getUnreadMessagesFromRoom = async (roomKey: string, myId: number) => {
+    !this.client.isOpen && (await this.client.connect());
+    const messages = (await this.client.hVals(roomKey)).flat();
+    if (messages.length === 0) {
+      return [];
+    }
+    return messages
+      .map((str) => JSON.parse(str) as MessagePayload)
+      .filter(({ authorId, hasBeenRead }) => myId !== authorId && !hasBeenRead);
+  };
+}
 const NotificationsService = NotificationsServiceClass.getInstance();
 
 export default NotificationsService;

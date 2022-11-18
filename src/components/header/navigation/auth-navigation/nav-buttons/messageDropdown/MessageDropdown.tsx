@@ -1,10 +1,4 @@
-import React, {
-  ChangeEventHandler,
-  useCallback,
-  useEffect,
-  useRef,
-  useState
-} from 'react';
+import React, { ChangeEventHandler, useCallback, useState } from 'react';
 import DropdownRootElement from '../../../../../../common/components/buttons/buttonDropdown/DropdownRootElement';
 import { FaCommentDots } from '@react-icons/all-files/fa/FaCommentDots';
 import style from './MessageDropdown.module.css';
@@ -13,28 +7,20 @@ import { RootState } from '../../../../../../redux/types';
 import axios from 'axios';
 import UserDataEntity from '../../../../../../common/backend/validation-services/registration/UserDataEntity';
 import clsx from 'clsx';
-import getFirstLastName from '../../../../../../common/utils/firstLastNameCreate/getFirstLastName';
-import UserAvatarImage from '../user-button/user-image/UserAvatarImage';
-import ButtonDropdownElement from '../../../../../../common/components/buttons/buttonDropdown/ButtonDropdownElement';
 import ChatWindow from './chatWindow/ChatWindow';
 import CommonInput from '../../../../../../common/components/inputs/commonInput/CommonInput';
 import { SearchUserPayload } from '../../../../../../common/backend/services/registrationService/types/types';
 import debounce from 'lodash/debounce';
 import ChatLoading from './chatWindow/loadingScreen/ChatLoading';
+import UserDialogElement from './userDialogElement/UserDialogElement';
 
 type Props = {};
 
 const MessageDropdown: React.FC<Props> = () => {
-  const myId: number = useSelector((state: RootState) => state.metadata.userId);
-  const [usersObjects, setUsers] = useState<UserDataEntity[]>();
+  const [searchedUsers, setUsers] = useState<UserDataEntity[]>([]);
   const [selectedUser, selectUser] = useState<UserDataEntity>();
-  const initialDialogsRef = useRef<UserDataEntity[]>([]);
   const [areUsersLoading, setLoading] = useState<boolean>(false);
-
-  const fetchDialogs = async () => {
-    const { data } = await axios.get<number[]>('/api/messages/dialogs');
-    initialDialogsRef.current = await fetchUserIds(data);
-  };
+  const messagesState = useSelector((state: RootState) => state.messages);
 
   const fetchUserIds = async (ids: number[]) => {
     setLoading(true);
@@ -46,10 +32,6 @@ const MessageDropdown: React.FC<Props> = () => {
     setUsers(mapped);
     return mapped;
   };
-
-  useEffect(() => {
-    fetchDialogs();
-  }, [selectedUser]);
 
   const onCloseDropdown = () => {
     selectUser(undefined);
@@ -70,17 +52,21 @@ const MessageDropdown: React.FC<Props> = () => {
       const ids = data.map(({ id }) => id);
       await fetchUserIds(ids);
     } else {
-      setUsers(initialDialogsRef.current);
+      setUsers([]);
     }
   };
   const debouncedChangeHandler = useCallback(debounce(onChangeSearch, 800), []);
+
+  const displayedUsers: UserDataEntity[] =
+    searchedUsers.length > 0
+      ? searchedUsers
+      : Object.values(messagesState.usersMap);
 
   return (
     <DropdownRootElement
       variant={'icon'}
       Icon={FaCommentDots}
       className="px-[12px]"
-      onClick={null}
       dropdownClass={style.dropdownContainer}
       buttonClass={'!text-[22px]'}
       tooltipText={'Messages'}
@@ -105,22 +91,21 @@ const MessageDropdown: React.FC<Props> = () => {
         {areUsersLoading ? (
           <ChatLoading />
         ) : (
-          usersObjects?.map((user) => (
-            <ButtonDropdownElement
-              onClick={() => {
-                selectUser(user);
-              }}
-            >
-              <div className="flex items-center gap-[12px]">
-                <UserAvatarImage
-                  userId={user.id}
-                  firstName={user.firstName}
-                  className={'w-[50px] h-[50px]'}
-                />
-                <div>{getFirstLastName(user.firstName, user.lastName)}</div>
-              </div>
-            </ButtonDropdownElement>
-          ))
+          displayedUsers?.map((user) => {
+            const unreadMessagesCount =
+              messagesState.messagesMap[user.id].length;
+            return (
+              <UserDialogElement
+                unreadMessagesCount={unreadMessagesCount}
+                userId={user.id}
+                firstName={user.firstName}
+                onOpen={() => {
+                  selectUser(user);
+                }}
+                lastName={user.lastName}
+              />
+            );
+          })
         )}
       </div>
     </DropdownRootElement>

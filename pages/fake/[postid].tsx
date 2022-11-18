@@ -31,7 +31,6 @@ export type FakePostPageProps = {
 };
 
 export default function Post(props: FakePostPageProps) {
-  console.log(props);
   return (
     <Layout>
       <FakePost {...props} />
@@ -45,7 +44,6 @@ export async function getServerSideProps({ params: { postid } }) {
   let comments;
   try {
     postData = await FakePostsService.getPost(postid);
-    console.log(postData);
   } catch (e) {
     console.error('Could not find post', e);
     postData = null;

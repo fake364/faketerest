@@ -8,13 +8,14 @@ import axios from 'axios';
 import { io, Socket } from 'socket.io-client';
 import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import MessageUtils from 'faketerest-utilities/dist/events/message/messageUtils';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../redux/types';
 import { CUSTOM_HEADERS } from 'faketerest-utilities/dist/common/enums';
 import MessagePayload from 'faketerest-utilities/dist/events/message/type';
 import ChatBody from './chatBody/ChatBody';
 import ChatTopPanel from './chatTopPanel/ChatTopPanel';
 import ChatBottomPanel from './chatBottomPanel/ChatBottomPanel';
+import { clearMessageIds } from '../../../../../../../redux/actions/messages/actions';
 
 type Props = {
   firstName: string;
@@ -34,6 +35,7 @@ const ChatWindow: React.FC<Props> = ({
   const socketRef = useRef<Socket<DefaultEventsMap, DefaultEventsMap>>();
   const myId: number = useSelector((state: RootState) => state.metadata.userId);
   const roomRef = useRef<string>();
+  const dispatch = useDispatch();
 
   const chatScrollBody = useRef<HTMLDivElement>();
 
@@ -57,6 +59,10 @@ const ChatWindow: React.FC<Props> = ({
       audio.play();
     }
   };
+
+  useEffect(() => {
+    dispatch(clearMessageIds(participantId));
+  }, []);
 
   useEffect(() => {
     if (messages) {
@@ -93,12 +99,10 @@ const ChatWindow: React.FC<Props> = ({
     socket.connect();
 
     socket.on('message', (payload: MessagePayload) => {
-      console.log('MESSAGE');
       setMessages((prev) => [...prev, payload]);
     });
 
     socket.on('read-messages', (keysToChange: string[]) => {
-      console.log('READ THESE KEYS', keysToChange);
       setMessages((prev) =>
         prev.map((message) => {
           if (keysToChange.includes(message.messageId)) {
@@ -109,9 +113,6 @@ const ChatWindow: React.FC<Props> = ({
       );
     });
 
-    socket.on('disconnect', () => {
-      console.log('Disconnected!');
-    });
   };
 
   useEffect(() => {

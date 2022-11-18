@@ -8,8 +8,7 @@ import {
   WIPE_STATE
 } from '../../actions/metadata/actions';
 import { HEADER_MODE } from '../../../components/layout/Layout';
-import { SubscriptionNotificationPayload } from '../../types/types';
-import { NotificationType } from '../../../common/types/events/EventTypes';
+import { NotificationType } from 'faketerest-utilities';
 
 type MetadataState = {
   isLoggedIn: boolean;
