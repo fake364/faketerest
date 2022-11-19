@@ -1,5 +1,4 @@
 import React from 'react';
-import { PostDisplayEntity } from '../MainGallery';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { getImageColSpanByHeight } from '../utils/utils';
@@ -7,10 +6,17 @@ import Image from 'next/image';
 import styles from './GalleryFakeItem.module.css';
 import { getGalleryItemSizes } from './utils/utils';
 import PrimaryButton from '../../../../../common/components/buttons/primary-button/PrimaryButton';
-import CircleIconButton from '../../../../../common/components/buttons/CircleIconButton';
 import { BsThreeDots } from '@react-icons/all-files/bs/BsThreeDots';
 import DropdownRootElement from '../../../../../common/components/buttons/buttonDropdown/DropdownRootElement';
 import ButtonDropdownElement from '../../../../../common/components/buttons/buttonDropdown/ButtonDropdownElement';
+import { Nullable } from '../../../../../common/types/common';
+
+export type PostDisplayEntity = {
+  postId: string;
+  title: Nullable<string>;
+  description: Nullable<string>;
+  sizes: [number, number];
+};
 
 type Props = { postDisplayEntity: PostDisplayEntity };
 

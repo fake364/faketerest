@@ -5,6 +5,7 @@ import userQueryWithCountry from '../../sql/userQueryWithCountry';
 import selectUsersByString from './queries/selectUsersByString';
 import { areSearchUsersEntries } from './utils/utils';
 import { SearchUserPayload } from './types/types';
+import selectUserIdByUsername from './queries/selectUserIdByUsername';
 
 export class RegService extends ConnectionService {
   public static instance: RegService;
@@ -58,6 +59,14 @@ export class RegService extends ConnectionService {
       fullText: entry.full_text
     })) as SearchUserPayload[];
   };
+
+  async getUserIdByUsername(username: string) {
+    const [[res]] = await this.connection.query(
+      selectUserIdByUsername(username)
+    );
+    const id = Number((res as { id: string }).id);
+    return isNaN(id) ? null : id;
+  }
 }
 
 const RegistrationService = RegService.getInstance();

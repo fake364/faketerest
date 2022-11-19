@@ -93,7 +93,7 @@ const MessageDropdown: React.FC<Props> = () => {
         ) : (
           displayedUsers?.map((user) => {
             const unreadMessagesCount =
-              messagesState.messagesMap[user.id].length;
+              messagesState.messagesMap[user.id]?.length;
             return (
               <UserDialogElement
                 unreadMessagesCount={unreadMessagesCount}

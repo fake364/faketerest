@@ -14,7 +14,7 @@ export const ASSIGN_USER_FOR_MAP = 'ASSIGN_USER_FOR_MAP';
 export const SET_USER_MAP = 'SET_USER_MAP';
 export const SET_MESSAGES_MAP = 'SET_MESSAGES_MAP';
 
-export const safeAddMessageFor =
+export const safeAddMessageToInbox =
   (message: MessagePayload) =>
   async (dispatch: Dispatch, getState: () => RootState) => {
     const usersMap = getState().messages.usersMap;

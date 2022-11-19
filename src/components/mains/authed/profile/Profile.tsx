@@ -38,7 +38,7 @@ const Profile: React.FC<ProfilePageProps> = ({
         subscriptions={subscriptions}
       />
       <ProfileButtons userData={userData} />
-      <ProfilePins />
+      <ProfilePins userId={userData.id} />
     </div>
   );
 };

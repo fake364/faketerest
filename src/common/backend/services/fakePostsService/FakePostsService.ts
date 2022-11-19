@@ -72,8 +72,8 @@ export class FakePostsServiceClass extends ConnectionService {
     });
   };
 
-  getTotalPosts = async () => {
-    const [[res]] = await this.connection.query(totalPostsQuery());
+  getTotalPosts = async (fromUserId?: number) => {
+    const [[res]] = await this.connection.query(totalPostsQuery(fromUserId));
     const countObj = res as { count: string };
     return Number(countObj.count);
   };

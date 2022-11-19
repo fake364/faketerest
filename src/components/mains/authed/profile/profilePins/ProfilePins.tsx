@@ -4,7 +4,7 @@ import CreatedPins from './createdPins/CreatedPins';
 import SavedPins from './savedPins/SavedPins';
 import useTranslation from 'next-translate/useTranslation';
 
-type Props = {};
+type Props = { userId: number };
 
 enum PROFILE_TAB {
   CREATED = 'CREATED',
@@ -13,9 +13,9 @@ enum PROFILE_TAB {
 
 const PROFILE_TABS = [PROFILE_TAB.CREATED, PROFILE_TAB.SAVED];
 
-const ProfilePins: React.FC<Props> = () => {
+const ProfilePins: React.FC<Props> = ({ userId }) => {
   const { t } = useTranslation('profile');
-  const [currentTab, setTab] = useState<PROFILE_TAB>(PROFILE_TAB.SAVED);
+  const [currentTab, setTab] = useState<PROFILE_TAB>(PROFILE_TAB.CREATED);
 
   const onClickCreated = () => setTab(PROFILE_TAB.CREATED);
 
@@ -37,7 +37,7 @@ const ProfilePins: React.FC<Props> = () => {
           {t('saved')}
         </TabButton>
       </div>
-      {currentTab === PROFILE_TAB.CREATED && <CreatedPins />}
+      {currentTab === PROFILE_TAB.CREATED && <CreatedPins userId={userId} />}
       {currentTab === PROFILE_TAB.SAVED && <SavedPins />}
     </div>
   );
