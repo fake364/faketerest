@@ -60,5 +60,17 @@
     "cancel": "Cancel",
     "postCommentButton": "Send",
     "justNow": "Just now"
-  }
+  },
+  "unfollow": "Unfollow",
+  "allPosts": "All posts",
+  "selected": "Selected",
+  "posts": "posts",
+  "selectAll": "Select all",
+  "cancelSelection": "Cancel selection",
+  "publish": "Publish",
+  "view": "View",
+  "postPublished": "Post was successfully published!",
+  "you": "You",
+  "noTitle": "No title",
+  "download": "Download"
 }

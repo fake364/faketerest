@@ -4,6 +4,7 @@ import Link from 'next/link';
 import SecondaryButton from '../../../../../../common/components/buttons/secondary-button/SecondaryButton';
 import { FaCheckCircle } from '@react-icons/all-files/fa/FaCheckCircle';
 import { FaTimesCircle } from '@react-icons/all-files/fa/FaTimesCircle';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = {
   imageUrl: string;
@@ -18,6 +19,7 @@ const UploadSuccess: React.FC<Props> = ({
   onRemove,
   title
 }) => {
+  const { t } = useTranslation('common');
   return (
     <div className="flex justify-between items-center">
       <div className={'flex items-center gap-[24px]'}>
@@ -31,15 +33,15 @@ const UploadSuccess: React.FC<Props> = ({
           />
         </div>
         <div className={'text-[#767676] text-[20px] flex flex-col'}>
-          <div>{title?.trim() || 'Нет названия'}</div>
+          <div>{title?.trim() || t('noTitle')}</div>
           <div className={'text-[12px] text-[black]'}>
-            Пост был успешно добавлен!
+            {t('postPublished')}
           </div>
         </div>
       </div>
       <div className="flex items-center gap-[12px]">
         <a href={'/fake/' + postId} target="_blank" rel="noopener noreferrer">
-          <SecondaryButton>Просмотреть</SecondaryButton>
+          <SecondaryButton>{t('view')}</SecondaryButton>
         </a>
         <div
           className={

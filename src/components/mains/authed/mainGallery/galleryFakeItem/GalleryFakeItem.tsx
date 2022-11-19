@@ -10,6 +10,7 @@ import { BsThreeDots } from '@react-icons/all-files/bs/BsThreeDots';
 import DropdownRootElement from '../../../../../common/components/buttons/buttonDropdown/DropdownRootElement';
 import ButtonDropdownElement from '../../../../../common/components/buttons/buttonDropdown/ButtonDropdownElement';
 import { Nullable } from '../../../../../common/types/common';
+import useTranslation from 'next-translate/useTranslation';
 
 export type PostDisplayEntity = {
   postId: string;
@@ -27,6 +28,7 @@ const GalleryFakeItem: React.FC<Props> = ({
     title
   }
 }) => {
+  const { t } = useTranslation('common');
   const { width: fixWidth, height: fixHeight } = getGalleryItemSizes(
     width,
     height
@@ -69,7 +71,7 @@ const GalleryFakeItem: React.FC<Props> = ({
                 className={'relative mt-[12px] mr-[12px] h-[40px]'}
                 onClick={onClickSave}
               >
-                Сохранить
+                {t('fakePost.save')}
               </PrimaryButton>
             </div>
             <div className={'flex justify-end leading-[normal]'}>
@@ -81,7 +83,7 @@ const GalleryFakeItem: React.FC<Props> = ({
               >
                 <Link href={'/api/image/' + postId}>
                   <ButtonDropdownElement onClick={onDownload}>
-                    Скачать
+                    {t('download')}
                   </ButtonDropdownElement>
                 </Link>
               </DropdownRootElement>

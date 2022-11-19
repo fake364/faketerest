@@ -9,6 +9,7 @@ import useFakeSnackbar from '../../../../../../snackbar/hooks/useFakeSnackbar/us
 import { SUBSCRIPTION_TYPE } from '../SubscriptionsList';
 import clsx from 'clsx';
 import useFollowUnfollow from '../../../../../../common/hooks/useFollowUnfollow/useFollowUnfollow';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = {
   username: string;
@@ -25,11 +26,11 @@ const SubscriptionItem: React.FC<Props> = ({
   firstName,
   type
 }) => {
+  const { t } = useTranslation('common');
   const selectId =
     type === SUBSCRIPTION_TYPE.SUBSCRIBER ? actionAuthorId : subscribedToid;
   const { onFollow, isSubscribed, onUnfollow } = useFollowUnfollow(selectId);
   const myId = useSelector((state: RootState) => state.metadata.userId);
-
 
   return (
     <div className={'flex items-center gap-[12px] w-full justify-between'}>
@@ -49,10 +50,12 @@ const SubscriptionItem: React.FC<Props> = ({
             onClick={onUnfollow}
             className={clsx(selectId === myId && 'pointer-events-none')}
           >
-            {selectId === myId ? 'You' : 'Отписаться'}
+            {selectId === myId ? t('you') : t('unfollow')}
           </SecondaryButton>
         ) : (
-          <PrimaryButton onClick={onFollow}>Подписаться</PrimaryButton>
+          <PrimaryButton onClick={onFollow}>
+            {t('fakePost.subscribe')}
+          </PrimaryButton>
         )}
       </div>
     </div>

@@ -14,6 +14,7 @@ import PrimaryButton from '../../../../common/components/buttons/primary-button/
 import { FaTimes } from '@react-icons/all-files/fa/FaTimes';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = {};
 
@@ -23,6 +24,7 @@ const FakeBuilderHeader: React.FC<Props> = () => {
   );
   const dispatch: ThunkDispatch<RootState, {}, AnyAction> = useDispatch();
   const areAllPostsSelected = posts.every(({ isSelected }) => isSelected);
+  const { t } = useTranslation('common');
 
   const flagAllPostsSelection = (flag: boolean) => () => {
     posts.forEach((post) => {
@@ -51,13 +53,13 @@ const FakeBuilderHeader: React.FC<Props> = () => {
             'ml-[18px] pr-[18px] py-[4px]  border-r-[1px] border-[#d6d6d6] border-solid'
           }
         >
-          Выбрано {posts.length} поста
+          {t('selected')} {posts.length} {t('posts')}
         </div>
         <SecondaryButton
           onClick={flagAllPostsSelection(!areAllPostsSelected)}
           className={'!bg-[white] hover:!bg-[whitesmoke]'}
         >
-          {areAllPostsSelected ? 'Отменить выбор' : 'Выбрать все'}
+          {areAllPostsSelected ? t('cancelSelection') : t('selectAll')}
         </SecondaryButton>
       </div>
       <div className="flex gap-[18px]">
@@ -66,7 +68,7 @@ const FakeBuilderHeader: React.FC<Props> = () => {
           Icon={ImBin2}
           onClick={resetAllPosts}
         />
-        <PrimaryButton onClick={submitAll}>Опубликовать</PrimaryButton>
+        <PrimaryButton onClick={submitAll}>{t('publish')}</PrimaryButton>
         <div className="pl-[18px] border-l-[1px] border-solid border-[#d6d6d6]">
           <CircleIconButton
             className={'!text-[18px]'}
