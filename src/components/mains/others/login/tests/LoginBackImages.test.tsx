@@ -1,7 +1,7 @@
 import { mount, shallow } from 'enzyme';
 import { expect, jest } from '@jest/globals';
 import React from 'react';
-import LoginBackImages from '../LoginBackImages';
+import BackgroundImages from '../BackgroundImages';
 import CommonUtils from '../../../../../common/utils/creation-utils/arrays/common';
 
 jest.mock('next/image', () => (props) => <div {...props} />);
@@ -14,12 +14,12 @@ describe('LoginBackImages', () => {
   });
 
   it('should render container properly', async () => {
-    const component = await shallow(<LoginBackImages>Test</LoginBackImages>);
+    const component = await shallow(<BackgroundImages>Test</BackgroundImages>);
     expect(component).toMatchSnapshot();
   });
 
   it('should set body overflow to hidden', async () => {
-    await mount(<LoginBackImages>Test</LoginBackImages>);
+    await mount(<BackgroundImages>Test</BackgroundImages>);
     expect(document.body.style.overflow).toBe('hidden');
   });
 });

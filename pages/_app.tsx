@@ -15,6 +15,7 @@ import setLanguage from 'next-translate/setLanguage';
 import 'reflect-metadata';
 import SnackbarProvider from '../src/snackbar/SnackbarProvider';
 import GlobalNotificationWrapper from '../src/components/globalNotificationWrapper/GlobalNotificationWrapper';
+import '../src/common/utils/mobileCheck/mobileCheck';
 
 type WrapperProps = { children?: React.ReactNode };
 

@@ -1,4 +1,5 @@
-import getRegFormSchema, { regFormNames } from './GetRegFormSchema';
+import getRegFormSchema from './GetRegFormSchema';
+import { CreateRegistrationPayload } from '../../../../../../../../common/requests/registration/RegistrationRequests';
 
 export const initializeRegSchema = (errors: (key: string) => string) =>
   getRegFormSchema({
@@ -12,10 +13,8 @@ export const initializeRegSchema = (errors: (key: string) => string) =>
     ageNotNumber: errors('ageNotNumber')
   });
 
-export const getInitRegFormValues = () => ({
-  [regFormNames.email]: '',
-  [regFormNames.password]: '',
-  [regFormNames.age]: undefined
+export const getInitRegFormValues = (): CreateRegistrationPayload => ({
+  email: '',
+  password: '',
+  age: undefined
 });
-
-

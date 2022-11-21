@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../src/redux/types';
 import Layout from '../src/components/layout/Layout';
 import MainGallery from '../src/components/mains/authed/mainGallery/MainGallery';
+import { mobileCheck } from '../src/common/utils/mobileCheck/mobileCheck';
+import MobileMainPage from '../src/components/mains/others/baseMain/mobileMainPage/MobileMainPage';
 
 export default function Home(props) {
   const isLoggedIn = useSelector(
@@ -18,6 +20,10 @@ export default function Home(props) {
     return <RegFormSpinner />;
   }
 
+  if (!isLoggedIn && mobileCheck()) {
+    return <MobileMainPage />;
+  }
+
   return (
     <>
       <Layout className="">
@@ -26,4 +32,3 @@ export default function Home(props) {
     </>
   );
 }
-

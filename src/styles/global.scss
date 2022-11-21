@@ -8,6 +8,15 @@
 //@import './customs/slider';
 
 body {
-	margin: 0;
-	font-family: Roboto, serif;
+  margin: 0;
+  font-family: Roboto, serif;
+}
+
+input,
+textarea,
+button,
+select,
+a,
+div {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }

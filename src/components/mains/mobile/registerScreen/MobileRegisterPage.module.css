@@ -1,0 +1,7 @@
+.regMobilePageContainer {
+  @apply w-full flex flex-col  gap-[12px] px-[8px] pt-[12px];
+}
+
+.backButton {
+  @apply w-[50px] h-[50px]  p-[4px] absolute left-[12px];
+}

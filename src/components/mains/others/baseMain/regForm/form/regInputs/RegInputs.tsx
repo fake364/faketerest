@@ -18,6 +18,9 @@ import {
 } from '../../../../../../../redux/actions/metadata/actions';
 import { AppDispatch } from '../../../../../../../redux/types';
 import { useDispatch } from 'react-redux';
+import RegistrationRequests, {
+  CreateRegistrationPayload
+} from '../../../../../../../common/requests/registration/RegistrationRequests';
 
 export const RegInputs: React.FC = () => {
   const { t: commonTranslations } = useTranslation('common');
@@ -25,22 +28,14 @@ export const RegInputs: React.FC = () => {
   const { t: errors } = useTranslation('error-messages');
   const dispatch: AppDispatch = useDispatch();
 
-  const formik = useFormik({
+  const formik = useFormik<CreateRegistrationPayload>({
     initialValues: getInitRegFormValues(),
     validationSchema: initializeRegSchema(errors),
     validateOnChange: false,
     validateOnBlur: false,
-    onSubmit: async (values) => {
+    onSubmit: async (values: CreateRegistrationPayload) => {
       try {
-        const response = await axios('/api/registration/create', {
-          responseType: 'json',
-          method: 'POST',
-          data: {
-            [regFormNames.password]: values.password,
-            [regFormNames.age]: values.age,
-            [regFormNames.email]: values.email
-          }
-        });
+        const response = await RegistrationRequests.createRegistration(values);
         if (response.status === StatusCodes.OK) {
           dispatch(setIsLoggedIn(true));
           dispatch(setUserId(response.data.userId));

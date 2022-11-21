@@ -26,7 +26,10 @@ export const useCheckAuth = () => {
       })
       .catch((e) => {
         setCheckAuth(false);
-        router.push('/').then(() => dispatch(setWipeState()));
+        const path = router.pathname;
+        if (!path.includes('/login') && !path.includes('/signup')) {
+          router.push('/').then(() => dispatch(setWipeState()));
+        }
       });
   }, []);
 

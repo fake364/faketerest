@@ -6,6 +6,7 @@ module.exports = {
     '/': ['main-page', 'error-messages'],
     '/fake-builder': ['error-messages'],
     'rgx:/.*': ['profile'],
-    'rgx:/settings/.*': ['settings']
+    'rgx:/settings/.*': ['settings'],
+    '/signup': ['error-messages']
   }
 };

@@ -6,6 +6,7 @@ import selectUsersByString from './queries/selectUsersByString';
 import { areSearchUsersEntries } from './utils/utils';
 import { SearchUserPayload } from './types/types';
 import selectUserIdByUsername from './queries/selectUserIdByUsername';
+import countEmail from './queries/countEmail';
 
 export class RegService extends ConnectionService {
   public static instance: RegService;
@@ -66,6 +67,17 @@ export class RegService extends ConnectionService {
     );
     const id = Number((res as { id: string }).id);
     return isNaN(id) ? null : id;
+  }
+
+  async isEmailExists(email: string) {
+    const formattedEmail = email.trim().toLowerCase();
+    try {
+      const [[res]] = await this.connection.query(countEmail(formattedEmail));
+      return (res as { count: string })?.count === '1';
+    } catch (e) {
+      console.error(e);
+      return false;
+    }
   }
 }
 
