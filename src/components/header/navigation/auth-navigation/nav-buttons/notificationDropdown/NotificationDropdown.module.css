@@ -3,9 +3,9 @@
 }
 
 .dropdownBody {
-  @apply w-[340px] max-h-[80vh] min-h-[300px] relative flex flex-col gap-[12px];
+  @apply relative flex flex-col gap-[12px];
 }
 
 .emptyListContainer {
-  @apply w-full h-full absolute m-auto left-0 right-0 flex items-center justify-center flex-col gap-[12px];
+  @apply w-full h-full absolute m-auto top-0 left-0 right-0 flex items-center justify-center flex-col gap-[12px];
 }

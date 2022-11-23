@@ -14,6 +14,7 @@ import PagerNotificationsService from '../../../../../../common/singletons/Pager
 import { FiBellOff } from '@react-icons/all-files/fi/FiBellOff';
 import { CLIENT_EVENTS, NotificationType } from 'faketerest-utilities';
 import styles from './NotificationDropdown.module.css';
+import NotificationsBody from './notificationsBody/NotificationsBody';
 
 type Props = {};
 
@@ -47,20 +48,7 @@ const NotificationDropdown: React.FC<Props> = () => {
       onOpenDropdown={onOpenDropdown}
       tooltipText={'Notifications'}
     >
-      <div className={styles.dropdownBody}>
-        {notifications.length === 0 ? (
-          <div className={styles.emptyListContainer}>
-            <FiBellOff className={'text-[48px] text-[gray]'} />
-            <div className={'text-center text-[24px] text-[gray] font-[300]'}>
-              No notifications yet
-            </div>
-          </div>
-        ) : (
-          notifications.map((data) => (
-            <NotificationWrapper notificationData={data} />
-          ))
-        )}
-      </div>
+      <NotificationsBody className={'w-[340px] max-h-[80vh] min-h-[300px]'} />
     </DropdownRootElement>
   );
 };

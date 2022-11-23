@@ -1,5 +1,5 @@
 .fakePostItemTitle {
-  @apply line-clamp-[2] text-ellipsis font-bold text-[14px] text-[#4d4d4d] pointer-events-none;
+  @apply line-clamp-[2] text-ellipsis font-bold text-[14px] text-[#4d4d4d] pointer-events-none p-0;
 }
 
 .imageMenuBlock {

@@ -5,6 +5,7 @@ import {
   SnackbarReducerState
 } from '../reducers/snackbar/snackbarReducer';
 import { AnyAction } from 'redux';
+import styles from './SnackbarProvider.module.css';
 
 type Props = {};
 
@@ -20,11 +21,7 @@ const SnackbarProvider: React.FC<Props> = ({ children }) => {
 
   return (
     <SnackbarContext.Provider value={{ state, dispatch }}>
-      <div
-        className={
-          'fixed z-[15] w-fit m-auto right-0 left-0 bottom-[24px] flex flex-col gap-[12px]'
-        }
-      >
+      <div className={styles.snackbarQueueColumn}>
         {state.snacks.map(({ text, theme }) => (
           <FakeSnack text={text} theme={theme} />
         ))}

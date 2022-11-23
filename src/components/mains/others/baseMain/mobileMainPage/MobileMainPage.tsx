@@ -13,6 +13,10 @@ const MobileMainPage: React.FC<Props> = () => {
     await router.push('/signup');
   };
 
+  const onClickLogin = async () => {
+    await router.push('/login');
+  };
+
   return (
     <BackgroundImages>
       <div
@@ -39,7 +43,10 @@ const MobileMainPage: React.FC<Props> = () => {
           </PrimaryButton>
         </div>
         <div className={'text-center mt-[12px] mb-[48px]'}>
-          Already a member? <span className={'font-medium'}>Log in</span>
+          Already a member?{' '}
+          <span onClick={onClickLogin} className={'font-medium'}>
+            Log in
+          </span>
         </div>
       </div>
     </BackgroundImages>

@@ -8,6 +8,9 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/types';
 import AuthNavigation from '../header/navigation/auth-navigation/AuthNavigation';
 import FakeBuilderHeader from '../header/navigation/fake-builder-header/FakeBuilderHeader';
+import DesktopHeader from './desktopHeader/DesktopHeader';
+import { mobileCheck } from '../../common/utils/mobileCheck/mobileCheck';
+import MobileNavigation from './mobileNavigation/MobileNavigation';
 
 export enum HEADER_MODE {
   DEFAULT,
@@ -18,33 +21,10 @@ export enum HEADER_MODE {
 type Props = { className?: string };
 
 const Layout: React.FC<Props> = ({ children, className }) => {
-  const isLoggedIn = useSelector(
-    (state: RootState) => state.metadata.isLoggedIn
-  );
-  const mode = useSelector((state: RootState) => state.metadata.headerMode);
-
   return (
     <div className={className}>
       <BaseHead />
-      <Header
-        className={clsx(
-          isLoggedIn &&
-            mode === HEADER_MODE.DEFAULT &&
-            'sticky top-0 z-[100] bg-[white]'
-        )}
-      >
-        {isLoggedIn ? (
-          <>
-            {mode === HEADER_MODE.DEFAULT && <AuthNavigation />}
-            {mode === HEADER_MODE.FAKE_BUILDER && <FakeBuilderHeader />}
-            {mode === HEADER_MODE.NON_AUTHED_WITH_SEARCH && <div></div>}
-          </>
-        ) : (
-          <NavigationContainer>
-            <CommonNavigation />
-          </NavigationContainer>
-        )}
-      </Header>
+      {mobileCheck() ? <MobileNavigation /> : <DesktopHeader />}
       <main className={clsx('')}>{children}</main>
     </div>
   );

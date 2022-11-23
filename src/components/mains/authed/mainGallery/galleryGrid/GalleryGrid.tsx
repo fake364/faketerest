@@ -7,6 +7,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import clsx from 'clsx';
 import styles from '../MainGallery.module.css';
 import GalleryFakeItem from '../galleryFakeItem/GalleryFakeItem';
+import { mobileCheck } from '../../../../../common/utils/mobileCheck/mobileCheck';
 
 type Props = { fetchFromUserId?: number };
 
@@ -23,6 +24,10 @@ const GalleryGrid: React.FC<Props> = ({ fetchFromUserId }) => {
     </div>
   );
 
+  const isMobile = mobileCheck();
+  console.log('is mobile', isMobile);
+  const mobileColWidth = document.documentElement.clientWidth / 2 - 18;
+  const colWidth = isMobile ? mobileColWidth : 236;
   return (
     <div className={'flex justify-center [&>div]:w-full'}>
       <InfiniteScroll
@@ -30,7 +35,16 @@ const GalleryGrid: React.FC<Props> = ({ fetchFromUserId }) => {
         next={fetchImages}
         hasMore={posts.length < totalCount}
         loader={loadingMoreJSX}
-        className={clsx(styles.gridInfiniteScroll, 'gap-x-[16px] gap-y-[4px]')}
+        className={clsx(
+          styles.gridInfiniteScroll,
+          !isMobile
+            ? 'gap-x-[16px] gap-y-[4px] px-[24px]'
+            : 'gap-x-[8px] gap-y-[4px]'
+        )}
+        style={{
+          gridAutoColumns: colWidth,
+          gridTemplateColumns: `repeat(auto-fit, ${colWidth}px)`
+        }}
       >
         {posts.map((post, index) => (
           <GalleryFakeItem postDisplayEntity={post} key={index} />

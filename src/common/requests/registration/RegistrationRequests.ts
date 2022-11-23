@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { regFormNames } from '../../../components/mains/others/baseMain/regForm/form/formValues/schemas/GetRegFormSchema';
+import { loginFormNames } from '../../../components/mains/others/baseMain/regForm/form/formValues/schemas/GetLoginFormSchema';
 
 export type CreateRegistrationPayload = {
   password: string;
@@ -33,6 +34,27 @@ const isEmailExists = async (email: string) => {
   }
 };
 
-const RegistrationRequests = { createRegistration, isEmailExists };
+const loginRequest = ({
+  password,
+  email
+}: {
+  password: string;
+  email: string;
+}) => {
+  return axios('/api/login', {
+    responseType: 'json',
+    method: 'POST',
+    data: {
+      [loginFormNames.password]: password,
+      [loginFormNames.email]: email
+    }
+  });
+};
+
+const RegistrationRequests = {
+  createRegistration,
+  isEmailExists,
+  loginRequest
+};
 
 export default RegistrationRequests;

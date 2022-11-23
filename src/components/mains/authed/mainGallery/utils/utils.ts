@@ -34,7 +34,7 @@ export const getImageColSpanByHeight = (height: number) => {
       return ROW_SPAN_CLASSES[i + 1];
     }
   }
-  return '';
+  return 'row-span-3';
 };
 
 export const POSTS_FETCH_LIMIT = 20;

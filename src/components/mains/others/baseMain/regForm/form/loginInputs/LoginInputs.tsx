@@ -19,6 +19,7 @@ import {
   setUserId
 } from '../../../../../../../redux/actions/metadata/actions';
 import Router from 'next/router';
+import RegistrationRequests from '../../../../../../../common/requests/registration/RegistrationRequests';
 
 type Props = {};
 
@@ -36,13 +37,9 @@ const LoginInputs: React.FC<Props> = () => {
     validateOnBlur: false,
     onSubmit: async (values) => {
       try {
-        const response = await axios('/api/login', {
-          responseType: 'json',
-          method: 'POST',
-          data: {
-            [loginFormNames.password]: values.password,
-            [loginFormNames.email]: values.email
-          }
+        const response = await RegistrationRequests.loginRequest({
+          email: values.email,
+          password: values.password
         });
         if (response.status === StatusCodes.OK) {
           dispatch(setIsLoggedIn(true));

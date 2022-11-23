@@ -9,7 +9,6 @@ import ParamsArrowDropdown from './nav-buttons/dropdown-arrow/ParamsArrowDropdow
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/types';
 import RegFormSpinner from '../../../mains/others/baseMain/regForm/form/spinner/RegFormSpinner';
-import { UserData } from '../../../../common/types/user-types/UserData';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';

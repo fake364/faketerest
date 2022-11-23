@@ -1,7 +1,4 @@
 import React from 'react';
-import Tooltip from '../../../../../common/components/tooltip/Tooltip';
-import CircleIconButton from '../../../../../common/components/buttons/CircleIconButton';
-import { FaCommentDots } from '@react-icons/all-files/fa/FaCommentDots';
 import UserRoundButton from './user-button/UserRoundButton';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';

@@ -41,7 +41,7 @@ const GalleryFakeItem: React.FC<Props> = ({
   const onDownload = (e) => {
     e.stopPropagation();
   };
-
+  
   return (
     <Link href={'/fake/' + postId}>
       <div

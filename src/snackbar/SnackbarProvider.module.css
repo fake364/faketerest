@@ -1,0 +1,3 @@
+.snackbarQueueColumn {
+  @apply fixed z-[50] w-fit m-auto right-0 left-0 bottom-[24px] flex flex-col gap-[12px];
+}

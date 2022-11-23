@@ -1,0 +1,3 @@
+.circleButtonContainer {
+  @apply transition-all duration-[300ms] hover:bg-[#f0f0f0] p-[12px] rounded-[50%] active:scale-75 text-[gray] flex items-center;
+}
