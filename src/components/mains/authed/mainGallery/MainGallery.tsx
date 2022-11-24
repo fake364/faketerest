@@ -1,5 +1,4 @@
 import React from 'react';
-import { Nullable } from '../../../../common/types/common';
 import GalleryGrid from './galleryGrid/GalleryGrid';
 
 type Props = {};

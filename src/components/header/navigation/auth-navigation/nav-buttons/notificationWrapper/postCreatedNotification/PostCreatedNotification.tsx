@@ -5,12 +5,15 @@ import Image from 'next/image';
 import CreatedAtLabel from '../../../../../../../common/components/createdAtLabel/CreatedAtLabel';
 import PostCreatePayload from 'faketerest-utilities/dist/events/postCreate/types';
 import getFirstLastName from '../../../../../../../common/utils/firstLastNameCreate/getFirstLastName';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = { data: PostCreatePayload };
 
 const PostCreatedNotification: React.FC<Props> = ({
   data: { createdAt, postId, authorFirstname, authorLastName, authorId }
 }) => {
+  const { t } = useTranslation('common');
+
   return (
     <Link href={'/fake/' + postId}>
       <ButtonDropdownElement onClick={(e) => e.stopPropagation()}>
@@ -25,8 +28,8 @@ const PostCreatedNotification: React.FC<Props> = ({
             />
           </div>
           <div>
-            {getFirstLastName(authorFirstname, authorLastName)} has just posted
-            image
+            {getFirstLastName(authorFirstname, authorLastName)}{' '}
+            {t('notificationsText.posted.hasPostedImage')}
             <CreatedAtLabel
               createdAt={createdAt}
               className={'font-normal text-[16px] inline ml-[12px] text-[gray]'}

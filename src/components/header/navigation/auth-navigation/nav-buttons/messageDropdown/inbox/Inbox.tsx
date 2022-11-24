@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../redux/types';
 import clsx from 'clsx';
 import { mobileCheck } from '../../../../../../../common/utils/mobileCheck/mobileCheck';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = {
   className?: string;
@@ -27,6 +28,7 @@ const Inbox: React.FC<Props> = ({
   displayedUsers,
   selectUser
 }) => {
+  const { t } = useTranslation('common');
   const messagesState = useSelector((state: RootState) => state.messages);
 
   const debouncedChangeHandler = useCallback(debounce(onChangeSearch, 800), []);
@@ -39,7 +41,7 @@ const Inbox: React.FC<Props> = ({
     <div className={className}>
       <div>
         <CommonInput
-          placeholder={'Find user by name or username'}
+          placeholder={t('findPeopleBy')}
           onChange={debouncedChangeHandler}
         />
       </div>

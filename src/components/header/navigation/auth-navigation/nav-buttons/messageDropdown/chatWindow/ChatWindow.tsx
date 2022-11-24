@@ -4,18 +4,15 @@ import React, {
   useRef,
   useState
 } from 'react';
-import axios from 'axios';
-import { io, Socket } from 'socket.io-client';
+import { Socket } from 'socket.io-client';
 import { DefaultEventsMap } from 'socket.io/dist/typed-events';
-import MessageUtils from 'faketerest-utilities/dist/events/message/messageUtils';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../redux/types';
-import { CUSTOM_HEADERS } from 'faketerest-utilities/dist/common/enums';
-import MessagePayload from 'faketerest-utilities/dist/events/message/type';
 import ChatBody from './chatBody/ChatBody';
 import TopBackAndTitlePanel from './chatTopPanel/TopBackAndTitlePanel';
 import ChatBottomPanel from './chatBottomPanel/ChatBottomPanel';
 import { clearMessageIds } from '../../../../../../../redux/actions/messages/actions';
+import useRoomConnection from './hooks/useRoomConnection';
 
 type Props = {
   firstName: string;
@@ -31,23 +28,17 @@ const ChatWindow: React.FC<Props> = ({
   participantId
 }) => {
   const [text, setText] = useState<string>('');
-  const [messages, setMessages] = useState<MessagePayload[]>();
   const socketRef = useRef<Socket<DefaultEventsMap, DefaultEventsMap>>();
   const myId: number = useSelector((state: RootState) => state.metadata.userId);
   const roomRef = useRef<string>();
   const dispatch = useDispatch();
 
+  const { messages } = useRoomConnection(participantId);
+
   const chatScrollBody = useRef<HTMLDivElement>();
 
   const onChange = (e) => {
     setText(e.target.value);
-  };
-
-  const fetchMessages = async () => {
-    const result = await axios.get('/api/messages', {
-      params: { userId: participantId }
-    });
-    setMessages(result.data);
   };
 
   const submitMessage = async () => {
@@ -83,51 +74,6 @@ const ChatWindow: React.FC<Props> = ({
       top: chatScrollBody.current.scrollHeight
     });
   }, [messages?.length]);
-
-  const setupSocket = () => {
-    roomRef.current = MessageUtils.createConversationId(
-      Number(participantId),
-      Number(myId)
-    );
-    socketRef.current = io('http://192.168.0.9:3003', {
-      extraHeaders: {
-        [CUSTOM_HEADERS.X_CLIENT_ID]: String(myId),
-        [CUSTOM_HEADERS.X_JOIN_ROOM]: roomRef.current
-      }
-    });
-    const socket = socketRef.current;
-    socket.connect();
-
-    socket.on('message', (payload: MessagePayload) => {
-      setMessages((prev) => [...prev, payload]);
-    });
-
-    socket.on('read-messages', (keysToChange: string[]) => {
-      setMessages((prev) =>
-        prev.map((message) => {
-          if (keysToChange.includes(message.messageId)) {
-            return { ...message, hasBeenRead: true };
-          }
-          return message;
-        })
-      );
-    });
-
-  };
-
-  useEffect(() => {
-    fetchMessages();
-    if (!socketRef.current) {
-      setupSocket();
-    }
-    if (!socketRef.current?.connected) {
-      socketRef.current?.connect();
-    }
-
-    return () => {
-      socketRef.current?.disconnect();
-    };
-  }, []);
 
   const submitMessageViaEnter: KeyboardEventHandler<HTMLInputElement> = async (
     e

@@ -41,10 +41,7 @@ const EditProfileForm: React.FC<Props> = ({
       errorsKeys.forEach((key) => {
         switch (key) {
           case FORM_ERRORS_KEYS.EXISTING_FIELD:
-            formik.setFieldError(
-              'username',
-              'This username is already registered'
-            );
+            formik.setFieldError('username', t('userAlreadyRegistered'));
             break;
         }
       });

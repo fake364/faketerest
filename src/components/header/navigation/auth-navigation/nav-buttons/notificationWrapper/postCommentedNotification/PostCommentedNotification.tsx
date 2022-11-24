@@ -5,12 +5,15 @@ import { PostCommentedPayload } from 'faketerest-utilities/dist/events/comment/t
 import CreatedAtLabel from '../../../../../../../common/components/createdAtLabel/CreatedAtLabel';
 import getFirstLastName from '../../../../../../../common/utils/firstLastNameCreate/getFirstLastName';
 import UserAvatarImage from '../../user-button/user-image/UserAvatarImage';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = { data: PostCommentedPayload };
 
 const PostCommentedNotification: React.FC<Props> = ({
   data: { postId, fromFirstname, fromLastname, createdAt, text, fromUserId }
 }) => {
+  const { t } = useTranslation('common');
+
   return (
     <Link href={'/fake/' + postId}>
       <ButtonDropdownElement onClick={(e) => e.stopPropagation()}>
@@ -23,8 +26,8 @@ const PostCommentedNotification: React.FC<Props> = ({
             />
           </div>
           <div>
-            {getFirstLastName(fromFirstname, fromLastname)} has left comment
-            under your post:{' '}
+            {getFirstLastName(fromFirstname, fromLastname)}{' '}
+            {t('notificationsText.commented.hasCommentedYourPost')}:{' '}
             <span className={'font-normal line-clamp-2'}>{text}</span>
             <CreatedAtLabel
               createdAt={createdAt}

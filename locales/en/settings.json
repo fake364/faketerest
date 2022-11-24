@@ -40,5 +40,7 @@
     "submit": "Save"
   },
   "photo": "Photo",
-  "change": "Change"
+  "change": "Change",
+  "actions": "Actions",
+  "userAlreadyRegistered": "This user is already registered"
 }

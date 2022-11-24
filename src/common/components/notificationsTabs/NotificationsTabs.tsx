@@ -1,6 +1,7 @@
 import React from 'react';
 import TabButton from '../../../components/mains/authed/profile/profilePins/TabButton';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = { selectedTab: NOTIFICATION_TAB };
 
@@ -11,6 +12,8 @@ export enum NOTIFICATION_TAB {
 
 const NotificationsTab: React.FC<Props> = ({ selectedTab }) => {
   const router = useRouter();
+  const { t } = useTranslation('common');
+
   const onClickTab = async (tab: NOTIFICATION_TAB) => {
     if (tab === NOTIFICATION_TAB.NOTIFICATIONS) {
       await router.push('/notifications');
@@ -25,13 +28,13 @@ const NotificationsTab: React.FC<Props> = ({ selectedTab }) => {
         isActive={selectedTab === NOTIFICATION_TAB.NOTIFICATIONS}
         onClick={() => onClickTab(NOTIFICATION_TAB.NOTIFICATIONS)}
       >
-        Notifications
+        {t('notifications')}
       </TabButton>
       <TabButton
         isActive={selectedTab === NOTIFICATION_TAB.INBOX}
         onClick={() => onClickTab(NOTIFICATION_TAB.INBOX)}
       >
-        Inbox
+        {t('inbox')}
       </TabButton>
     </div>
   );

@@ -5,7 +5,6 @@ import { getImageBase64UrlById } from '../../src/common/backend/utils/fakePosts/
 import FakePostsService from '../../src/common/backend/services/fakePostsService/FakePostsService';
 import PostsCommentsService from '../../src/common/backend/services/postsCommentsService/PostsCommentsService';
 import { mobileCheck } from '../../src/common/utils/mobileCheck/mobileCheck';
-import { FaArrowLeft } from '@react-icons/all-files/fa/FaArrowLeft';
 import CircleIconButton from '../../src/common/components/buttons/CircleIconButton';
 import { FaChevronLeft } from '@react-icons/all-files/fa/FaChevronLeft';
 import PostTopPanel from '../../src/components/mains/authed/fakePost/postContent/postTopPanel/PostTopPanel';

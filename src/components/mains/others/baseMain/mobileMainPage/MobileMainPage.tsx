@@ -3,11 +3,13 @@ import BackgroundImages from '../../login/BackgroundImages';
 import Image from 'next/image';
 import PrimaryButton from '../../../../../common/components/buttons/primary-button/PrimaryButton';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 type Props = {};
 
 const MobileMainPage: React.FC<Props> = () => {
   const router = useRouter();
+  const { t } = useTranslation('common');
 
   const onClickRegister = async () => {
     await router.push('/signup');
@@ -32,20 +34,20 @@ const MobileMainPage: React.FC<Props> = () => {
           />
         </div>
         <div className={'text-[2rem] font-medium max-w-[60vw] text-center'}>
-          Welcome to Faketerest
+          {t('welcomeToFaketerest')}
         </div>
         <div className={'max-w-[75vw] w-full'}>
           <PrimaryButton
             className={'w-full py-[12px]'}
             onClick={onClickRegister}
           >
-            Continue with email
+            {t('continueWithEmail')}
           </PrimaryButton>
         </div>
         <div className={'text-center mt-[12px] mb-[48px]'}>
-          Already a member?{' '}
+          {t('alreadyAMember')}
           <span onClick={onClickLogin} className={'font-medium'}>
-            Log in
+            {t('logIn')}
           </span>
         </div>
       </div>

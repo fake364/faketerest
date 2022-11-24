@@ -40,11 +40,7 @@ const FakePostContent: React.FC<Props> = ({
       {!isMobile && <PostTopPanel className={'sticky'} />}
       {/*<div>website</div>*/}
       {title && (
-        <a
-          target="_blank"
-          href="https://twitter.com/"
-          rel="noopener noreferrer"
-        >
+        <a>
           <h1
             className={clsx(
               'break-words ',

@@ -72,5 +72,34 @@
   "postPublished": "Post was successfully published!",
   "you": "You",
   "noTitle": "No title",
-  "download": "Download"
+  "download": "Download",
+  "accountInformation": "Account information",
+  "welcomeToFaketerest": "Welcome to Faketerest",
+  "continueWithEmail": "Continue with email",
+  "alreadyAMember": "Already a member?",
+  "logIn": "Log in",
+  "whatYourEmail": "What is your email address?",
+  "createAPassword": "Create a password",
+  "specifyAge": "Please specify your age",
+  "next": "Next",
+  "mobileRegistrationPlaceholders": {
+    "email": "Email",
+    "password": "Password",
+    "age": "Age"
+  },
+  "findPeopleBy": "Find user by name or username",
+  "notifications": "Notifications",
+  "inbox": "Inbox",
+  "noNotifications": "No notifications",
+  "notificationsText": {
+    "subscribed": {
+      "startedFollowing": "has just started following you"
+    },
+    "posted": {
+      "hasPostedImage": "has posted image"
+    },
+    "commented": {
+      "hasCommentedYourPost": "has left comment under your post"
+    }
+  }
 }

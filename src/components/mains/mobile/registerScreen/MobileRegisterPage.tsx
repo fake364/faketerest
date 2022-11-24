@@ -38,6 +38,7 @@ const stepIndexToFieldName = ['email', 'password', 'age'];
 const MobileRegisterPage: React.FC<Props> = () => {
   const [stepIndex, setStepIndex] = useState<number>(0);
   const { t: errors } = useTranslation('error-messages');
+  const { t } = useTranslation('common');
   const dispatch: AppDispatch = useDispatch();
   const router = useRouter();
 
@@ -66,9 +67,15 @@ const MobileRegisterPage: React.FC<Props> = () => {
   };
 
   const titlesArray = [
-    'What is your email address?',
-    'Create a password',
-    'Please specify your age'
+    t('whatYourEmail'),
+    t('createAPassword'),
+    t('specifyAge')
+  ];
+
+  const placeholders = [
+    t('mobileRegistrationPlaceholders.email'),
+    t('mobileRegistrationPlaceholders.password'),
+    t('mobileRegistrationPlaceholders.age')
   ];
 
   const fieldName = stepIndexToFieldName[stepIndex];
@@ -115,20 +122,20 @@ const MobileRegisterPage: React.FC<Props> = () => {
           onChange={onChangeInput}
           type={inputType}
           className="mt-[8px]"
-          placeholder={'place'}
+          placeholder={placeholders[stepIndex]}
           labelText={currentError}
           value={fieldValue || ''}
         />
         <PrimaryButtonStateful
           isActive={!currentError}
-          activeText={'Next'}
+          activeText={t('next')}
           type={buttonType}
           onClick={onChangeStep}
         />
         <div className={'text-center mt-[24px] text-[18px]'}>
-          Already a member?{' '}
+          {t('alreadyAMember')}
           <span onClick={onClickLogin} className={'font-medium'}>
-            Log in
+            {t('logIn')}
           </span>
         </div>
       </div>
