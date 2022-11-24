@@ -30,30 +30,30 @@ const ParamsArrowDropdown: React.FC<Props> = () => {
     >
       <div className="text-[12px] ml-[12px]">{t('user-dropdown.now')}:</div>
       <UserCard onClick={onUserClick} />
-      <div className="text-[12px] ml-[12px] my-[12px]">
-        {t('user-dropdown.your-accounts')}
-      </div>
-      <ButtonDropdownElement onClick={null}>
-        {t('user-dropdown.add-account')}
-      </ButtonDropdownElement>
-      <ButtonDropdownElement onClick={null}>
-        {t('user-dropdown.switch-to-business')}
-      </ButtonDropdownElement>
+      {/*<div className="text-[12px] ml-[12px] my-[12px]">*/}
+      {/*  {t('user-dropdown.your-accounts')}*/}
+      {/*</div>*/}
+      {/*<ButtonDropdownElement onClick={null}>*/}
+      {/*  {t('user-dropdown.add-account')}*/}
+      {/*</ButtonDropdownElement>*/}
+      {/*<ButtonDropdownElement onClick={null}>*/}
+      {/*  {t('user-dropdown.switch-to-business')}*/}
+      {/*</ButtonDropdownElement>*/}
       <div className="text-[12px] ml-[12px] my-[12px]">
         {t('user-dropdown.additional')}
       </div>
       <ButtonDropdownElement onClick={onSettingsClick}>
         {t('user-dropdown.settings')}
       </ButtonDropdownElement>
-      <ButtonDropdownElement onClick={null}>
-        {t('user-dropdown.setup-feed')}
-      </ButtonDropdownElement>
-      <ButtonDropdownElement onClick={null}>
-        {t('user-dropdown.setup-app')}
-      </ButtonDropdownElement>
-      <ButtonDropdownElement onClick={null}>
-        {t('user-dropdown.get-reference')}
-      </ButtonDropdownElement>
+      {/*<ButtonDropdownElement onClick={null}>*/}
+      {/*  {t('user-dropdown.setup-feed')}*/}
+      {/*</ButtonDropdownElement>*/}
+      {/*<ButtonDropdownElement onClick={null}>*/}
+      {/*  {t('user-dropdown.setup-app')}*/}
+      {/*</ButtonDropdownElement>*/}
+      {/*<ButtonDropdownElement onClick={null}>*/}
+      {/*  {t('user-dropdown.get-reference')}*/}
+      {/*</ButtonDropdownElement>*/}
       <ButtonDropdownElement onClick={onLogoutClick}>
         {t('user-dropdown.logout')}
       </ButtonDropdownElement>

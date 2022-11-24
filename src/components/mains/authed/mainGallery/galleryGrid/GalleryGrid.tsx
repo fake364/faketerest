@@ -25,7 +25,6 @@ const GalleryGrid: React.FC<Props> = ({ fetchFromUserId }) => {
   );
 
   const isMobile = mobileCheck();
-  console.log('is mobile', isMobile);
   const mobileColWidth = document.documentElement.clientWidth / 2 - 18;
   const colWidth = isMobile ? mobileColWidth : 236;
   return (

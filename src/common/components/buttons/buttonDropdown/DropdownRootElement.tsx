@@ -50,9 +50,9 @@ const DropdownRootElement = <T,>(props: Props<T>) => {
   }, [isDisplayed]);
 
   const onBlur = (e) => {
-    // if (!e.currentTarget.contains(e.relatedTarget)) {
-    //   setDisplayed(false);
-    // }
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      setDisplayed(false);
+    }
   };
 
   return (

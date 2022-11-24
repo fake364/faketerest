@@ -85,7 +85,6 @@ const MobileRegisterPage: React.FC<Props> = () => {
   const inputType = stepIndex === 1 ? 'password' : '';
   const buttonType = stepIndex === 3 ? 'submit' : 'button';
 
-  console.log(formik.touched);
 
   const onChangeStep = async () => {
     if (
@@ -108,7 +107,6 @@ const MobileRegisterPage: React.FC<Props> = () => {
 
   const onClickLogin = () => router.push('/login');
 
-  console.log(fieldName, fieldValue, currentError, formik);
 
   return (
     <form onSubmit={formik.handleSubmit}>

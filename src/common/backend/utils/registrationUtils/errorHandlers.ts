@@ -4,7 +4,6 @@ import { REGISTRATION_ERROR } from '../../models/constants/code';
 import { NextApiResponse } from 'next';
 
 export const createRegistrationErrorHandler = (e, res: NextApiResponse) => {
-  console.log(e);
   const constraintViolated = e?.original?.constraint;
   if (constraintViolated) {
     const errorMessage = `${constraintViolated} field should be unique.`;

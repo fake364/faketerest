@@ -13,7 +13,7 @@ const CommonNavigation: React.FC<Props> = () => {
     <>
       <LogoTitle />
       <LoginButtonsContainer>
-        {theme === THEME_TYPE.BASE && <BaseNavigationLinks />}
+        {/*{theme === THEME_TYPE.BASE && <BaseNavigationLinks />} COMMENTED THIS BECAUSE THERE's no functionality*/}
       </LoginButtonsContainer>
     </>
   );

@@ -59,9 +59,6 @@ const AuthNavigation: React.FC<Props> = () => {
         text={t('header.create')}
         dropdownClass="left-[-57px]"
       >
-        <ButtonDropdownElement onClick={null}>
-          {t('header.create-fake-idea')}
-        </ButtonDropdownElement>
         <Link href={'/fake-builder'}>
           <ButtonDropdownElement>
             {t('header.create-fake')}
