@@ -7,8 +7,25 @@ import { mapUserDataWithJWTCheck } from '../../src/common/backend/utils/withServ
 import CountriesService from '../../src/common/backend/services/countriesService/CountriesService';
 import { sortCountriesAlphabetically } from '../../src/common/utils/functional-utils/sort-functions/common';
 import UserDataEntity from '../../src/common/backend/validation-services/registration/UserDataEntity';
+import { mobileCheck } from '../../src/common/utils/mobileCheck/mobileCheck';
+import useTranslation from 'next-translate/useTranslation';
+import SettingsMobilePageWrapper from '../../src/components/mains/authed/settings/settingsMobilePageWrapper/SettingsMobilePageWrapper';
 
 export default function PersonalInformation(props) {
+  const isMobile = mobileCheck();
+  const { t } = useTranslation('settings');
+
+  if (isMobile) {
+    return (
+      <SettingsMobilePageWrapper title={t('tabs.personal-data')}>
+        <PersonalInformationSettings
+          userData={props.userData}
+          countries={props.countries}
+        />
+      </SettingsMobilePageWrapper>
+    );
+  }
+
   return (
     <Layout>
       <SettingsContainer selectedTab={SETTINGS_TAB.PERSONAL_DATA}>

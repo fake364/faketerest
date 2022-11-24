@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ImageNext from 'next/image';
 import clsx from 'clsx';
+import { mobileCheck } from '../../../../../common/utils/mobileCheck/mobileCheck';
 
 type Props = { imageBase64Url: string };
 
@@ -18,15 +19,18 @@ const PostImageContainer: React.FC<Props> = ({ imageBase64Url }) => {
   if (!imgSizes || !imageBase64Url) {
     return <div>Image</div>;
   }
+  const screenWidth = document.documentElement.clientWidth;
+  const relativeToScreenHeight = (screenWidth * imgSizes[1]) / imgSizes[0];
+  const isMobile = mobileCheck();
 
   return (
     <div
-      className={clsx('relative w-full max-h-[684px]')}
-      style={{ height: imgSizes[1] }}
+      className={clsx('relative w-full ', !isMobile && 'max-h-[684px]')}
+      style={{ height: isMobile ? relativeToScreenHeight : imgSizes[1] }}
     >
       <ImageNext
         src={imageBase64Url}
-        className={'rounded-[16px]'}
+        className={!isMobile && 'rounded-[16px]'}
         height={imgSizes[1]}
         width={imgSizes[0]}
         layout={'fill'}

@@ -13,7 +13,7 @@ import { RootState } from '../../../../../../../redux/types';
 import { CUSTOM_HEADERS } from 'faketerest-utilities/dist/common/enums';
 import MessagePayload from 'faketerest-utilities/dist/events/message/type';
 import ChatBody from './chatBody/ChatBody';
-import ChatTopPanel from './chatTopPanel/ChatTopPanel';
+import TopBackAndTitlePanel from './chatTopPanel/TopBackAndTitlePanel';
 import ChatBottomPanel from './chatBottomPanel/ChatBottomPanel';
 import { clearMessageIds } from '../../../../../../../redux/actions/messages/actions';
 
@@ -140,7 +140,7 @@ const ChatWindow: React.FC<Props> = ({
   return (
     <div className={className}>
       <div className={'flex flex-col w-full h-full items-stretch gap-[12px]'}>
-        <ChatTopPanel onBack={onBack} title={firstName} />
+        <TopBackAndTitlePanel onBack={onBack} title={firstName} />
         <ChatBody
           messages={messages}
           participantId={participantId}

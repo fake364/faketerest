@@ -6,14 +6,14 @@ import { RootState } from '../../../../../../../redux/types';
 
 type Props = { className?: string; firstName?: string; userId?: number };
 
-const UserAvatarImage: React.FC<Props> = ({
-  firstName = useSelector(
-    (state: RootState) => state.userData?.userData?.firstName
-  ),
-  className,
-  userId = useSelector((state: RootState) => state.metadata.userId)
-}) => {
+const UserAvatarImage: React.FC<Props> = ({ firstName, className, userId }) => {
   const [isImageShown, setImageShown] = useState<boolean>(true);
+  const myFirstName = useSelector(
+    (state: RootState) => state.userData?.userData?.firstName
+  );
+  const myUserId = useSelector((state: RootState) => state.metadata.userId);
+  const displayFirstName = firstName || myFirstName;
+  const displayUserId = userId || myUserId;
 
   return (
     <div
@@ -25,7 +25,7 @@ const UserAvatarImage: React.FC<Props> = ({
     >
       {isImageShown ? (
         <Image
-          src={'/user/' + userId + '/avatar.png'}
+          src={'/user/' + displayUserId + '/avatar.png'}
           className={'rounded-[50%]'}
           onError={() => {
             setImageShown(false);
@@ -43,7 +43,7 @@ const UserAvatarImage: React.FC<Props> = ({
             'bg-[whitesmoke] w-[80%] h-[80%] rounded-[50%] flex justify-center items-center '
           }
         >
-          {firstName[0].toUpperCase()}
+          {displayFirstName[0].toUpperCase()}
         </div>
       )}
     </div>

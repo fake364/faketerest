@@ -1,13 +1,21 @@
 import React from 'react';
 import CircleIconButton from '../../../../../../../../common/components/buttons/CircleIconButton';
 import { FaArrowLeft } from '@react-icons/all-files/fa/FaArrowLeft';
+import clsx from 'clsx';
 
-type Props = { onBack: () => void; title: string };
+type Props = { onBack: () => void; title: string; className?: string };
 
-const ChatTopPanel: React.FC<Props> = ({ onBack, title }) => {
+const TopBackAndTitlePanel: React.FC<Props> = ({
+  onBack,
+  title,
+  className
+}) => {
   return (
     <div
-      className={'p-[4px] font-medium text-center relative items-center flex'}
+      className={clsx(
+        'p-[4px] font-medium text-center relative items-center flex',
+        className
+      )}
     >
       <CircleIconButton
         className={' w-[45px] h-[45px] !text-[22px]'}
@@ -19,4 +27,4 @@ const ChatTopPanel: React.FC<Props> = ({ onBack, title }) => {
   );
 };
 
-export default ChatTopPanel;
+export default TopBackAndTitlePanel;

@@ -8,10 +8,11 @@ import { mobileCheck } from '../../../../common/utils/mobileCheck/mobileCheck';
 type Props = {};
 
 const BackgroundImages: React.FC<Props> = ({ children }) => {
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-  }, []);
   const isMobile = mobileCheck();
+
+  useEffect(() => {
+    !isMobile && (document.body.style.overflow = 'hidden');
+  }, []);
 
   return (
     <div

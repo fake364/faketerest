@@ -6,25 +6,22 @@ import { GrLink } from '@react-icons/all-files/gr/GrLink';
 import PrimaryButton from '../../../../../../common/components/buttons/primary-button/PrimaryButton';
 import useFakeSnackbar from '../../../../../../snackbar/hooks/useFakeSnackbar/useFakeSnackbar';
 import useTranslation from 'next-translate/useTranslation';
+import clsx from 'clsx';
 
-type Props = {};
+type Props = { className?: string };
 
-const PostTopPanel: React.FC<Props> = () => {
+const PostTopPanel: React.FC<Props> = ({ className }) => {
   const { addFakeSnack } = useFakeSnackbar();
   const { t } = useTranslation('common');
+
   const copyCurrentUrl = async () => {
     await navigator.clipboard.writeText(window.location.href);
     addFakeSnack({ text: t('fakePost.linkCopied') });
   };
 
   return (
-    <div className={'flex justify-between sticky'}>
-      <div className="flex gap-[4px]">
-        <CircleIconButton
-          className="text-[black]"
-          Icon={BsThreeDots}
-          onClick={null}
-        />
+    <div className={clsx('flex justify-between', className)}>
+      <div className="flex gap-[8px] ml-[8px]">
         <CircleIconButton
           Icon={FiUpload}
           className="text-[black]"
@@ -36,7 +33,7 @@ const PostTopPanel: React.FC<Props> = () => {
           onClick={copyCurrentUrl}
         />
       </div>
-      <div>
+      <div className={'float-right'}>
         <PrimaryButton>{t('fakePost.save')}</PrimaryButton>
       </div>
     </div>

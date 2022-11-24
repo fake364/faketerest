@@ -10,6 +10,8 @@ import { FakePostPageProps } from '../../../../../../pages/fake/[postid]';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import getFirstLastName from '../../../../../common/utils/firstLastNameCreate/getFirstLastName';
+import { mobileCheck } from '../../../../../common/utils/mobileCheck/mobileCheck';
+import clsx from 'clsx';
 
 type Props = { className?: string; postId: string } & Pick<
   FakePostPageProps,
@@ -31,10 +33,11 @@ const FakePostContent: React.FC<Props> = ({
 }) => {
   const authUserId = useSelector((state: RootState) => state.metadata.userId);
   const { t } = useTranslation('common');
+  const isMobile = mobileCheck();
 
   return (
     <div className={className}>
-      <PostTopPanel />
+      {!isMobile && <PostTopPanel className={'sticky'} />}
       {/*<div>website</div>*/}
       {title && (
         <a
@@ -42,7 +45,14 @@ const FakePostContent: React.FC<Props> = ({
           href="https://twitter.com/"
           rel="noopener noreferrer"
         >
-          <h1 className={'break-words text-[36px]'}>{title}</h1>
+          <h1
+            className={clsx(
+              'break-words ',
+              isMobile ? 'text-[1.6rem]' : 'text-[36px]'
+            )}
+          >
+            {title}
+          </h1>
         </a>
       )}
 

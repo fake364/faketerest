@@ -27,7 +27,7 @@ const Comment: React.FC<Props> = ({
           className={'w-[40px] h-[40px]'}
         />
       </Link>
-      <div className={'flex-1 mt-[4px] flex flex-col'}>
+      <div className={'flex-1 mt-[4px] flex flex-col break-all'}>
         <div>
           <Link href={'/' + username}>
             <span

@@ -8,6 +8,7 @@ import UserAvatarImage from '../../../header/navigation/auth-navigation/nav-butt
 import { ProfilePageProps } from '../../../../../pages/[username]';
 import SubscriptionsBlock from './subscriptionsBlock/SubscriptionsBlock';
 import getFirstLastName from '../../../../common/utils/firstLastNameCreate/getFirstLastName';
+import { mobileCheck } from '../../../../common/utils/mobileCheck/mobileCheck';
 
 const Profile: React.FC<ProfilePageProps> = ({
   userData,
@@ -27,7 +28,12 @@ const Profile: React.FC<ProfilePageProps> = ({
           'cursor-pointer'
         )}
       />
-      <div className="text-[36px] mt-[16px]">
+      <div
+        className={clsx(
+          'mt-[16px]',
+          mobileCheck() ? 'text-[1.6rem]' : 'text-[36px]'
+        )}
+      >
         {getFirstLastName(userData.firstName, userData.lastName)}
       </div>
       <div className="text-[14px] text-[#767676] mt-[4px]">

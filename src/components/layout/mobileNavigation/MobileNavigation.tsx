@@ -33,7 +33,7 @@ const MobileNavigation: React.FC<Props> = () => {
   const userData: UserDataEntity = useSelector(
     (state: RootState) => state.userData.userData
   );
-  const profileUrl = '/' + userData.username;
+  const profileUrl = '/' + userData?.username;
   const router = useRouter();
 
   const firstName: string = useSelector(
@@ -80,19 +80,21 @@ const MobileNavigation: React.FC<Props> = () => {
           onClick={onClickNotifications}
         />
       </div>
-      <div
-        className={clsx(
-          circleButtonStyle.circleButtonContainer,
-          router.asPath === profileUrl && '!bg-[#e5e7eb]'
-        )}
-        onClick={onClickProfile}
-      >
-        <UserAvatarImage
-          userId={userId}
-          firstName={firstName}
-          className={'h-[25px] w-[25px]'}
-        />
-      </div>
+      {userId && (
+        <div
+          className={clsx(
+            circleButtonStyle.circleButtonContainer,
+            router.asPath === profileUrl && '!bg-[#e5e7eb]'
+          )}
+          onClick={onClickProfile}
+        >
+          <UserAvatarImage
+            userId={userId}
+            firstName={firstName}
+            className={'h-[25px] w-[25px]'}
+          />
+        </div>
+      )}
     </div>
   );
 };

@@ -3,30 +3,19 @@ import { FaChevronDown } from '@react-icons/all-files/fa/FaChevronDown';
 import DropdownRootElement from '../../../../../../common/components/buttons/buttonDropdown/DropdownRootElement';
 import ButtonDropdownElement from '../../../../../../common/components/buttons/buttonDropdown/ButtonDropdownElement';
 import UserCard from './userCard/UserCard';
-import { useDispatch } from 'react-redux';
-import { setWipeState } from '../../../../../../redux/actions/metadata/actions';
-import axios from 'axios';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import useLogout from '../../../../../../common/hooks/useLogout/useLogout';
 
 type Props = {};
 
 const ParamsArrowDropdown: React.FC<Props> = () => {
   const { t } = useTranslation('common');
-  const dispatch = useDispatch();
   const router = useRouter();
+  const onLogoutClick = useLogout();
 
   const onSettingsClick = async () => {
     await router.push('/settings/edit-profile');
-  };
-
-  const onLogoutClick = async () => {
-    try {
-      await axios.get('/api/logout');
-    } finally {
-      await router.push('/');
-      dispatch(setWipeState());
-    }
   };
 
   const onUserClick = async (username: string) => {

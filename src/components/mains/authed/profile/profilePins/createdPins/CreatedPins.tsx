@@ -6,6 +6,7 @@ import useFakeSnackbar from '../../../../../../snackbar/hooks/useFakeSnackbar/us
 import clsx from 'clsx';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
+import { mobileCheck } from '../../../../../../common/utils/mobileCheck/mobileCheck';
 
 type Props = { userId: number; username: string };
 
@@ -16,6 +17,7 @@ const CreatedPins: React.FC<Props> = ({ userId, username }) => {
   );
   const [totalCreated, setTotal] = useState(0);
   const { addFakeSnack } = useFakeSnackbar();
+  const isMobile = mobileCheck();
 
   const setCreatedWithFixedLength = (posts: PostDisplayEntity[]) => {
     setCreated((prevPosts) => {
@@ -52,7 +54,14 @@ const CreatedPins: React.FC<Props> = ({ userId, username }) => {
   }, []);
 
   return (
-    <div className="self-start p-[62px]">
+    <div
+      className={clsx(
+        'self-start',
+        !isMobile
+          ? 'p-[62px] self-start'
+          : 'w-full flex justify-center pb-[74px]'
+      )}
+    >
       <Link href={`/${username}/fakes`}>
         <div className={'flex flex-col cursor-pointer'}>
           <div className={'flex'}>
