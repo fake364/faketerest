@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import UserAvatarImage from '../../../../../header/navigation/auth-navigation/nav-buttons/user-button/user-image/UserAvatarImage';
 import SecondaryButton from '../../../../../../common/components/buttons/secondary-button/SecondaryButton';
 import PrimaryButton from '../../../../../../common/components/buttons/primary-button/PrimaryButton';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../../redux/types';
-import axios from 'axios';
-import useFakeSnackbar from '../../../../../../snackbar/hooks/useFakeSnackbar/useFakeSnackbar';
 import { SUBSCRIPTION_TYPE } from '../SubscriptionsList';
 import clsx from 'clsx';
 import useFollowUnfollow from '../../../../../../common/hooks/useFollowUnfollow/useFollowUnfollow';
