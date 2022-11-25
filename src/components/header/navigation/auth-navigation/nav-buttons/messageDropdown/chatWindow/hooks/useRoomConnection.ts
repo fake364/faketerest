@@ -65,7 +65,7 @@ const useRoomConnection = (participantId: number) => {
     setMessages(result.data);
   };
 
-  return { messages };
+  return { messages,socketRef };
 };
 
 export default useRoomConnection;

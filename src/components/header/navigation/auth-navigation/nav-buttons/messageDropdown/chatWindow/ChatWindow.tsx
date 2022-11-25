@@ -28,12 +28,11 @@ const ChatWindow: React.FC<Props> = ({
   participantId
 }) => {
   const [text, setText] = useState<string>('');
-  const socketRef = useRef<Socket<DefaultEventsMap, DefaultEventsMap>>();
   const myId: number = useSelector((state: RootState) => state.metadata.userId);
   const roomRef = useRef<string>();
   const dispatch = useDispatch();
 
-  const { messages } = useRoomConnection(participantId);
+  const { messages, socketRef } = useRoomConnection(participantId);
 
   const chatScrollBody = useRef<HTMLDivElement>();
 
@@ -43,7 +42,7 @@ const ChatWindow: React.FC<Props> = ({
 
   const submitMessage = async () => {
     if (text.trim()) {
-      socketRef.current.emit('message', roomRef.current, text);
+      socketRef.current?.emit('message', roomRef.current, text);
       setText('');
       const audio = new Audio('/audio/message_sent.mp3');
 
