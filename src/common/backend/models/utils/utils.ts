@@ -13,7 +13,8 @@ export const createAndAssignSession = async (
     cookie.serialize(AUTH_SESSION_KEY, sessionUUid, {
       httpOnly: true,
       path: '/',
-      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 3) // TWO DAYS
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 3), // TWO DAYS
+      sameSite: 'strict'
     })
   );
 };
