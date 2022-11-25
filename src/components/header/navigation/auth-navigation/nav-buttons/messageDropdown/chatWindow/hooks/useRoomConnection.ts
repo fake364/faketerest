@@ -19,7 +19,7 @@ const useRoomConnection = (participantId: number) => {
       Number(participantId),
       Number(myId)
     );
-    socketRef.current = io('http://192.168.0.9:3003', {
+    socketRef.current = io('http://84.46.243.80:3003', {
       extraHeaders: {
         [CUSTOM_HEADERS.X_CLIENT_ID]: String(myId),
         [CUSTOM_HEADERS.X_JOIN_ROOM]: roomRef.current

@@ -19,7 +19,7 @@ export class PagerNotificationsServiceClass {
     if (this._socket) {
       await this._socket.disconnect();
     }
-    this._socket = io('http://192.168.0.9:3003', {
+    this._socket = io('http://84.46.243.80:3003', {
       extraHeaders: { [CUSTOM_HEADERS.X_CLIENT_ID]: String(userId) }
     }) as unknown as Socket<DefaultEventsMap, DefaultEventsMap>;
     await this._socket.connect();
