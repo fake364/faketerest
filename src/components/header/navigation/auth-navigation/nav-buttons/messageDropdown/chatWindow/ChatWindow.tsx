@@ -31,8 +31,8 @@ const ChatWindow: React.FC<Props> = ({
   const myId: number = useSelector((state: RootState) => state.metadata.userId);
   const roomRef = useRef<string>();
   const dispatch = useDispatch();
-
-  const { messages, socketRef } = useRoomConnection(participantId);
+  const socketRef = useRef<Socket<DefaultEventsMap, DefaultEventsMap>>();
+  const { messages } = useRoomConnection(participantId, socketRef);
 
   const chatScrollBody = useRef<HTMLDivElement>();
 
