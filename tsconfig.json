@@ -23,10 +23,11 @@
   },
   "include": [
     "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
+    "(pages|src)/**/*.ts",
+    "(pages|src)/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "faketerest-pager"
   ]
 }

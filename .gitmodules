@@ -1,0 +1,3 @@
+[submodule "faketerest-pager"]
+	path = faketerest-pager
+	url = https://github.com/fake364/faketerest-pager.git

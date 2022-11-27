@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  faketerest:
+    build: .
+    ports:
+      - '3000:3000'
+    #    volumes:
+    #      - .:/code
+    #      - logvolume01:/var/log
+    depends_on:
+      - redis
+    links:
+      - 'redis:redis'
+      - 'pager:pager'
+  pager:
+    build: ./faketerest-pager/Dockerfile
+    ports:
+      - '3003:3003'
+  redis:
+    image: redis:5.0.14
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    ports:
+      - '6379:6379'
+  postgres:
+    image: postgres:14-alpine
+    volumes:
+      - ./
