@@ -68,7 +68,7 @@ const CreatedPins: React.FC<Props> = ({ userId, username }) => {
             {createdPosts.map((post, index) => (
               <div
                 className={clsx(
-                  'w-[118px] h-[157px] relative border-[white] border-[1px] border-solid rounded-[16px]',
+                  'w-[118px] h-[157px] relative border-[white] border-[1px] border-solid rounded-[16px] bg-[#f0f0f0]',
                   index > 0 && 'ml-[-86px]'
                 )}
                 style={{ zIndex: 6 - index }}

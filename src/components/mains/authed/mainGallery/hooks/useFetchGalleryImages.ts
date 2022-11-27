@@ -11,6 +11,7 @@ const useFetchGalleryImages = (fetchUsersId?: number) => {
   const [posts, setPosts] = useState<PostDisplayEntity[]>([]);
   const { addFakeSnack } = useFakeSnackbar();
   const { t } = useTranslation('main-page');
+  const [hasBeenFetched, setHasBeenFetched] = useState<boolean>(false);
 
   useEffect(() => {
     if (posts.length === 0) {
@@ -46,7 +47,7 @@ const useFetchGalleryImages = (fetchUsersId?: number) => {
     }
   };
 
-  return { fetchImages, posts, totalCount };
+  return { fetchImages, posts, totalCount, hasBeenFetched };
 };
 
 export default useFetchGalleryImages;

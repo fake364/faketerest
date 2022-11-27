@@ -13,6 +13,7 @@ class DialogsHandler {
   @WithSessionAuth()
   async getDialogs(@Req() req: NextApiRequest) {
     const sessionId = req.cookies[AUTH_SESSION_KEY];
+    console.log('TEST',sessionId);
     const myId = await UserSessionsService.getUserIdBySessionUUid(sessionId);
     const dialogsKeys = await NotificationsService.getUsersDialogs(myId);
     const participantsIds = getParticipantsIdsFromKeys(dialogsKeys, myId);

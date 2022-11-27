@@ -1,6 +1,4 @@
 import React from 'react';
-import { UserData } from '../../../../../common/types/user-types/UserData';
-import { useRouter } from 'next/router';
 import MyProfileButtons from './myProfileButtons/MyProfileButtons';
 import AnotherAccountButtons from './anothersProfileButtons/AnotherAccountButtons';
 import UserDataEntity from '../../../../../common/backend/validation-services/registration/UserDataEntity';

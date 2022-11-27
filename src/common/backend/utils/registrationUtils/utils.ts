@@ -117,6 +117,8 @@ const modifyFieldFn =
       case 'password':
         finalValue = createPasswordHmac(value);
         break;
+      case 'id':
+        return;
       default:
         finalValue = value;
         break;
@@ -149,9 +151,9 @@ export const prepareEntityAndValidate = async (
   const formValues = Object.entries(payload);
   if (formValues.length > 0) {
     formValues.forEach(modifyFieldFn((key, value) => (dto[key] = value)));
+    console.log(dto, dto.gender, typeof dto.gender);
     const errors = await validate(dto, {
-      whitelist: true,
-      forbidNonWhitelisted: true
+      whitelist: true
     });
     const hasCurrentPasswordNoError =
       errors.length === 0 && dto.currentPassword;

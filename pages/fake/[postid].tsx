@@ -41,7 +41,7 @@ export default function Post(props: FakePostPageProps) {
 
   if (isMobile) {
     const onBack = async () => {
-      await router.back();
+      await router.push('/');
     };
 
     return (

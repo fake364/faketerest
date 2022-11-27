@@ -16,12 +16,18 @@ import 'reflect-metadata';
 import SnackbarProvider from '../src/snackbar/SnackbarProvider';
 import GlobalNotificationWrapper from '../src/components/globalNotificationWrapper/GlobalNotificationWrapper';
 import '../src/common/utils/mobileCheck/mobileCheck';
+import { useRouter } from 'next/router';
+import CircleSpinner, {
+  SPINNER_COLORS
+} from '../src/common/components/spinner/CircleSpinner';
+import useSSRLoading from '../src/common/hooks/useSSRLoading/useSSRLoading';
 
 type WrapperProps = { children?: React.ReactNode };
 
 const WrapperUnderRedux: React.FC<WrapperProps> = ({ children }) => {
   const [theme, setTheme] = useState(THEME_TYPE.BASE);
   const [isTranslationLoading, setTranslationsLoading] = useState(true);
+
   useFetchUser();
 
   const { isCheckingAuth } = useCheckAuth();
@@ -45,6 +51,8 @@ const WrapperUnderRedux: React.FC<WrapperProps> = ({ children }) => {
 };
 
 function MyApp({ Component, pageProps }) {
+  const isPageLoading = useSSRLoading();
+
   return (
     <Provider store={store}>
       {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
@@ -53,7 +61,11 @@ function MyApp({ Component, pageProps }) {
         <WrapperUnderRedux>
           <SnackbarProvider>
             <GlobalNotificationWrapper>
-              <Component {...pageProps} />
+              {isPageLoading ? (
+                <RegFormSpinner />
+              ) : (
+                <Component {...pageProps} />
+              )}
             </GlobalNotificationWrapper>
           </SnackbarProvider>
         </WrapperUnderRedux>

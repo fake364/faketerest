@@ -12,9 +12,9 @@ const MyProfileButtons: React.FC<Props> = () => {
 
   return (
     <>
-      <SecondaryButton className="text-[18px] font-normal !px-[22px]">
-        {t('share')}
-      </SecondaryButton>
+      {/*<SecondaryButton className="text-[18px] font-normal !px-[22px]">*/}
+      {/*  {t('share')}*/}
+      {/*</SecondaryButton>*/}
       <Link href={isMobile ? '/settings' : '/settings/edit-profile'}>
         <SecondaryButton className="text-[18px] font-normal !px-[22px]">
           {t('editProfile')}

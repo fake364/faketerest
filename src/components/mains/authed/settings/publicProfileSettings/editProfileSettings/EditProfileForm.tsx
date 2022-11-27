@@ -76,7 +76,11 @@ const EditProfileForm: React.FC<Props> = ({
 
   return (
     <>
-      <ChangeProfilePhoto firstName={firstName} onChangeFile={onChangeFiles} />
+      <ChangeProfilePhoto
+        firstName={firstName}
+        onChangeFile={onChangeFiles}
+        value={formik.values.image}
+      />
       <form name="edit-profile-form" onSubmit={formik.handleSubmit}>
         <div className="flex gap-[12px] w-full">
           <InputWithError

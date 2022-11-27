@@ -18,6 +18,9 @@ export class ConnectionService {
       process.env.ENVIRONMENT !== 'local'
         ? { ssl: { require: true, rejectUnauthorized: false } }
         : {};
+    console.log(
+      `postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}`
+    );
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     this._connection = new Sequelize(

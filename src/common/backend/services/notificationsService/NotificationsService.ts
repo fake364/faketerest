@@ -10,6 +10,7 @@ export class NotificationsServiceClass {
   constructor() {
     this.client = createClient({
       url: `redis://${process.env.REDIS_DB_HOST}`,
+      password: process.env.REDIS_DB_PASS
     });
   }
 

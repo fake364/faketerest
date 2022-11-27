@@ -13,6 +13,6 @@ export default class IsGenderNumber implements ValidatorConstraintInterface {
   }
 
   validate(value: number): Promise<boolean> | boolean {
-    return value === -1 || value === 0 || value === -1;
+    return value === -1 || value === 0 || value === 1;
   }
 }
