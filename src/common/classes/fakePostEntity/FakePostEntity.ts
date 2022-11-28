@@ -28,7 +28,7 @@ export default class FakePostEntity {
 
   uploadId?: string;
 
-  isSelected: boolean = false;
+  isSelected = false;
 
   constructor(id: number, title = '', description = '', image?: File) {
     this.id = id;

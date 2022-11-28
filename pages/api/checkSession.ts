@@ -18,16 +18,18 @@ export const WithSessionAuth = createMiddlewareDecorator(sessionMiddlewareFn);
 class CheckSessionHandler {
   @Get()
   async checkSession(@Req() req: NextApiRequest, @Res() res: NextApiResponse) {
-    await RegistrationService.checkConnection();
-    const sessionId = req.cookies[AUTH_SESSION_KEY];
-    if (!sessionId) {
-      throw new UnauthorizedException();
-    }
     try {
+      await RegistrationService.checkConnection();
+      const sessionId = req.cookies[AUTH_SESSION_KEY];
+      if (!sessionId) {
+        throw new UnauthorizedException();
+      }
+
       return {
         userId: await UserSessionsService.getUserIdBySessionUUid(sessionId)
       };
     } catch (e) {
+      console.error(e);
       console.error(
         'Could not authenticate for ' + req.cookies[AUTH_SESSION_KEY]
       );

@@ -30,6 +30,7 @@ const useFetchGalleryImages = (fetchUsersId?: number) => {
 
   const fetchImages = async () => {
     try {
+      setHasBeenFetched(true);
       const result = await axios.get('/api/posts', {
         params: {
           offset: offsetRef.current,

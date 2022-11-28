@@ -9,7 +9,12 @@ export class NotificationsServiceClass {
 
   constructor() {
     this.client = createClient({
-      url: `redis://${process.env.REDIS_DB_HOST}`,
+      socket: {
+        host: process.env.REDIS_DB_HOST,
+        port: Number(process.env.REDIS_DB_PORT)
+      },
+      legacyMode: true,
+
       password: process.env.REDIS_DB_PASS
     });
   }
@@ -41,6 +46,7 @@ export class NotificationsServiceClass {
     });
   };
 
+  // TODO wrap with try catch to prevent error crash
   async withConnection<T>(callback: () => T) {
     !this.client.isOpen && (await this.client.connect());
     const result = await callback();
@@ -49,9 +55,9 @@ export class NotificationsServiceClass {
 
   getUsersDialogs(userId: number) {
     return this.withConnection(async () => {
-      const usersDialogs = await this.client.keys(
-        `${EVENT_TYPE.MESSAGE}:*${userId}*`
-      );
+      const usersDialogs =
+        (await this.client.keys(`${EVENT_TYPE.MESSAGE}:*${userId}*`)) || [];
+      console.log('keys', usersDialogs);
       const splittedDialogKeys = usersDialogs.map((dialogKey) =>
         dialogKey.split(':')
       );
@@ -73,6 +79,7 @@ export class NotificationsServiceClass {
       .filter(({ authorId, hasBeenRead }) => myId !== authorId && !hasBeenRead);
   };
 }
+
 const NotificationsService = NotificationsServiceClass.getInstance();
 
 export default NotificationsService;

@@ -4,26 +4,41 @@ services:
     build: .
     ports:
       - '3000:3000'
-    #    volumes:
-    #      - .:/code
-    #      - logvolume01:/var/log
+    volumes:
+      - ./.env:/faketerest/.env
     depends_on:
       - redis
+      - postgres
+      - pager
     links:
       - 'redis:redis'
       - 'pager:pager'
+      - 'postgres:postgres'
   pager:
-    build: ./faketerest-pager/Dockerfile
+    build: ./faketerest-pager
     ports:
       - '3003:3003'
+    links:
+      - 'postgres:postgres'
+    depends_on:
+      - redis
+      - postgres
   redis:
     image: redis:5.0.14
+    command: redis-server /redis.conf
     volumes:
-      - ./redis.conf:/usr/local/etc/redis/redis.conf
-    command: redis-server /usr/local/etc/redis/redis.conf
+      - ./config/redis.conf:/redis.conf
     ports:
       - '6379:6379'
   postgres:
     image: postgres:14-alpine
+    restart: always
+    tty: true
     volumes:
-      - ./
+      - ./config/postgres-dump:/postgres/postgres-dump
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=d48t4r
+      - POSTGRES_DB=postgres
