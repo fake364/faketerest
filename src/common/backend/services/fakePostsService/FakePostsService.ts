@@ -62,7 +62,7 @@ export class FakePostsServiceClass extends ConnectionService {
     const [res] = await this.connection.query(selectAllPostsQuery(settings));
     const posts = res as TablePostEntity[];
     return posts.map(({ pk_id, title, description }) => {
-      const dimensions = sizeOf(path.join('public', 'posts', `${pk_id}.jpg`));
+      const dimensions = sizeOf(path.join('static-box', 'posts', `${pk_id}.jpg`));
       return {
         postId: pk_id,
         title,

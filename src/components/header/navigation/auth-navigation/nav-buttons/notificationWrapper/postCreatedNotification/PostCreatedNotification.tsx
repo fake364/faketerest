@@ -13,7 +13,7 @@ const PostCreatedNotification: React.FC<Props> = ({
   data: { createdAt, postId, authorFirstname, authorLastName, authorId }
 }) => {
   const { t } = useTranslation('common');
-
+  const src = `http://localhost/static-box/posts/${postId}.jpg`;
   return (
     <Link href={'/fake/' + postId}>
       <ButtonDropdownElement onClick={(e) => e.stopPropagation()}>
@@ -23,7 +23,8 @@ const PostCreatedNotification: React.FC<Props> = ({
               layout={'fill'}
               objectFit={'cover'}
               objectPosition={'center'}
-              src={`/posts/${postId}.jpg`}
+              loader={() => src}
+              src={src}
               className={'rounded-[12px]'}
             />
           </div>

@@ -14,6 +14,8 @@ const UserAvatarImage: React.FC<Props> = ({ firstName, className, userId }) => {
   const myUserId = useSelector((state: RootState) => state.metadata.userId);
   const displayFirstName = firstName || myFirstName;
   const displayUserId = userId || myUserId;
+  const src =
+    'http://localhost/static-box/user/' + displayUserId + '/avatar.png';
 
   return (
     <div
@@ -25,7 +27,8 @@ const UserAvatarImage: React.FC<Props> = ({ firstName, className, userId }) => {
     >
       {isImageShown ? (
         <Image
-          src={'/user/' + displayUserId + '/avatar.png'}
+          src={src}
+          loader={() => src}
           className={'rounded-[50%]'}
           onError={() => {
             setImageShown(false);

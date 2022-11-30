@@ -41,7 +41,8 @@ const GalleryFakeItem: React.FC<Props> = ({
   const onDownload = (e) => {
     e.stopPropagation();
   };
-  
+
+  const src = `http://localhost/static-box/posts/${postId}.jpg`;
   return (
     <Link href={'/fake/' + postId}>
       <div
@@ -59,7 +60,8 @@ const GalleryFakeItem: React.FC<Props> = ({
         >
           <Image
             className={'rounded-[24px] min-h-[236px]'}
-            src={`/posts/${postId}.jpg`}
+            loader={() => src}
+            src={src}
             width={fixWidth}
             height={fixHeight}
           />

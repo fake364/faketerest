@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { MB_3_IN_BYTES } from '../../../constants/commons';
+import { MB_5_IN_BYTES } from '../../../constants/commons';
 import * as path from 'path';
 
 import * as fs from 'fs';
@@ -53,8 +53,8 @@ export const syncHandleFormAndSaveFile = (
 export const handleRegistrationFormData = async (req: NextApiRequest, userId) =>
   (await syncHandleFormAndSaveFile(req, {
     filename: 'avatar.png',
-    maxFileSize: MB_3_IN_BYTES,
-    uploadDir: path.join('public', 'user', String(userId))
+    maxFileSize: MB_5_IN_BYTES,
+    uploadDir: path.join('static-box', 'user', String(userId))
   })) as UserDataEntity | undefined;
 
 export const updateUser = async (

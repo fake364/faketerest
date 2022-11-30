@@ -65,25 +65,29 @@ const CreatedPins: React.FC<Props> = ({ userId, username }) => {
       <Link href={`/${username}/fakes`}>
         <div className={'flex flex-col cursor-pointer'}>
           <div className={'flex'}>
-            {createdPosts.map((post, index) => (
-              <div
-                className={clsx(
-                  'w-[118px] h-[157px] relative border-[white] border-[1px] border-solid rounded-[16px] bg-[#f0f0f0]',
-                  index > 0 && 'ml-[-86px]'
-                )}
-                style={{ zIndex: 6 - index }}
-              >
-                {post?.postId && (
-                  <Image
-                    src={`/posts/${post.postId}.jpg`}
-                    layout={'fill'}
-                    objectFit={'cover'}
-                    objectPosition={'center'}
-                    className={'rounded-[16px] '}
-                  />
-                )}
-              </div>
-            ))}
+            {createdPosts.map((post, index) => {
+              const src = `http://localhost/static-box/posts/${post?.postId}.jpg`;
+              return (
+                <div
+                  className={clsx(
+                    'w-[118px] h-[157px] relative border-[white] border-[1px] border-solid rounded-[16px] bg-[#f0f0f0]',
+                    index > 0 && 'ml-[-86px]'
+                  )}
+                  style={{ zIndex: 6 - index }}
+                >
+                  {post?.postId && (
+                    <Image
+                      loader={() => src}
+                      src={src}
+                      layout={'fill'}
+                      objectFit={'cover'}
+                      objectPosition={'center'}
+                      className={'rounded-[16px] '}
+                    />
+                  )}
+                </div>
+              );
+            })}
           </div>
           <div className={'flex flex-col ml-[12px]'}>
             <div className={'text-[20px] font-medium'}>{t('allPosts')}</div>

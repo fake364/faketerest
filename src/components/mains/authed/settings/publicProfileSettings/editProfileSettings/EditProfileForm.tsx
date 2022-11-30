@@ -9,7 +9,7 @@ import { AppDispatch, RootState } from '../../../../../../redux/types';
 import { useRouter } from 'next/router';
 import { setUserData } from '../../../../../../redux/actions/user-data/actions';
 import useTranslation from 'next-translate/useTranslation';
-import { MB_3_IN_BYTES } from '../../../../../../common/constants/commons';
+import { MB_5_IN_BYTES } from '../../../../../../common/constants/commons';
 import UserDataEntity from '../../../../../../common/backend/validation-services/registration/UserDataEntity';
 import { getErrorsKeysArray, submitProfileSettings } from './utils/utils';
 import { FORM_ERRORS_KEYS } from '../../../../../../common/enums/common';
@@ -66,7 +66,7 @@ const EditProfileForm: React.FC<Props> = ({
 
   const onChangeFiles: ChangeEventHandler<HTMLInputElement> = (e) => {
     const file = e.target.files[0];
-    if (file.size < MB_3_IN_BYTES) {
+    if (file.size < MB_5_IN_BYTES) {
       formik.setFieldValue('image', file);
       formik.setFieldError('image', undefined);
     } else {

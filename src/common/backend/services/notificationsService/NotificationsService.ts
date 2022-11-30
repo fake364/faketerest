@@ -9,12 +9,7 @@ export class NotificationsServiceClass {
 
   constructor() {
     this.client = createClient({
-      socket: {
-        host: process.env.REDIS_DB_HOST,
-        port: Number(process.env.REDIS_DB_PORT)
-      },
-      legacyMode: true,
-
+      url: `redis://${process.env.REDIS_DB_HOST}:${process.env.REDIS_DB_PORT}`,
       password: process.env.REDIS_DB_PASS
     });
   }
@@ -33,7 +28,7 @@ export class NotificationsServiceClass {
         participantId
       );
       const list = await this.client.hVals(listKey);
-      if (list.length > 0) {
+      if (list?.length > 0) {
         const parsedMessages = list.map((item) =>
           JSON.parse(item)
         ) as MessagePayload[];
@@ -57,7 +52,6 @@ export class NotificationsServiceClass {
     return this.withConnection(async () => {
       const usersDialogs =
         (await this.client.keys(`${EVENT_TYPE.MESSAGE}:*${userId}*`)) || [];
-      console.log('keys', usersDialogs);
       const splittedDialogKeys = usersDialogs.map((dialogKey) =>
         dialogKey.split(':')
       );

@@ -10,7 +10,7 @@ class PostImageHandler {
     return {
       filename,
       contents: fs.createReadStream(
-        path.join('public', 'posts', `${postid}.jpg`)
+        path.join('static-box', 'posts', `${postid}.jpg`)
       ),
       contentType: 'image/jpg'
     };

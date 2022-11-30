@@ -3,7 +3,7 @@ import path from 'path';
 
 export const getImageBase64UrlById = (postId: string) => {
   const uintArr = fs.readFileSync(
-    path.join('public', 'posts', `${postId}.jpg`)
+    path.join('static-box', 'posts', `${postId}.jpg`)
   );
   if (uintArr.length === 0) {
     if (!postId) {

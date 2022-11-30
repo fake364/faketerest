@@ -1,7 +1,10 @@
 import { createHandler, Header, Post, Req, Res } from 'next-api-decorators';
 import { WithSessionAuth } from '../checkSession';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { AUTH_SESSION_KEY } from '../../../src/common/constants/commons';
+import {
+  AUTH_SESSION_KEY,
+  MB_5_IN_BYTES
+} from '../../../src/common/constants/commons';
 import UserSessionsService from '../../../src/common/backend/services/usersSessionsService/UserSessionsService';
 import * as path from 'path';
 import { StatusCodes } from 'http-status-codes';
@@ -28,12 +31,13 @@ class PostHandler {
       const userId = await UserSessionsService.getUserIdBySessionUUid(
         sessionId
       );
-      const uploadDir = path.join('public', 'posts');
+      const uploadDir = path.join('static-box', 'posts');
       const postId = uuid();
       const filename = postId + '.jpg';
       const { description, title } = (await syncHandleFormAndSaveFile(req, {
         uploadDir,
-        filename
+        filename,
+        maxFileSize: MB_5_IN_BYTES
       })) as { title: string; description: string };
 
       if (description?.length <= 500 && title?.length <= 100) {

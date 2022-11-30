@@ -50,15 +50,17 @@ export class RegService extends ConnectionService {
     };
   }
 
-  getUsersByStringEntry = async (entry: string) => {
+  getUsersByStringEntry = async (entry: string, excludeId?: number) => {
     const [res] = await this.connection.query(selectUsersByString(entry));
     if (!areSearchUsersEntries(res)) {
       throw new Error('some entry was wrong');
     }
-    return res.map((entry) => ({
-      id: Number(entry.ID),
-      fullText: entry.full_text
-    })) as SearchUserPayload[];
+    return res
+      .filter(({ ID }) => Number(ID) !== excludeId)
+      .map((entry) => ({
+        id: Number(entry.ID),
+        fullText: entry.full_text
+      })) as SearchUserPayload[];
   };
 
   async getUserIdByUsername(username: string) {

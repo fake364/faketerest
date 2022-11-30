@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsOptional, Max, Min, ValidateIf } from 'class-validator';
-import { MB_3_IN_BYTES } from '../../../../constants/commons';
+import { MB_5_IN_BYTES } from '../../../../constants/commons';
 import { isUserNameValid} from '../../../validation-services/registration/functions';
 import { NAME_REGEX, SPACES_REGEX } from '../../../validation-services/registration/constants';
 
@@ -28,6 +28,6 @@ export default class PutUserPayload {
   username: string;
 
   @IsOptional()
-  @ValidateIf((value: File) => value.size < MB_3_IN_BYTES)
+  @ValidateIf((value: File) => value.size < MB_5_IN_BYTES)
   image?: File;
 }

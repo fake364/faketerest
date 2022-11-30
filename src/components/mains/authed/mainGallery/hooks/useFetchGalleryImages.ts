@@ -4,9 +4,10 @@ import { POSTS_FETCH_LIMIT } from '../utils/utils';
 import useFakeSnackbar from '../../../../../snackbar/hooks/useFakeSnackbar/useFakeSnackbar';
 import useTranslation from 'next-translate/useTranslation';
 import { PostDisplayEntity } from '../galleryFakeItem/GalleryFakeItem';
+import { Nullable } from 'faketerest-utilities';
 
 const useFetchGalleryImages = (fetchUsersId?: number) => {
-  const [totalCount, setTotalCount] = useState(0);
+  const [totalCount, setTotalCount] = useState<Nullable<number>>(0);
   const offsetRef = useRef(0);
   const [posts, setPosts] = useState<PostDisplayEntity[]>([]);
   const { addFakeSnack } = useFakeSnackbar();
@@ -30,7 +31,6 @@ const useFetchGalleryImages = (fetchUsersId?: number) => {
 
   const fetchImages = async () => {
     try {
-      setHasBeenFetched(true);
       const result = await axios.get('/api/posts', {
         params: {
           offset: offsetRef.current,
@@ -45,6 +45,8 @@ const useFetchGalleryImages = (fetchUsersId?: number) => {
       setPosts((prev) => [...prev, ...result.data.posts]);
     } catch (e) {
       addFakeSnack({ text: t('gallery.errors.couldNotGetImages') });
+    } finally {
+      setHasBeenFetched(true);
     }
   };
 

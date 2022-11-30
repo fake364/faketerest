@@ -1,5 +1,5 @@
 import { io, Socket } from 'socket.io-client';
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { MutableRefObject, useEffect, useState } from 'react';
 import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../../redux/types';
@@ -8,9 +8,12 @@ import MessagePayload from 'faketerest-utilities/dist/events/message/type';
 import MessageUtils from 'faketerest-utilities/dist/events/message/messageUtils';
 import { CUSTOM_HEADERS } from 'faketerest-utilities/dist/common/enums';
 
-const useRoomConnection = (participantId: number,ref: MutableRefObject<Socket<DefaultEventsMap, DefaultEventsMap>>) => {
+const useRoomConnection = (
+  participantId: number,
+  ref: MutableRefObject<Socket<DefaultEventsMap, DefaultEventsMap>>,
+  roomRef: React.MutableRefObject<string>
+) => {
   const myId: number = useSelector((state: RootState) => state.metadata.userId);
-  const roomRef = useRef<string>();
   const [messages, setMessages] = useState<MessagePayload[]>();
 
   const setupSocket = () => {
@@ -18,7 +21,9 @@ const useRoomConnection = (participantId: number,ref: MutableRefObject<Socket<De
       Number(participantId),
       Number(myId)
     );
-    ref.current = io(process.env.PAGER_API_URL, {
+    ref.current = io({
+      path: '/pager-connect',
+      hostname: process.env.PAGER_API_URL,
       extraHeaders: {
         [CUSTOM_HEADERS.X_CLIENT_ID]: String(myId),
         [CUSTOM_HEADERS.X_JOIN_ROOM]: roomRef.current
@@ -64,7 +69,7 @@ const useRoomConnection = (participantId: number,ref: MutableRefObject<Socket<De
     setMessages(result.data);
   };
 
-  return { messages };
+  return { messages};
 };
 
 export default useRoomConnection;
