@@ -66,7 +66,7 @@ const CreatedPins: React.FC<Props> = ({ userId, username }) => {
         <div className={'flex flex-col cursor-pointer'}>
           <div className={'flex'}>
             {createdPosts.map((post, index) => {
-              const src = `http://localhost/static-box/posts/${post?.postId}.jpg`;
+              const src = `http://${window.location.host}/static-box/posts/${post?.postId}.jpg`;
               return (
                 <div
                   className={clsx(

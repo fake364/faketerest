@@ -15,7 +15,7 @@ const UserAvatarImage: React.FC<Props> = ({ firstName, className, userId }) => {
   const displayFirstName = firstName || myFirstName;
   const displayUserId = userId || myUserId;
   const src =
-    'http://localhost/static-box/user/' + displayUserId + '/avatar.png';
+    `http://${window.location.host}/static-box/user/` + displayUserId + '/avatar.png';
 
   return (
     <div

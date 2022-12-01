@@ -42,7 +42,7 @@ const GalleryFakeItem: React.FC<Props> = ({
     e.stopPropagation();
   };
 
-  const src = `http://localhost/static-box/posts/${postId}.jpg`;
+  const src = `http://${window.location.host}/static-box/posts/${postId}.jpg`;
   return (
     <Link href={'/fake/' + postId}>
       <div
