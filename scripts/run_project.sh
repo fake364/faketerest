@@ -4,6 +4,6 @@ docker-compose down
 
 docker-compose up -d
 
-export PGPASSWORD=d48t4r
+export PGPASSWORD=${DB_PASSWORD}
 
-pg_restore -c -U postgres -d postgres -h localhost -p 5432 ./config/postgres-dump
+pg_restore -c -U ${DB_USERNAME} -d ${DB_NAME} -h localhost -p ${DB_PORT} ./config/postgres-dump
