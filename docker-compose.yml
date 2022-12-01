@@ -1,15 +1,28 @@
 version: '3.9'
 services:
+  nginx:
+    image: nginx:latest
+    restart: unless-stopped
+    ports:
+      - '80:80'
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
+      - ./static-box:/static-box
   faketerest:
     build: .
     ports:
       - '3000:3000'
     volumes:
       - ./.env:/faketerest/.env
+      - ./next.config.js:/faketerest/.next.config.js
+      - ./pages:/faketerest/pages
+      - ./src:/faketerest/src
+      - ./static-box:/faketerest/static-box
     depends_on:
       - redis
       - postgres
       - pager
+      - nginx
     links:
       - 'redis:redis'
       - 'pager:pager'
@@ -23,13 +36,14 @@ services:
     depends_on:
       - redis
       - postgres
+      - nginx
   redis:
     image: redis:5.0.14
-    command: redis-server /redis.conf
+    command: redis-server /redis.conf --requirepass ${REDIS_DB_PASS}
     volumes:
       - ./config/redis.conf:/redis.conf
     ports:
-      - '6379:6379'
+      - '${REDIS_DB_PORT}:6379'
   postgres:
     image: postgres:14-alpine
     restart: always
@@ -37,8 +51,8 @@ services:
     volumes:
       - ./config/postgres-dump:/postgres/postgres-dump
     ports:
-      - '5432:5432'
+      - '${DB_PORT}:5432'
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=d48t4r
-      - POSTGRES_DB=postgres
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}

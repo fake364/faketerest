@@ -23,7 +23,7 @@ const useRoomConnection = (
     );
     ref.current = io({
       path: '/pager-connect',
-      hostname: process.env.PAGER_API_URL,
+      hostname:'/pager',
       extraHeaders: {
         [CUSTOM_HEADERS.X_CLIENT_ID]: String(myId),
         [CUSTOM_HEADERS.X_JOIN_ROOM]: roomRef.current
@@ -69,7 +69,7 @@ const useRoomConnection = (
     setMessages(result.data);
   };
 
-  return { messages};
+  return { messages };
 };
 
 export default useRoomConnection;

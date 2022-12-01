@@ -21,7 +21,7 @@ export class PagerNotificationsServiceClass {
     }
     this._socket = io({
       path: '/pager-connect',
-      hostname: process.env.PAGER_API_URL,
+      hostname: '/pager',
       extraHeaders: { [CUSTOM_HEADERS.X_CLIENT_ID]: String(userId) }
     }) as unknown as Socket<DefaultEventsMap, DefaultEventsMap>;
     await this._socket.connect();

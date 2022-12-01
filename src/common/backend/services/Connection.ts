@@ -21,7 +21,7 @@ export class ConnectionService {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     this._connection = new Sequelize(
-      `postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
+      `postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@postgres:${process.env.DB_PORT}/${process.env.DB_NAME}`,
       {
         models: [__dirname + '/**/*.model.ts'],
         dialect: pg,
