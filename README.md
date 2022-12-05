@@ -48,17 +48,7 @@ I decided to clone part of Pinterest functionality.
 ### Installation
 
 1. Setup configuration
+Create .env file with appropriate enviironment variables
 ```
-PASS_SECRET=secret2 <--- secret for encrypting password
-// Postgresql configuration
-DB_USERNAME=postgres <--- db user name
-DB_NAME=postgres <--- database name
-DB_PASSWORD=pass <-- database password
-DB_HOST=localhost:5432 <--- database host
-//
-ENVIRONMENT=local <--- current environment
+docker-compose up
 ```
-2. Start Faketerest pager
-3. Setup PostgreSQL database in order to be able store data
-4. `npm install`
-5. `npm dev`
