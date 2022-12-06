@@ -57,13 +57,13 @@ const Inbox: React.FC<Props> = ({
     ) : (
       <div
         className={
-          'flex flex-col items-center justify-center text-[#737373] absolute h-full z-[0]'
+          'flex flex-col items-center justify-center text-[#737373] absolute h-full z-[0] top-0'
         }
       >
         <FaUserAltSlash className={'text-[64px]'} />
         <div className={'mt-[18px] text-[24px] text-center'}>
             {/* eslint-disable-next-line react/no-unescaped-entities */}
-          There are no users you've had chated yet
+          There are no users you've had chat yet
         </div>
       </div>
     );
@@ -87,6 +87,7 @@ const Inbox: React.FC<Props> = ({
           )}
           onBack={onBackChatWindow}
           participantId={selectedUser.id}
+          username={selectedUser.username}
         />
       )}
 

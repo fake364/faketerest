@@ -83,7 +83,7 @@ const MobileRegisterPage: React.FC<Props> = () => {
   const fieldTouched = formik.touched[fieldName];
   const currentError = fieldTouched && formik.errors[fieldName];
   const inputType = stepIndex === 1 ? 'password' : '';
-  const buttonType = stepIndex === 3 ? 'submit' : 'button';
+  const buttonType = stepIndex === 2 ? 'submit' : 'button';
 
 
   const onChangeStep = async () => {
@@ -131,7 +131,7 @@ const MobileRegisterPage: React.FC<Props> = () => {
           onClick={onChangeStep}
         />
         <div className={'text-center mt-[24px] text-[18px]'}>
-          {t('alreadyAMember')}
+          {t('alreadyAMember')}{' '}
           <span onClick={onClickLogin} className={'font-medium'}>
             {t('logIn')}
           </span>

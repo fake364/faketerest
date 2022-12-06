@@ -45,7 +45,7 @@ const MobileMainPage: React.FC<Props> = () => {
           </PrimaryButton>
         </div>
         <div className={'text-center mt-[12px] mb-[48px]'}>
-          {t('alreadyAMember')}
+          {t('alreadyAMember')}{' '}
           <span onClick={onClickLogin} className={'font-medium'}>
             {t('logIn')}
           </span>

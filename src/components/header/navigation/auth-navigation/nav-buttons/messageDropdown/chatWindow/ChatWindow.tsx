@@ -19,13 +19,15 @@ type Props = {
   className?: string;
   onBack: () => void;
   participantId: number;
+  username: string;
 };
 
 const ChatWindow: React.FC<Props> = ({
   firstName,
   className,
   onBack,
-  participantId
+  participantId,
+  username
 }) => {
   const [text, setText] = useState<string>('');
   const myId: number = useSelector((state: RootState) => state.metadata.userId);
@@ -86,7 +88,11 @@ const ChatWindow: React.FC<Props> = ({
   return (
     <div className={className}>
       <div className={'flex flex-col w-full h-full items-stretch gap-[12px]'}>
-        <TopBackAndTitlePanel onBack={onBack} title={firstName} />
+        <TopBackAndTitlePanel
+          onBack={onBack}
+          title={firstName}
+          username={username}
+        />
         <ChatBody
           messages={messages}
           participantId={participantId}

@@ -16,10 +16,6 @@ import 'reflect-metadata';
 import SnackbarProvider from '../src/snackbar/SnackbarProvider';
 import GlobalNotificationWrapper from '../src/components/globalNotificationWrapper/GlobalNotificationWrapper';
 import '../src/common/utils/mobileCheck/mobileCheck';
-import { useRouter } from 'next/router';
-import CircleSpinner, {
-  SPINNER_COLORS
-} from '../src/common/components/spinner/CircleSpinner';
 import useSSRLoading from '../src/common/hooks/useSSRLoading/useSSRLoading';
 
 type WrapperProps = { children?: React.ReactNode };

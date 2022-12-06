@@ -2,13 +2,20 @@ import React from 'react';
 import CircleIconButton from '../../../../../../../../common/components/buttons/CircleIconButton';
 import { FaArrowLeft } from '@react-icons/all-files/fa/FaArrowLeft';
 import clsx from 'clsx';
+import Link from 'next/link';
 
-type Props = { onBack: () => void; title: string; className?: string };
+type Props = {
+  onBack: () => void;
+  title: string;
+  className?: string;
+  username?: string;
+};
 
 const TopBackAndTitlePanel: React.FC<Props> = ({
   onBack,
   title,
-  className
+  className,
+  username
 }) => {
   return (
     <div
@@ -22,7 +29,14 @@ const TopBackAndTitlePanel: React.FC<Props> = ({
         Icon={FaArrowLeft}
         onClick={onBack}
       />
-      <div className={'flex-1 mr-[36px] text-[18px]'}>{title}</div>
+      <Link
+        href={'/' + username}
+        className={!username && 'pointer-events-none'}
+      >
+        <div className={'flex-1 mr-[36px] text-[18px] cursor-pointer'}>
+          {title}
+        </div>
+      </Link>
     </div>
   );
 };

@@ -73,7 +73,6 @@ const AccountSettings: React.FC<Props> = ({ userData: { email } }) => {
       router.reload();
     } catch (e) {
       // TODO refactor this shit
-      console.log(e);
       const errorsKeys = getErrorsKeysArray(e);
       errorsKeys.forEach((key) => {
         switch (key) {

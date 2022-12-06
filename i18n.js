@@ -8,6 +8,8 @@ module.exports = {
     'rgx:/.*': ['profile'],
     'rgx:/settings/.*': ['settings'],
     '/signup': ['error-messages', 'main-page'],
-    '/login': ['error-messages', 'main-page']
+    '/login': ['error-messages', 'main-page'],
+    '/settings': ['settings'],
+
   }
 };
