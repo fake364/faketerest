@@ -52,3 +52,12 @@ Create .env file with appropriate enviironment variables
 ```
 docker-compose up
 ```
+### Preview images
+![main gallery](./public/images/readme/photo1670334137.jpeg)
+![profile](./public/images/readme/photo1670334167.jpeg)
+![main page non auth](./public/images/readme/photo1670334205.jpeg)
+![main page](./public/images/readme/photo1670334229.jpeg)
+![chat](./public/images/readme/photo1670334375.jpeg)
+![post create](./public/images/readme/photo1670334085.jpeg)
+![empty dialogs](./public/images/readme/photo1670334153.jpeg)
+![post](./public/images/readme/photo1670334287.jpeg)
