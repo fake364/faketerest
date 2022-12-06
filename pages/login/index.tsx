@@ -21,7 +21,6 @@ export default function Login(props) {
       >
         <RegForm isRegistrationShown={false} />
       </div>
-      )
     </BackgroundImages>
   );
 }
