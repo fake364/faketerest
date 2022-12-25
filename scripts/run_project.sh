@@ -2,6 +2,8 @@
 
 docker-compose down -v
 
+mkdir "static-box"
+
 docker-compose up -d --force-recreate --build
 
 export PGPASSWORD=${DB_PASSWORD}
