@@ -12,7 +12,7 @@ const ProfileButtons: React.FC<Props> = ({ userData }) => {
 
   return (
     <div className="flex mt-[18px] gap-[14px]">
-      {myId === userData.id ? (
+      {myId == userData.id ? (
         <MyProfileButtons />
       ) : (
         <AnotherAccountButtons pageId={userData.id} />

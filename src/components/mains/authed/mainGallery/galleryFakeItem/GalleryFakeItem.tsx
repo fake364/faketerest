@@ -11,6 +11,7 @@ import DropdownRootElement from '../../../../../common/components/buttons/button
 import ButtonDropdownElement from '../../../../../common/components/buttons/buttonDropdown/ButtonDropdownElement';
 import { Nullable } from '../../../../../common/types/common';
 import useTranslation from 'next-translate/useTranslation';
+import useFakeSnackbar from '../../../../../snackbar/hooks/useFakeSnackbar/useFakeSnackbar';
 
 export type PostDisplayEntity = {
   postId: string;
@@ -33,13 +34,25 @@ const GalleryFakeItem: React.FC<Props> = ({
     width,
     height
   );
+  const { addFakeSnack } = useFakeSnackbar();
 
   const onClickSave = (e) => {
     e.stopPropagation();
   };
 
-  const onDownload = (e) => {
+  const onDownload = async (e) => {
     e.stopPropagation();
+    try {
+      const response = await fetch('/api/image/' + postId);
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = postId + '.jpg';
+      a.click();
+    } catch (e) {
+      addFakeSnack({ text: 'Something went wrong downloading your image' });
+    }
   };
 
   const src = `http://${window.location.host}/static-box/posts/${postId}.jpg`;
@@ -83,11 +96,9 @@ const GalleryFakeItem: React.FC<Props> = ({
                 buttonClass={styles.dotsButtonIcon}
                 dropdownClass={'z-[10] top-0 right-0'}
               >
-                <Link href={'/api/image/' + postId}>
-                  <ButtonDropdownElement onClick={onDownload}>
-                    {t('download')}
-                  </ButtonDropdownElement>
-                </Link>
+                <ButtonDropdownElement onClick={onDownload}>
+                  {t('download')}
+                </ButtonDropdownElement>
               </DropdownRootElement>
             </div>
           </div>

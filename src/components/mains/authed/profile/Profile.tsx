@@ -3,7 +3,6 @@ import styles from './Profile.module.css';
 import ProfileButtons from './ProfileButtons/ProfileButtons';
 import ProfilePins from './profilePins/ProfilePins';
 import clsx from 'clsx';
-import useTranslation from 'next-translate/useTranslation';
 import UserAvatarImage from '../../../header/navigation/auth-navigation/nav-buttons/user-button/user-image/UserAvatarImage';
 import { ProfilePageProps } from '../../../../../pages/[username]';
 import SubscriptionsBlock from './subscriptionsBlock/SubscriptionsBlock';

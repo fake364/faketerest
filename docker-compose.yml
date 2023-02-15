@@ -10,14 +10,14 @@ services:
       - ./static-box:/static-box
   faketerest:
     build: .
-    ports:
-      - '3000:3000'
     volumes:
       - ./.env:/faketerest/.env
       - ./next.config.js:/faketerest/.next.config.js
       - ./pages:/faketerest/pages
       - ./src:/faketerest/src
       - ./static-box:/faketerest/static-box
+      - /var/lib/postgresql/data
+      - ./locales:/faketerest/locales
     depends_on:
       - redis
       - postgres
@@ -29,8 +29,6 @@ services:
       - 'postgres:postgres'
   pager:
     build: ./faketerest-pager
-    ports:
-      - '3003:3003'
     links:
       - 'postgres:postgres'
     depends_on:
@@ -42,17 +40,18 @@ services:
     command: redis-server /redis.conf --requirepass ${REDIS_DB_PASS}
     volumes:
       - ./config/redis.conf:/redis.conf
-    ports:
-      - '${REDIS_DB_PORT}:6379'
   postgres:
     image: postgres:14-alpine
     restart: always
     tty: true
     volumes:
       - ./config/postgres-dump:/postgres/postgres-dump
+      - postgres_data:/var/lib/postgresql/data
     ports:
       - '${DB_PORT}:5432'
     environment:
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
+volumes:
+  postgres_data:

@@ -3,7 +3,7 @@ import { useNotification } from '../../common/hooks/useNotification/useNotificat
 
 type Props = {};
 
-const GlobalNotificationWrapper: React.FC<Props> = ({children}) => {
+const GlobalNotificationWrapper: React.FC<Props> = ({children}) => {//
 	useNotification();
 
 	return <>{children}</>;

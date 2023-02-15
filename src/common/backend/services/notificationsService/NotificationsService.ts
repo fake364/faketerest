@@ -9,7 +9,7 @@ export class NotificationsServiceClass {
 
   constructor() {
     this.client = createClient({
-      url: `redis://redis:${process.env.REDIS_DB_PORT}`,
+      url: `redis://${process.env.REDIS_DB_HOST}:${process.env.REDIS_DB_PORT}`,
       password: process.env.REDIS_DB_PASS
     });
   }

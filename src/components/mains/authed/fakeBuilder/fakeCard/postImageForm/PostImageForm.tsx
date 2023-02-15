@@ -33,6 +33,9 @@ const PostImageForm: React.FC<Props> = ({
   const dNdError = error?.constraints?.['isNotEmpty'];
   const dispatch: AppDispatch = useDispatch();
 
+  const onImageDrop = (file) =>
+    dispatch(changePostFieldById(postEntry.id, 'image', file));
+
   return (
     <>
       {postEntry.isLoading && (
@@ -64,15 +67,10 @@ const PostImageForm: React.FC<Props> = ({
         <ImageDnDUpload
           className={'flex-1'}
           src={imageUrl}
-          onImageDrop={(file) =>
-            dispatch(changePostFieldById(postEntry.id, 'image', file))
-          }
+          onImageDrop={onImageDrop}
           error={dNdError}
         />
-        <FakeAddForm
-          className={'flex-[2]'}
-          fakePost={postEntry}
-        />
+        <FakeAddForm className={'flex-[2]'} fakePost={postEntry} />
       </div>
     </>
   );

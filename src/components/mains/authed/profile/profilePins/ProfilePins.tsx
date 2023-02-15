@@ -33,6 +33,7 @@ const ProfilePins: React.FC<Props> = ({ userId, username }) => {
         <TabButton
           isActive={currentTab === PROFILE_TAB.SAVED}
           onClick={onClickSaved}
+          disabled
         >
           {t('saved')}
         </TabButton>

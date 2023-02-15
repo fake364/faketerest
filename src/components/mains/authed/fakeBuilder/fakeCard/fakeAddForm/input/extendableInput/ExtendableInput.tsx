@@ -26,13 +26,16 @@ const ExtendableInput: React.FC<Props> = ({
   containerClass,
   onClick
 }) => {
+  const onChangeTextContent = (event) =>
+    onChange(event.currentTarget.textContent);
+
   return (
     <div className={clsx('relative flex items-center', containerClass)}>
       {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
       {/* @ts-ignore*/}
       <ContentEditable
         className={clsx(styles.expandableInput, className)}
-        onChange={(event) => onChange(event.target.value)}
+        onChange={onChangeTextContent}
         tagName={'div'}
         html={value || ''}
         onFocus={onFocus}

@@ -31,7 +31,7 @@
   },
   "fake-builder": {
     "drag-image": "Drag and drop image or click button to upload",
-    "recommend-using-jpg": "We recommend using high quality .jpg files (less than 20MB in size)",
+    "recommend-using-jpg": "We recommend using high quality .jpg files (less than 6MB in size)",
     "inputs": {
       "title": {
         "placeholder": "Add title",
@@ -42,6 +42,7 @@
         "description": "When people click on your Pin, they only see the first 50 characters"
       }
     },
+    "imageFormatError": "This is not valid image type, please provide either png or jpg and less than 6MB",
     "save": "Save",
     "remove": "Remove"
   },

@@ -14,4 +14,5 @@ export default COMMON_CONSTANTS;
 
 export const AUTH_SESSION_KEY = 'auth-session-uuid';
 
-export const MB_5_IN_BYTES=1024*1024*5;
+export const MB_5_IN_BYTES = 1024 * 1024 * 5;
+export const MB_6_IN_BYTES = 6291456;

@@ -19,7 +19,6 @@ export const getDifferenceWithCode = (createDate: string) => {
   const dates = Object.entries(
     msToTime(Date.now() - Date.parse(createDate))
   ).filter(([, roundedTime]) => roundedTime !== 0);
-
   return dates.reduce(
     (prev, current) => (prev[1] < current[1] ? prev : current),
     dates[0]

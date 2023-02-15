@@ -15,8 +15,12 @@ const PostTopPanel: React.FC<Props> = ({ className }) => {
   const { t } = useTranslation('common');
 
   const copyCurrentUrl = async () => {
-    await navigator.clipboard.writeText(window.location.href);
-    addFakeSnack({ text: t('fakePost.linkCopied') });
+      try {
+          await navigator.clipboard.writeText(window.location.href);
+          addFakeSnack({ text: t('fakePost.linkCopied') });
+      }catch (e) {
+          addFakeSnack({ text: 'Ваша ссылка не была скопирована' });
+      }
   };
 
   return (

@@ -6,6 +6,7 @@ import ImageNext from 'next/image';
 import DashedIconBlock from './dashedIconBlock/DashedIconBlock';
 import { ImBin2 } from '@react-icons/all-files/im/ImBin2';
 import CircleIconButton from '../../../../../../common/components/buttons/CircleIconButton';
+import { MB_6_IN_BYTES } from '../../../../../../common/constants/commons';
 
 const fileTypes = ['image/apng', 'image/jpeg', 'image/png', 'image/webp'];
 
@@ -23,6 +24,7 @@ const ImageDnDUpload: React.FC<ImageDnDProps> = ({
 }) => {
   const { t } = useTranslation('common');
   const [isDraggingOn, setDragging] = useState<boolean>(false);
+  const [formatError, setFormatError] = useState<boolean>(false);
 
   const onDragOver = (e) => {
     e.preventDefault();
@@ -32,25 +34,31 @@ const ImageDnDUpload: React.FC<ImageDnDProps> = ({
     setDragging(state);
   };
 
+  const loadImageFileAndValidate = (file?: File) => {
+    if (file && fileTypes.includes(file.type) && file.size < MB_6_IN_BYTES) {
+      setFormatError(false);
+      onImageDrop(file);
+    } else {
+      console.warn('It is not allowed image type');
+      setFormatError(true);
+    }
+  };
+
   const onDrop = (e: React.DragEvent<HTMLInputElement>) => {
     e.preventDefault();
     const dataItem = e.dataTransfer.items[0];
-    if (dataItem && fileTypes.includes(dataItem.type)) {
-      onImageDrop(dataItem.getAsFile());
-    } else {
-      console.warn('It is not allowed image type');
-    }
+    const file = dataItem?.getAsFile();
+    loadImageFileAndValidate(file);
     setDragging(false);
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files[0];
-    if (fileTypes.includes(file.type)) {
-      onImageDrop(e.target.files[0]);
-    } else {
-      console.warn('It is not allowed image type');
-    }
+    loadImageFileAndValidate(file);
   };
+
+  const errorString =
+    error || (formatError && t('fake-builder.imageFormatError'));
   return (
     <div
       className={clsx(
@@ -81,8 +89,8 @@ const ImageDnDUpload: React.FC<ImageDnDProps> = ({
         </div>
       ) : (
         <>
-          <DashedIconBlock error={error}>
-            {error || t('fake-builder.drag-image')}
+          <DashedIconBlock error={errorString}>
+            {errorString || t('fake-builder.drag-image')}
           </DashedIconBlock>
           <div className="m-[32px] text-center text-[12px] font-[400] text-[#111]">
             {t('fake-builder.recommend-using-jpg')}
@@ -101,12 +109,12 @@ const ImageDnDUpload: React.FC<ImageDnDProps> = ({
         )}
         onChange={onChangeHandler}
       />
-      {(isDraggingOn || error) && (
+      {(isDraggingOn || errorString) && (
         <div
           className={clsx(
             styles.fullSizeAbsoluteBlock,
             styles.draggedOnBlock,
-            error ? styles.errorColors : styles.dragColors,
+            errorString ? styles.errorColors : styles.dragColors,
             'z-[1]'
           )}
         />
