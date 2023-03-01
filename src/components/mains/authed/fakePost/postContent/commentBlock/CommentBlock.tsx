@@ -33,25 +33,28 @@ const CommentBlock: React.FC<Props> = ({ className, comments, postId }) => {
   };
 
   const handleChangeComment = (value) => {
+    console.log('SET VALUE', value);
     setComment(value);
   };
 
   const onSubmitComment = async () => {
-    setSubmitting(true);
-    try {
-      await axios.post('/api/post/comment', {
-        postId,
-        text: commentValue,
-        userId: myUserId
-      } as CommentEntity);
-      await router.replace(router.asPath);
-      setComment('');
-      addFakeSnack({ text: t('fakePost.commentHasBeenAdded') });
-    } catch (e) {
-      addFakeSnack({ text: t('fakePost.errorAddingComment') });
-      console.error('Error creating comment', e);
-    }
-    setSubmitting(false);
+    if (commentValue) {
+      setSubmitting(true);
+      try {
+        await axios.post('/api/post/comment', {
+          postId,
+          text: commentValue,
+          userId: myUserId
+        } as CommentEntity);
+        await router.replace(router.asPath, undefined, { scroll: false });
+        setComment('');
+        addFakeSnack({ text: t('fakePost.commentHasBeenAdded') });
+      } catch (e) {
+        addFakeSnack({ text: t('fakePost.errorAddingComment') });
+        console.error('Error creating comment', e);
+      }
+      setSubmitting(false);
+    }//....
   };
 
   return (

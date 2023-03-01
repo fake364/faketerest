@@ -14,7 +14,7 @@ export default function SettingsPage() {
   const onLogoutClick = useLogout();
 
   const onBack = () => {
-    router.back();
+    router.push('/');
   };
 
   return (

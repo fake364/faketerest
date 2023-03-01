@@ -22,12 +22,14 @@ const ImageCell: React.FC<Props> = ({ images, shownType }) => {
             <Image
               className={clsx('rounded-[16px]')}
               src={image}
+              loader={() => image as string}
               width={200}
               height={500}
               layout={'fill'}
               objectFit="cover"
               quality={70}
               sizes="12vw"
+              suppressHydrationWarning
             />
           </div>
         );

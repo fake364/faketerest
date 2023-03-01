@@ -7,7 +7,7 @@ type Props = { title: string };
 const SettingsMobilePageWrapper: React.FC<Props> = ({ title, children }) => {
   const router = useRouter();
   const onBack = () => {
-    router.back();
+    router.push('/settings');
   };
 
   return (

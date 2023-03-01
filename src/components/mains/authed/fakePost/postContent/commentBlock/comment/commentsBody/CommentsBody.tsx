@@ -41,12 +41,33 @@ const CommentsBody: React.FC<Props> = ({
     setCommentsNum((prev) => prev + 3);
   };
 
+  const onEnterCommentInput = async (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      event.stopPropagation();
+      const parent = event.currentTarget.parentNode;
+      await onSubmitComment();
+      parent.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }
+  };
+
+  const showCommentsIndex = comments.length - showCommentsNum;
+  const displayedComments =
+    showCommentsIndex >= 0 ? comments.slice(showCommentsIndex) : comments;
+
   return (
     <>
       <div className={'flex flex-col gap-[8px]'}>
-        {comments
-          .slice(0, showCommentsNum)
-          .map(({ text, username, userId, firstName, createDate }) => (
+        {showCommentsNum < comments.length && (
+          <SecondaryButton onClick={onClickShowMore}>
+            {t('fakePost.showMore')}({showCommentsIndex})
+          </SecondaryButton>
+        )}
+        {displayedComments.map(
+          ({ text, username, userId, firstName, createDate }) => (
             <Comment
               userId={userId}
               firstName={firstName}
@@ -54,11 +75,7 @@ const CommentsBody: React.FC<Props> = ({
               createDate={createDate}
               text={text}
             />
-          ))}
-        {showCommentsNum < comments.length && (
-          <SecondaryButton onClick={onClickShowMore}>
-            {t('fakePost.showMore')}
-          </SecondaryButton>
+          )
         )}
       </div>
       <div className="flex gap-[12px] mt-[18px]">
@@ -73,8 +90,9 @@ const CommentsBody: React.FC<Props> = ({
           placeholder={t('fakePost.addComment')}
           placeholderClassName={'ml-[12px]'}
           value={commentValue}
-          onChange={(value) => handleChangeComment(decodeHtml(value))}
+          onChange={handleChangeComment}
           onClick={onClickInput}
+          onKeyDown={onEnterCommentInput}
         />
       </div>
       {isInputFocused && (

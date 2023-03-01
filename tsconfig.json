@@ -3,11 +3,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "target": "es6",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -19,15 +15,9 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "strictPropertyInitialization": false
   },
-  "include": [
-    "next-env.d.ts",
-    "(pages|src)/**/*.ts",
-    "(pages|src)/**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules",
-    "faketerest-pager"
-  ]
+  "include": ["next-env.d.ts", "(pages|src)/**/*.ts", "(pages|src)/**/*.tsx"],
+  "exclude": ["node_modules", "faketerest-pager"]
 }

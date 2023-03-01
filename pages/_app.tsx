@@ -37,6 +37,16 @@ const WrapperUnderRedux: React.FC<WrapperProps> = ({ children }) => {
     setLanguage('en').then(() => {
       setTranslationsLoading(false);
     });
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/public/sw.js', { scope: '/' }).then(
+        () => {
+          console.log('[Faketerest] SW has been installed successful');
+        },
+        (err) => {
+          console.error('[Faketerest] Failed installing service worker', err);
+        }
+      );
+    }
   }, []);
 
   return (

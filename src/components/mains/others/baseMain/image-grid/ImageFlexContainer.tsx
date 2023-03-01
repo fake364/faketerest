@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import CommonUtils from '../../../../../common/utils/creation-utils/arrays/common';
 import * as ImageUtils from './flex-cell/utils/utils';
 import ImageCell from './flex-cell/ImageCell';
@@ -19,29 +19,35 @@ const delays = [
 
 type Props = { isAnimation: boolean } & ShownType;
 
-const imagesChunks = ImageUtils.chunkImageIndexes(34, 5);
 const marginPalindrome = CommonUtils.numericPalindrome(3, 0);
 
-const ImageFlexContainer: React.FC<Props> = ({ shownType, isAnimation }) => (
-  <div
-    className={clsx('slider-flex-container', isAnimation && 'slider-gradient')}
-  >
-    {imagesChunks.map((columnIndexes, columnIndex) => {
-      const cellClass = clsx(
-        'flex flex-col flex-1 relative',
-        margins[marginPalindrome[columnIndex]],
-        isAnimation && 'opacity_move_up',
-        isAnimation && delays[columnIndex]
-      );
-      return (
-        <div className={cellClass} key={columnIndex}>
-          {columnIndexes.map((images, index) => (
-            <ImageCell shownType={shownType} images={images} key={index} />
-          ))}
-        </div>
-      );
-    })}
-  </div>
-);
+const ImageFlexContainer: React.FC<Props> = ({ shownType, isAnimation }) => {
+  const imagesRef = useRef(ImageUtils.chunkImageIndexes(34, 5));
+
+  return (
+    <div
+      className={clsx(
+        'slider-flex-container',
+        isAnimation && 'slider-gradient'
+      )}
+    >
+      {imagesRef.current.map((columnIndexes, columnIndex) => {
+        const cellClass = clsx(
+          'flex flex-col flex-1 relative',
+          margins[marginPalindrome[columnIndex]],
+          isAnimation && 'opacity_move_up',
+          isAnimation && delays[columnIndex]
+        );
+        return (
+          <div className={cellClass} key={columnIndex}>
+            {columnIndexes.map((images, index) => (
+              <ImageCell shownType={shownType} images={images} key={index} />
+            ))}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
 export default ImageFlexContainer;

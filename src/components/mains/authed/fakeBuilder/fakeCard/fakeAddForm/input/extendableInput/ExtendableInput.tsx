@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { KeyboardEventHandler, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import styles from '../BottomLineInput.module.css';
-import ContentEditable from 'react-contenteditable';
 
 type Props = {
   className?: string;
@@ -13,6 +12,7 @@ type Props = {
   onBlur?: () => void;
   containerClass?: string;
   onClick?: () => void;
+  onKeyDown?: KeyboardEventHandler<HTMLDivElement>;
 };
 
 const ExtendableInput: React.FC<Props> = ({
@@ -24,23 +24,33 @@ const ExtendableInput: React.FC<Props> = ({
   onFocus,
   onBlur,
   containerClass,
-  onClick
+  onClick,
+  onKeyDown
 }) => {
-  const onChangeTextContent = (event) =>
-    onChange(event.currentTarget.textContent);
+  const inputRef = useRef<HTMLDivElement>();
+  const onChangeTextContent = (event) => {
+    if (inputRef.current) {
+      inputRef.current.textContent = event.currentTarget.textContent;
+      onChange(event.currentTarget.textContent);
+    }
+  };
+
+  useEffect(() => {
+    inputRef.current.textContent = value;
+  }, [value]);
+  console.log('RENDER INSIDE EXTENDABLE INPUT COMPONENT', value);
 
   return (
     <div className={clsx('relative flex items-center', containerClass)}>
-      {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-      {/* @ts-ignore*/}
-      <ContentEditable
+      <div
         className={clsx(styles.expandableInput, className)}
-        onChange={onChangeTextContent}
-        tagName={'div'}
-        html={value || ''}
+        ref={inputRef}
+        onInput={onChangeTextContent}
         onFocus={onFocus}
         onBlur={onBlur}
         onClick={onClick}
+        onKeyDown={onKeyDown}
+        contentEditable
       />
       {placeholder && !value && (
         <div

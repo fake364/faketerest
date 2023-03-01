@@ -36,6 +36,7 @@ const BackgroundImages: React.FC<Props> = ({ children }) => {
             <Image
               className={clsx('rounded-[16px]')}
               src={image}
+              loader={() => image as string}
               layout={'fill'}
               objectFit="cover"
             />

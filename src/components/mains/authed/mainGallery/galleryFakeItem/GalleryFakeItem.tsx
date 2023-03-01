@@ -12,6 +12,7 @@ import ButtonDropdownElement from '../../../../../common/components/buttons/butt
 import { Nullable } from '../../../../../common/types/common';
 import useTranslation from 'next-translate/useTranslation';
 import useFakeSnackbar from '../../../../../snackbar/hooks/useFakeSnackbar/useFakeSnackbar';
+import { mobileCheck } from '../../../../../common/utils/mobileCheck/mobileCheck';
 
 export type PostDisplayEntity = {
   postId: string;
@@ -68,7 +69,7 @@ const GalleryFakeItem: React.FC<Props> = ({
           className={clsx(
             styles.imageMenuBlock,
             '[&>.hover-opening-menu]:hidden',
-            '[&>.hover-opening-menu]:hover:flex'
+            !mobileCheck() && '[&>.hover-opening-menu]:hover:flex'
           )}
         >
           <Image

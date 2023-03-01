@@ -9,9 +9,9 @@ export const getImageById = (
   type: SLIDER_THEMES,
   index: number
 ): ImageProps['src'] =>
-  require(`../../../../../../../../public/images/main-slider/${type}/${
+  `${window.location.origin}/public/images/main-slider/${type}/${
     index + 1
-  }.jpeg`);
+  }.jpeg`;
 
 export const chunkImageIndexes = (count: number, chunksNumber: number) =>
   chunk(

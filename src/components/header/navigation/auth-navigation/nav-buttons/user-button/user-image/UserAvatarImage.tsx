@@ -15,7 +15,9 @@ const UserAvatarImage: React.FC<Props> = ({ firstName, className, userId }) => {
   const displayFirstName = firstName || myFirstName;
   const displayUserId = userId || myUserId;
   const src =
-    `http://${window.location.host}/static-box/user/` + displayUserId + '/avatar.png';
+    `http://${window.location.host}/static-box/user/` +
+    displayUserId +
+    '/avatar.png';
 
   return (
     <div
@@ -46,7 +48,7 @@ const UserAvatarImage: React.FC<Props> = ({ firstName, className, userId }) => {
             'bg-[whitesmoke] w-[80%] h-[80%] rounded-[50%] flex justify-center items-center '
           }
         >
-          {displayFirstName[0].toUpperCase()}
+          {displayFirstName?.[0].toUpperCase() || 'N'}
         </div>
       )}
     </div>
