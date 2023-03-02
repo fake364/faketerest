@@ -33,7 +33,6 @@ const CommentBlock: React.FC<Props> = ({ className, comments, postId }) => {
   };
 
   const handleChangeComment = (value) => {
-    console.log('SET VALUE', value);
     setComment(value);
   };
 

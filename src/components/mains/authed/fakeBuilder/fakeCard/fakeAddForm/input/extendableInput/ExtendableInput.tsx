@@ -38,7 +38,6 @@ const ExtendableInput: React.FC<Props> = ({
   useEffect(() => {
     inputRef.current.textContent = value;
   }, [value]);
-  console.log('RENDER INSIDE EXTENDABLE INPUT COMPONENT', value);
 
   return (
     <div className={clsx('relative flex items-center', containerClass)}>
