@@ -1,24 +1,22 @@
 version: '3.3'
 services:
   nginx:
-    user: "111:117"
     image: nginx:latest
     restart: unless-stopped
     ports:
       - '80:80'
     volumes:
       - ./config/nginx.conf:/etc/nginx/nginx.conf
-      - ./static-box:/static-box
+      - static_box:/static-box
       - ./public:/public
   faketerest:
-    user: "111:117"
     build: .
     volumes:
       - ./.env:/faketerest/.env
       - ./next.config.js:/faketerest/.next.config.js
       - ./pages:/faketerest/pages
       - ./src:/faketerest/src
-      - ./static-box:/faketerest/static-box
+      - static_box:/faketerest/static-box
       - ./locales:/faketerest/locales
       - ./public:/faketerest/public
     depends_on:
@@ -59,3 +57,4 @@ services:
       - POSTGRES_DB=${DB_NAME}
 volumes:
   postgres_data:
+  static_box:
