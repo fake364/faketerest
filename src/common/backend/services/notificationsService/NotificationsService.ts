@@ -12,6 +12,7 @@ export class NotificationsServiceClass {
       url: `redis://${process.env.REDIS_DB_HOST}:${process.env.REDIS_DB_PORT}`,
       password: process.env.REDIS_DB_PASS
     });
+    console.log('TEST',`redis://${process.env.REDIS_DB_HOST}:${process.env.REDIS_DB_PORT}`,process.env.REDIS_DB_PASS);
   }
 
   static getInstance() {
